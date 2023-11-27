@@ -1,0 +1,95 @@
+/* Color Palette */
+:root {
+    /* i prefer to define colors based on their function 
+    i will probably rework the first three because
+    basing color names on ... their color creates issues
+    but for now they are my three primary colors*/
+    
+  
+    --off-black: #131D24;/* maybe footer */
+   
+    --icon-on-bg-light: #FCEAD1;
+
+
+    /* on dark background */
+    --type-on-bg-dark: #EEF4F8;
+    --img-border-on-bg-dark: #EFCFA4;
+    --bg-dark: #131D24;
+    
+   
+    
+    /* on light background */ 
+    --bg-light: #EDCEA3; /* -> when no gradient applied*/
+    --linktext-on-nav: #A9895D;
+    --type-on-bg-light: #4A3211;
+    --bg-light-gradient-start: #FAEACA;
+    --bg-light-gradient-end: #EFCFA4;
+    /* on accent background */
+    --type-on-bg-accent: #D6F2EC;
+    --bg-accent-gradient-start: #9BB6B3;
+    --bg-accent-gradient-end: #5F888A;
+  }
+
+
+
+/* Global Styles */
+
+
+body {
+    font-family: 'IMFELLEnglisch', sans-serif;
+    background-color: var(--bg-dark); 
+
+}
+
+/* Typography */
+@font-face {
+    font-family: 'IMFELLEnglisch';
+    src: 
+         url('../fonts/im_fell_types/IM_Fell_English/FeENrm2.ttf') format('truetype');
+    /* Add additional file formats if needed */
+  }
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+p {}
+a {}
+a:hover {}
+
+ul, ol {}
+
+li {}
+
+img {}
+
+
+/* Form Elements */
+form {}
+
+input {}
+
+textarea {}
+
+select {}
+
+button {}
+/* table styles */
+table {}
+
+thead {}
+
+tbody {}
+
+tr {}
+
+th {}
+
+td {}
+
+input, textarea, select {}
+
+button {}
+
+button:hover {}
