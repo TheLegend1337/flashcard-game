@@ -4,19 +4,23 @@
     <div class="card">
       <div class="card-inner">
         <div class="card-face front" >
-          <h1>{{ question }}</h1>
+          <p>{{ flashcards[0].question }}</p>
         </div>
         <div class="card-face back">
-          <h1>{{ response }}</h1>
+          <p>{{ response }}</p>
         </div>
       </div>
     </div>
 </template>
   
   <script>
+ 
+  import Flashcards from './db.json';
   export default {
+   
     data() {
       return {
+        flashcards: Flashcards,
         question: 'What is a card?',
         response: 'This is the Cards Response.'
       };
