@@ -40,7 +40,7 @@ import SupportIcon from './icons/IconSupport.vue'
 
     More instructions are available in <code>README.md</code>.
   </WelcomeItem>
-
+ <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem incidunt eum voluptatum quisquam officiis tempora quibusdam, maxime mollitia culpa pariatur dolores, cumque debitis ipsa. Laborum iste dicta hic corporis, totam ab, beatae ipsa itaque rerum repudiandae officia expedita officiis cupiditate facilis fuga consectetur cum maxime. Molestias, dolor dignissimos tenetur eveniet quisquam expedita illum reiciendis, nemo, ullam impedit architecto. Possimus, itaque maxime soluta asperiores laboriosam molestiae quasi libero dignissimos in enim. Ipsam eligendi, aliquid explicabo nulla facilis nihil quaerat doloribus itaque ut veniam quis fugiat tenetur cupiditate quo odio! Illum, eos et. Sapiente dolorem modi impedit sunt aspernatur doloribus, quisquam iusto.</p>
   <WelcomeItem>
     <template #icon>
       <EcosystemIcon />
