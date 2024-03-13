@@ -1,36 +1,42 @@
 {
-    "jobs": [
-        {
-            "title": "Ninja UX Designer",
-            "id": 1,
-            "details": "lorem"
-         },
-         {
-            "title": "Ninja Web Developer",
-            "id": 2,
-            "details": "lorem"
-         },
-         {
-            "title": "Ninja Vue Developer",
-            "id": 3,
-            "details": "lorem"
-         }
-    ],
-    "flashcards": [
-        {
-        "id": 1,
-        "question": "Was ist die Hauptstadt von Frankreich?",
-        "answer": "Paris"
-        },
-        {
-        "id": 2,
-        "question": "Wie viele Planeten gibt es in unserem Sonnensystem?",
-        "answer": "Acht (Pluto wird oft nicht mehr als Planet betrachtet)"
-        },
-        { 
-        "id": 3,
-        "question": "Wer hat die Relativitätstheorie entwickelt?",
-        "answer": "Albert Einstein"
-        }
+  "flashcards": [
+    {
+      "id": 1,
+      "question": "Was ist die Hauptstadt von Frankreich?",
+      "answer": "Paris"
+    },
+    {
+      "id": 2,
+      "question": "Wie viele Planeten gibt es in unserem Sonnensystem?",
+      "answer": "Acht (Pluto wird oft nicht mehr als Planet betrachtet)"
+    },
+    {
+      "id": 3,
+      "question": "Wer hat die Relativitätstheorie entwickelt?",
+      "answer": "Albert Einstein"
+    }
+  ],
+  "playcards": [
+    {
+      "id": 1,
+      "name": "Feuerball",
+      "description": "Lorem ipsum dolor sit amet consetetur elitir.",
+      "damage": 2,
+      "armor": 0
+    },
+    {
+      "id": 2,
+      "name": "Schild",
+      "description": "Lorem ipsum dolor sit amet consetetur elitir.",
+      "damage": 0,
+      "armor": 2
+    },
+    {
+      "id": 3,
+      "name": "Blitz",
+      "description": "Lorem ipsum dolor sit amet consetetur elitir.",
+      "damage": 1,
+      "armor": 0
+    }
   ]
 }
