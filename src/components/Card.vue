@@ -1,4 +1,3 @@
-<!-- HelloWorld.vue -->
 
 <template>
   <div>{{ flashcards[0] }}</div>

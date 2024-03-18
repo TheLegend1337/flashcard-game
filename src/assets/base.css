@@ -100,15 +100,15 @@
 @font-face {
   font-family: 'IMFELLEnglisch';
   src: 
-       url('../fonts/im_fell_types/IM_Fell_English/FeENrm2.ttf') format('truetype');
+       url('./fonts/im_fell_types/IM_Fell_English/FeENrm2.ttf') format('truetype');
   /* Add additional file formats if needed */
 }
 
 
 body {
-  /* font-family: 'IMFELLEnglisch', sans-serif; */
+  /* font-family: 'IMFELLEnglisch', sans-serif;  */
   background-color: var(--bg-dark); 
-  color: white !important;
+  color: white;
   min-height: 100vh;
   /*color: var(--color-text);*/
   /*background: var(--color-background);*/
@@ -118,7 +118,7 @@ body {
   line-height: 1.6;
   font-family:
    'IMFELLEnglisch',
-    /* Inter,
+    Inter,
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -128,8 +128,8 @@ body {
     Cantarell,
     'Fira Sans',
     'Droid Sans',
-    'Helvetica Neue', */
-    sans-serif;
+    'Helvetica Neue',
+    sans-serif; 
   font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

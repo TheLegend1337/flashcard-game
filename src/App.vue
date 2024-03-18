@@ -15,6 +15,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/matchfield">Spielfeld</RouterLink>
+        <RouterLink to="/menu-overlay">Overlay</RouterLink>
         <RouterLink to="/flashcard-game">Karteikartenspiel</RouterLink>
         <RouterLink to="/flashcard-game/flashcard-animation">Karte</RouterLink>
         <RouterLink to="/about">About</RouterLink>

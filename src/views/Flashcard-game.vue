@@ -14,12 +14,10 @@
   </template>
   
   <style>
-  @media (min-width: 1024px) {
-    .flashcard-game {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-  }
+    .flashcard-game{
+      width: 100vw;
+      height: 100vh;
+      border: 1px solid beige;
+      }
   </style>
   

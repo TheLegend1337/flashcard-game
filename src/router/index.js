@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Card from '../components/Card.vue'
 import FlashcardGame from '../views/Flashcard-game.vue'
+import Matchfield from '../components/Matchfield.vue'
+import MenuOverlay from '../components/MenuOverlay.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +13,16 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     }, 
+    {
+      path: '/matchfield',
+      name: 'matchfield',
+      component: Matchfield
+    },
+    {
+      path: '/menu-overlay',
+      name: 'menu-overlay',
+      component: MenuOverlay
+    },
     {
       path: '/flashcard-game',
       name: 'home',
