@@ -1,7 +1,7 @@
 <!-- HelloWorld.vue -->
 
 <template>
-  <div>{{ flashcards }}</div>
+  <div>{{ flashcards[0] }}</div>
   <div class="card">
     <div class="card-inner">
       <div class="card-face front">
@@ -39,9 +39,6 @@ export default {
 <style scoped>
 /* Add your component-specific styles here */
 
-h1 {
-  color: #42b983;
-}
 
 .card {
   width: 200px;
@@ -103,8 +100,4 @@ h1 {
   transform: rotateY(180deg);
 }
 </style>
-<style>
-div {
-  background-color: var(--);
-}
-</style>
+

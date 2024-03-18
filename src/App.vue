@@ -42,10 +42,12 @@ nav {
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  background: linear-gradient(180deg, rgba(250,234,202,1) 0%, rgba(239,207,164,1) 64%);
+  border-radius: 50px;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: var(--type-on-bg-light);
 }
 
 nav a.router-link-exact-active:hover {
@@ -53,6 +55,7 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
+  color: var(--linktext-on-nav);
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
@@ -83,7 +86,6 @@ nav a:first-of-type {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
-
     padding: 1rem 0;
     margin-top: 1rem;
   }

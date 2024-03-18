@@ -1,5 +1,5 @@
 /* color palette from <https://github.com/vuejs/theme> */
-:root {
+/*:root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -19,10 +19,10 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
+}*/
 
 /* semantic color variables for this project */
-:root {
+/*:root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
@@ -35,7 +35,8 @@
 
   --section-gap: 160px;
 }
-
+*/
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
@@ -48,7 +49,7 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
   }
-}
+}*/
 
 *,
 *::before,
@@ -57,17 +58,67 @@
   margin: 0;
   font-weight: normal;
 }
+:root {
+  /* i prefer to define colors based on their function 
+  i will probably rework the first three because
+  basing color names on ... their color creates issues
+  but for now they are my three primary colors*/
+  
+
+  --off-black: #131D24;/* maybe footer */
+ 
+  --icon-on-bg-light: #FCEAD1;
+
+
+  /* on dark background */
+  --type-on-bg-dark: #EEF4F8;
+  --img-border-on-bg-dark: #EFCFA4;
+  --bg-dark: #131D24;
+  
+ 
+  
+  /* on light background */ 
+  --bg-light: #EDCEA3; /* -> when no gradient applied*/
+  --linktext-on-nav: #A9895D;
+  --type-on-bg-light: #4A3211;
+  --bg-light-gradient-start: #FAEACA;
+  --bg-light-gradient-end: #EFCFA4;
+  /* on accent background */
+  --type-on-bg-accent: #D6F2EC;
+  --bg-accent-gradient-start: #9BB6B3;
+  --bg-accent-gradient-end: #5F888A;
+}
+
+
+
+/* Global Styles */
+
+
+
+
+/* Typography */
+@font-face {
+  font-family: 'IMFELLEnglisch';
+  src: 
+       url('../fonts/im_fell_types/IM_Fell_English/FeENrm2.ttf') format('truetype');
+  /* Add additional file formats if needed */
+}
+
 
 body {
+  /* font-family: 'IMFELLEnglisch', sans-serif; */
+  background-color: var(--bg-dark); 
+  color: white !important;
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  /*color: var(--color-text);*/
+  /*background: var(--color-background);*/
   transition:
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
   font-family:
-    Inter,
+   'IMFELLEnglisch',
+    /* Inter,
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -77,10 +128,58 @@ body {
     Cantarell,
     'Fira Sans',
     'Droid Sans',
-    'Helvetica Neue',
+    'Helvetica Neue', */
     sans-serif;
   font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h1 {
+
+}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+p {}
+a {}
+a:hover {}
+
+ul, ol {}
+
+li {}
+
+img {}
+
+
+/* Form Elements */
+form {}
+
+input {}
+
+textarea {}
+
+select {}
+
+button {}
+/* table styles */
+table {}
+
+thead {}
+
+tbody {}
+
+tr {}
+
+th {}
+
+td {}
+
+input, textarea, select {}
+
+button {}
+
+button:hover {}
