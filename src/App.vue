@@ -29,9 +29,14 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+
 header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  width: 100%;
   line-height: 1.5;
-  max-height: 100vh;
+  max-height: 7vh;
 }
 
 .logo {
@@ -66,7 +71,7 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+/* 
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -91,5 +96,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
+} */
 </style>
