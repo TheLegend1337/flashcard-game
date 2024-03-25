@@ -1,7 +1,6 @@
-
 <template>
   <div>{{ flashcards[0] }}</div>
-  <div class="card">
+  <div class="card" draggable="true">
     <div class="card-inner">
       <div class="card-face front">
         <p>{{ question }}</p>
@@ -37,7 +36,6 @@ export default {
 
 <style scoped>
 /* Add your component-specific styles here */
-
 
 .card {
   width: 200px;
@@ -99,4 +97,3 @@ export default {
   transform: rotateY(180deg);
 }
 </style>
-
