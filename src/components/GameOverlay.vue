@@ -1,22 +1,12 @@
 <script setup>
-import Card from "../components/Card.vue";
+ import HandOfCards from "../components/HandOfCards.vue";
 </script>
 <template>
   <div class="grid-container game-overlay">
-    <div v-for="i in 100" :key="i" class="item" :id="'item-' + i">
-      Item {{ i }}
-      <Card v-if="i === 44" />
-      <Card v-if="i === 45" />
-      <Card v-if="i === 46" />
-      <Card v-if="i === 47" />
-      <Card v-if="i === 48" />
+    <div class="handOfCards" >
+     <HandOfCards  />
     </div>
 
-    <!-- <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card /> -->
   </div>
 </template>
 
@@ -30,8 +20,10 @@ export default {
 
 <style scoped>
 .game-overlay {
+  display:absolute;
   height: 100%;
   width: 100%;
+  z-index: 1000;
 }
 .item {
   border: 5px solid beige;
@@ -42,15 +34,24 @@ export default {
 .grid-container {
   display: grid;
   /* grid-template-columns: repeat(10, 1fr); */
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   /* grid-template-rows: repeat(10, 1fr); */
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
   gap: 10px;
 }
 
+.handOfCards{
+  width: 100%;
+  grid-row-start: 8;
+  grid-row-end: 10;
+  grid-column-start: 3;
+  grid-column-end: 8;
+}
+
+
 /* .item-2{
-    grid-row-start: 2;
-    grid-column-end: 3;
+  grid-row-start: 2;
+  grid-column-end: 3;
   }
   .item-3{
     grid-row-start: 3;
