@@ -1,18 +1,21 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 
 // import HelloWorld from './components/HelloWorld.vue'
-
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="http://frommoon.de/wp-content/uploads/2022/08/Logo-1024x455.png" width="230" height="100" />
+    <!-- <img
+      alt="Vue logo"
+      class="logo"
+      src="http://frommoon.de/wp-content/uploads/2022/08/Logo-1024x455.png"
+      width="230"
+      height="100"
+    /> -->
 
     <div class="wrapper">
-       <!-- <HelloWorld msg="You did it!" /> -->
-     
-
+      <!-- <HelloWorld msg="You did it!" /> -->
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/matchfield">Spielfeld</RouterLink>
@@ -24,19 +27,24 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </div>
   </header>
-
+  <aside></aside>
   <RouterView />
 </template>
 
 <style scoped>
-
 header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  height: 7vh;
   line-height: 1.5;
   max-height: 7vh;
+  background: linear-gradient(
+    180deg,
+    rgba(250, 234, 202, 1) 0%,
+    rgba(239, 207, 164, 1) 64%
+  );
 }
 
 .logo {
@@ -46,10 +54,10 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  height: 7vh;
+  font-size: 1rem;
   text-align: center;
   margin-top: 2rem;
-  background: linear-gradient(180deg, rgba(250,234,202,1) 0%, rgba(239,207,164,1) 64%);
   border-radius: 50px;
 }
 
