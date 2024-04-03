@@ -3,7 +3,8 @@
   <div class="card" draggable="true">
     <div class="card-inner">
       <div class="card-face front">
-        <p>{{ question }}</p>
+        <button>Entfesseln</button>
+        <!-- <p>{{ question }}</p> -->
       </div>
       <div class="card-face back">
         <p>{{ response }}</p>
@@ -36,7 +37,10 @@ export default {
 
 <style scoped>
 /* Add your component-specific styles here */
-
+button {
+  position: absolute;
+  top: 50px;
+}
 .card {
   width: 200px;
   height: 300px;
@@ -60,9 +64,9 @@ export default {
   transition: transform 0.5s;
 }
 
-.card:hover .card-inner {
+/* .card:hover .card-inner {
   transform: rotateY(180deg);
-}
+} */
 
 .card-face {
   border-radius: 5%;

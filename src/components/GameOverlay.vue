@@ -36,7 +36,6 @@ export default {
 
 .grid-container {
   display: grid;
-
   /* grid-template-columns: repeat(10, 1fr); */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   /* grid-template-rows: repeat(10, 1fr); */
