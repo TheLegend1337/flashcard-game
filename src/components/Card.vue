@@ -1,9 +1,17 @@
+<!-- <script setup>
+// import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+
+// access the `store` variable anywhere in the component ✨
+// const store = useRoundsmanagerStore();
+</script> -->
 <template>
   <div>{{ flashcards[0] }}</div>
   <div class="card" draggable="true">
     <div class="card-inner">
       <div class="card-face front">
-        <button>Entfesseln</button>
+        <div class="card-face-front-content">
+          <button @click="playcard">Entfesseln</button>
+        </div>
         <!-- <p>{{ question }}</p> -->
       </div>
       <div class="card-face back">
@@ -14,10 +22,12 @@
 </template>
 
 <script>
+import { useRoundsmanagerStore } from "@/stores/roundsmanager";
 // import Flashcards from './db.json';
 export default {
   data() {
     return {
+      store : useRoundsmanagerStore(),
       flashcards: [],
       question: "What is a card?",
       response: "This is the Cards Response.",
@@ -32,12 +42,19 @@ export default {
       })
       .catch((err) => console.log(err.message));
   },
+  methods: {
+    playcard(){
+      this.store.decreaseWillpower(2);
+      this.store.damageHero(3);
+    }
+
+  }
 };
 </script>
 
 <style scoped>
 /* Add your component-specific styles here */
-button {
+.card-face-front-content {
   position: absolute;
   top: 50px;
 }

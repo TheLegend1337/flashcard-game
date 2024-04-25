@@ -1,10 +1,16 @@
-<script setup></script>
+<script></script>
 <template>
-  <div class="healthbar"></div>
+  <div class="healthbar">{{ playerHealth }}</div>
 </template>
 
 <script>
 export default {
+  props: {
+    playerHealth: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {};
   },

@@ -2,7 +2,9 @@
 import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
+import Willpower from "../components/Willpower.vue";
 </script>
+
 <template>
   <div class="grid-container game-overlay">
     <div class="handOfCards">
@@ -10,6 +12,7 @@ import Monster from "../components/Monster.vue";
     </div>
     <Player />
     <Monster />
+    <Willpower />
   </div>
 </template>
 
