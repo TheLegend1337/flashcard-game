@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useRoundsmanagerStore = defineStore("roundsmanager", {
   state: () => ({
     round: 0,
-    monsterhealth: 10,
+    monsterHealth: 10,
     playerHealth: 10,
     willpower: 3,
   }),
@@ -29,6 +29,13 @@ export const useRoundsmanagerStore = defineStore("roundsmanager", {
         this.playerHealth = this.playerHealth + value;
       } else {
         throw new Error("Value must be positive!");
+      }
+    },
+    damageMonster(value) {
+      if (value < 0) {
+        throw new Error("Value must be negative!");
+      } else {
+        this.monsterHealth = this.monsterHealth - value;
       }
     },
   },

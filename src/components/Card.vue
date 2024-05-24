@@ -46,6 +46,7 @@ export default {
     playcard(){
       this.store.decreaseWillpower(2);
       this.store.damageHero(3);
+      this.store.damageMonster(2);
     }
 
   }

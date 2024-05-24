@@ -1,16 +1,21 @@
-<script setup>
-import Healthbar from "../components/Healthbar.vue";
-</script>
+
 <template>
   <div class="monster">
-    <Healthbar class="healthbar" />
+    <Healthbar :monsterHealth="store.monsterHealth" class="healthbar" />
   </div>
 </template>
 
 <script>
+import Healthbar from "../components/Healthbar.vue";
+import { useRoundsmanagerStore } from "@/stores/roundsmanager";
 export default {
+  components: {
+    Healthbar,
+  },
   data() {
-    return {};
+    return {
+      store: useRoundsmanagerStore(),
+    };
   },
 };
 </script>

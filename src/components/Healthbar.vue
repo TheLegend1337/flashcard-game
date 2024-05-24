@@ -1,6 +1,8 @@
 <script></script>
 <template>
-  <div class="healthbar">{{ playerHealth }}</div>
+
+  <div v-if ="playerHealth" class="healthbar">{{ playerHealth }}</div>
+  <div v-else-if ="monsterHealth" class="healthbar">{{ monsterHealth }}</div>
 </template>
 
 <script>
@@ -8,7 +10,10 @@ export default {
   props: {
     playerHealth: {
       type: Number,
-      required: true,
+    
+    },
+    monsterHealth: {
+      type: Number,
     },
   },
   data() {
