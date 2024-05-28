@@ -1,7 +1,11 @@
 <script setup>
+//umschreiben in Options API bevor ich hier rumfriemel
 // import Card from "../components/Card.vue";
 import GameOverlay from "../components/GameOverlay.vue";
 // import Matchfield from "../components/Matchfield.vue";
+//TODO:
+//Switch Case einbauen zum verwalten der Runden, übergeben von
+//Daten aus HomeView für Start Bedingung in Console loggen zum testen
 </script>
 
 <template>
