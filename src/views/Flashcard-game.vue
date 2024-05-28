@@ -1,11 +1,15 @@
 <script setup>
+//TODO:
+//Ich muss hier alle Phasen jeweils als Funktion umsetzen
+//und dann muss ich auf veränderung der Phase im Store hören können:
+//https://pinia.vuejs.org/core-concepts/state.html
+//dann kann der Game View auf Veränderungen der Phasen reagieren.
+//andere Komponenten können dann die Phase an verschiedenen Stellen ändern.
+
 //umschreiben in Options API bevor ich hier rumfriemel
 // import Card from "../components/Card.vue";
 import GameOverlay from "../components/GameOverlay.vue";
 // import Matchfield from "../components/Matchfield.vue";
-//TODO:
-//Switch Case einbauen zum verwalten der Runden, übergeben von
-//Daten aus HomeView für Start Bedingung in Console loggen zum testen
 </script>
 
 <template>
@@ -13,6 +17,31 @@ import GameOverlay from "../components/GameOverlay.vue";
     <GameOverlay />
   </main>
 </template>
+<script>
+/*
+import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+// import Flashcards from './db.json';
+export default {
+  data() {
+    return {
+      store : useRoundsmanagerStore(),
+      flashcards: [],
+      question: "What is a card?",
+      response: "This is the Cards Response.",
+    };
+  },
+  mounted() {
+         this.store.changePhase('GameStart');
+  },
+  methods: {
+    playcard(){
+      this.store.decreaseWillpower(2);
+    }
+
+  }
+};*/
+</script>
+
 <style>
 .flashcard-game {
   background-image: url("../assets/environments/tempel_mit_baeumen_korrigiert.png");

@@ -6,6 +6,7 @@ export const useRoundsmanagerStore = defineStore("roundsmanager", {
     monsterHealth: 10,
     playerHealth: 10,
     willpower: 3,
+    phase: 'GameStart',
   }),
   getters: {
     doubleCount: (state) => state.count * 2,
