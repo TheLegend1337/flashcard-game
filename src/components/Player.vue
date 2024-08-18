@@ -1,7 +1,7 @@
 <!-- <script setup>
 import Healthbar from "../components/Healthbar.vue";
-import { useRoundsmanagerStore } from "@/stores/roundsmanager";
-const store = useRoundsmanagerStore();
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+const store = useFlashcardGameStore();
 </script> -->
 <template>
   <div class="player">
@@ -11,7 +11,7 @@ const store = useRoundsmanagerStore();
 
 <script>
 import Healthbar from "../components/Healthbar.vue";
-import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 
 export default {
   components: {
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-       store: useRoundsmanagerStore(),
+      store: useFlashcardGameStore(),
     };
   },
 };

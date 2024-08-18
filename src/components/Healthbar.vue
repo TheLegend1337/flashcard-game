@@ -1,8 +1,7 @@
 <script></script>
 <template>
-
-  <div v-if ="playerHealth" class="healthbar">{{ playerHealth }}</div>
-  <div v-else-if ="monsterHealth" class="healthbar">{{ monsterHealth }}</div>
+  <div v-if="playerHealth" class="healthbar">{{ playerHealth }}</div>
+  <div v-else-if="monsterHealth" class="healthbar">{{ monsterHealth }}</div>
 </template>
 
 <script>
@@ -10,7 +9,6 @@ export default {
   props: {
     playerHealth: {
       type: Number,
-    
     },
     monsterHealth: {
       type: Number,
@@ -18,6 +16,9 @@ export default {
   },
   data() {
     return {};
+  },
+  updated() {
+    console.log("Healthbar Komponent feuert updated");
   },
 };
 </script>

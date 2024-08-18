@@ -1,6 +1,6 @@
 <script setup>
-import { useRoundsmanagerStore } from "@/stores/roundsmanager";
-const store = useRoundsmanagerStore();
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+const store = useFlashcardGameStore();
 </script>
 <template>
   <div class="willpower">

@@ -1,4 +1,3 @@
-
 <template>
   <div class="monster">
     <Healthbar :monsterHealth="store.monsterHealth" class="healthbar" />
@@ -7,14 +6,14 @@
 
 <script>
 import Healthbar from "../components/Healthbar.vue";
-import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 export default {
   components: {
     Healthbar,
   },
   data() {
     return {
-      store: useRoundsmanagerStore(),
+      store: useFlashcardGameStore(),
     };
   },
 };

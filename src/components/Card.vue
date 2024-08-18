@@ -1,8 +1,8 @@
 <!-- <script setup>
-// import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+// import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 
 // access the `store` variable anywhere in the component ✨
-// const store = useRoundsmanagerStore();
+// const store = useFlashcardGameStore();
 </script> -->
 <template>
   <div>{{ flashcards[0] }}</div>
@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import { useRoundsmanagerStore } from "@/stores/roundsmanager";
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 // import Flashcards from './db.json';
 export default {
   data() {
     return {
-      store : useRoundsmanagerStore(),
+      store: useFlashcardGameStore(),
       flashcards: [],
       question: "What is a card?",
       response: "This is the Cards Response.",
@@ -43,13 +43,12 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
-    playcard(){
+    playcard() {
       this.store.decreaseWillpower(2);
       this.store.damageHero(3);
       this.store.damageMonster(2);
-    }
-
-  }
+    },
+  },
 };
 </script>
 

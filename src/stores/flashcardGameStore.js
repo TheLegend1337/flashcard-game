@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 
-export const useRoundsmanagerStore = defineStore("roundsmanager", {
+export const useFlashcardGameStore = defineStore("flashcardGame", {
   state: () => ({
     round: 0,
     monsterHealth: 10,
     playerHealth: 10,
     willpower: 3,
-    phase: 'GameStart',
+    phase: "gameStart",
   }),
   getters: {
     doubleCount: (state) => state.count * 2,
@@ -16,7 +16,7 @@ export const useRoundsmanagerStore = defineStore("roundsmanager", {
       this.willpower++;
     },
     decreaseWillpower(value) {
-      this.willpower = this.willpower - value ;
+      this.willpower = this.willpower - value;
     },
     damageHero(value) {
       if (value < 0) {
