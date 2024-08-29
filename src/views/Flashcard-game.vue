@@ -7,7 +7,7 @@
     <h1 v-if="endTurn">End Turn</h1>
     <h1 v-if="enemyTurn">Enemy Turn</h1>
     <h1 v-if="gameOver">Game Over</h1> -->
-    <button @click="updateFoo" class="center-button">{{ foo }}</button>
+    <button @click="changePhase" class="center-button">Phase ändern</button>
   </main>
 </template>
 <script>
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       foo: 0,
+      phase: "gameStart",
       // store : useFlashcardGameStore(),
       // flashcards: [],
       // question: "What is a card?",
@@ -46,38 +47,6 @@ export default {
   mounted() {
     console.log("mounted");
     //  this.store.changePhase('GameStart');
-    // const phase = "gameStart";
-    // switch (phase) {
-    //   case "gameStart":
-    //     console.log("Das Spiel hat gestartet");
-    //     console.log("Ändere Phase auf drawInitialCards");
-    //     break;
-    //   case "drawInitialCards":
-    //     console.log("Spieler zieht beim erstn Mal 5 Karten");
-    //     console.log("Ändere Phase auf playPhase");
-    //     break;
-    //   case "drawCards":
-    //     console.log("Spieler zieht eine Karte");
-    //     console.log("Ändere Phase auf playPhase");
-    //     break;
-    //   case "playPhase":
-    //     console.log("Spieler darf Entscheidungen");
-    //     console.log("Ändere Phase auf endTurn");
-    //     break;
-    //   case "endTurn":
-    //     console.log("Spieler beendet den Zug");
-    //     console.log("Ändere Phase auf enemyTurn");
-    //     break;
-    //   case "enemyTurn":
-    //     console.log("Gegner ist am Zug");
-    //     console.log("Ändere Phase auf drawCards");
-    //     break;
-    //   case "gameOver":
-    //     console.log("You died!");
-    //     break;
-    //   default:
-    //     console.log(`Sorry, we are out of ${expr}.`);
-    // }
   },
   beforeUpdate() {
     console.log("beforeUpdate");
@@ -92,11 +61,48 @@ export default {
     console.log("unmounted");
   },
 
-  watch: {},
+  watch: {
+    phase(value) {
+      console.log(value);
+    },
+  },
   methods: {
-    updateFoo() {
-      this.foo = this.foo + 1;
-      console.log(this.foo);
+    changePhase() {
+      switch (this.phase) {
+        case "gameStart":
+          console.log("Das Spiel hat gestartet");
+          this.phase = "drawInitialCards";
+
+          break;
+        case "drawInitialCards":
+          console.log("Spieler zieht beim erstn Mal 5 Karten");
+          this.phase = "drawCards";
+
+          break;
+        case "drawCards":
+          console.log("Spieler zieht eine Karte");
+          this.phase = "playPhase";
+
+          break;
+        case "playPhase":
+          console.log("Spieler darf Entscheidungen treffen");
+          this.phase = "endTurn";
+          break;
+        case "endTurn":
+          console.log("Spieler beendet den Zug");
+          this.phase = "enemyTurn";
+          break;
+        case "enemyTurn":
+          console.log("Gegner ist am Zug");
+          this.phase = "gameOver";
+          break;
+        case "gameOver":
+          console.log("You died!");
+          this.phase = "gameStart";
+          break;
+        default:
+          console.log(`Sorry, we are out of ${expr}.`);
+      }
     },
   },
 };
