@@ -1,12 +1,14 @@
 <template>
   <main class="flashcard-game">
     <GameOverlay />
-    <!-- <h1 v-if="gameStart">Game Start</h1>
-    <h1 v-if="drawCards">Draw Cards</h1>
-    <h1 v-if="playPhase">Play Phase</h1>
-    <h1 v-if="endTurn">End Turn</h1>
-    <h1 v-if="enemyTurn">Enemy Turn</h1>
-    <h1 v-if="gameOver">Game Over</h1> -->
+    <div id="phase-banner">
+      <h1 v-if="phase === 'gameStart'" class="phase-title">Game Start</h1>
+      <h1 v-if="phase === 'drawCards'" class="phase-title">Draw Cards</h1>
+      <h1 v-if="phase === 'playPhase'" class="phase-title">Play Phase</h1>
+      <h1 v-if="phase === 'endTurn'" class="phase-title">End Turn</h1>
+      <h1 v-if="phase === 'enemyTurn'" class="phase-title">Enemy Turn</h1>
+      <h1 v-if="phase === 'gameOver'" class="phase-title">Game Over</h1>
+    </div>
     <button @click="changePhase" class="center-button">Phase ändern</button>
   </main>
 </template>
@@ -71,16 +73,10 @@ export default {
       switch (this.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
-          this.phase = "drawInitialCards";
-
-          break;
-        case "drawInitialCards":
-          console.log("Spieler zieht beim erstn Mal 5 Karten");
           this.phase = "drawCards";
-
           break;
         case "drawCards":
-          console.log("Spieler zieht eine Karte");
+          console.log("Spieler zieht Karten");
           this.phase = "playPhase";
 
           break;
@@ -101,7 +97,7 @@ export default {
           this.phase = "gameStart";
           break;
         default:
-          console.log(`Sorry, we are out of ${expr}.`);
+          console.log(`Default behavior.`);
       }
     },
   },
@@ -127,6 +123,32 @@ export default {
   transform: translate(-50%, -50%);
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
+}
+phase-title {
+  color: var(--type-on-bg-light);
+  background-color: var(--bg-light-05);
+}
+
+#phase-banner {
+  clip-path: polygon(9% 0, 91% 0, 100% 49%, 91% 100%, 9% 100%, 0% 50%);
+  width: 500px;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size: 0.7em;
+  background: linear-gradient(
+    135deg,
+    var(--bg-accent-gradient-start),
+    var(--bg-accent-gradient-end)
+  ); /* Farbverlauf für den Hintergrund */
+  padding: 10px;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Leichter Schatten für 3D-Effekt */
+
+  transition: background-color 0.5s, transform 0.5s;
 }
 </style>
