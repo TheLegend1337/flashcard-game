@@ -1,13 +1,23 @@
 <template>
   <main class="flashcard-game">
     <GameOverlay />
-    <div id="phase-banner">
-      <h1 v-if="phase === 'gameStart'" class="phase-title">Game Start</h1>
-      <h1 v-if="phase === 'drawCards'" class="phase-title">Draw Cards</h1>
-      <h1 v-if="phase === 'playPhase'" class="phase-title">Play Phase</h1>
-      <h1 v-if="phase === 'endTurn'" class="phase-title">End Turn</h1>
-      <h1 v-if="phase === 'enemyTurn'" class="phase-title">Enemy Turn</h1>
-      <h1 v-if="phase === 'gameOver'" class="phase-title">Game Over</h1>
+    <div id="phaseBanner">
+      <h1 v-if="this.store.phase === 'gameStart'" class="phaseTitle">
+        Game Start
+      </h1>
+      <h1 v-if="this.store.phase === 'drawCards'" class="phaseTitle">
+        Draw Cards
+      </h1>
+      <h1 v-if="this.store.phase === 'playPhase'" class="phaseTitle">
+        Play Phase
+      </h1>
+      <h1 v-if="this.store.phase === 'endTurn'" class="phaseTitle">End Turn</h1>
+      <h1 v-if="this.store.phase === 'enemyTurn'" class="phaseTitle">
+        Enemy Turn
+      </h1>
+      <h1 v-if="this.store.phase === 'gameOver'" class="phaseTitle">
+        Game Over
+      </h1>
     </div>
     <button @click="changePhase" class="center-button">Phase ändern</button>
   </main>
@@ -20,6 +30,7 @@
 //dann kann der Game View auf Veränderungen der Phasen reagieren.
 //andere Komponenten können dann die Phase an verschiedenen Stellen ändern.
 import GameOverlay from "../components/GameOverlay.vue";
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 
 // import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 
@@ -29,9 +40,9 @@ export default {
   },
   data() {
     return {
+      store: useFlashcardGameStore(),
       foo: 0,
-      phase: "gameStart",
-      // store : useFlashcardGameStore(),
+      /*phase: "gameStart",*/
       // flashcards: [],
       // question: "What is a card?",
       // response: "This is the Cards Response.",
@@ -48,6 +59,7 @@ export default {
   },
   mounted() {
     console.log("mounted");
+    console.log("Phase ist: " + this.store.phase);
     //  this.store.changePhase('GameStart');
   },
   beforeUpdate() {
@@ -70,31 +82,31 @@ export default {
   },
   methods: {
     changePhase() {
-      switch (this.phase) {
+      switch (this.store.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
-          this.phase = "drawCards";
+          this.store.phase = "drawCards";
           break;
         case "drawCards":
           console.log("Spieler zieht Karten");
-          this.phase = "playPhase";
+          this.store.phase = "playPhase";
 
           break;
         case "playPhase":
           console.log("Spieler darf Entscheidungen treffen");
-          this.phase = "endTurn";
+          this.store.phase = "endTurn";
           break;
         case "endTurn":
           console.log("Spieler beendet den Zug");
-          this.phase = "enemyTurn";
+          this.store.phase = "enemyTurn";
           break;
         case "enemyTurn":
           console.log("Gegner ist am Zug");
-          this.phase = "gameOver";
+          this.store.phase = "gameOver";
           break;
         case "gameOver":
           console.log("You died!");
-          this.phase = "gameStart";
+          this.store.phase = "gameStart";
           break;
         default:
           console.log(`Default behavior.`);
@@ -124,12 +136,11 @@ export default {
   padding: 10px 20px;
   font-size: 16px;
 }
-phase-title {
+.phaseTitle {
   color: var(--type-on-bg-light);
-  background-color: var(--bg-light-05);
 }
 
-#phase-banner {
+#phaseBanner {
   clip-path: polygon(9% 0, 91% 0, 100% 49%, 91% 100%, 9% 100%, 0% 50%);
   width: 500px;
   position: absolute;
