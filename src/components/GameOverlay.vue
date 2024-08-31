@@ -3,6 +3,8 @@ import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
 import Willpower from "../components/Willpower.vue";
+import DiscardPile from "../components/DiscardPile.vue";
+import CardDeck from "../components/CardDeck.vue";
 </script>
 
 <template>
@@ -13,6 +15,8 @@ import Willpower from "../components/Willpower.vue";
     <Player />
     <Monster />
     <Willpower />
+    <DiscardPile />
+    <CardDeck />
   </div>
 </template>
 
