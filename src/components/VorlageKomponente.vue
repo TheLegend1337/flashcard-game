@@ -1,20 +1,12 @@
 <!--Options API-->
-<template>
-  <!-- Dein Template-Code kommt hier hin -->
-</template>
+<template></template>
 
 <script>
 export default {
-  // Hier kommen alle Optionen der Options API
   data() {
-    return {
-      // Definiere deine reaktiven Daten hier
-    };
+    return {};
   },
-  // Methoden, Computed Properties usw. können hier hinzugefügt werden
 };
 </script>
 
-<style scoped>
-/* Add your component-specific styles here */
-</style>
+<style scoped></style>

@@ -1,26 +1,27 @@
 <template>
-  <!-- Dein Template-Code kommt hier hin -->
   <div class="discard-pile-wrapper">
     <div class="discard-pile">
-      <div class="discard-pile-counter">2</div>
+      <div class="discard-pile-counter">
+        <button @click="this.store.popCard" class="card-deck-counter">
+          Abwerfen
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 export default {
-  // Hier kommen alle Optionen der Options API
   data() {
     return {
-      // Definiere deine reaktiven Daten hier
+      store: useFlashcardGameStore(),
     };
   },
-  // Methoden, Computed Properties usw. können hier hinzugefügt werden
 };
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
 .discard-pile-wrapper {
   width: 50px;
   height: 50px;

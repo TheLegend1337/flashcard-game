@@ -49,5 +49,8 @@ export const useFlashcardGameStore = defineStore("flashcardGame", {
     pushCard() {
       this.cards.push({ id: 6, title: "Default" });
     },
+    popCard() {
+      this.cards.pop();
+    },
   },
 });
