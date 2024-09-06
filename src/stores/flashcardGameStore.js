@@ -7,6 +7,13 @@ export const useFlashcardGameStore = defineStore("flashcardGame", {
     playerHealth: 10,
     willpower: 3,
     phase: "gameStart",
+    cards: [
+      { id: 1, title: "Karte 1" },
+      { id: 2, title: "Karte 2" },
+      { id: 3, title: "Karte 3" },
+      { id: 4, title: "Karte 4" },
+      { id: 5, title: "Karte 5" },
+    ],
   }),
   getters: {
     doubleCount: (state) => state.count * 2,
@@ -38,6 +45,9 @@ export const useFlashcardGameStore = defineStore("flashcardGame", {
       } else {
         this.monsterHealth = this.monsterHealth - value;
       }
+    },
+    pushCard() {
+      this.cards.push({ id: 6, title: "Default" });
     },
   },
 });

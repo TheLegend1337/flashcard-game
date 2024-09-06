@@ -10,6 +10,7 @@
     <div class="card-inner">
       <div class="card-face front">
         <div class="card-face-front-content">
+          <p>{{ title }}</p>
           <button @click="playcard">Entfesseln</button>
         </div>
         <!-- <p>{{ question }}</p> -->
@@ -25,6 +26,16 @@
 import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 // import Flashcards from './db.json';
 export default {
+  props: {
+    title: {
+      type: String,
+      default: "Default Title",
+    },
+    id: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       store: useFlashcardGameStore(),

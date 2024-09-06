@@ -1,26 +1,26 @@
-<script setup>
-import Card from "./Card.vue";
-</script>
 <template>
   <div class="handOfCards">
-    <Card />
-    <Card />
-    <Card />
-    <Card />
-    <Card />
+    <Card v-for="card in store.cards" :key="card.id" :title="card.title" />
   </div>
 </template>
 
 <script>
+import Card from "./Card.vue";
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+
 export default {
+  components: {
+    Card,
+  },
   data() {
-    return {};
+    return {
+      store: useFlashcardGameStore(),
+    };
   },
 };
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
 .handOfCards {
   display: flex;
 }

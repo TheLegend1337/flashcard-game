@@ -1,16 +1,19 @@
 <template>
   <!-- Dein Template-Code kommt hier hin -->
   <div class="card-deck">
-    <button class="card-deck-counter">24</button>
+    <button @click="this.store.pushCard" class="card-deck-counter">
+      Ziehen
+    </button>
   </div>
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
 export default {
   // Hier kommen alle Optionen der Options API
   data() {
     return {
-      // Definiere deine reaktiven Daten hier
+      store: useFlashcardGameStore(),
     };
   },
   // Methoden, Computed Properties usw. können hier hinzugefügt werden
