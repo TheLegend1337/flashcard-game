@@ -4,7 +4,11 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      //Komma statt Semicolon benutzen
+      //z.b store: useWillpowerStore(),
+      //Achtung Doppelpunkt' : '' statt ' = ',
+    };
   },
 };
 </script>

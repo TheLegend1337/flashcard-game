@@ -1,19 +1,21 @@
 <template>
   <div class="monster">
-    <Healthbar :monsterHealth="store.monsterHealth" class="healthbar" />
+    <Healthbar :monsterHealth="monsterStore.monsterHealth" class="healthbar" />
   </div>
 </template>
 
 <script>
 import Healthbar from "../components/Healthbar.vue";
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 export default {
   components: {
     Healthbar,
   },
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
+      monsterStore: useMonsterStore(),
     };
   },
 };

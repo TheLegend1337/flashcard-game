@@ -1,17 +1,19 @@
-<script setup>
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
-const store = useFlashcardGameStore();
-</script>
+<!--Options API-->
 <template>
   <div class="willpower">
-    <div class="willpower-count">{{ store.willpower }}</div>
+    <div class="willpower-count">{{ willpowerStore.willpower }}</div>
   </div>
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
 export default {
   data() {
-    return {};
+    return {
+      store: useFlashcardGameStore(),
+      willpowerStore: useWillpowerStore(),
+    };
   },
 };
 </script>

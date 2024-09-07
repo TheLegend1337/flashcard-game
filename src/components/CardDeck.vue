@@ -1,19 +1,21 @@
 <template>
   <!-- Dein Template-Code kommt hier hin -->
   <div class="card-deck">
-    <button @click="this.store.pushCard" class="card-deck-counter">
+    <button @click="this.cardStore.pushCard" class="card-deck-counter">
       Ziehen
     </button>
   </div>
 </template>
 
 <script>
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   // Hier kommen alle Optionen der Options API
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
+      cardStore: useCardStore(),
     };
   },
   // Methoden, Computed Properties usw. können hier hinzugefügt werden

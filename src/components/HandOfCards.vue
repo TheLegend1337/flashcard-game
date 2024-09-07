@@ -1,20 +1,21 @@
 <template>
   <div class="handOfCards">
-    <Card v-for="card in store.cards" :key="card.id" :title="card.title" />
+    <Card v-for="card in cardStore.cards" :key="card.id" :title="card.title" />
   </div>
 </template>
 
 <script>
 import Card from "./Card.vue";
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
-
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   components: {
     Card,
   },
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
+      cardStore: useCardStore(),
     };
   },
 };

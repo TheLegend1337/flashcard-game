@@ -2,7 +2,7 @@
   <div class="discard-pile-wrapper">
     <div class="discard-pile">
       <div class="discard-pile-counter">
-        <button @click="this.store.popCard" class="card-deck-counter">
+        <button @click="this.cardStore.popCard" class="card-deck-counter">
           Abwerfen
         </button>
       </div>
@@ -11,11 +11,13 @@
 </template>
 
 <script>
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
+      cardStore: useCardStore(),
     };
   },
 };

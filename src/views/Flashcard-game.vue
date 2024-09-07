@@ -2,20 +2,37 @@
   <main class="flashcard-game">
     <GameOverlay />
     <div id="phaseBanner">
-      <h1 v-if="this.store.phase === 'gameStart'" class="phaseTitle">
+      <h1
+        v-if="this.flashcardGameStore.phase === 'gameStart'"
+        class="phaseTitle"
+      >
         Game Start
       </h1>
-      <h1 v-if="this.store.phase === 'drawCards'" class="phaseTitle">
+      <h1
+        v-if="this.flashcardGameStore.phase === 'drawCards'"
+        class="phaseTitle"
+      >
         Draw Cards
       </h1>
-      <h1 v-if="this.store.phase === 'playPhase'" class="phaseTitle">
+      <h1
+        v-if="this.flashcardGameStore.phase === 'playPhase'"
+        class="phaseTitle"
+      >
         Play Phase
       </h1>
-      <h1 v-if="this.store.phase === 'endTurn'" class="phaseTitle">End Turn</h1>
-      <h1 v-if="this.store.phase === 'enemyTurn'" class="phaseTitle">
+      <h1 v-if="this.flashcardGameStore.phase === 'endTurn'" class="phaseTitle">
+        End Turn
+      </h1>
+      <h1
+        v-if="this.flashcardGameStore.phase === 'enemyTurn'"
+        class="phaseTitle"
+      >
         Enemy Turn
       </h1>
-      <h1 v-if="this.store.phase === 'gameOver'" class="phaseTitle">
+      <h1
+        v-if="this.flashcardGameStore.phase === 'gameOver'"
+        class="phaseTitle"
+      >
         Game Over
       </h1>
     </div>
@@ -23,24 +40,15 @@
   </main>
 </template>
 <script>
-//TODO:
-//Ich muss hier alle Phasen jeweils als Funktion umsetzen
-//und dann muss ich auf veränderung der Phase im Store hören können:
-//https://pinia.vuejs.org/core-concepts/state.html
-//dann kann der Game View auf Veränderungen der Phasen reagieren.
-//andere Komponenten können dann die Phase an verschiedenen Stellen ändern.
 import GameOverlay from "../components/GameOverlay.vue";
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
-
-// import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
-
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   components: {
     GameOverlay,
   },
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
       foo: 0,
       /*phase: "gameStart",*/
       // flashcards: [],
@@ -59,8 +67,7 @@ export default {
   },
   mounted() {
     console.log("mounted");
-    console.log("Phase ist: " + this.store.phase);
-    //  this.store.changePhase('GameStart');
+    console.log("Phase ist: " + this.flashcardGameStore.phase);
   },
   beforeUpdate() {
     console.log("beforeUpdate");
@@ -82,31 +89,31 @@ export default {
   },
   methods: {
     changePhase() {
-      switch (this.store.phase) {
+      switch (this.flashcardGameStore.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
-          this.store.phase = "drawCards";
+          this.flashcardGameStore.phase = "drawCards";
           break;
         case "drawCards":
           console.log("Spieler zieht Karten");
-          this.store.phase = "playPhase";
+          this.flashcardGameStore.phase = "playPhase";
 
           break;
         case "playPhase":
           console.log("Spieler darf Entscheidungen treffen");
-          this.store.phase = "endTurn";
+          this.flashcardGameStore.phase = "endTurn";
           break;
         case "endTurn":
           console.log("Spieler beendet den Zug");
-          this.store.phase = "enemyTurn";
+          this.flashcardGameStore.phase = "enemyTurn";
           break;
         case "enemyTurn":
           console.log("Gegner ist am Zug");
-          this.store.phase = "gameOver";
+          this.flashcardGameStore.phase = "gameOver";
           break;
         case "gameOver":
           console.log("You died!");
-          this.store.phase = "gameStart";
+          this.flashcardGameStore.phase = "gameStart";
           break;
         default:
           console.log(`Default behavior.`);

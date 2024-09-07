@@ -1,11 +1,5 @@
-<!-- <script setup>
-// import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
-
-// access the `store` variable anywhere in the component ✨
-// const store = useFlashcardGameStore();
-</script> -->
 <template>
-  <div>{{ flashcards[0] }}</div>
+  <div></div>
   <div class="card" draggable="true">
     <div class="card-inner">
       <div class="card-face front">
@@ -23,7 +17,10 @@
 </template>
 
 <script>
-import { useFlashcardGameStore } from "@/stores/flashcardGameStore";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
+import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
+import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 // import Flashcards from './db.json';
 export default {
   props: {
@@ -38,26 +35,26 @@ export default {
   },
   data() {
     return {
-      store: useFlashcardGameStore(),
-      flashcards: [],
-      question: "What is a card?",
-      response: "This is the Cards Response.",
+      flashcardGameStore: useFlashcardGameStore(),
+      playerStore: usePlayerStore(),
+      willpowerStore: useWillpowerStore(),
+      monsterStore: useMonsterStore(),
     };
   },
   mounted() {
-    fetch("http://localhost:3000/flashcards")
+    /* fetch("http://localhost:3000/flashcards")
       .then((response) => response.json())
       .then((data) => {
         this.flashcards = data;
         console.log(data);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message));*/
   },
   methods: {
     playcard() {
-      this.store.decreaseWillpower(2);
-      this.store.damageHero(3);
-      this.store.damageMonster(2);
+      this.willpowerStore.decreaseWillpower(2);
+      this.playerStore.damageHero(3);
+      this.monsterStore.damageMonster(2);
     },
   },
 };
