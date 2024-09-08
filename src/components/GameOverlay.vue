@@ -5,6 +5,7 @@ import Monster from "../components/Monster.vue";
 import Willpower from "../components/Willpower.vue";
 import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
+import QuizBox from "../components/QuizBox.vue";
 </script>
 
 <template>
@@ -17,6 +18,7 @@ import CardDeck from "../components/CardDeck.vue";
     <Willpower />
     <DiscardPile />
     <CardDeck />
+    <QuizBox />
   </div>
 </template>
 
