@@ -1,22 +1,32 @@
 <template>
   <!-- Dein Template-Code kommt hier hin -->
   <div class="card-deck">
-    <button @click="this.cardStore.pushCard" class="card-deck-counter">
+    <!-- <button @click="this.cardStore.pushCard" class="card-deck-counter">
       Ziehen
-    </button>
+    </button> -->
+    <ButtonPrimary :clickHandler="drawCard" label="Ziehen" />
   </div>
 </template>
 
 <script>
+import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   // Hier kommen alle Optionen der Options API
+  components: {
+    ButtonPrimary,
+  },
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
     };
+  },
+  methods: {
+    drawCard() {
+      this.cardStore.pushCard();
+    },
   },
   // Methoden, Computed Properties usw. können hier hinzugefügt werden
 };

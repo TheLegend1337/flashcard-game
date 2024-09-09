@@ -2,23 +2,33 @@
   <div class="discard-pile-wrapper">
     <div class="discard-pile">
       <div class="discard-pile-counter">
-        <button @click="this.cardStore.popCard" class="card-deck-counter">
+        <!-- <button @click="this.cardStore.popCard" class="card-deck-counter">
           Abwerfen
-        </button>
+        </button> -->
+        <ButtonPrimary :clickHandler="discard" label="Abwerfen" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
+  components: {
+    ButtonPrimary,
+  },
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
     };
+  },
+  methods: {
+    discard() {
+      this.cardStore.popCard();
+    },
   },
 };
 </script>

@@ -5,21 +5,32 @@
       <p>Hier steht lorem ipsum dolor sit amet consetetur elitir text.</p>
     </div>
     <div class="answer">
-      <button>Nochmal</button>
-      <button>Schwer</button>
-      <button>Einfach</button>
+      <ButtonSecondary :clickHandler="again" label="nochmal" />
+      <ButtonSecondary :clickHandler="hard" label="Schwer" />
+      <ButtonPrimary :clickHandler="easy" label="Einfach" />
     </div>
   </div>
 </template>
 
 <script>
+import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
+import ButtonSecondary from "@/components/FlashcardGame/Buttons/ButtonSecondary.vue";
 export default {
+  components: {
+    ButtonPrimary,
+    ButtonSecondary,
+  },
   data() {
     return {
       //Komma statt Semicolon benutzen
       //z.b store: useWillpowerStore(),
       //Achtung Doppelpunkt' : '' statt ' = ',
     };
+  },
+  methods: {
+    drawCard() {
+      this.cardStore.pushCard();
+    },
   },
 };
 </script>

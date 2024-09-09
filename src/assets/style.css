@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* i prefer to define colors based on their function 
+    i will probably rework the first three because
+    basing color names on ... their color creates issues
+    but for now they are my three primary colors*/
+
+  --off-black: #131d24; /* maybe footer */
+
+  --icon-on-bg-light: #fcead1;
+
+  /* on dark background */
+  --type-on-bg-dark: #eef4f8;
+  --img-border-on-bg-dark: #efcfa4;
+  --bg-dark: #131d24;
+
+  /* on light background */
+  --bg-light: #edcea3; /* -> when no gradient applied*/
+  --bg-light-05: rgb(237, 206, 163, 0.5);
+  --linktext-on-nav: #a9895d;
+  --type-on-bg-light: #4a3211;
+  --bg-light-gradient-start: #faeaca;
+  --bg-light-gradient-end: #efcfa4;
+  /* on accent background */
+  --type-on-bg-accent: #d6f2ec;
+  --bg-accent-gradient-start: #9bb6b3;
+  --bg-accent-gradient-end: #5f888a;
+}
+
+@font-face {
+  font-family: "IMFELLEnglisch";
+  src: url("./fonts/im_fell_types/IM_Fell_English/FeENrm2.ttf")
+    format("truetype");
+  /* Add additional file formats if needed */
+}
+
+body {
+  /* font-family: 'IMFELLEnglisch', sans-serif;  */
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  /*color: var(--color-text);*/
+  /*background: var(--color-background);*/
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: "IMFELLEnglisch", Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

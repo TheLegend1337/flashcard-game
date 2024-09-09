@@ -4,7 +4,7 @@
     <div id="phaseBanner">
       <h1
         v-if="this.flashcardGameStore.phase === 'gameStart'"
-        class="phaseTitle"
+        class="phaseTitle text-3xl font-bold underline"
       >
         Game Start
       </h1>
