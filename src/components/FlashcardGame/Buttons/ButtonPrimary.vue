@@ -24,7 +24,11 @@ export default {
   },
   methods: {
     handleClick() {
-      this.clickHandler();
+      if (this.clickHandler) {
+        this.clickHandler();
+      } else {
+        this.$emit("button-clicked");
+      }
     },
   },
 };

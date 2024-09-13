@@ -8,7 +8,7 @@
       <p class="text-xs sm:text-xs md:text-xs lg:text-lg">
         Lorem ipsum dolor sit amet, consetetur elitir?
       </p>
-      <ButtonPrimary class="" :clickHandler="showAnswer" label="Antwort" />
+      <ButtonPrimary class="" @button-clicked="showAnswer" label="Antwort" />
     </div>
     <div v-else class="container answer text-center m-6">
       <p class="text-xs sm:text-xs md:text-base lg:text-lg">
@@ -45,6 +45,9 @@ export default {
   methods: {
     drawCard() {
       this.cardStore.pushCard();
+    },
+    showAnswer() {
+      this.isQuestionVisible = false;
     },
   },
 };

@@ -4,7 +4,8 @@
     <!-- <button @click="this.cardStore.pushCard" class="card-deck-counter">
       Ziehen
     </button> -->
-    <ButtonPrimary :clickHandler="drawCard" label="Ziehen" />
+    <!-- <ButtonPrimary :clickHandler="drawCard" label="Ziehen" /> -->
+    <ButtonPrimary @button-clicked="drawCard" label="Ziehen" />
   </div>
 </template>
 

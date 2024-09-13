@@ -5,7 +5,8 @@
         <!-- <button @click="this.cardStore.popCard" class="card-deck-counter">
           Abwerfen
         </button> -->
-        <ButtonPrimary :clickHandler="discard" label="Abwerfen" />
+        <!-- <ButtonPrimary :clickHandler="discard" label="Abwerfen" /> -->
+        <ButtonPrimary @button-clicked="discard" label="Abwerfen" />
       </div>
     </div>
   </div>
