@@ -1,10 +1,23 @@
 <template>
   <main class="flashcard-game">
-    <GameOverlay />
+    <div class="grid-container game-overlay">
+      <HandOfCards />
+      <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
+      <Player />
+      <Monster />
+      <Willpower />
+      <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
+      <CardDeck />
+      <!-- <QuizBox /> -->
+    </div>
     <div id="phaseBanner">
+      <button @click="drawCard" class="m-2">Ziehen</button>
+      <button @click="discard" class="m-2">Ablegen</button>
+      <button @click="changePhase" class="m-2">Phase ändern</button>
+
       <h1
         v-if="this.flashcardGameStore.phase === 'gameStart'"
-        class="phaseTitle text-3xl font-bold underline"
+        class="phaseTitle"
       >
         Game Start
       </h1>
@@ -36,15 +49,26 @@
         Game Over
       </h1>
     </div>
-    <button @click="changePhase" class="center-button">Phase ändern</button>
   </main>
 </template>
 <script>
-import GameOverlay from "../components/GameOverlay.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import HandOfCards from "../components/HandOfCards.vue";
+import Player from "../components/Player.vue";
+import Monster from "../components/Monster.vue";
+import Willpower from "../components/Willpower.vue";
+import DiscardPile from "../components/DiscardPile.vue";
+import CardDeck from "../components/CardDeck.vue";
+import QuizBox from "../components/QuizBox.vue";
 export default {
   components: {
-    GameOverlay,
+    HandOfCards,
+    Player,
+    Monster,
+    Willpower,
+    DiscardPile,
+    CardDeck,
+    QuizBox,
   },
   data() {
     return {
@@ -119,6 +143,9 @@ export default {
           console.log(`Default behavior.`);
       }
     },
+    drawCard() {
+      return; //rausfinden wie man direkt eine Methode abruft
+    },
   },
 };
 </script>
@@ -141,7 +168,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px 20px;
-  font-size: 16px;
 }
 .phaseTitle {
   color: var(--type-on-bg-light);
@@ -155,7 +181,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px 20px;
-  font-size: 0.7em;
+
   background: linear-gradient(
     135deg,
     var(--bg-accent-gradient-start),
@@ -168,5 +194,21 @@ export default {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Leichter Schatten für 3D-Effekt */
 
   transition: background-color 0.5s, transform 0.5s;
+}
+
+.game-overlay {
+  display: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+}
+
+.grid-container {
+  display: grid;
+  /* grid-template-columns: repeat(10, 1fr); */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  /* grid-template-rows: repeat(10, 1fr); */
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
 }
 </style>

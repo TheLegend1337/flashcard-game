@@ -10,13 +10,12 @@ import QuizBox from "../components/QuizBox.vue";
 
 <template>
   <div class="grid-container game-overlay">
-    <div class="handOfCards">
-      <HandOfCards />
-    </div>
+    <HandOfCards />
+    <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
     <Player />
     <Monster />
     <Willpower />
-    <DiscardPile />
+    <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
     <CardDeck />
     <QuizBox />
   </div>
@@ -50,13 +49,5 @@ export default {
   /* grid-template-rows: repeat(10, 1fr); */
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
-}
-
-.handOfCards {
-  width: 100%;
-  grid-row-start: 8;
-  grid-row-end: 10;
-  grid-column-start: 3;
-  grid-column-end: 8;
 }
 </style>

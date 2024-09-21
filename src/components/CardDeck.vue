@@ -5,7 +5,6 @@
       Ziehen
     </button> -->
     <!-- <ButtonPrimary :clickHandler="drawCard" label="Ziehen" /> -->
-    <ButtonPrimary @button-clicked="drawCard" label="Ziehen" />
   </div>
 </template>
 
@@ -22,11 +21,19 @@ export default {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
+      cardDeck: [
+        { id: 1, title: "Karte 1" },
+        { id: 2, title: "Karte 2" },
+        { id: 3, title: "Karte 3" },
+        { id: 4, title: "Karte 4" },
+        { id: 5, title: "Karte 5" },
+      ],
     };
   },
   methods: {
     drawCard() {
-      this.cardStore.pushCard();
+      //this.cardStore.pushCard();
+      this.cardDeck.pop();
     },
   },
   // Methoden, Computed Properties usw. können hier hinzugefügt werden
