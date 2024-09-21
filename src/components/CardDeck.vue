@@ -33,7 +33,7 @@ export default {
   methods: {
     drawCard() {
       //this.cardStore.pushCard();
-      this.cardDeck.pop();
+      return this.cardDeck.pop();
     },
   },
   // Methoden, Computed Properties usw. können hier hinzugefügt werden

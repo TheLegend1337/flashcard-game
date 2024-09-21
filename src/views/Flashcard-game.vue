@@ -7,7 +7,7 @@
       <Monster />
       <Willpower />
       <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
-      <CardDeck />
+      <CardDeck ref="CardDeck" />
       <!-- <QuizBox /> -->
     </div>
     <div id="phaseBanner">
@@ -144,7 +144,7 @@ export default {
       }
     },
     drawCard() {
-      return; //rausfinden wie man direkt eine Methode abruft
+      console.log(this.$refs.CardDeck.drawCard());
     },
   },
 };
