@@ -1,7 +1,7 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
-      <HandOfCards />
+      <HandOfCards :card="drawnCard" />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
       <Player />
       <Monster />
@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
+      drawnCard: null,
       foo: 0,
       /*phase: "gameStart",*/
       // flashcards: [],
@@ -144,7 +145,9 @@ export default {
       }
     },
     drawCard() {
-      console.log(this.$refs.CardDeck.drawCard());
+      const card = this.$refs.CardDeck.drawCard();
+      console.log(card);
+      this.drawnCard = card;
     },
   },
 };

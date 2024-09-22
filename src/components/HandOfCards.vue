@@ -13,6 +13,7 @@ export default {
   props: {
     card: {
       type: Object,
+      default: null,
     },
   },
   components: {

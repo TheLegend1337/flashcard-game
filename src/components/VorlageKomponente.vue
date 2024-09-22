@@ -9,6 +9,10 @@ export default {
   name: "ExampleComponent",
   props: {
     // Definiere Props hier
+    // objectName:{
+    //   type: object,
+    //   default: null,
+    // }
   },
   data() {
     return {
@@ -21,6 +25,7 @@ export default {
   watch: {
     // Beobachter für reaktive Daten oder Props
   },
+  /*
   // Lifecycle Hooks
   beforeCreate() {
     // Wird ausgeführt, bevor die Instanz erstellt wird
@@ -55,7 +60,7 @@ export default {
   errorCaptured(err, vm, info) {
     // Wird ausgeführt, wenn ein Fehler in einem Kindkomponenten-Lebenszyklus oder -Rendering auftritt
     // Ermöglicht Fehlerbehandlung innerhalb der Komponente
-  },
+  },*/
   methods: {
     // Methoden der Komponente
   },
