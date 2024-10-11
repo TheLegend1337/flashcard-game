@@ -30,6 +30,7 @@
 </template>
 
 <script>
+//habe den Content gefunden
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import ButtonSecondary from "@/components/FlashcardGame/Buttons/ButtonSecondary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
