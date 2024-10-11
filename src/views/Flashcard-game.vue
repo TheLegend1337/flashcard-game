@@ -8,7 +8,7 @@
       <Willpower />
       <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
       <CardDeck ref="CardDeck" />
-      <!-- <QuizBox /> -->
+      <QuizBox />
     </div>
     <div id="phaseBanner">
       <button @click="drawCard" class="m-2">Ziehen</button>

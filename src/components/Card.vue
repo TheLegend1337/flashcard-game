@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     playcard() {
+      this.flashcardGameStore.changeQuizBoxVisibility();
       this.willpowerStore.decreaseWillpower(2);
       this.playerStore.damageHero(3);
       this.monsterStore.damageMonster(2);

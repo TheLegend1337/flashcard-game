@@ -1,6 +1,9 @@
 <!--Options API-->
 <template>
-  <div class="container quiz-box">
+  <div
+    class="container quiz-box"
+    :class="{ hideQuizBox: quizBoxVisibility === 'invisible' }"
+  >
     <div
       v-if="isQuestionVisible"
       class="container question flex justify-items-center flex-col items-center"
@@ -29,6 +32,7 @@
 <script>
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import ButtonSecondary from "@/components/FlashcardGame/Buttons/ButtonSecondary.vue";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   components: {
     ButtonPrimary,
@@ -40,7 +44,13 @@ export default {
       //z.b store: useWillpowerStore(),
       //Achtung Doppelpunkt' : '' statt ' = ',
       isQuestionVisible: true,
+      flashcardGameStore: useFlashcardGameStore(),
     };
+  },
+  computed: {
+    quizBoxVisibility() {
+      return this.flashcardGameStore.quizBoxState;
+    },
   },
   methods: {
     drawCard() {
@@ -76,6 +86,10 @@ export default {
   background-position: center;
   padding: 100px 50px;
   background-image: url("@/assets/ui-components-backgrounds/background-pergament-quadratisch.png");
+}
+
+.hideQuizBox {
+  display: none;
 }
 .question {
 }
