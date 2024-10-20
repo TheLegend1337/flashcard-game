@@ -22,6 +22,7 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink to="/menu-overlay">Overlay</RouterLink>
         <RouterLink to="/flashcard-game">Karteikartenspiel</RouterLink>
         <RouterLink to="/flashcard-game/flashcard-animation">Karte</RouterLink>
+        <RouterLink to="/sprite-animations">Sprite Animation Demo</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/axiostest">Axios Test</RouterLink>
       </nav>

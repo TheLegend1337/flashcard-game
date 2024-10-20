@@ -1,21 +1,51 @@
 <template>
   <div class="monster">
-    <Healthbar :monsterHealth="monsterStore.monsterHealth" class="healthbar" />
+    <select v-model="selectedAnimation" @change="updateAnimation">
+      <!-- Dropdown zur Auswahl der Animation -->
+      <option
+        v-for="(animation, key) in zombieVillagerAnimations"
+        :key="key"
+        :value="key"
+      >
+        {{ animation.name }}
+      </option>
+    </select>
+    <Healthbar
+      v-if="!healthbarOff"
+      :monsterHealth="monsterStore.monsterHealth"
+      class="healthbar"
+    />
+    <SpriteAnimation
+      :key="selectedAnimation"
+      :animationParameters="zombieVillagerAnimations[selectedAnimation]"
+      flip
+    />
   </div>
 </template>
 
 <script>
 import Healthbar from "../components/Healthbar.vue";
-import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+// import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
+import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
+import zombieVillagerAnimations from "@/assets/animations/monsters/zombieVillager/animation-data/zombieVillagerAnimations.js"; // TODO: Ziel ist es irgendwann im Pfad monster-vue mit dem ausgewählten Monster zu ersetzen
 export default {
   components: {
     Healthbar,
+    SpriteAnimation,
+  },
+  props: {
+    healthbarOff: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      flashcardGameStore: useFlashcardGameStore(),
+      // flashcardGameStore: useFlashcardGameStore(),
       monsterStore: useMonsterStore(),
+      zombieVillagerAnimations,
+      selectedAnimation: "zombieVillagerIdle",
     };
   },
 };
@@ -24,8 +54,8 @@ export default {
 <style scoped>
 /* Add your component-specific styles here */
 .monster {
-  width: 80px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border: 10px solid rgb(255, 0, 0);
   grid-row-start: 6;
   grid-row-end: 7;

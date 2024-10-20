@@ -5,8 +5,13 @@
 </template>
 
 <script>
+//beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
+//@ steht für den src Ordner
 export default {
   name: "ExampleComponent",
+  components: {
+    //Component
+  },
   props: {
     // Definiere Props hier
     // objectName:{
