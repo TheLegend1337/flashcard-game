@@ -1,11 +1,16 @@
 <template>
   <!-- Dein Template-Code kommt hier hin -->
   <div class="card-deck">
-    <!-- <button @click="this.cardStore.pushCard" class="card-deck-counter">
+    <div class="card-deck-counter-border">
+      <div class="card-deck-counter">
+        <p class="card-deck-counter-text">3</p>
+      </div>
+    </div>
+  </div>
+  <!-- <button @click="this.cardStore.pushCard" class="card-deck-counter">
       Ziehen
     </button> -->
-    <!-- <ButtonPrimary :clickHandler="drawCard" label="Ziehen" /> -->
-  </div>
+  <!-- <ButtonPrimary :clickHandler="drawCard" label="Ziehen" /> -->
 </template>
 
 <script>
@@ -42,14 +47,52 @@ export default {
 
 <style scoped>
 .card-deck {
-  width: 50px;
-  height: 50px;
-  border: 3px solid black;
+  width: 150px;
+  height: 150px;
+  /* border: 3px solid black; */
   grid-row-start: 8;
   grid-row-end: 9;
   grid-column-start: 9;
   grid-column-end: 10;
   justify-self: start;
+  background-image: url("@/assets/icons/cardDeck.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
+
+.card-deck-counter-border {
+  transform: rotateZ(19deg);
+  padding: 5px;
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+  position: absolute;
+  background: linear-gradient(to top right, #42392d, #d1af8b);
+  height: 40px;
+  width: 40px;
+  right: 106px;
+  bottom: 33px;
+  box-shadow: -1px 1px 13px rgba(255, 255, 255, 0.3),
+    5px -8px 7px rgba(0, 0, 0, 0.5);
+}
+.card-deck-counter {
+  /* border: 2px solid var(--border-around-bg-accent); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #562f18, #b67e3b);
+  border-radius: 50%;
+}
+.card-deck-counter-text {
+  height: 2rem;
+  line-height: 1.2rem;
+  font-size: 1.5rem;
+  color: #fef2b6;
+}
+
 /* Add your component-specific styles here */
 </style>

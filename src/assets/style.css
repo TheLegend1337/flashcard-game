@@ -28,6 +28,7 @@
   --type-on-bg-accent: #d6f2ec;
   --bg-accent-gradient-start: #9bb6b3;
   --bg-accent-gradient-end: #5f888a;
+  --border-around-bg-accent: #a7c7c2;
 }
 
 @font-face {
