@@ -56,7 +56,7 @@ export default {
 .monster {
   width: 300px;
   height: 300px;
-  border: 10px solid rgb(255, 0, 0);
+  /* border: 10px solid rgb(255, 0, 0);*/
   grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 6;

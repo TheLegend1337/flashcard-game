@@ -27,6 +27,29 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
       cardDeck: [
+        //10 Angriffskarten
+        //Eine Schaden über Zeit karte "Do you smell Popcorn?" verursacht 1 Giftschaden pro Runde über 5 Runden
+        //Sodbrennen 1 Schaden über 10 Runden
+        //Sodbrannt
+        //Zerstörerische brennende Sod
+        //Constipation "Das Gegnerische Monster hat die Kontrolle über ihr Leben verloren und eine ganze Pizza alleine gegessen"
+        //Email nach 17 Uhr "Das Monster ist gestresst und verliert 1 HP"
+        //Passive Agressivität "Verursache 1 Schaden wenn du angegriffen wirst"
+        //Burnout: Ein Monster erhält 3 Schaden
+
+        //5 Heilkarten
+        //Fresspaket: erhalte +2 HP
+        //Verband: Erhalte +5 Hp
+        //Drauf pusten: Erhalte +1 HP
+        //Pflaster: Erhalte +3 HP
+        //Schmerzmittel: Erhalte +1HP
+        //5 Rüstungskarten
+        //
+        //Tilt Proof: erhalte +3 Rüstung
+
+        //Willenskraft Karten
+        //Multitasking "Erhalte jede Runde +1 Willenskraft"
+        //Gehaltserhöhung "Erhalte jede runde +2 Willenskraft"
         { id: 1, title: "Karte 1" },
         { id: 2, title: "Karte 2" },
         { id: 3, title: "Karte 3" },

@@ -72,7 +72,7 @@ export default {
 .player {
   width: 300px;
   height: 300px;
-  border: 10px solid black;
+  /*border: 10px solid black;*/
   grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 4;
