@@ -9,7 +9,11 @@
         alt="Producterra Logo"
       />
       <div class="button-dimension">
-        <ButtonPrimary label="Starten" route="/flashcard-game" />
+        <ButtonPrimary
+          label="Starten"
+          route="/flashcard-game"
+          :clickHandler="flashcardGameStore.setPhaseGameStart"
+        />
       </div>
     </main>
     <!-- <aside class="col-span-2 flex flex-col justify-center items-center">
@@ -24,6 +28,7 @@
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 // Achte darauf, keine Dateiendung wie '.js' beim Import zu verwenden, da dies in Vite zu einem Fehler führt.
 // '@' steht für den 'src'-Ordner.
@@ -42,6 +47,7 @@ export default {
   },
   data() {
     return {
+      flashcardGameStore: useFlashcardGameStore(),
       // Zustandsvariablen, falls nötig.
     };
   },

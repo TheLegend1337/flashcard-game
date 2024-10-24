@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useFlashcardGameStore = defineStore("flashcardGame", {
   state: () => ({
-    phase: "gameStart",
+    phase: "gameOver",
     quizBox: "invisible",
   }),
   getters: {
@@ -16,6 +16,24 @@ export const useFlashcardGameStore = defineStore("flashcardGame", {
       } else {
         this.quizBox = "invisible";
       }
+    },
+    setPhaseGameStart() {
+      this.phase = "gameStart";
+    },
+    setPhaseDrawCards() {
+      this.phase = "drawCards";
+    },
+    setPhasePlayPhase() {
+      this.phase = "playPhase";
+    },
+    setPhaseEndTurn() {
+      this.phase = "endTurn";
+    },
+    setPhaseEnemyTurn() {
+      this.phase = "enemyTurn";
+    },
+    setPhaseGameOver() {
+      this.phase = "gameOver";
     },
   },
 });

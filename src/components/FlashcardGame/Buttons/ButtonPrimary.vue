@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   props: {
     clickHandler: {
@@ -21,6 +22,7 @@ export default {
   },
   data() {
     return {
+      flashcardGameStore: useFlashcardGameStore(),
       //Komma statt Semicolon benutzen
       //z.b store: useWillpowerStore(),
       //Achtung Doppelpunkt' : '' statt ' = ',
@@ -30,10 +32,12 @@ export default {
     handleClick() {
       if (this.clickHandler) {
         this.clickHandler();
-      } else if (this.route) {
-        this.$router.push(this.route);
       } else {
         this.$emit("button-clicked");
+      }
+
+      if (this.route) {
+        this.$router.push(this.route);
       }
     },
   },
