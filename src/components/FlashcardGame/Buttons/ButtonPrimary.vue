@@ -36,8 +36,8 @@ export default {
 
 <style scoped>
 button {
-  width: 151px;
-  height: 43px;
+  width: 100%;
+  height: 100%;
   color: var(--type-on-bg-dark);
   background-repeat: no-repeat;
   background-size: contain;
