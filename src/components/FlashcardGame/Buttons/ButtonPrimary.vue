@@ -8,11 +8,15 @@ export default {
   props: {
     clickHandler: {
       type: Function,
-      required: true,
+      required: false,
     },
     label: {
       type: String,
       required: true,
+    },
+    route: {
+      type: String,
+      required: false,
     },
   },
   data() {
@@ -26,6 +30,8 @@ export default {
     handleClick() {
       if (this.clickHandler) {
         this.clickHandler();
+      } else if (this.route) {
+        this.$router.push(this.route);
       } else {
         this.$emit("button-clicked");
       }

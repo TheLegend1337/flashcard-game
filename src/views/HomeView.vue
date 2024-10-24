@@ -9,7 +9,7 @@
         alt="Producterra Logo"
       />
       <div class="button-dimension">
-        <ButtonPrimary label="Starten" />
+        <ButtonPrimary label="Starten" route="/flashcard-game" />
       </div>
     </main>
     <!-- <aside class="col-span-2 flex flex-col justify-center items-center">
