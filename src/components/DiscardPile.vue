@@ -5,8 +5,8 @@
         <div class="discard-pile-counter">
           <p class="discard-pile-counter-text">3</p>
           <!-- <button @click="this.cardStore.popCard" class="card-deck-counter">
-          Abwerfen
-        </button> -->
+            Abwerfen
+          </button> -->
           <!-- <ButtonPrimary :clickHandler="discard" label="Abwerfen" /> -->
           <!-- <ButtonPrimary @button-clicked="discard" label="Abwerfen" /> -->
         </div>
@@ -39,6 +39,8 @@ export default {
 
 <style scoped>
 .discard-pile-wrapper {
+  animation: fadeInFromBottomLeftToTopRight 1s
+    cubic-bezier(0.69, 0.16, 0.41, 1.44);
   width: 150px;
   height: 150px;
   /* border: 3px solid white; */
@@ -47,13 +49,15 @@ export default {
   grid-column-start: 1;
   grid-column-end: 2;
   justify-self: end;
+  position: relative;
+}
+.discard-pile {
+  width: 100%;
+  height: 100%;
   background-image: url("@/assets/icons/discardPile.png");
   background-size: cover;
   background-position: center;
   transform: rotateZ(-51deg);
-  position: relative;
-}
-.discard-pile {
 }
 .discard-pile-counter {
   /* border: 2px solid var(--border-around-bg-accent); */
@@ -68,7 +72,7 @@ export default {
 }
 
 .discard-pile-counter-border {
-  transform: rotateZ(19deg);
+  /* transform: rotateZ(19deg); */
   padding: 5px;
   border-radius: 50%;
   height: 160px;

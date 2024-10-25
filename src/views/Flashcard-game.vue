@@ -1,13 +1,20 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
-      <HandOfCards :card="drawnCard" />
+      <HandOfCards
+        :card="drawnCard"
+        class="animate-fade-in-from-bottom-to-top"
+      />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
-      <Player />
-      <Monster />
-      <Willpower />
+      <Player class="animate-fade-in-from-left-to-right" />
+      <Monster class="animate-fade-in-from-right-to-left" />
+      <Willpower class="animate-fade-in-from-left-to-right" />
+      <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
-      <CardDeck ref="CardDeck" />
+      <CardDeck
+        ref="CardDeck"
+        class="animate-fade-in-from-bottom-right-to-top-left"
+      />
       <QuizBox />
     </div>
     <div id="phaseBanner" class="animate-fade-in">
