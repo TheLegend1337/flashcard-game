@@ -10,7 +10,7 @@
       <CardDeck ref="CardDeck" />
       <QuizBox />
     </div>
-    <div id="phaseBanner">
+    <div id="phaseBanner" class="animate-fade-in">
       <button @click="drawCard" class="m-2">Ziehen</button>
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase" class="m-2">Phase ändern</button>
@@ -51,6 +51,7 @@
     </div>
   </main>
 </template>
+
 <script>
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import HandOfCards from "../components/HandOfCards.vue";
@@ -155,8 +156,8 @@ export default {
 
 <style>
 .flashcard-game {
-  background-image: url("../assets/environments/tempel_mit_baeumen_korrigiert.png");
-  background-size: 150%;
+  background-image: url("../assets/environments/card-game-kit-background-field-2.png");
+  background-size: cover;
   background-repeat: no-repeat;
   /* background-position-y: -230px; */
   background-position: 50% 100%;
