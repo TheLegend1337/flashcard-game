@@ -29,10 +29,21 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
   </header>
   <aside></aside>
-  <RouterView />
+  <Transition name="fade" mode="out-in">
+    <RouterView />
+  </Transition>
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 header {
   display: flex;
   justify-content: center;
