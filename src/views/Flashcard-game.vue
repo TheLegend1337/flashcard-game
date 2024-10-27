@@ -1,6 +1,7 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
+      <InfoBanner />
       <HandOfCards
         :card="drawnCard"
         class="animate-fade-in-from-bottom-to-top"
@@ -68,6 +69,7 @@ import Willpower from "../components/Willpower.vue";
 import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
 import QuizBox from "../components/QuizBox.vue";
+import InfoBanner from "@/components/FlashcardGame/container/InfoBanner.vue";
 export default {
   components: {
     HandOfCards,
@@ -77,6 +79,7 @@ export default {
     DiscardPile,
     CardDeck,
     QuizBox,
+    InfoBanner,
   },
   data() {
     return {
