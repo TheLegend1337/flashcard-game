@@ -29,7 +29,6 @@ export default {
       cardDeck: [
         //10 Angriffskarten
         //Eine Schaden über Zeit karte "Do you smell Popcorn?" verursacht 1 Giftschaden pro Runde über 5 Runden
-        //Sodbrennen 1 Schaden über 10 Runden
         //Sodbrannt
         //Zerstörerische brennende Sod
         //Constipation "Das Gegnerische Monster hat die Kontrolle über ihr Leben verloren und eine ganze Pizza alleine gegessen"
@@ -38,18 +37,21 @@ export default {
         //Burnout: Ein Monster erhält 3 Schaden
 
         //5 Heilkarten
-        //Fresspaket: erhalte +2 HP
         //Verband: Erhalte +5 Hp
         //Drauf pusten: Erhalte +1 HP
         //Pflaster: Erhalte +3 HP
         //Schmerzmittel: Erhalte +1HP
+
         //5 Rüstungskarten
         //
         //Tilt Proof: erhalte +3 Rüstung
 
         //Willenskraft Karten
         //Multitasking "Erhalte jede Runde +1 Willenskraft"
-        //Gehaltserhöhung "Erhalte jede runde +2 Willenskraft"
+        //Gehaltserhöhung "Erhalte jede Runde +2 Willenskraft"
+        //Gelber Schein "Erhalte 1 Willenskraft zurück"
+        //Fresspaket: erhalte +X Willenskraft
+        //Erhalte Sodbrennen "Erleide am Ende des Zuges 1 Schaden"
         { id: 1, title: "Karte 1" },
         { id: 2, title: "Karte 2" },
         { id: 3, title: "Karte 3" },
@@ -96,7 +98,8 @@ export default {
   width: 40px;
   right: 106px;
   bottom: 33px;
-  box-shadow: -1px 1px 13px rgba(255, 255, 255, 0.3),
+  box-shadow:
+    -1px 1px 13px rgba(255, 255, 255, 0.3),
     5px -8px 7px rgba(0, 0, 0, 0.5);
 }
 .card-deck-counter {

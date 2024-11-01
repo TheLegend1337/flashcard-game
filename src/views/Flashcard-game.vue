@@ -1,7 +1,7 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
-      <InfoBanner />
+      <InfoBanner class="animate-enter-right-exit-left-with-fade-in" />
       <HandOfCards
         :card="drawnCard"
         class="animate-fade-in-from-bottom-to-top"

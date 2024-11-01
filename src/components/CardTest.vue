@@ -3,9 +3,10 @@
     <div class="card-inner">
       <div class="front card-artwork">
         <!-- <div class="card-face-front-content">
-          <p>{{ title }}</p>
-          <button @click="playcard">Entfesseln</button>
-        </div> -->
+            <p>{{ title }}</p>
+            <button @click="playcard">Entfesseln</button>
+          </div> -->
+        <p>{{ question }}</p>
         <div
           class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
         >
@@ -15,55 +16,17 @@
         </div>
 
         <div
-          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
-        >
-          <!-- <p
-            id="willpower-counter"
-            class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
-          >
-            1
-          </p> -->
-          <p
-            id="willpower-counter"
-            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
-          >
-            0
-          </p>
-        </div>
+          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] h-[25%] w-[25%]"
+        ></div>
         <div
           class="card-frame absolute left-0 top-0 z-[4] h-full w-full border-2 border-green-500"
         ></div>
         <div
-          class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2 border-2 border-red-500"
-        >
-          <p
-            id="text-card-title"
-            class="absolute left-1/2 top-[20%] w-[90%] -translate-x-1/2 text-center text-[1rem] text-white"
-          >
-            Maximalsovielzeichen
-          </p>
-        </div>
+          class="card-title absolute bottom-[9%] left-1/2 z-[2] h-[27%] w-[80%] -translate-x-1/2 border-2 border-red-500"
+        ></div>
         <div
-          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2 border-2 border-blue-500"
-        >
-          <p
-            id="text-card-description"
-            class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] border-2 border-red-800 text-center text-[0.8rem] text-white"
-          >
-            Lege eine Karte ab, ziehe eine neue, dann lege dasdasdasdasdsadaiese
-            Karte dauerhaft ab und erhalte deine erste zurück as asd asd aassd
-            asasd.
-          </p>
-        </div>
-        <!-- 
-        -- 
-        Herangehensweise mit nur einem Bild als Karte
-          <img
-            src="@/assets/ui-components-backgrounds/card/card-frame-full.png"
-            class="card-frame-full"
-          /> 
-        --
-        -->
+          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[27%] w-[90%] -translate-x-1/2 border-2 border-blue-500"
+        ></div>
       </div>
     </div>
   </div>
@@ -96,12 +59,12 @@ export default {
   },
   mounted() {
     /* fetch("http://localhost:3000/flashcards")
-      .then((response) => response.json())
-      .then((data) => {
-        this.flashcards = data;
-        console.log(data);
-      })
-      .catch((err) => console.log(err.message));*/
+        .then((response) => response.json())
+        .then((data) => {
+          this.flashcards = data;
+          console.log(data);
+        })
+        .catch((err) => console.log(err.message));*/
   },
   methods: {
     playcard() {
@@ -117,40 +80,18 @@ export default {
 <style scoped>
 /* Add your component-specific styles here */
 /* .card-face-front-content {
-  position: absolute;
-  top: 50px;
-} */
-#willpower-counter {
-  text-shadow:
-    rgb(2, 38, 42) 3px 0px 0px,
-    rgb(2, 38, 42) 2.83487px 0.981584px 0px,
-    rgb(2, 38, 42) 2.35766px 1.85511px 0px,
-    rgb(2, 38, 42) 1.62091px 2.52441px 0px,
-    rgb(2, 38, 42) 0.705713px 2.91581px 0px,
-    rgb(2, 38, 42) -0.287171px 2.98622px 0px,
-    rgb(2, 38, 42) -1.24844px 2.72789px 0px,
-    rgb(2, 38, 42) -2.07227px 2.16926px 0px,
-    rgb(2, 38, 42) -2.66798px 1.37182px 0px,
-    rgb(2, 38, 42) -2.96998px 0.42336px 0px,
-    rgb(2, 38, 42) -2.94502px -0.571704px 0px,
-    rgb(2, 38, 42) -2.59586px -1.50383px 0px,
-    rgb(2, 38, 42) -1.96093px -2.27041px 0px,
-    rgb(2, 38, 42) -1.11013px -2.78704px 0px,
-    rgb(2, 38, 42) -0.137119px -2.99686px 0px,
-    rgb(2, 38, 42) 0.850987px -2.87677px 0px,
-    rgb(2, 38, 42) 1.74541px -2.43999px 0px,
-    rgb(2, 38, 42) 2.44769px -1.73459px 0px,
-    rgb(2, 38, 42) 2.88051px -0.838247px 0px;
-}
+    position: absolute;
+    top: 50px;
+  } */
 .card {
   width: 248px;
   aspect-ratio: 248/350;
   perspective: 1000px;
-  transition: transform 0.5s;
+  transition: transform 5s;
   /* background-color: white; */
 }
 .card:hover {
-  transform: scale(1.3);
+  transform: scale(2);
 }
 
 .card-inner {
@@ -186,22 +127,17 @@ export default {
 }
 
 .card-description {
-  background-image: url("@/assets/ui-components-backgrounds/card/card_description-dark-reduced.png");
-  background-size: cover;
+  background-image: url("@/assets/ui-components-backgrounds/card/card_description.png");
+  background-size: contain;
   background-repeat: no-repeat;
 }
-
-#text-card-title {
-  text-shadow: 0px 1px 1px #000;
-}
-
 .card-frame {
   background-image: url("@/assets/ui-components-backgrounds/card/card_frame.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
 .card-title {
-  background-image: url("@/assets/ui-components-backgrounds/card/card-title-dark.png");
+  background-image: url("@/assets/ui-components-backgrounds/card/card_title.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -220,11 +156,4 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
 }
-/* Herangehensweise mit einem Bild als Karte */
-/* .card-frame-full {
-  background-image: url("@/assets/card-art/change-request-resized.png");
-  background-size: 90%;
-  background-position: 50% 12%;
-  background-repeat: no-repeat;
-} */
 </style>

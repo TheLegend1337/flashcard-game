@@ -1,7 +1,11 @@
 <template>
-  <div class="handOfCards">
+  <div
+    class="handOfCards fixed left-1/2 top-1/2 z-10 w-4/6 -translate-x-1/2 -translate-y-1/2"
+  >
     <!-- <Card v-for="card in cardStore.cards" :key="card.id" :title="card.title" /> -->
-    <Card v-for="card in handOfCards" :key="card.id" :title="card.title" />
+    <div class="container flex flex-wrap">
+      <Card v-for="card in handOfCards" :key="card.id" :title="card.title" />
+    </div>
   </div>
 </template>
 
@@ -41,11 +45,10 @@ export default {
 
 <style scoped>
 .handOfCards {
-  display: flex;
-  width: 100%;
-  grid-row-start: 8;
+  /* width: 100%; */
+  /* grid-row-start: 8;
   grid-row-end: 10;
   grid-column-start: 3;
-  grid-column-end: 8;
+  grid-column-end: 8; */
 }
 </style>

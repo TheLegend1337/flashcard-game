@@ -60,15 +60,37 @@ module.exports = {
             transform: "translate(0, 0)",
           },
         },
+        enterRightExitLeftWithFadeIn: {
+          "0%": {
+            visibility: "hidden",
+            opacity: 0,
+            transform: "translate(100%, 0)",
+          },
+          "40%": {
+            visibility: "visible",
+            opacity: 1,
+            transform: "translate(-50%, 0)",
+          },
+          "60%": {
+            visibility: "visible",
+            opacity: 1,
+            transform: "translate(-50%, 0)",
+          },
+          "100%": {
+            visibility: "hidden",
+            opacity: 0,
+            transform: "translate(-100%, 0)",
+          },
+        },
       },
       animation: {
         "fade-in": "fadeIn 2s linear",
 
-        //Bewegungsanimationen
+        //Directional animations
         //cubic-bezier(0.69, 0.16, 0.41, 1.44) sorgt für einen sauberen Rubberband Effekt
         //Cubic Bezier Generator: https://cubic-bezier.com/#.69,.16,.41,1.44
         "fade-in-from-bottom-left-to-top-right":
-          "fadeInFromBottomLeftToTopRight 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)",
+          "fadeInFromBottomLeftToTopRight 1s cubic-bezier(0.69, 0.16, 0.41, 1.44b)",
         "fade-in-from-bottom-right-to-top-left":
           "fadeInFromBottomRightToTopLeft 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)",
         "fade-in-from-left-to-right":
@@ -77,6 +99,9 @@ module.exports = {
           "fadeInFromRightToLeft 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)",
         "fade-in-from-bottom-to-top":
           "fadeInFromBottomToTop 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)",
+        //
+        "enter-right-exit-left-with-fade-in":
+          "enterRightExitLeftWithFadeIn 4s ease-in-out",
       },
     },
   },
