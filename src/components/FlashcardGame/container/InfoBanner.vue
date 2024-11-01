@@ -1,6 +1,8 @@
 <template>
   <div
-    class="info-banner w-4/6 h-24 sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40 fixed top-1/2 left-1/2 transform -translate-x-1/2 z-40"
+    :key="flashcardGameStore.phase"
+    v-if="flashcardGameStore.phase"
+    class="info-banner invisible w-4/6 h-24 sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40 fixed top-1/2 left-1/2 transform -translate-x-1/2 z-40"
   >
     <img
       class="absolute top-0"
@@ -14,7 +16,7 @@
     <h2
       class="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-white absolute top-1/2 left-[15%] -translate-y-1/2"
     >
-      Kampf
+      {{ leftText }}
     </h2>
     <img
       class="h-[120%] sm:h-[130%] md:h-[140%] lg:h-[150%] xl:h-[160%] 2xl:h-[170%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -24,7 +26,7 @@
     <h2
       class="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-white absolute top-1/2 right-[15%] -translate-y-1/2"
     >
-      beginnt!
+      {{ rightText }}
     </h2>
 
     <p>Kampf beginnt!</p>
@@ -34,6 +36,7 @@
 <script>
 //beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
 //@ steht für den src Ordner
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   name: "InfoBanner",
   components: {
@@ -49,10 +52,61 @@ export default {
   data() {
     return {
       // Zustandsvariablen
+      flashcardGameStore: useFlashcardGameStore(),
     };
   },
   computed: {
     // Berechnete Eigenschaften
+    leftText() {
+      switch (this.flashcardGameStore.phase) {
+        case "gameStart": {
+          return "Kampf";
+        }
+        case "drawCards": {
+          return "Ziehe";
+        }
+        case "playPhase": {
+          return "Entfessel";
+        }
+        case "endTurn": {
+          return "Zug";
+        }
+        case "enemyTurn": {
+          return "Gegner";
+        }
+        case "gameOver": {
+          return "Du hast";
+        }
+        default: {
+          return "Deine";
+        }
+      }
+    },
+    rightText() {
+      switch (this.flashcardGameStore.phase) {
+        case "gameStart": {
+          return "beginnt!";
+        }
+        case "drawCards": {
+          return "Karten";
+        }
+        case "playPhase": {
+          return "Karten!";
+        }
+        case "endTurn": {
+          return "beendet";
+        }
+        case "enemyTurn": {
+          return "am Zug";
+        }
+        case "gameOver": {
+          return "versagt!";
+        }
+        default: {
+          return "Mudda";
+        }
+      }
+    },
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
