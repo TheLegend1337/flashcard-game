@@ -1,61 +1,71 @@
 <template>
-  <div class="card m-3" draggable="true">
-    <div class="card-inner">
-      <div class="front card-artwork">
-        <!-- <div class="card-face-front-content">
+  <div class="initialTransformAnimationWrapperJustForfun">
+    <div
+      class="card"
+      :style="{
+        // rotate: `${cardRotationDegree}deg`,
+        // translate: `0, ${yTranslation}%`,
+        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
+      }"
+    >
+      <!-- Rotation der Karten berechnet über calcRotation -->
+
+      <div class="card-inner">
+        <div class="front card-artwork">
+          <!-- <div class="card-face-front-content">
           <p>{{ title }}</p>
           <button @click="playcard">Entfesseln</button>
         </div> -->
-        <div
-          class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
-        >
           <div
-            class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
-          ></div>
-        </div>
+            class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
+          >
+            <div
+              class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
+            ></div>
+          </div>
 
-        <div
-          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
-        >
-          <!-- <p
+          <div
+            class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
+          >
+            <!-- <p
             id="willpower-counter"
             class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
           >
             1
           </p> -->
-          <p
-            id="willpower-counter"
-            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
+            <p
+              id="willpower-counter"
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
+            >
+              {{ id }}
+            </p>
+          </div>
+          <div
+            class="card-frame absolute left-0 top-0 z-[4] h-full w-full border-2 border-green-500"
+          ></div>
+          <div
+            class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2 border-2 border-red-500"
           >
-            0
-          </p>
-        </div>
-        <div
-          class="card-frame absolute left-0 top-0 z-[4] h-full w-full border-2 border-green-500"
-        ></div>
-        <div
-          class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2 border-2 border-red-500"
-        >
-          <p
-            id="text-card-title"
-            class="absolute left-1/2 top-[20%] w-[90%] -translate-x-1/2 text-center text-[1rem] text-white"
+            <p
+              id="text-card-title"
+              class="absolute left-1/2 top-[20%] w-[90%] -translate-x-1/2 text-center text-[1rem] text-white"
+            >
+              Maximalsovielzeichen
+            </p>
+          </div>
+          <div
+            class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2 border-2 border-blue-500"
           >
-            Maximalsovielzeichen
-          </p>
-        </div>
-        <div
-          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2 border-2 border-blue-500"
-        >
-          <p
-            id="text-card-description"
-            class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] border-2 border-red-800 text-center text-[0.8rem] text-white"
-          >
-            Lege eine Karte ab, ziehe eine neue, dann lege dasdasdasdasdsadaiese
-            Karte dauerhaft ab und erhalte deine erste zurück as asd asd aassd
-            asasd.
-          </p>
-        </div>
-        <!-- 
+            <p
+              id="text-card-description"
+              class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] border-2 border-red-800 text-center text-[14px] text-white"
+            >
+              Lege eine Karte ab, ziehe eine neue, dann lege
+              dasdasdasdasdsadaiese Karte dauerhaft ab und erhalte deine erste
+              zurück as asd asd aassd asasd.
+            </p>
+          </div>
+          <!-- 
         -- 
         Herangehensweise mit nur einem Bild als Karte
           <img
@@ -63,7 +73,7 @@
             class="card-frame-full"
           /> 
         --
-        -->
+        --></div>
       </div>
     </div>
   </div>
@@ -85,6 +95,14 @@ export default {
       type: Number,
       default: 0,
     },
+    handOfCardsLength: {
+      type: Number,
+      required: true,
+    },
+    cardIndex: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -92,16 +110,40 @@ export default {
       playerStore: usePlayerStore(),
       willpowerStore: useWillpowerStore(),
       monsterStore: useMonsterStore(),
+      cardRotationDegree: 0,
+      cardRotationDegreeOnHover: 0,
+      resetYTranslationOnHover: 0,
+      yTranslation: 0,
+      xTranslation: 0,
     };
   },
   mounted() {
-    /* fetch("http://localhost:3000/flashcards")
-      .then((response) => response.json())
-      .then((data) => {
-        this.flashcards = data;
-        console.log(data);
-      })
-      .catch((err) => console.log(err.message));*/
+    this.cardRotationDegree = this.calcRotation(this.cardIndex);
+    //
+    this.yTranslation = this.calcYTranslation(this.cardIndex);
+    this.xTranslation = this.calcXTranslation(this.cardIndex);
+
+    console.log(this.cardRotationDegree);
+    this.cardRotationDegreeOnHover = this.cardRotationDegree * -1;
+    this.resetYTranslationOnHover = (this.yTranslation + 25) * -1;
+    //
+    console.log(this.cardRotationDegreeOnHover);
+    this.$el.style.setProperty(
+      "--reset-rotation-degree",
+      `${this.cardRotationDegreeOnHover}deg`,
+    );
+    this.$el.style.setProperty(
+      "--reset-yTranslation",
+      `${this.resetYTranslationOnHover}%`,
+    );
+  },
+  computed: {
+    // für das Berechnen der Karten Rotation
+    getCenterCardIndex() {
+      const totalCards = this.handOfCardsLength;
+      let cardCenter = Math.floor(totalCards / 2);
+      return cardCenter;
+    },
   },
   methods: {
     playcard() {
@@ -109,6 +151,25 @@ export default {
       this.willpowerStore.decreaseWillpower(2);
       this.playerStore.damageHero(3);
       this.monsterStore.damageMonster(2);
+    },
+    // für das Berechnen der Karten Rotation
+    calcRotation(cardIndex) {
+      const rotationFactor = 10;
+      const centerCardIndex = this.getCenterCardIndex;
+      const distance = cardIndex - centerCardIndex;
+      return distance * rotationFactor;
+    },
+    calcYTranslation(cardIndex) {
+      const ytranslationFactor = 4;
+      const centerCardIndex = this.getCenterCardIndex;
+      const distance = Math.abs(cardIndex - centerCardIndex);
+      return distance * distance * ytranslationFactor;
+    },
+    calcXTranslation(cardIndex) {
+      const xTranslationFactor = 5;
+      const centerCardIndex = this.getCenterCardIndex;
+      const distance = cardIndex - centerCardIndex;
+      return distance * xTranslationFactor;
     },
   },
 };
@@ -146,17 +207,33 @@ export default {
   width: 248px;
   aspect-ratio: 248/350;
   perspective: 1000px;
-  transition: transform 0.5s;
+  /* animation: animateCard 0.5s forwards; */
+  transition: all 0.5s;
   /* background-color: white; */
 }
-.card:hover {
-  transform: scale(1.3);
+
+.initialTransformAnimationWrapperJustForfun {
+  transition: all 0.5s;
 }
+.initialTransformAnimationWrapperJustForfun:hover {
+  /* transform: scale(1.5) translateY(-25%); */
+  /* width: 360px;
+  margin-top: -270px; */
+  z-index: 100;
+  transform: rotateZ(var(--reset-rotation-degree)) scale(1.3)
+    translateY(var(--reset-yTranslation));
+}
+
+/* @keyframes animateCard {
+  to {
+    transform: translateX(-100%);
+  }
+} */
 
 .card-inner {
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
   /* The transform property in CSS has a relationship between parent and child 
         elements when it comes to 3D transformations, especially with the preserve-3d 
         value for the transform-style property.

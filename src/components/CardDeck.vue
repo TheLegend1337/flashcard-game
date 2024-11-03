@@ -52,11 +52,14 @@ export default {
         //Gelber Schein "Erhalte 1 Willenskraft zurück"
         //Fresspaket: erhalte +X Willenskraft
         //Erhalte Sodbrennen "Erleide am Ende des Zuges 1 Schaden"
-        { id: 1, title: "Karte 1" },
-        { id: 2, title: "Karte 2" },
-        { id: 3, title: "Karte 3" },
-        { id: 4, title: "Karte 4" },
+        { id: 7, title: "Karte 7" },
+        { id: 6, title: "Karte 6" },
         { id: 5, title: "Karte 5" },
+        { id: 4, title: "Karte 4" },
+        { id: 3, title: "Karte 3" },
+        { id: 2, title: "Karte 2" },
+        { id: 1, title: "Karte 1" },
+        { id: 0, title: "Karte 0" },
       ],
     };
   },

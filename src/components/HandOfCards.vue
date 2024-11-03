@@ -1,10 +1,31 @@
 <template>
   <div
-    class="handOfCards fixed left-1/2 top-1/2 z-10 w-4/6 -translate-x-1/2 -translate-y-1/2"
+    class="handOfCards fixed bottom-[-5%] left-1/2 z-10 h-[300px] w-4/6 -translate-x-1/2"
   >
-    <!-- <Card v-for="card in cardStore.cards" :key="card.id" :title="card.title" /> -->
-    <div class="container flex flex-wrap">
-      <Card v-for="card in handOfCards" :key="card.id" :title="card.title" />
+    <div tag="div" class="container flex flex-wrap items-center justify-center">
+      <!-- <div
+        id="transformCardWrapper"
+        class="-m-10"
+        v-for="(card, index) in handOfCards"
+        :key="card.id"
+        :title="card.title"
+        :style="{
+          transform: `rotateZ(${getRotation(index)}deg)`,
+        }"
+      > -->
+      <Card
+        class="-m-10"
+        v-for="(card, index) in handOfCards"
+        :key="handOfCards.length"
+        :title="card.title"
+        :id="card.id"
+        :handOfCardsLength="handOfCards.length"
+        :cardIndex="index"
+      />
+      <!-- :style="{
+          transform: `rotateZ(${getRotation(index)}deg)`,
+        }" -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -27,11 +48,7 @@ export default {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
-      handOfCards: [
-        { id: 1, title: "Karte 1" },
-        { id: 2, title: "Karte 2" },
-        { id: 3, title: "Karte 3" },
-      ],
+      handOfCards: [],
     };
   },
   watch: {
@@ -39,6 +56,7 @@ export default {
       this.handOfCards.push(card);
     },
   },
+
   methods: {},
 };
 </script>
@@ -51,4 +69,13 @@ export default {
   grid-column-start: 3;
   grid-column-end: 8; */
 }
+
+/* Transition classes for entering and leaving */
+/* .card-transition-enter-active,
+.card-transition-leave-active {
+}
+
+.card-transition-enter-from,
+.card-transition-leave-to {
+} */
 </style>
