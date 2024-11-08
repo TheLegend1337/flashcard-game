@@ -1,7 +1,11 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
-      <InfoBanner class="animate-enter-right-exit-left-with-fade-in" />
+      <InfoBanner
+        :key="this.phase"
+        :phase="this.phase"
+        class="animate-enter-right-exit-left-with-fade-in"
+      />
       <HandOfCards
         :card="drawnCard"
         class="animate-fade-in-from-bottom-to-top"
@@ -19,43 +23,16 @@
       <QuizBox />
     </div>
     <div id="phaseBanner" class="animate-fade-in">
-      <button @click="drawCard" class="m-2">Ziehen</button>
+      <button @click="drawCard(1)" class="m-2">Ziehen</button>
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase" class="m-2">Phase ändern</button>
 
-      <h1
-        v-if="this.flashcardGameStore.phase === 'gameStart'"
-        class="phaseTitle"
-      >
-        Game Start
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'drawCards'"
-        class="phaseTitle"
-      >
-        Draw Cards
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'playPhase'"
-        class="phaseTitle"
-      >
-        Play Phase
-      </h1>
-      <h1 v-if="this.flashcardGameStore.phase === 'endTurn'" class="phaseTitle">
-        End Turn
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'enemyTurn'"
-        class="phaseTitle"
-      >
-        Enemy Turn
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'gameOver'"
-        class="phaseTitle"
-      >
-        Game Over
-      </h1>
+      <h1 v-if="this.phase === 'gameStart'" class="phaseTitle">Game Start</h1>
+      <h1 v-if="this.phase === 'drawCards'" class="phaseTitle">Draw Cards</h1>
+      <h1 v-if="this.phase === 'playPhase'" class="phaseTitle">Play Phase</h1>
+      <h1 v-if="this.phase === 'endTurn'" class="phaseTitle">End Turn</h1>
+      <h1 v-if="this.phase === 'enemyTurn'" class="phaseTitle">Enemy Turn</h1>
+      <h1 v-if="this.phase === 'gameOver'" class="phaseTitle">Game Over</h1>
     </div>
   </main>
 </template>
@@ -129,30 +106,31 @@ export default {
   computed: {
     newPhase: {
       get() {
-        return this.flashcardGameStore.phase;
+        return this.phase;
       },
       set(value) {
-        this.phase = value;
+        this.flashcardGameStore.phase = value;
       },
     },
   },
   methods: {
     changePhase() {
-      switch (this.flashcardGameStore.phase) {
+      switch (this.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
           setTimeout(() => {
             this.phase = "drawCards";
-          }, 2000);
+          }, 3000);
           break;
         case "drawCards":
           console.log("Spieler zieht Karten");
-          this.phase = "playPhase";
+          // this.phase = "playPhase";
+          this.drawCard(5);
 
           break;
         case "playPhase":
           console.log("Spieler darf Entscheidungen treffen");
-          // this.phase = "endTurn";
+          this.phase = "endTurn";
           break;
         case "endTurn":
           console.log("Spieler beendet den Zug");
@@ -170,10 +148,20 @@ export default {
           console.log(`Default behavior.`);
       }
     },
-    drawCard() {
-      const card = this.$refs.CardDeck.drawCard();
-      console.log(card);
-      this.drawnCard = card;
+    async drawCard(amount) {
+      for (let i = 0; i < amount; i++) {
+        await this.drawSinglecard();
+      }
+    },
+    drawSinglecard() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const card = this.$refs.CardDeck.drawCard();
+          console.log(card);
+          this.drawnCard = card;
+          resolve(card);
+        }, 200);
+      });
     },
   },
 };

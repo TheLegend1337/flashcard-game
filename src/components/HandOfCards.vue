@@ -3,33 +3,7 @@
     class="handOfCards fixed bottom-[-5%] left-1/2 z-10 h-[300px] w-4/6 -translate-x-1/2"
   >
     <div tag="div" class="container flex flex-wrap items-center justify-center">
-      <!-- <div
-        id="transformCardWrapper"
-        class="-m-10"
-        v-for="(card, index) in handOfCards"
-        :key="card.id"
-        :title="card.title"
-        :style="{
-          transform: `rotateZ(${getRotation(index)}deg)`,
-        }"
-      > -->
-      <!-- <Card
-        class="-m-10"
-        v-for="(card, index) in handOfCards"
-        :key="card.id"
-        :title="card.title"
-        :description="card.description"
-        :defense="card.defense"
-        :damage="card.damage"
-        :heal="card.heal"
-        :willpowerCost="card.willpowerCost"
-        :cardArtworkSrc="card.cardArtworkSrc"
-        :id="card.id"
-        :handOfCardsLength="handOfCards.length"
-        :cardIndex="index"
-        :isBound="card.isBound"
-      /> -->
-      <CardTest
+      <Card
         class="-m-10"
         v-for="(card, index) in handOfCards"
         :key="card.id"
@@ -45,10 +19,6 @@
         :cardIndex="index"
         :isBound="card.isBound"
       />
-      <!-- :style="{
-          transform: `rotateZ(${getRotation(index)}deg)`,
-        }" -->
-      <!-- </div> -->
     </div>
   </div>
 </template>

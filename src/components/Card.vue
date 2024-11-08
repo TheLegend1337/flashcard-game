@@ -1,66 +1,70 @@
 <template>
-  <div
-    class="card"
-    :style="{
-      // rotate: `${cardRotationDegree}deg`,
-      // translate: `0, ${yTranslation}%`,
-      transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
-    }"
-  >
-    <!-- Rotation der Karten berechnet über calcRotation -->
+  <div>
+    <div
+      v-if="!this.isBound"
+      class="card"
+      :style="{
+        // rotate: `${cardRotationDegree}deg`,
+        // translate: `0, ${yTranslation}%`,
+        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
+      }"
+    >
+      <!-- Rotation der Karten berechnet über calcRotation -->
 
-    <div class="card-inner">
-      <div class="front card-artwork">
-        <!-- <div class="card-face-front-content">
+      <div class="card-inner">
+        <div class="front card-artwork">
+          <!-- <div class="card-face-front-content">
           <p>{{ title }}</p>
           <button @click="playcard">Entfesseln</button>
         </div> -->
-        <div
-          class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
-        >
           <div
-            class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
-          ></div>
-        </div>
+            class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
+          >
+            <div
+              class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
+            ></div>
+          </div>
 
-        <div
-          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
-        >
-          <!-- <p
+          <div
+            class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
+          >
+            <!-- <p
             id="willpower-counter"
             class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
           >
             1
           </p> -->
-          <p
-            id="willpower-counter"
-            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
+            <p
+              id="willpower-counter"
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
+            >
+              {{ this.willpowerCost }}
+            </p>
+          </div>
+          <div
+            class="card-frame absolute left-0 top-0 z-[4] h-full w-full"
+          ></div>
+          <div
+            class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2"
           >
-            {{ this.willpowerCost }}
-          </p>
-        </div>
-        <div class="card-frame absolute left-0 top-0 z-[4] h-full w-full"></div>
-        <div
-          class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2"
-        >
-          <p
-            id="text-card-title"
-            class="absolute left-1/2 top-[12%] w-[90%] -translate-x-1/2 text-center text-[1.5rem] text-white"
+            <p
+              id="text-card-title"
+              class="absolute left-1/2 top-[12%] w-[90%] -translate-x-1/2 text-center text-[1.5rem] text-white"
+            >
+              {{ this.title }}
+            </p>
+          </div>
+          <div
+            class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
           >
-            {{ this.title }}
-          </p>
-        </div>
-        <div
-          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
-        >
-          <p
-            id="text-card-description"
-            class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] text-center align-middle text-[21px] text-white"
-          >
-            {{ this.description }}
-          </p>
-        </div>
-        <!-- 
+            <p
+              id="text-card-description"
+              class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] text-center align-middle text-[21px] text-white"
+            >
+              {{ this.description }}
+            </p>
+          </div>
+          <!-- 
         -- 
         Herangehensweise mit nur einem Bild als Karte
           <img
@@ -68,7 +72,36 @@
             class="card-frame-full"
           /> 
         --
-        -->
+        --></div>
+      </div>
+    </div>
+    <div
+      v-if="this.isBound"
+      class="card"
+      :style="{
+        // rotate: `${cardRotationDegree}deg`,
+        // translate: `0, ${yTranslation}%`,
+        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
+      }"
+    >
+      <!-- Rotation der Karten berechnet über calcRotation -->
+
+      <div class="card-inner">
+        <div class="front bound-card-artwork">
+          <!-- <div class="card-face-front-content">
+          <p>{{ title }}</p>
+          <button @click="playcard">Entfesseln</button>
+        </div> -->
+
+          <!-- 
+        -- 
+        Herangehensweise mit nur einem Bild als Karte
+          <img
+            src="@/assets/ui-components-backgrounds/card/card-frame-full.png"
+            class="card-frame-full"
+          /> 
+        --
+        --></div>
       </div>
     </div>
   </div>
@@ -140,7 +173,18 @@ export default {
       yTranslation: 0,
       xTranslation: 0,
       cardArtworkSource: "",
+      previousHandOfCardsLength: this.handOfCardsLength,
     };
+  },
+  updated() {
+    this.cardArtworkSource = new URL(
+      this.cardArtworkSrc,
+      import.meta.url,
+    ).toString(); //notwendig damit in setProperty auch wirklich ein String inklusive Anführungsstriche übergeben werden.
+    this.cardRotationDegree = this.calcRotation(this.cardIndex);
+    //
+    this.yTranslation = this.calcYTranslation(this.cardIndex);
+    this.xTranslation = this.calcXTranslation(this.cardIndex);
   },
   mounted() {
     this.cardArtworkSource = new URL(
@@ -158,14 +202,7 @@ export default {
     //
 
     //Card Styles will be applied when mounted
-    this.$el.style.setProperty(
-      "--reset-rotation-degree",
-      `${this.cardRotationDegreeOnHover}deg`,
-    );
-    this.$el.style.setProperty(
-      "--reset-yTranslation",
-      `${this.resetYTranslationOnHover}%`,
-    );
+
     this.$el.style.setProperty(
       "--card-artwork-source",
       `url("${this.cardArtworkSource}")`,
@@ -240,6 +277,7 @@ export default {
     rgb(2, 38, 42) 2.88051px -0.838247px 0px;
 }
 .card {
+  position: relative; /*löst das Problem, dass der Z-index nicht auf 100 gesetzt wird, z-Index funktioniert nur auf positionierten Elementen*/
   width: 248px;
   aspect-ratio: 248/350;
   perspective: 1000px;
@@ -293,6 +331,12 @@ export default {
 .card-artwork {
   /* background-image: url("@/assets/card-art/change-request-resized.png"); */
   background-image: var(--card-artwork-source);
+  background-size: 90%;
+  background-position: 50% 12%;
+  background-repeat: no-repeat;
+}
+.bound-card-artwork {
+  background-image: url("@/assets/ui-components-backgrounds/card/bound-card-3d-framed.png");
   background-size: 90%;
   background-position: 50% 12%;
   background-repeat: no-repeat;

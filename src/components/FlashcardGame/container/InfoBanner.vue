@@ -1,8 +1,7 @@
 <template>
   <div
-    :key="flashcardGameStore.phase"
-    v-if="flashcardGameStore.phase"
-    class="info-banner invisible w-4/6 h-24 sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40 fixed top-1/2 left-1/2 transform -translate-x-1/2 z-40"
+    v-if="this.phase"
+    class="info-banner invisible fixed left-1/2 top-1/2 z-40 h-24 w-4/6 -translate-x-1/2 transform sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40"
   >
     <img
       class="absolute top-0"
@@ -14,17 +13,17 @@
       class="absolute bottom-0"
     />
     <h2
-      class="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-white absolute top-1/2 left-[15%] -translate-y-1/2"
+      class="absolute left-[15%] top-1/2 -translate-y-1/2 text-2xl text-white sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
     >
       {{ leftText }}
     </h2>
     <img
-      class="h-[120%] sm:h-[130%] md:h-[140%] lg:h-[150%] xl:h-[160%] 2xl:h-[170%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      class="absolute left-1/2 top-1/2 h-[120%] -translate-x-1/2 -translate-y-1/2 sm:h-[130%] md:h-[140%] lg:h-[150%] xl:h-[160%] 2xl:h-[170%]"
       src="@/assets/icons/crossed-swords-icon.png"
       alt=""
     />
     <h2
-      class="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-white absolute top-1/2 right-[15%] -translate-y-1/2"
+      class="absolute right-[15%] top-1/2 -translate-y-1/2 text-2xl text-white sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
     >
       {{ rightText }}
     </h2>
@@ -36,7 +35,7 @@
 <script>
 //beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
 //@ steht für den src Ordner
-import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+// import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   name: "InfoBanner",
   components: {
@@ -48,17 +47,22 @@ export default {
     //   type: object,
     //   default: null,
     // }
+    phase: {
+      type: String,
+      default: "",
+      required: true,
+    },
   },
   data() {
     return {
       // Zustandsvariablen
-      flashcardGameStore: useFlashcardGameStore(),
+      // flashcardGameStore: useFlashcardGameStore(),
     };
   },
   computed: {
     // Berechnete Eigenschaften
     leftText() {
-      switch (this.flashcardGameStore.phase) {
+      switch (this.phase) {
         case "gameStart": {
           return "Kampf";
         }
@@ -83,7 +87,7 @@ export default {
       }
     },
     rightText() {
-      switch (this.flashcardGameStore.phase) {
+      switch (this.phase) {
         case "gameStart": {
           return "beginnt!";
         }
