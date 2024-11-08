@@ -10,6 +10,40 @@ module.exports = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        // Pulse Animations
+        pulseScale: {
+          "0%": { scale: "1.0" },
+          "50%": { scale: "1.05" },
+          "100%": { scale: "1.00" },
+        },
+        breathing: {
+          "0%": { scale: "1.0" },
+          "50%": { scale: "1.02" },
+          "100%": { scale: "1.00" },
+        },
+        attacking: {
+          "0%": {
+            transform: "translate(0, 0)",
+          },
+          "50%": {
+            transform: "translate(-100%, 0)",
+          },
+          "100%": {
+            transform: "translate(0, 0)",
+          },
+        },
+        attackingFromLeftToRight: {
+          "0%": {
+            transform: "translate(0, 0)",
+          },
+          "50%": {
+            transform: "translate(100%, 0)",
+          },
+          "100%": {
+            transform: "translate(0, 0)",
+          },
+        },
+
         fadeInFromBottomLeftToTopRight: {
           "0%": {
             opacity: 0,
@@ -85,6 +119,15 @@ module.exports = {
       },
       animation: {
         "fade-in": "fadeIn 2s linear",
+        // Pulse Animations
+        "pulse-scale": "pulseScale 2s infinite",
+        breathing: "breathing 1s infinite",
+        // evtl attacking vom Monster mit den Keyframes ins Monster verlagern und dann mit event triggern
+        attacking: "attacking 1s ease-in-out ",
+        //gleiches gilt für den Player.
+        "attacking-from-left-to-right":
+          "attackingFromLeftToRight 1s ease-in-out infinite",
+        //Icon Effects
 
         //Directional animations
         //cubic-bezier(0.69, 0.16, 0.41, 1.44) sorgt für einen sauberen Rubberband Effekt

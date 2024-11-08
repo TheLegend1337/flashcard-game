@@ -1,7 +1,15 @@
 <!--Options API-->
 <template>
   <div class="willpower">
-    <div class="willpower-count">{{ willpowerStore.willpower }}</div>
+    <div class="willpower-count relative">
+      <span class="absolute left-[23%] top-[-5%] block h-[5px] w-[5px]">{{
+        flashcardGamestore.willpower
+      }}</span>
+      <span class="absolute left-[30%] top-[30%] block h-[5px] w-[5px]">/</span>
+      <span class="absolute left-[55%] top-[30%] block h-[5px] w-[5px]">
+        {{ flashcardGamestore.maxWillpower }}</span
+      >
+    </div>
   </div>
 </template>
 
@@ -11,7 +19,7 @@ import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
 export default {
   data() {
     return {
-      store: useFlashcardGameStore(),
+      flashcardGamestore: useFlashcardGameStore(),
       willpowerStore: useWillpowerStore(),
     };
   },
@@ -28,9 +36,6 @@ export default {
   grid-row-end: 8;
   grid-column-start: 2;
   grid-column-end: 3;
-  display: grid;
-  align-items: center;
-  justify-content: center;
   background-image: url("@/assets/icons/brain-icon4.png");
   background-size: 120%;
   background-position: center;
@@ -39,9 +44,11 @@ export default {
 
 .willpower-count {
   height: 65px;
-  color: white;
+  /* color: white; */
+  color: rgb(216, 239, 255);
   font-size: 2rem;
-  text-shadow: rgb(2, 38, 42) 3px 0px 0px,
+  text-shadow:
+    rgb(2, 38, 42) 3px 0px 0px,
     rgb(2, 38, 42) 2.83487px 0.981584px 0px,
     rgb(2, 38, 42) 2.35766px 1.85511px 0px,
     rgb(2, 38, 42) 1.62091px 2.52441px 0px,

@@ -13,14 +13,37 @@
           transform: `rotateZ(${getRotation(index)}deg)`,
         }"
       > -->
-      <Card
+      <!-- <Card
         class="-m-10"
         v-for="(card, index) in handOfCards"
-        :key="handOfCards.length"
+        :key="card.id"
         :title="card.title"
+        :description="card.description"
+        :defense="card.defense"
+        :damage="card.damage"
+        :heal="card.heal"
+        :willpowerCost="card.willpowerCost"
+        :cardArtworkSrc="card.cardArtworkSrc"
         :id="card.id"
         :handOfCardsLength="handOfCards.length"
         :cardIndex="index"
+        :isBound="card.isBound"
+      /> -->
+      <CardTest
+        class="-m-10"
+        v-for="(card, index) in handOfCards"
+        :key="card.id"
+        :title="card.title"
+        :description="card.description"
+        :defense="card.defense"
+        :damage="card.damage"
+        :heal="card.heal"
+        :willpowerCost="card.willpowerCost"
+        :cardArtworkSrc="card.cardArtworkSrc"
+        :id="card.id"
+        :handOfCardsLength="handOfCards.length"
+        :cardIndex="index"
+        :isBound="card.isBound"
       />
       <!-- :style="{
           transform: `rotateZ(${getRotation(index)}deg)`,
@@ -32,6 +55,7 @@
 
 <script>
 import Card from "./Card.vue";
+import CardTest from "./CardTest.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
@@ -43,6 +67,7 @@ export default {
   },
   components: {
     Card,
+    CardTest,
   },
   data() {
     return {
@@ -53,6 +78,7 @@ export default {
   },
   watch: {
     card(card) {
+      console.log("New card willpowerCost:", card.willpowerCost);
       this.handOfCards.push(card);
     },
   },

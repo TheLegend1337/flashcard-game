@@ -15,11 +15,13 @@
       :monsterHealth="monsterStore.monsterHealth"
       class="healthbar"
     />
-    <SpriteAnimation
-      :key="selectedAnimation"
-      :animationParameters="zombieVillagerAnimations[selectedAnimation]"
-      flip
-    />
+    <div id="single-effect-animation-wrapper" class="animate-attacking">
+      <SpriteAnimation
+        :key="selectedAnimation"
+        :animationParameters="zombieVillagerAnimations[selectedAnimation]"
+        flip
+      />
+    </div>
   </div>
 </template>
 

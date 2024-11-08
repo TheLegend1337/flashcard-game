@@ -1,14 +1,14 @@
 <template>
-  <div class="home-view grid grid-cols-5 vh-93">
+  <div class="home-view vh-93 grid grid-cols-5">
     <main
-      class="col-span-5 flex flex-col space-y-10 justify-center items-center"
+      class="col-span-5 flex flex-col items-center justify-center space-y-10"
     >
       <img
-        class="h-32"
+        class="h-[300px]"
         src="@/assets/brandIdentity/Logo-1024x455.png"
         alt="Producterra Logo"
       />
-      <div class="button-dimension">
+      <div class="button-dimension animate-pulse-scale">
         <ButtonPrimary
           label="Starten"
           route="/flashcard-game"
@@ -61,6 +61,7 @@ export default {
 
 .home-view {
   background-image: url("@/assets/environments/rest-room.png");
+  /* background-image: url("@/assets/brandIdentity/Thumbnail-Producterra-LogoAndCards-Kickstarter.png"); */
   background-size: cover;
   background-repeat: no-repeat;
 }

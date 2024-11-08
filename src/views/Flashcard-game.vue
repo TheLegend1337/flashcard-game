@@ -86,7 +86,8 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       drawnCard: null,
       foo: 0,
-      /*phase: "gameStart",*/
+      phase: "",
+      // nextPhase: "",
       // flashcards: [],
       // question: "What is a card?",
       // response: "This is the Cards Response.",
@@ -102,6 +103,7 @@ export default {
     console.log("beforeMount");
   },
   mounted() {
+    this.phase = this.flashcardGameStore.phase; //Brauche ich das im Mounted?
     console.log("mounted");
     console.log("Phase ist: " + this.flashcardGameStore.phase);
   },
@@ -121,6 +123,17 @@ export default {
   watch: {
     phase(value) {
       console.log(value);
+      this.changePhase();
+    },
+  },
+  computed: {
+    newPhase: {
+      get() {
+        return this.flashcardGameStore.phase;
+      },
+      set(value) {
+        this.phase = value;
+      },
     },
   },
   methods: {
@@ -128,28 +141,30 @@ export default {
       switch (this.flashcardGameStore.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
-          this.flashcardGameStore.phase = "drawCards";
+          setTimeout(() => {
+            this.phase = "drawCards";
+          }, 2000);
           break;
         case "drawCards":
           console.log("Spieler zieht Karten");
-          this.flashcardGameStore.phase = "playPhase";
+          this.phase = "playPhase";
 
           break;
         case "playPhase":
           console.log("Spieler darf Entscheidungen treffen");
-          this.flashcardGameStore.phase = "endTurn";
+          // this.phase = "endTurn";
           break;
         case "endTurn":
           console.log("Spieler beendet den Zug");
-          this.flashcardGameStore.phase = "enemyTurn";
+          this.phase = "enemyTurn";
           break;
         case "enemyTurn":
           console.log("Gegner ist am Zug");
-          this.flashcardGameStore.phase = "gameOver";
+          this.phase = "gameOver";
           break;
         case "gameOver":
           console.log("You died!");
-          this.flashcardGameStore.phase = "gameStart";
+          this.phase = "gameStart";
           break;
         default:
           console.log(`Default behavior.`);
@@ -166,7 +181,12 @@ export default {
 
 <style>
 .flashcard-game {
-  background-image: url("../assets/environments/card-game-kit-background-field-2.png");
+  /* background-image: url("../assets/environments/card-game-kit-background-field-2.png"); */
+  /* background-image: url("../assets/environments/combat-area-background-inside-office-room-2.png"); */
+  /* background-image: url("../assets/environments/combat-area-background-inside-school-room-blue.png"); */
+
+  background-image: url("../assets/environments/battle-area-background-home-office-1.png");
+
   background-size: cover;
   background-repeat: no-repeat;
   /* background-position-y: -230px; */
@@ -207,7 +227,9 @@ export default {
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Leichter Schatten für 3D-Effekt */
 
-  transition: background-color 0.5s, transform 0.5s;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
 }
 
 .game-overlay {

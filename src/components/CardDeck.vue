@@ -17,6 +17,12 @@
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
+//importieren der URL, damit das Laden auch korrekt klappt...
+import cardArtworkRightHook from "@/assets/card-art/combatSport-right-hook.png";
+import cardArtworkJab from "@/assets/card-art/combatSport-Jab.png";
+import cardArtworkBlock from "@/assets/card-art/combatSport-block.png";
+import cardArtworkRest from "@/assets/card-art/combatSport-rest.png";
+import cardArtworkGelberScheinImAermel from "@/assets/card-art/buero-gelberScheinImAermel.png";
 export default {
   // Hier kommen alle Optionen der Options API
   components: {
@@ -27,39 +33,105 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
       cardDeck: [
-        //10 Angriffskarten
-        //Eine Schaden über Zeit karte "Do you smell Popcorn?" verursacht 1 Giftschaden pro Runde über 5 Runden
-        //Sodbrannt
-        //Zerstörerische brennende Sod
-        //Constipation "Das Gegnerische Monster hat die Kontrolle über ihr Leben verloren und eine ganze Pizza alleine gegessen"
-        //Email nach 17 Uhr "Das Monster ist gestresst und verliert 1 HP"
-        //Passive Agressivität "Verursache 1 Schaden wenn du angegriffen wirst"
-        //Burnout: Ein Monster erhält 3 Schaden
-
-        //5 Heilkarten
-        //Verband: Erhalte +5 Hp
-        //Drauf pusten: Erhalte +1 HP
-        //Pflaster: Erhalte +3 HP
-        //Schmerzmittel: Erhalte +1HP
-
-        //5 Rüstungskarten
-        //
-        //Tilt Proof: erhalte +3 Rüstung
-
-        //Willenskraft Karten
-        //Multitasking "Erhalte jede Runde +1 Willenskraft"
-        //Gehaltserhöhung "Erhalte jede Runde +2 Willenskraft"
-        //Gelber Schein "Erhalte 1 Willenskraft zurück"
-        //Fresspaket: erhalte +X Willenskraft
-        //Erhalte Sodbrennen "Erleide am Ende des Zuges 1 Schaden"
-        { id: 7, title: "Karte 7" },
-        { id: 6, title: "Karte 6" },
-        { id: 5, title: "Karte 5" },
-        { id: 4, title: "Karte 4" },
-        { id: 3, title: "Karte 3" },
-        { id: 2, title: "Karte 2" },
-        { id: 1, title: "Karte 1" },
-        { id: 0, title: "Karte 0" },
+        {
+          id: 10,
+          title: "Blocken",
+          willpowerCost: 1,
+          description: "Erhalte 6 Verteidigung",
+          defense: 6,
+          cardArtworkSrc: cardArtworkBlock,
+          isBound: true,
+        },
+        {
+          id: 9,
+          title: "Blocken",
+          willpowerCost: 1,
+          description: "Erhalte 6 Verteidigung",
+          defense: 6,
+          cardArtworkSrc: cardArtworkBlock,
+          isBound: true,
+        },
+        {
+          id: 8,
+          title: "Blocken",
+          willpowerCost: 1,
+          description: "Erhalte 6 Verteidigung",
+          defense: 6,
+          cardArtworkSrc: cardArtworkBlock,
+          isBound: true,
+        },
+        {
+          id: 7,
+          title: "Blocken",
+          willpowerCost: 1,
+          description: "Erhalte 6 Verteidigung",
+          defense: 6,
+          cardArtworkSrc: cardArtworkBlock,
+          isBound: true,
+        },
+        {
+          id: 6,
+          title: "Gelber Schein",
+          willpowerCost: 2,
+          description: "Heile 10 HP",
+          heal: 10,
+          cardArtworkSrc: cardArtworkGelberScheinImAermel,
+          isBound: false,
+        },
+        {
+          id: 5,
+          title: "Ausruhen",
+          willpowerCost: 1,
+          description: "Heile 5 HP",
+          heal: 10,
+          cardArtworkSrc: cardArtworkRest,
+          isBound: true,
+        },
+        {
+          id: 4,
+          title: "Rechter Haken",
+          willpowerCost: 2,
+          description: "Ein Gegner erleidet 6 Schaden",
+          damage: 6,
+          cardArtworkSrc: cardArtworkRightHook,
+          isBound: false,
+        },
+        {
+          id: 3,
+          title: "Rechter Haken",
+          willpowerCost: 2,
+          description: "Ein Gegner erleidet 6 Schaden",
+          damage: 6,
+          cardArtworkSrc: cardArtworkRightHook,
+          isBound: true,
+        },
+        {
+          id: 2,
+          title: "Jab",
+          willpowerCost: 1,
+          description: "Ein Gegner erleidet 2 Schaden",
+          damage: 2,
+          cardArtworkSrc: cardArtworkJab,
+          isBound: false,
+        },
+        {
+          id: 1,
+          title: "Jab",
+          willpowerCost: 1,
+          description: "Ein Gegner erleidet 2 Schaden",
+          damage: 2,
+          cardArtworkSrc: cardArtworkJab,
+          isBound: true,
+        },
+        {
+          id: 0,
+          title: "Jab",
+          willpowerCost: 1,
+          description: "Ein Gegner erleidet 2 Schaden",
+          damage: 2,
+          cardArtworkSrc: cardArtworkJab,
+          isBound: true,
+        },
       ],
     };
   },

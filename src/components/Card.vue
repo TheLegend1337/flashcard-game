@@ -1,71 +1,66 @@
 <template>
-  <div class="initialTransformAnimationWrapperJustForfun">
-    <div
-      class="card"
-      :style="{
-        // rotate: `${cardRotationDegree}deg`,
-        // translate: `0, ${yTranslation}%`,
-        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
-      }"
-    >
-      <!-- Rotation der Karten berechnet über calcRotation -->
+  <div
+    class="card"
+    :style="{
+      // rotate: `${cardRotationDegree}deg`,
+      // translate: `0, ${yTranslation}%`,
+      transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
+    }"
+  >
+    <!-- Rotation der Karten berechnet über calcRotation -->
 
-      <div class="card-inner">
-        <div class="front card-artwork">
-          <!-- <div class="card-face-front-content">
+    <div class="card-inner">
+      <div class="front card-artwork">
+        <!-- <div class="card-face-front-content">
           <p>{{ title }}</p>
           <button @click="playcard">Entfesseln</button>
         </div> -->
+        <div
+          class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
+        >
           <div
-            class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
-          >
-            <div
-              class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
-            ></div>
-          </div>
+            class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
+          ></div>
+        </div>
 
-          <div
-            class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
-          >
-            <!-- <p
+        <div
+          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
+        >
+          <!-- <p
             id="willpower-counter"
             class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
           >
             1
           </p> -->
-            <p
-              id="willpower-counter"
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
-            >
-              {{ id }}
-            </p>
-          </div>
-          <div
-            class="card-frame absolute left-0 top-0 z-[4] h-full w-full border-2 border-green-500"
-          ></div>
-          <div
-            class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2 border-2 border-red-500"
+          <p
+            id="willpower-counter"
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
           >
-            <p
-              id="text-card-title"
-              class="absolute left-1/2 top-[20%] w-[90%] -translate-x-1/2 text-center text-[1rem] text-white"
-            >
-              Maximalsovielzeichen
-            </p>
-          </div>
-          <div
-            class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2 border-2 border-blue-500"
+            {{ this.willpowerCost }}
+          </p>
+        </div>
+        <div class="card-frame absolute left-0 top-0 z-[4] h-full w-full"></div>
+        <div
+          class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2"
+        >
+          <p
+            id="text-card-title"
+            class="absolute left-1/2 top-[12%] w-[90%] -translate-x-1/2 text-center text-[1.5rem] text-white"
           >
-            <p
-              id="text-card-description"
-              class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] border-2 border-red-800 text-center text-[14px] text-white"
-            >
-              Lege eine Karte ab, ziehe eine neue, dann lege
-              dasdasdasdasdsadaiese Karte dauerhaft ab und erhalte deine erste
-              zurück as asd asd aassd asasd.
-            </p>
-          </div>
-          <!-- 
+            {{ this.title }}
+          </p>
+        </div>
+        <div
+          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
+        >
+          <p
+            id="text-card-description"
+            class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] text-center align-middle text-[21px] text-white"
+          >
+            {{ this.description }}
+          </p>
+        </div>
+        <!-- 
         -- 
         Herangehensweise mit nur einem Bild als Karte
           <img
@@ -73,7 +68,7 @@
             class="card-frame-full"
           /> 
         --
-        --></div>
+        -->
       </div>
     </div>
   </div>
@@ -87,13 +82,37 @@ import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 // import Flashcards from './db.json';
 export default {
   props: {
+    id: {
+      type: Number,
+      default: 0,
+    },
     title: {
       type: String,
       default: "Default Title",
     },
-    id: {
+    description: {
+      type: String,
+      default: "Default Description",
+    },
+    willpowerCost: {
       type: Number,
-      default: 0,
+      required: true,
+    },
+    damage: {
+      type: Number,
+      required: false,
+    },
+    heal: {
+      type: Number,
+      required: false,
+    },
+    defense: {
+      type: Number,
+      required: false,
+    },
+    cardArtworkSrc: {
+      type: String,
+      required: true,
     },
     handOfCardsLength: {
       type: Number,
@@ -102,6 +121,11 @@ export default {
     cardIndex: {
       type: Number,
       required: true,
+    },
+    isBound: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   data() {
@@ -115,9 +139,14 @@ export default {
       resetYTranslationOnHover: 0,
       yTranslation: 0,
       xTranslation: 0,
+      cardArtworkSource: "",
     };
   },
   mounted() {
+    this.cardArtworkSource = new URL(
+      this.cardArtworkSrc,
+      import.meta.url,
+    ).toString(); //notwendig damit in setProperty auch wirklich ein String inklusive Anführungsstriche übergeben werden.
     this.cardRotationDegree = this.calcRotation(this.cardIndex);
     //
     this.yTranslation = this.calcYTranslation(this.cardIndex);
@@ -127,7 +156,8 @@ export default {
     this.cardRotationDegreeOnHover = this.cardRotationDegree * -1;
     this.resetYTranslationOnHover = (this.yTranslation + 25) * -1;
     //
-    console.log(this.cardRotationDegreeOnHover);
+
+    //Card Styles will be applied when mounted
     this.$el.style.setProperty(
       "--reset-rotation-degree",
       `${this.cardRotationDegreeOnHover}deg`,
@@ -136,6 +166,12 @@ export default {
       "--reset-yTranslation",
       `${this.resetYTranslationOnHover}%`,
     );
+    this.$el.style.setProperty(
+      "--card-artwork-source",
+      `url("${this.cardArtworkSource}")`,
+    );
+
+    console.log("Card Artwork Source URL:", this.cardArtworkSource);
   },
   computed: {
     // für das Berechnen der Karten Rotation
@@ -211,17 +247,16 @@ export default {
   transition: all 0.5s;
   /* background-color: white; */
 }
-
-.initialTransformAnimationWrapperJustForfun {
-  transition: all 0.5s;
-}
-.initialTransformAnimationWrapperJustForfun:hover {
-  /* transform: scale(1.5) translateY(-25%); */
-  /* width: 360px;
-  margin-top: -270px; */
+.card:hover {
+  border-radius: 10%;
+  filter: drop-shadow(0 0 6px rgba(245, 222, 179, 0.465))
+    drop-shadow(0 0 12px rgba(245, 222, 179, 0.339))
+    drop-shadow(0 0 18px rgba(245, 222, 179, 0.231));
   z-index: 100;
-  transform: rotateZ(var(--reset-rotation-degree)) scale(1.3)
-    translateY(var(--reset-yTranslation));
+  /* transform: rotateZ(var(--reset-rotation-degree)) scale(1.3)
+    translateY(var(--reset-yTranslation)) !important; */
+  /* Die auskommentierte Version war mit dem rückrechnen von Rotate und der y-Achse */
+  transform: scale(1.3) translateY(-20%) !important;
 }
 
 /* @keyframes animateCard {
@@ -234,13 +269,13 @@ export default {
   width: 100%;
   height: 100%;
   /* transform-style: preserve-3d; */
-  /* The transform property in CSS has a relationship between parent and child 
-        elements when it comes to 3D transformations, especially with the preserve-3d 
+  /* The transform property in CSS has a relationship between parent and child
+        elements when it comes to 3D transformations, especially with the preserve-3d
         value for the transform-style property.
-        When you set transform-style: preserve-3d; on a parent element, 
-        it indicates that the child elements of this parent can have their 
-        own 3D transformations and will be positioned in 3D space relative to the parent. 
-        This is particularly relevant in the context of creating 3D transformations or 
+        When you set transform-style: preserve-3d; on a parent element,
+        it indicates that the child elements of this parent can have their
+        own 3D transformations and will be positioned in 3D space relative to the parent.
+        This is particularly relevant in the context of creating 3D transformations or
         animations, such as card flips or other spatial effects.*/
   transition: transform 0.5s;
 }
@@ -256,7 +291,8 @@ export default {
 }
 
 .card-artwork {
-  background-image: url("@/assets/card-art/change-request-resized.png");
+  /* background-image: url("@/assets/card-art/change-request-resized.png"); */
+  background-image: var(--card-artwork-source);
   background-size: 90%;
   background-position: 50% 12%;
   background-repeat: no-repeat;
