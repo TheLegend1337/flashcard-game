@@ -1,14 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="!this.isBound"
-      class="card"
-      :style="{
-        // rotate: `${cardRotationDegree}deg`,
-        // translate: `0, ${yTranslation}%`,
-        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
-      }"
-    >
+    <div v-if="!this.isBound" class="card">
       <!-- Rotation der Karten berechnet über calcRotation -->
 
       <div class="card-inner">
@@ -76,32 +68,15 @@
       </div>
     </div>
     <div
+      @click="handleBoundCardClick"
       v-if="this.isBound"
       class="card"
-      :style="{
-        // rotate: `${cardRotationDegree}deg`,
-        // translate: `0, ${yTranslation}%`,
-        transform: `rotate(${cardRotationDegree}deg) translate(${xTranslation}%, ${yTranslation}%)`,
-      }"
+      :class="{ animateCardGrow: isSelectedForUnleash }"
     >
-      <!-- Rotation der Karten berechnet über calcRotation -->
-
-      <div class="card-inner">
-        <div class="front bound-card-artwork">
-          <!-- <div class="card-face-front-content">
-          <p>{{ title }}</p>
-          <button @click="playcard">Entfesseln</button>
-        </div> -->
-
-          <!-- 
-        -- 
-        Herangehensweise mit nur einem Bild als Karte
-          <img
-            src="@/assets/ui-components-backgrounds/card/card-frame-full.png"
-            class="card-frame-full"
-          /> 
-        --
-        --></div>
+      <div class="front bound-card-artwork flex h-full w-full justify-center">
+        <div class="absolute top-[9%] h-[80%] w-[80%] border-2 border-white">
+          <QuizBox :isVisible="this.isQuizboxVisible" />
+        </div>
       </div>
     </div>
   </div>
@@ -109,11 +84,15 @@
 
 <script>
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
-import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
-import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
-import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
+// import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
+// import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
+// import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
+import QuizBox from "@/components/QuizBox.vue";
 // import Flashcards from './db.json';
 export default {
+  components: {
+    QuizBox,
+  },
   props: {
     id: {
       type: Number,
@@ -164,9 +143,9 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
-      playerStore: usePlayerStore(),
-      willpowerStore: useWillpowerStore(),
-      monsterStore: useMonsterStore(),
+      // playerStore: usePlayerStore(),
+      // willpowerStore: useWillpowerStore(),
+      // monsterStore: useMonsterStore(),
       cardRotationDegree: 0,
       cardRotationDegreeOnHover: 0,
       resetYTranslationOnHover: 0,
@@ -174,6 +153,8 @@ export default {
       xTranslation: 0,
       cardArtworkSource: "",
       previousHandOfCardsLength: this.handOfCardsLength,
+      isSelectedForUnleash: false,
+      isQuizboxVisible: false,
     };
   },
   updated() {
@@ -185,6 +166,14 @@ export default {
     //
     this.yTranslation = this.calcYTranslation(this.cardIndex);
     this.xTranslation = this.calcXTranslation(this.cardIndex);
+    this.$el.style.setProperty(
+      "--card-rotation-degree",
+      `rotate(${this.cardRotationDegree}deg)`,
+    );
+    this.$el.style.setProperty(
+      "--xy-translation",
+      `translate(${this.xTranslation}%,${this.yTranslation}% )`,
+    );
   },
   mounted() {
     this.cardArtworkSource = new URL(
@@ -206,6 +195,14 @@ export default {
     this.$el.style.setProperty(
       "--card-artwork-source",
       `url("${this.cardArtworkSource}")`,
+    );
+    this.$el.style.setProperty(
+      "--card-rotation-degree",
+      `rotate(${this.cardRotationDegree}deg)`,
+    );
+    this.$el.style.setProperty(
+      "--xy-translation",
+      `translate(${this.xTranslation}%,${this.yTranslation}% )`,
     );
 
     console.log("Card Artwork Source URL:", this.cardArtworkSource);
@@ -244,6 +241,19 @@ export default {
       const distance = cardIndex - centerCardIndex;
       return distance * xTranslationFactor;
     },
+    handleBoundCardClick() {
+      this.isSelectedForUnleash = true;
+      this.isQuizboxVisible = true;
+      console.log("Entfesselt");
+      const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
+      const imagePath = new URL(
+        "@/assets/ui-components-backgrounds/card/quiz-background.png",
+        import.meta.url,
+      ).toString();
+      if (boundCardArtwork) {
+        boundCardArtwork.style.backgroundImage = `url(${imagePath})`;
+      }
+    },
   },
 };
 </script>
@@ -280,21 +290,25 @@ export default {
   position: relative; /*löst das Problem, dass der Z-index nicht auf 100 gesetzt wird, z-Index funktioniert nur auf positionierten Elementen*/
   width: 248px;
   aspect-ratio: 248/350;
-  perspective: 1000px;
+  /* perspective: 1000px; */
   /* animation: animateCard 0.5s forwards; */
   transition: all 0.5s;
   /* background-color: white; */
+  transform: var(--card-rotation-degree) var(--xy-translation);
 }
+
 .card:hover {
   border-radius: 10%;
   filter: drop-shadow(0 0 6px rgba(245, 222, 179, 0.465))
     drop-shadow(0 0 12px rgba(245, 222, 179, 0.339))
     drop-shadow(0 0 18px rgba(245, 222, 179, 0.231));
   z-index: 100;
+  /* width: 200px; */
   /* transform: rotateZ(var(--reset-rotation-degree)) scale(1.3)
     translateY(var(--reset-yTranslation)) !important; */
   /* Die auskommentierte Version war mit dem rückrechnen von Rotate und der y-Achse */
-  transform: scale(1.3) translateY(-20%) !important;
+  /* transform: scale(1.3) translateY(-20%) !important; */
+  transform: scale(1.3) translateY(-20%);
 }
 
 /* @keyframes animateCard {
@@ -315,7 +329,7 @@ export default {
         own 3D transformations and will be positioned in 3D space relative to the parent.
         This is particularly relevant in the context of creating 3D transformations or
         animations, such as card flips or other spatial effects.*/
-  transition: transform 0.5s;
+  /* transition: transform 0.5s; */
 }
 
 /* .card:hover .card-inner {
@@ -384,4 +398,17 @@ export default {
   background-position: 50% 12%;
   background-repeat: no-repeat;
 } */
+
+@keyframes scaleCard {
+  to {
+    /* scale: 3 !important;
+    translate: 0 20%; */
+
+    transform: scale(2.5) translateY(-30%);
+  }
+}
+
+.animateCardGrow {
+  animation: scaleCard 0.5s forwards;
+}
 </style>
