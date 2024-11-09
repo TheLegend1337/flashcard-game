@@ -7,6 +7,7 @@
         class="animate-enter-right-exit-left-with-fade-in"
       />
       <HandOfCards
+        ref="HandOfCards"
         :card="drawnCard"
         class="animate-fade-in-from-bottom-to-top"
       />
@@ -20,7 +21,7 @@
         ref="CardDeck"
         class="animate-fade-in-from-bottom-right-to-top-left"
       />
-      <QuizBox />
+      <!-- <QuizBox /> -->
     </div>
     <div id="phaseBanner" class="animate-fade-in">
       <button @click="drawCard(1)" class="m-2">Ziehen</button>
@@ -45,7 +46,7 @@ import Monster from "../components/Monster.vue";
 import Willpower from "../components/Willpower.vue";
 import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
-import QuizBox from "../components/QuizBox.vue";
+// import QuizBox from "../components/QuizBox.vue";
 import InfoBanner from "@/components/FlashcardGame/container/InfoBanner.vue";
 export default {
   components: {
@@ -55,7 +56,7 @@ export default {
     Willpower,
     DiscardPile,
     CardDeck,
-    QuizBox,
+    // QuizBox,
     InfoBanner,
   },
   data() {
@@ -114,7 +115,7 @@ export default {
     },
   },
   methods: {
-    changePhase() {
+    async changePhase() {
       switch (this.phase) {
         case "gameStart":
           console.log("Das Spiel hat gestartet");
@@ -124,13 +125,13 @@ export default {
           break;
         case "drawCards":
           console.log("Spieler zieht Karten");
-          // this.phase = "playPhase";
-          this.drawCard(5);
+          await this.drawCard(5);
+          this.phase = "playPhase";
 
           break;
         case "playPhase":
           console.log("Spieler darf Entscheidungen treffen");
-          this.phase = "endTurn";
+          // this.phase = "endTurn";
           break;
         case "endTurn":
           console.log("Spieler beendet den Zug");
@@ -160,7 +161,7 @@ export default {
           console.log(card);
           this.drawnCard = card;
           resolve(card);
-        }, 200);
+        }, 400);
       });
     },
   },

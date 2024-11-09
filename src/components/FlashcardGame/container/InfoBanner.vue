@@ -27,8 +27,6 @@
     >
       {{ rightText }}
     </h2>
-
-    <p>Kampf beginnt!</p>
   </div>
 </template>
 
