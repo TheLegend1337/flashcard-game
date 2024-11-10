@@ -1,6 +1,15 @@
 <template>
   <div class="example-component">
     <!-- Template-Inhalt -->
+
+    <!-- <MyComponent
+          :propName="60"
+          stringProp="secondary"
+         
+        /> -->
+    <!-- Doppelpunkt ist shorthand für v-bind und wird für Variablen verwendet
+          objects sowie Arrays brauchen den Doppelpunkt.
+          Numbers, booleans, Strings ohne Doppelpunkt. -->
   </div>
 </template>
 

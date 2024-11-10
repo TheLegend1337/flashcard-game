@@ -1,6 +1,8 @@
 <!--Options API-->
 <template>
-  <button @click="handleClick">{{ label }}</button>
+  <button @click="handleClick">
+    <p class="calcFontSize">{{ label }}</p>
+  </button>
 </template>
 
 <script>
@@ -52,5 +54,14 @@ button {
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url("@/assets/ui-components-backgrounds/button-background-blue-icy.png");
+  transition: all 0.5s ease-in-out;
+}
+
+.calcFontSize {
+  font-size: 16px;
+}
+
+button:hover {
+  transform: scale(1.2);
 }
 </style>

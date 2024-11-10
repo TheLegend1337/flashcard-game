@@ -74,7 +74,7 @@
       :class="{ animateCardGrow: isSelectedForUnleash }"
     >
       <div class="front bound-card-artwork flex h-full w-full justify-center">
-        <div class="absolute top-[9%] h-[80%] w-[80%] border-2 border-white">
+        <div class="absolute top-[9%] h-[80%] w-[76%]">
           <QuizBox :isVisible="this.isQuizboxVisible" />
         </div>
       </div>

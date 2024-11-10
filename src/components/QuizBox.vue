@@ -1,29 +1,56 @@
 <!--Options API-->
 <template>
   <div
-    class="container quiz-box"
-    :class="{ hideQuizBox: quizBoxVisibility === 'invisible' }"
+    :class="{ hideQuizBox: !isVisible }"
+    class="quiz-box flex h-full w-[100%] flex-col items-center justify-around"
   >
-    <div
-      v-if="isQuestionVisible"
-      class="container question flex justify-items-center flex-col items-center"
-    >
-      <p class="text-xs sm:text-xs md:text-xs lg:text-lg">
+    <div class="question container flex flex-col items-center">
+      <p class="text-center text-[0.7rem]">
         Lorem ipsum dolor sit amet, consetetur elitir?
       </p>
-      <ButtonPrimary class="" @button-clicked="showAnswer" label="Antwort" />
+      <ButtonUniversal
+        v-if="!isAnswerVisible"
+        :buttonWidth="100"
+        :buttonHeight="30"
+        class=""
+        @button-clicked="showAnswer"
+        label="Antwort"
+      />
     </div>
-    <div v-else class="container answer text-center m-6">
-      <p class="text-xs sm:text-xs md:text-base lg:text-lg">
+
+    <div
+      v-if="isAnswerVisible"
+      class="answer flex w-full flex-col items-center justify-center text-center"
+    >
+      <Divider />
+      <p class="w-[90%] text-center text-[0.4rem]">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, sanctus est Lorem ipsum dolor sit amet. Lorem
+        ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
         eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
         voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
         clita kasd gubergren, sanctus est Lorem ipsum dolor sit amet.
       </p>
-      <div class="difficulty">
-        <ButtonSecondary :clickHandler="again" label="nochmal" />
-        <ButtonSecondary :clickHandler="hard" label="Schwer" />
-        <ButtonPrimary :clickHandler="easy" label="Einfach" />
+      <div class="difficulty flex">
+        <ButtonUniversal
+          buttonWidth="60"
+          buttonHeight="19"
+          type="wrong"
+          :clickHandler="again"
+          label="falsch"
+          class=""
+        />
+
+        <ButtonUniversal
+          buttonWidth="60"
+          buttonHeight="19"
+          type="correct"
+          :clickHandler="hard"
+          label="richtig"
+          class=""
+        />
       </div>
     </div>
   </div>
@@ -31,34 +58,39 @@
 
 <script>
 //habe den Content gefunden
+import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
+import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
-import ButtonSecondary from "@/components/FlashcardGame/Buttons/ButtonSecondary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   components: {
+    ButtonUniversal,
     ButtonPrimary,
-    ButtonSecondary,
+    Divider,
+  },
+  props: {
+    isVisible: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       //Komma statt Semicolon benutzen
       //z.b store: useWillpowerStore(),
       //Achtung Doppelpunkt' : '' statt ' = ',
-      isQuestionVisible: true,
+      isAnswerVisible: false,
       flashcardGameStore: useFlashcardGameStore(),
     };
   },
   computed: {
-    quizBoxVisibility() {
-      return this.flashcardGameStore.quizBoxState;
-    },
+    // quizBoxVisibility() {
+    //   return this.flashcardGameStore.quizBoxState;
+    // },
   },
   methods: {
-    drawCard() {
-      this.cardStore.pushCard();
-    },
     showAnswer() {
-      this.isQuestionVisible = false;
+      this.isAnswerVisible = true;
     },
   },
 };
@@ -67,26 +99,6 @@ export default {
 <style scoped>
 .quiz-box p {
   color: black;
-}
-
-.quiz-box {
-  width: 100%;
-  height: 100%;
-  grid-row-start: 2;
-  grid-row-end: 7;
-  grid-column-start: 4;
-  grid-column-end: 7;
-  justify-self: start;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 100px 50px;
-  background-image: url("@/assets/ui-components-backgrounds/background-pergament-quadratisch.png");
 }
 
 .hideQuizBox {
