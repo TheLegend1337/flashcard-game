@@ -67,18 +67,28 @@
         --></div>
       </div>
     </div>
+    <!-- :key="this.isSelectedForUnleash" -->
     <div
       v-if="this.isBound"
       @click="handleBoundCardClick"
       class="card"
-      :class="{ animateCardGrow: isSelectedForUnleash }"
+      :class="{
+        animateCardGrow: isSelectedForUnleash,
+        animateCardShrink: !isSelectedForUnleash,
+      }"
     >
-      <div class="front bound-card-artwork flex h-full w-full justify-center">
+      <div
+        :style="boundCardArtworkBackgroundImage"
+        class="front bound-card-artwork flex h-full w-full justify-center"
+      >
         <div class="absolute top-[9%] h-[80%] w-[76%]">
           <QuizBox
+            v-if="this.isSelectedForUnleash"
+            :key="this.isSelectedForUnleash"
+            @click.stop
             @button-wrong-clicked="handleButtonWrongClicked"
-            :isVisible="this.isQuizboxVisible"
           />
+          <!-- :isVisible="this.isQuizboxVisible" -->
         </div>
       </div>
     </div>
@@ -228,23 +238,29 @@ export default {
       let cardCenter = Math.floor(totalCards / 2);
       return cardCenter;
     },
-  },
-  watch: {
-    isSelectedForUnleash() {
+    boundCardArtworkBackgroundImage() {
       if (this.isSelectedForUnleash) {
-        console.log("Entfesselt");
-        const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
         const imagePath = new URL(
           "@/assets/ui-components-backgrounds/card/quiz-background.png",
           import.meta.url,
         ).toString();
-        if (boundCardArtwork) {
-          boundCardArtwork.style.backgroundImage = `url(${imagePath})`;
-        }
+        return {
+          backgroundImage: `url(${imagePath})`,
+        };
       } else {
-        const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
-        boundCardArtwork.classList.remove("bound-card-artwork");
+        const imagePath = new URL(
+          "@/assets/ui-components-backgrounds/card/bound-card-3d-framed.png",
+          import.meta.url,
+        ).toString();
+        return {
+          backgroundImage: `url(${imagePath})`,
+        };
       }
+    },
+  },
+  watch: {
+    isSelectedForUnleash() {
+      console.log("Watch:isSelectedForUnleash" + this.isSelectedForUnleash);
     },
   },
   methods: {
@@ -275,10 +291,13 @@ export default {
     },
     handleButtonWrongClicked() {
       this.isSelectedForUnleash = false;
-      console.log(this.isSelectedForUnleash);
+      this.isQuizboxVisible = false;
+      console.log("isSelectedforUnleash:" + this.isSelectedForUnleash);
+      console.log("isQuizboxVisible:" + this.isQuizboxVisible);
     },
     handleBoundCardClick() {
       this.isSelectedForUnleash = true;
+      console.log("this.isSelectedForUnleash: " + this.isSelectedForUnleash);
       this.isQuizboxVisible = true;
 
       if (!this.isOpenCardSoundPlayed) {
@@ -382,7 +401,7 @@ export default {
   background-repeat: no-repeat;
 }
 .bound-card-artwork {
-  background-image: url("@/assets/ui-components-backgrounds/card/bound-card-3d-framed.png");
+  /* background-image: url("@/assets/ui-components-backgrounds/card/bound-card-3d-framed.png"); */
   background-size: 90%;
   background-position: 50% 12%;
   background-repeat: no-repeat;
@@ -433,14 +452,20 @@ export default {
 
 @keyframes scaleCard {
   to {
-    /* scale: 3 !important;
-    translate: 0 20%; */
-
     transform: scale(2.5) translateY(-30%);
   }
 }
 
 .animateCardGrow {
   animation: scaleCard 0.5s forwards;
+}
+
+@keyframes shrinkCard {
+  to {
+    transform: scale(1) var(--card-rotation-degree) var(--xy-translation);
+  }
+}
+.animateCardShrink {
+  animation: shrinkCard 0.5s;
 }
 </style>

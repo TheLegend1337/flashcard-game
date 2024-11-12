@@ -1,7 +1,7 @@
 <!--Options API-->
 <template>
+  <!-- :class="{ hideQuizBox: !isVisible }" -->
   <div
-    :class="{ hideQuizBox: !isVisible }"
     class="quiz-box flex h-full w-[100%] flex-col items-center justify-around"
   >
     <div class="question container flex flex-col items-center">
