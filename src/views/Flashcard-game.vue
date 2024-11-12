@@ -161,7 +161,7 @@ export default {
           console.log(card);
           this.drawnCard = card;
           resolve(card);
-        }, 400);
+        }, 200);
       });
     },
   },

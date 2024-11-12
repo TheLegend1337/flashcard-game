@@ -11,6 +11,7 @@
       wrong: type === 'wrong',
     }"
     @click="handleClick"
+    @mouseenter="playHoverSound"
   >
     <p class="calcTextSize">{{ label }}</p>
   </button>
@@ -18,7 +19,8 @@
 
 <script>
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
-
+import SoundHandler from "@/helpers/soundHandler";
+import soundEffect_ButtonMouseEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
 export default {
   props: {
     clickHandler: {
@@ -57,6 +59,12 @@ export default {
     };
   },
   mounted() {
+    this.soundHandler = new SoundHandler();
+    this.soundHandler.registerSound(
+      "buttonHover",
+      soundEffect_ButtonMouseEnter,
+    );
+
     console.log(
       "Button Width is:" +
         this.buttonWidth +
@@ -78,15 +86,29 @@ export default {
       return part;
     },
     handleClick() {
+      if (this.type === "wrong") {
+        this.$emit("button-wrong-clicked");
+      } else if (this.type === "correct") {
+        this.$emit("button-correct-clicked");
+      } else if (this.type === "primary") {
+        //Differentiate between primary and secondary
+        this.$emit("button-primary-clicked");
+      } else if (this.type === "secondary") {
+        //Differentiate between primary and secondary
+        this.$emit("button-secondary-clicked");
+      }
       if (this.clickHandler) {
         this.clickHandler();
       } else {
+        //I can always listen to this event in Parents
         this.$emit("button-clicked");
       }
-
       if (this.route) {
         this.$router.push(this.route);
       }
+    },
+    playHoverSound() {
+      this.soundHandler.playSound("buttonHover", 0.03);
     },
   },
 };

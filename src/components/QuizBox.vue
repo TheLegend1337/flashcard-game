@@ -41,6 +41,7 @@
           :clickHandler="again"
           label="falsch"
           class=""
+          @button-wrong-clicked="handleButtonWrongClicked"
         />
 
         <ButtonUniversal
@@ -91,6 +92,9 @@ export default {
   methods: {
     showAnswer() {
       this.isAnswerVisible = true;
+    },
+    handleButtonWrongClicked() {
+      this.$emit("button-wrong-clicked");
     },
   },
 };

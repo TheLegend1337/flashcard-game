@@ -68,14 +68,17 @@
       </div>
     </div>
     <div
-      @click="handleBoundCardClick"
       v-if="this.isBound"
+      @click="handleBoundCardClick"
       class="card"
       :class="{ animateCardGrow: isSelectedForUnleash }"
     >
       <div class="front bound-card-artwork flex h-full w-full justify-center">
         <div class="absolute top-[9%] h-[80%] w-[76%]">
-          <QuizBox :isVisible="this.isQuizboxVisible" />
+          <QuizBox
+            @button-wrong-clicked="handleButtonWrongClicked"
+            :isVisible="this.isQuizboxVisible"
+          />
         </div>
       </div>
     </div>
@@ -83,6 +86,10 @@
 </template>
 
 <script>
+import SoundHandler from "@/helpers/soundHandler";
+import soundEffect_DrawCard from "@/assets/sounds/soundEffects/drawCard_shorter.mp3";
+import soundEffect_OpenCard from "@/assets/sounds/soundEffects/bookFlip2.ogg";
+
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 // import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 // import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
@@ -155,6 +162,8 @@ export default {
       previousHandOfCardsLength: this.handOfCardsLength,
       isSelectedForUnleash: false,
       isQuizboxVisible: false,
+      //check if Soundeffect was played once, if yes, the flag will be set to true and wont be played on consequtive clicks
+      isOpenCardSoundPlayed: false,
     };
   },
   updated() {
@@ -176,6 +185,11 @@ export default {
     );
   },
   mounted() {
+    this.soundHandler = new SoundHandler();
+    this.soundHandler.registerSound("drawCard", soundEffect_DrawCard);
+    this.soundHandler.registerSound("openCard", soundEffect_OpenCard);
+    this.soundHandler.playSound("drawCard", 0.4);
+
     this.cardArtworkSource = new URL(
       this.cardArtworkSrc,
       import.meta.url,
@@ -215,6 +229,24 @@ export default {
       return cardCenter;
     },
   },
+  watch: {
+    isSelectedForUnleash() {
+      if (this.isSelectedForUnleash) {
+        console.log("Entfesselt");
+        const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
+        const imagePath = new URL(
+          "@/assets/ui-components-backgrounds/card/quiz-background.png",
+          import.meta.url,
+        ).toString();
+        if (boundCardArtwork) {
+          boundCardArtwork.style.backgroundImage = `url(${imagePath})`;
+        }
+      } else {
+        const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
+        boundCardArtwork.classList.remove("bound-card-artwork");
+      }
+    },
+  },
   methods: {
     playcard() {
       this.flashcardGameStore.changeQuizBoxVisibility();
@@ -241,17 +273,17 @@ export default {
       const distance = cardIndex - centerCardIndex;
       return distance * xTranslationFactor;
     },
+    handleButtonWrongClicked() {
+      this.isSelectedForUnleash = false;
+      console.log(this.isSelectedForUnleash);
+    },
     handleBoundCardClick() {
       this.isSelectedForUnleash = true;
       this.isQuizboxVisible = true;
-      console.log("Entfesselt");
-      const boundCardArtwork = this.$el.querySelector(".bound-card-artwork");
-      const imagePath = new URL(
-        "@/assets/ui-components-backgrounds/card/quiz-background.png",
-        import.meta.url,
-      ).toString();
-      if (boundCardArtwork) {
-        boundCardArtwork.style.backgroundImage = `url(${imagePath})`;
+
+      if (!this.isOpenCardSoundPlayed) {
+        this.soundHandler.playSound("openCard", 0.4);
+        this.isOpenCardSoundPlayed = true; // Update the flag
       }
     },
   },
