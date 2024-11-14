@@ -37,7 +37,7 @@ export default {
     },
     type: {
       type: String,
-      required: true,
+
       default: "primary",
       //accepts primary, secondary
     },

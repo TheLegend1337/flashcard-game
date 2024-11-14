@@ -4,9 +4,9 @@
   <div
     class="quiz-box flex h-full w-[100%] flex-col items-center justify-around"
   >
-    <div class="question container flex flex-col items-center">
+    <div class="question container flex flex-col items-center p-[10px]">
       <p class="text-center text-[0.7rem]">
-        Lorem ipsum dolor sit amet, consetetur elitir?
+        {{ flashcard.question }}
       </p>
       <ButtonUniversal
         v-if="!isAnswerVisible"
@@ -23,17 +23,13 @@
       class="answer flex w-full flex-col items-center justify-center text-center"
     >
       <Divider />
-      <p class="w-[90%] text-center text-[0.4rem]">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, sanctus est Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, sanctus est Lorem ipsum dolor sit amet.
-      </p>
-      <div class="difficulty flex">
+      <div class="h-[90px] w-[90%] pb-[10px] pt-[10px]">
+        <p class="text-center text-[0.7rem]">
+          {{ flashcard.answer }}
+        </p>
+      </div>
+
+      <div id="buttons" class="difficulty flex">
         <ButtonUniversal
           buttonWidth="60"
           buttonHeight="19"
@@ -63,6 +59,7 @@ import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.
 import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useFlashCardsStore } from "@/stores/FlashcardGameStores/flashcardsStore";
 export default {
   components: {
     ButtonUniversal,
@@ -82,12 +79,20 @@ export default {
       //Achtung Doppelpunkt' : '' statt ' = ',
       isAnswerVisible: false,
       flashcardGameStore: useFlashcardGameStore(),
+      flashCardsStore: useFlashCardsStore(),
+      flashcard: {},
     };
   },
   computed: {
     // quizBoxVisibility() {
     //   return this.flashcardGameStore.quizBoxState;
     // },
+    flashcards() {
+      return this.flashCardsStore.flashcards;
+    },
+  },
+  mounted() {
+    this.flashcard = this.flashCardsStore.shiftFirstFromStreak0();
   },
   methods: {
     showAnswer() {
