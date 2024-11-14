@@ -1,21 +1,6 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-
-// import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
-    <!-- <img
-      alt="Vue logo"
-      class="logo"
-      src="http://frommoon.de/wp-content/uploads/2022/08/Logo-1024x455.png"
-      width="230"
-      height="100"
-    /> -->
-
     <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/matchfield">Spielfeld</RouterLink>
@@ -32,9 +17,104 @@ import { RouterLink, RouterView } from "vue-router";
   <Transition name="fade" mode="out-in">
     <RouterView />
   </Transition>
+  <!-- Particle effect container -->
+  <div ref="particleContainer" class="particle-container"></div>
 </template>
 
+<script>
+import { RouterLink, RouterView } from "vue-router";
+
+export default {
+  name: "App",
+  methods: {
+    handleClickToCreateParticles(event) {
+      const x = event.pageX;
+      const y = event.pageY;
+
+      // Create the particle effect at the click position
+      // this.createParticleEffect(x, y);
+      // Create the container div
+      const div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.left = x + "px";
+      div.style.top = y + "px";
+      div.style.transform = "translate(-50%, -50%)";
+      div.style.width = "10px"; // Reduced from 50px
+      div.style.height = "10px"; // Reduced from 50px
+      div.style.pointerEvents = "none"; // Ensure the effect doesn't block clicks
+
+      // Append the div to the particle container
+      this.$refs.particleContainer.appendChild(div);
+
+      const maxElems = 8; // Reduced from 16
+      for (let i = 0; i < maxElems; i++) {
+        const span = document.createElement("span");
+        span.style.display = "block";
+        span.style.position = "absolute";
+        span.style.left = "50%";
+        span.style.bottom = "50%";
+        span.style.width = "1px"; // Reduced from 4px
+        span.style.height = "6px"; // Reduced from 50px
+        span.style.borderRadius = "2px"; // Reduced from 4px
+        span.style.background = "#fff";
+        span.style.boxShadow = "0 0 2px rgba(255, 255, 255, 0.5)";
+        span.style.transformOrigin = "center bottom";
+        span.style.transition =
+          "transform 0.2s ease-out, opacity 0.45s ease-out";
+
+        const deg = i * (360 / maxElems) + Math.floor(Math.random() * 10);
+        const height = 5 + Math.floor(Math.random() * 12); // Reduced variation
+        const width = 1 + Math.floor(Math.random() * 3); // Reduced variation
+        span.style.height = height + "px";
+        span.style.width = width + "px";
+        span.style.transform = `rotate(${deg}deg)`;
+
+        div.appendChild(span);
+      }
+
+      // Trigger the animation
+      window.requestAnimationFrame(() => {
+        const spans = div.querySelectorAll("span");
+        spans.forEach((el) => {
+          const trasY = -10 - Math.floor(Math.random() * 10); // Reduced movement
+          el.style.transform += ` scaleY(0.5) translateY(${trasY}px)`;
+          el.style.opacity = "0";
+        });
+
+        // Remove the div after the animation is done
+        setTimeout(() => {
+          if (this.$refs.particleContainer.contains(div)) {
+            this.$refs.particleContainer.removeChild(div);
+          }
+        }, 400);
+      });
+    },
+  },
+  mounted() {
+    // Attach the click event listener to the document body
+    document.body.addEventListener("click", this.handleClickToCreateParticles);
+  },
+  beforeUnmount() {
+    // Clean up the event listener when the component is destroyed
+    document.body.removeEventListener(
+      "click",
+      this.handleClickToCreateParticles,
+    );
+  },
+};
+</script>
+
 <style scoped>
+.particle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow clicks to pass through */
+  overflow: hidden;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 2s ease;
@@ -44,6 +124,7 @@ import { RouterLink, RouterView } from "vue-router";
 .fade-leave-to {
   opacity: 0;
 }
+
 header {
   display: flex;
   justify-content: center;
@@ -91,30 +172,4 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-/* 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
 </style>
