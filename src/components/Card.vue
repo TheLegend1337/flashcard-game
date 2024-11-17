@@ -3,60 +3,60 @@
     <div v-if="!this.isBound" class="card">
       <!-- Rotation der Karten berechnet über calcRotation -->
 
-      <div class="card-inner">
-        <div class="front card-artwork">
-          <!-- <div class="card-face-front-content">
+      <div
+        id="UnleashedCardContent"
+        class="card-artwork absolute h-full w-full"
+      >
+        <!-- <div class="card-face-front-content">
           <p>{{ title }}</p>
           <button @click="playcard">Entfesseln</button>
         </div> -->
+        <div
+          class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
+        >
           <div
-            class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
-          >
-            <div
-              class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
-            ></div>
-          </div>
+            class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
+          ></div>
+        </div>
 
-          <div
-            class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
-          >
-            <!-- <p
+        <div
+          class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
+        >
+          <!-- <p
             id="willpower-counter"
             class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
           >
             1
           </p> -->
-            <p
-              id="willpower-counter"
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
-            >
-              {{ this.willpowerCost }}
-            </p>
-          </div>
-          <div
-            class="card-frame absolute left-0 top-0 z-[4] h-full w-full"
-          ></div>
-          <div
-            class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2"
+          <p
+            id="willpower-counter"
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
           >
-            <p
-              id="text-card-title"
-              class="absolute left-1/2 top-[12%] w-[90%] -translate-x-1/2 text-center text-[1.5rem] text-white"
-            >
-              {{ this.title }}
-            </p>
-          </div>
-          <div
-            class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
+            {{ this.willpowerCost }}
+          </p>
+        </div>
+        <div class="card-frame absolute left-0 top-0 z-[4] h-full w-full"></div>
+        <div
+          class="card-title absolute bottom-[30%] left-1/2 z-[2] h-[20%] w-[85%] -translate-x-1/2"
+        >
+          <p
+            id="text-card-title"
+            class="absolute left-1/2 top-[12%] w-[90%] -translate-x-1/2 text-center text-[1.5rem] text-white"
           >
-            <p
-              id="text-card-description"
-              class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] text-center align-middle text-[21px] text-white"
-            >
-              {{ this.description }}
-            </p>
-          </div>
-          <!-- 
+            {{ this.title }}
+          </p>
+        </div>
+        <div
+          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
+        >
+          <p
+            id="text-card-description"
+            class="absolute left-1/2 top-1/2 h-[70%] w-[92%] -translate-x-1/2 -translate-y-[45%] text-center align-middle text-[21px] text-white"
+          >
+            {{ this.description }}
+          </p>
+        </div>
+        <!-- 
         -- 
         Herangehensweise mit nur einem Bild als Karte
           <img
@@ -64,9 +64,10 @@
             class="card-frame-full"
           /> 
         --
-        --></div>
+        -->
       </div>
     </div>
+
     <!-- :key="this.isSelectedForUnleash" -->
     <div
       v-if="this.isBound"
@@ -75,11 +76,13 @@
       :class="{
         animateCardGrow: isSelectedForUnleash,
         animateCardShrink: !isSelectedForUnleash,
+        animateAnticipationSkew: isUnleashed,
       }"
     >
       <div
         :style="boundCardArtworkBackgroundImage"
-        class="front bound-card-artwork flex h-full w-full justify-center"
+        id="boundCardContent"
+        class="bound-card-artwork flex h-full w-full justify-center"
       >
         <div class="absolute top-[9%] h-[80%] w-[76%]">
           <QuizBox
@@ -87,8 +90,8 @@
             :key="this.isSelectedForUnleash"
             @click.stop
             @button-wrong-clicked="handleButtonWrongClicked"
+            @button-correct-clicked="handleButtonCorrectClicked"
           />
-          <!-- :isVisible="this.isQuizboxVisible" -->
         </div>
       </div>
     </div>
@@ -171,9 +174,10 @@ export default {
       cardArtworkSource: "",
       previousHandOfCardsLength: this.handOfCardsLength,
       isSelectedForUnleash: false,
-      isQuizboxVisible: false,
+
       //check if Soundeffect was played once, if yes, the flag will be set to true and wont be played on consequtive clicks
       isOpenCardSoundPlayed: false,
+      isUnleashed: false, //TODO: refaktorieren sodass nur ein State Attribut die Phasen steuert. bound, selected, unleashed
     };
   },
   updated() {
@@ -291,14 +295,14 @@ export default {
     },
     handleButtonWrongClicked() {
       this.isSelectedForUnleash = false;
-      this.isQuizboxVisible = false;
-      console.log("isSelectedforUnleash:" + this.isSelectedForUnleash);
-      console.log("isQuizboxVisible:" + this.isQuizboxVisible);
+    },
+    handleButtonCorrectClicked() {
+      this.isUnleashed = true;
+
+      console.log("isBound:" + this.isBound);
     },
     handleBoundCardClick() {
       this.isSelectedForUnleash = true;
-      console.log("this.isSelectedForUnleash: " + this.isSelectedForUnleash);
-      this.isQuizboxVisible = true;
 
       if (!this.isOpenCardSoundPlayed) {
         this.soundHandler.playSound("openCard", 0.4);
@@ -368,30 +372,9 @@ export default {
   }
 } */
 
-.card-inner {
-  width: 100%;
-  height: 100%;
-  /* transform-style: preserve-3d; */
-  /* The transform property in CSS has a relationship between parent and child
-        elements when it comes to 3D transformations, especially with the preserve-3d
-        value for the transform-style property.
-        When you set transform-style: preserve-3d; on a parent element,
-        it indicates that the child elements of this parent can have their
-        own 3D transformations and will be positioned in 3D space relative to the parent.
-        This is particularly relevant in the context of creating 3D transformations or
-        animations, such as card flips or other spatial effects.*/
-  /* transition: transform 0.5s; */
-}
-
 /* .card:hover .card-inner {
     transform: rotateY(180deg);
   } */
-
-.front {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
 
 .card-artwork {
   /* background-image: url("@/assets/card-art/change-request-resized.png"); */
@@ -467,5 +450,77 @@ export default {
 }
 .animateCardShrink {
   animation: shrinkCard 0.5s;
+}
+
+@keyframes anticipationShake {
+  0% {
+    transform: translateX(0) scale(2.5) translateY(-30%);
+  }
+  10% {
+    transform: translateX(-8px) rotateZ(-2deg) scale(2.5) translateY(-30%);
+    filter: brightness(1.4);
+  }
+  20% {
+    transform: translateX(-8px) rotateZ(2deg) scale(2.5) translateY(-30%);
+  }
+  30% {
+    transform: translateX(-6px) rotateZ(-1.5deg) scale(2.5) translateY(-30%);
+    filter: brightness(1);
+  }
+  40% {
+    transform: translateX(6px) rotateZ(1.5deg) scale(2.5) translateY(-30%);
+  }
+  50% {
+    transform: translateX(-4px) rotateZ(-1deg) scale(2.5) translateY(-30%);
+  }
+  60% {
+    transform: translateX(4px) rotateZ(1deg) scale(2.5) translateY(-30%);
+  }
+  70% {
+    transform: translateX(-2px) rotateZ(-0.5deg) scale(2.5) translateY(-30%);
+  }
+  80% {
+    transform: translateX(2px) rotateZ(0.5deg) scale(2.5) translateY(-30%);
+  }
+  90% {
+    transform: translateX(-1px) rotateZ(0deg) scale(2.5) translateY(-30%);
+  }
+  100% {
+    transform: translateX(0) rotateZ(0deg) scale(2.5) translateY(-30%);
+  }
+}
+
+.animateAnticipationShake {
+  animation: anticipationShake 0.6s step-end forwards;
+}
+@keyframes anticipationSkew {
+  0% {
+    transform: translateX(0) scale(2.5) translateY(-30%);
+    filter: drop-shadow(0px 0px 20px rgb(255, 225, 117));
+  }
+  25% {
+    transform: skew(5deg, -10deg) translateX(-2px) rotateZ(-0.5deg) scale(2.55)
+      translateY(-30%);
+    filter: drop-shadow(0px 0px 20px rgb(255, 212, 55));
+  }
+  50% {
+    transform: skew(-5deg, 10deg) translateX(2px) rotateZ(0.5deg) scale(2.6)
+      translateY(-30%);
+    filter: drop-shadow(0px 0px 20px rgb(255, 255, 255));
+  }
+  75% {
+    transform: skew(5deg, -10deg) translateX(-1px) rotateZ(0deg) scale(2.65)
+      translateY(-30%);
+    filter: drop-shadow(0px 0px 20px rgb(119, 255, 246));
+  }
+  100% {
+    transform: skew(0deg, 0deg) translateX(0) rotateZ(0deg) scale(2.7)
+      translateY(-30%);
+    filter: drop-shadow(0px 0px 20px rgb(255, 228, 119));
+  }
+}
+
+.animateAnticipationSkew {
+  animation: anticipationSkew 0.5s step-end forwards;
 }
 </style>

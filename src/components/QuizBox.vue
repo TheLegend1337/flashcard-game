@@ -3,6 +3,7 @@
   <!-- :class="{ hideQuizBox: !isVisible }" -->
   <div
     class="quiz-box flex h-full w-[100%] flex-col items-center justify-around"
+    :class="{ animateAnticipationBlur: isAnimateAnticipationBlur }"
   >
     <div class="question container flex flex-col items-center p-[10px]">
       <p class="text-center text-[0.7rem]">
@@ -47,6 +48,7 @@
           :clickHandler="hard"
           label="richtig"
           class=""
+          @button-correct-clicked="handleButtonCorrectClicked"
         />
       </div>
     </div>
@@ -81,6 +83,7 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       flashCardsStore: useFlashCardsStore(),
       flashcard: {},
+      isAnimateAnticipationBlur: false,
     };
   },
   computed: {
@@ -101,6 +104,10 @@ export default {
     handleButtonWrongClicked() {
       this.$emit("button-wrong-clicked");
     },
+    handleButtonCorrectClicked() {
+      this.isAnimateAnticipationBlur = true;
+      this.$emit("button-correct-clicked");
+    },
   },
 };
 </script>
@@ -116,5 +123,23 @@ export default {
 .question {
 }
 .answer {
+}
+
+@keyframes anticipationBlur {
+  0% {
+    filter: blur(0px);
+  }
+
+  50% {
+    filter: blur(1px);
+  }
+
+  100% {
+    filter: blur(3px);
+  }
+}
+
+.animateAnticipationBlur {
+  animation: anticipationBlur 0.5s step-end forwards;
 }
 </style>
