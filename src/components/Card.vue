@@ -1,33 +1,40 @@
 <template>
   <div>
-    <div v-if="!this.isBound" class="card">
-      <!-- Rotation der Karten berechnet über calcRotation -->
-
+    <div
+      @click="handleBoundCardClick"
+      class="card"
+      :class="{
+        animateCardGrow: this.animationState === 'selected',
+        animateCardShrink: this.animationState === 'shrink',
+        animateAnticipationShake: this.animationState === 'anticipationShake',
+        animateAnticipationSkew: this.animationState === 'anticipationSkew',
+      }"
+      @animationend="handleAnimationEnd"
+    >
       <div
-        id="UnleashedCardContent"
+        v-if="this.cardData.isBound"
+        id="front"
+        :style="boundCardArtworkBackgroundImage"
+        class="bound-card-artwork flex h-full w-full justify-center"
+      >
+        <div class="absolute top-[9%] h-[80%] w-[76%]">
+          <QuizBox
+            v-if="this.animationState === 'selected'"
+            :key="this.animationState === 'selected'"
+            @click.stop
+            @button-wrong-clicked="handleButtonWrongClicked"
+            @button-correct-clicked="handleButtonCorrectClicked"
+          />
+        </div>
+      </div>
+      <div
+        v-if="!this.cardData.isBound"
+        id="back"
         class="card-artwork absolute h-full w-full"
       >
-        <!-- <div class="card-face-front-content">
-          <p>{{ title }}</p>
-          <button @click="playcard">Entfesseln</button>
-        </div> -->
-        <div
-          class="card-level-frame absolute left-1/2 z-[5] h-[15%] w-[25%] -translate-x-1/2"
-        >
-          <div
-            class="card-level z-[5] mx-auto -mt-[10px] h-[90%] w-[90%]"
-          ></div>
-        </div>
-
         <div
           class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
         >
-          <!-- <p
-            id="willpower-counter"
-            class="absolute left-1/2 top-1/2 block h-full -translate-x-1/2 -translate-y-1/2 text-3xl text-white"
-          >
-            1
-          </p> -->
           <p
             id="willpower-counter"
             class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] text-3xl text-white"
@@ -55,43 +62,6 @@
           >
             {{ this.description }}
           </p>
-        </div>
-        <!-- 
-        -- 
-        Herangehensweise mit nur einem Bild als Karte
-          <img
-            src="@/assets/ui-components-backgrounds/card/card-frame-full.png"
-            class="card-frame-full"
-          /> 
-        --
-        -->
-      </div>
-    </div>
-
-    <!-- :key="this.isSelectedForUnleash" -->
-    <div
-      v-if="this.isBound"
-      @click="handleBoundCardClick"
-      class="card"
-      :class="{
-        animateCardGrow: isSelectedForUnleash,
-        animateCardShrink: !isSelectedForUnleash,
-        animateAnticipationSkew: isUnleashed,
-      }"
-    >
-      <div
-        :style="boundCardArtworkBackgroundImage"
-        id="boundCardContent"
-        class="bound-card-artwork flex h-full w-full justify-center"
-      >
-        <div class="absolute top-[9%] h-[80%] w-[76%]">
-          <QuizBox
-            v-if="this.isSelectedForUnleash"
-            :key="this.isSelectedForUnleash"
-            @click.stop
-            @button-wrong-clicked="handleButtonWrongClicked"
-            @button-correct-clicked="handleButtonCorrectClicked"
-          />
         </div>
       </div>
     </div>
@@ -159,10 +129,14 @@ export default {
       required: true,
       default: false,
     },
+    card: {
+      type: Object,
+    },
   },
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
+      cardData: this.card,
       // playerStore: usePlayerStore(),
       // willpowerStore: useWillpowerStore(),
       // monsterStore: useMonsterStore(),
@@ -173,11 +147,10 @@ export default {
       xTranslation: 0,
       cardArtworkSource: "",
       previousHandOfCardsLength: this.handOfCardsLength,
-      isSelectedForUnleash: false,
+      animationState: "", //TODO umschreiben in eine Computed Property(dauert ne Weile gibt einige Abhängigkeiten)
 
       //check if Soundeffect was played once, if yes, the flag will be set to true and wont be played on consequtive clicks
       isOpenCardSoundPlayed: false,
-      isUnleashed: false, //TODO: refaktorieren sodass nur ein State Attribut die Phasen steuert. bound, selected, unleashed
     };
   },
   updated() {
@@ -243,7 +216,7 @@ export default {
       return cardCenter;
     },
     boundCardArtworkBackgroundImage() {
-      if (this.isSelectedForUnleash) {
+      if (this.animationState === "selected") {
         const imagePath = new URL(
           "@/assets/ui-components-backgrounds/card/quiz-background.png",
           import.meta.url,
@@ -262,11 +235,7 @@ export default {
       }
     },
   },
-  watch: {
-    isSelectedForUnleash() {
-      console.log("Watch:isSelectedForUnleash" + this.isSelectedForUnleash);
-    },
-  },
+  watch: {},
   methods: {
     playcard() {
       this.flashcardGameStore.changeQuizBoxVisibility();
@@ -294,15 +263,31 @@ export default {
       return distance * xTranslationFactor;
     },
     handleButtonWrongClicked() {
-      this.isSelectedForUnleash = false;
+      this.playWrongAnimation();
     },
     handleButtonCorrectClicked() {
-      this.isUnleashed = true;
-
-      console.log("isBound:" + this.isBound);
+      this.playCorrectAnimation();
+    },
+    playCorrectAnimation() {
+      // this.animationState = "anticipationShake";
+      this.animationState = "anticipationSkew";
+      setTimeout(() => {
+        this.cardData.isBound = false;
+      }, 1000);
+    },
+    playWrongAnimation() {
+      this.animationState = "anticipationShake";
+      // this.animationState = "shrink";
+    },
+    handleAnimationEnd() {
+      if (this.animationState === "anticipationShake") {
+        this.animationState = "shrink";
+      } else if (this.animationState === "anticipationSkew") {
+        this.animationState = "shrink";
+      }
     },
     handleBoundCardClick() {
-      this.isSelectedForUnleash = true;
+      this.animationState = "selected";
 
       if (!this.isOpenCardSoundPlayed) {
         this.soundHandler.playSound("openCard", 0.4);
@@ -319,6 +304,7 @@ export default {
   position: absolute;
   top: 50px;
 } */
+
 #willpower-counter {
   text-shadow:
     rgb(2, 38, 42) 3px 0px 0px,
@@ -358,23 +344,8 @@ export default {
     drop-shadow(0 0 12px rgba(245, 222, 179, 0.339))
     drop-shadow(0 0 18px rgba(245, 222, 179, 0.231));
   z-index: 100;
-  /* width: 200px; */
-  /* transform: rotateZ(var(--reset-rotation-degree)) scale(1.3)
-    translateY(var(--reset-yTranslation)) !important; */
-  /* Die auskommentierte Version war mit dem rückrechnen von Rotate und der y-Achse */
-  /* transform: scale(1.3) translateY(-20%) !important; */
   transform: scale(1.3) translateY(-20%);
 }
-
-/* @keyframes animateCard {
-  to {
-    transform: translateX(-100%);
-  }
-} */
-
-/* .card:hover .card-inner {
-    transform: rotateY(180deg);
-  } */
 
 .card-artwork {
   /* background-image: url("@/assets/card-art/change-request-resized.png"); */
@@ -385,7 +356,7 @@ export default {
 }
 .bound-card-artwork {
   /* background-image: url("@/assets/ui-components-backgrounds/card/bound-card-3d-framed.png"); */
-  background-size: 90%;
+  background-size: 100%;
   background-position: 50% 12%;
   background-repeat: no-repeat;
 }
@@ -435,7 +406,7 @@ export default {
 
 @keyframes scaleCard {
   to {
-    transform: scale(2.5) translateY(-30%);
+    transform: scale(2.2) translateY(-40%);
   }
 }
 
@@ -454,39 +425,39 @@ export default {
 
 @keyframes anticipationShake {
   0% {
-    transform: translateX(0) scale(2.5) translateY(-30%);
+    transform: translateX(0) scale(2.3) translateY(-40%);
   }
   10% {
-    transform: translateX(-8px) rotateZ(-2deg) scale(2.5) translateY(-30%);
+    transform: translateX(-8px) rotateZ(-2deg) scale(2.3) translateY(-40%);
     filter: brightness(1.4);
   }
   20% {
-    transform: translateX(-8px) rotateZ(2deg) scale(2.5) translateY(-30%);
+    transform: translateX(-8px) rotateZ(2deg) scale(2.3) translateY(-40%);
   }
   30% {
-    transform: translateX(-6px) rotateZ(-1.5deg) scale(2.5) translateY(-30%);
+    transform: translateX(-6px) rotateZ(-1.5deg) scale(2.3) translateY(-40%);
     filter: brightness(1);
   }
   40% {
-    transform: translateX(6px) rotateZ(1.5deg) scale(2.5) translateY(-30%);
+    transform: translateX(6px) rotateZ(1.5deg) scale(2.3) translateY(-40%);
   }
   50% {
-    transform: translateX(-4px) rotateZ(-1deg) scale(2.5) translateY(-30%);
+    transform: translateX(-4px) rotateZ(-1deg) scale(2.3) translateY(-40%);
   }
   60% {
-    transform: translateX(4px) rotateZ(1deg) scale(2.5) translateY(-30%);
+    transform: translateX(4px) rotateZ(1deg) scale(2.3) translateY(-40%);
   }
   70% {
-    transform: translateX(-2px) rotateZ(-0.5deg) scale(2.5) translateY(-30%);
+    transform: translateX(-2px) rotateZ(-0.5deg) scale(2.3) translateY(-40%);
   }
   80% {
-    transform: translateX(2px) rotateZ(0.5deg) scale(2.5) translateY(-30%);
+    transform: translateX(2px) rotateZ(0.5deg) scale(2.3) translateY(-40%);
   }
   90% {
-    transform: translateX(-1px) rotateZ(0deg) scale(2.5) translateY(-30%);
+    transform: translateX(-1px) rotateZ(0deg) scale(2.5) translateY(-40%);
   }
   100% {
-    transform: translateX(0) rotateZ(0deg) scale(2.5) translateY(-30%);
+    transform: translateX(0) rotateZ(0deg) scale(2.5) translateY(-40%);
   }
 }
 
@@ -495,32 +466,48 @@ export default {
 }
 @keyframes anticipationSkew {
   0% {
-    transform: translateX(0) scale(2.5) translateY(-30%);
+    transform: translateX(0) scale(1.3) translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(255, 225, 117));
   }
   25% {
-    transform: skew(5deg, -10deg) translateX(-2px) rotateZ(-0.5deg) scale(2.55)
-      translateY(-30%);
+    transform: skew(5deg, -5deg) translateX(-2px) rotateZ(-0.5deg) scale(1.5)
+      translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(255, 212, 55));
   }
   50% {
-    transform: skew(-5deg, 10deg) translateX(2px) rotateZ(0.5deg) scale(2.6)
-      translateY(-30%);
+    transform: skew(-5deg, 5deg) translateX(2px) rotateZ(0.5deg) scale(1.7)
+      translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(255, 255, 255));
   }
   75% {
-    transform: skew(5deg, -10deg) translateX(-1px) rotateZ(0deg) scale(2.65)
-      translateY(-30%);
+    transform: skew(5deg, -5deg) translateX(-1px) rotateZ(0deg) scale(2)
+      translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(119, 255, 246));
   }
   100% {
-    transform: skew(0deg, 0deg) translateX(0) rotateZ(0deg) scale(2.7)
-      translateY(-30%);
+    transform: skew(0deg, 0deg) translateX(0) rotateZ(0deg) scale(2.2)
+      translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(255, 228, 119));
   }
 }
 
 .animateAnticipationSkew {
-  animation: anticipationSkew 0.5s step-end forwards;
+  animation: anticipationSkew 1s step-end forwards;
+}
+
+@keyframes rotateCard {
+  0% {
+    transform: rotateY(0deg) translateY(-40%) scale(2.2);
+  }
+  50% {
+    transform: rotateY(180deg) translateY(-40%) scale(2.2);
+  }
+  100% {
+    transform: rotateY(0deg) translateY(-40%) scale(2.2);
+  }
+}
+
+.animateRotateCard {
+  animation: rotateCard 0.5s linear forwards;
 }
 </style>

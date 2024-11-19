@@ -7,6 +7,7 @@
         class="-m-10"
         v-for="(card, index) in handOfCards"
         :key="card.id"
+        :card="card"
         :title="card.title"
         :description="card.description"
         :defense="card.defense"

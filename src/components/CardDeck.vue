@@ -76,7 +76,7 @@ export default {
           description: "Heile 10 HP",
           heal: 10,
           cardArtworkSrc: cardArtworkGelberScheinImAermel,
-          isBound: false,
+          isBound: true,
         },
         {
           id: 5,
@@ -94,7 +94,7 @@ export default {
           description: "Ein Gegner erleidet 6 Schaden",
           damage: 6,
           cardArtworkSrc: cardArtworkRightHook,
-          isBound: false,
+          isBound: true,
         },
         {
           id: 3,
@@ -112,7 +112,7 @@ export default {
           description: "Ein Gegner erleidet 2 Schaden",
           damage: 2,
           cardArtworkSrc: cardArtworkJab,
-          isBound: false,
+          isBound: true,
         },
         {
           id: 1,
