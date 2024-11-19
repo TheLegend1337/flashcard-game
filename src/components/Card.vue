@@ -271,9 +271,9 @@ export default {
     playCorrectAnimation() {
       // this.animationState = "anticipationShake";
       this.animationState = "anticipationSkew";
-      setTimeout(() => {
-        this.cardData.isBound = false;
-      }, 1000);
+      // setTimeout(() => {
+      //   this.cardData.isBound = false;
+      // }, 1000);
     },
     playWrongAnimation() {
       this.animationState = "anticipationShake";
@@ -283,11 +283,16 @@ export default {
       if (this.animationState === "anticipationShake") {
         this.animationState = "shrink";
       } else if (this.animationState === "anticipationSkew") {
-        this.animationState = "shrink";
+        this.cardData.isBound = false;
+        setTimeout(() => {
+          this.animationState = "shrink";
+        }, 1000);
       }
     },
     handleBoundCardClick() {
-      this.animationState = "selected";
+      if (this.cardData.isBound == true) {
+        this.animationState = "selected";
+      }
 
       if (!this.isOpenCardSoundPlayed) {
         this.soundHandler.playSound("openCard", 0.4);
@@ -479,7 +484,12 @@ export default {
       translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(255, 255, 255));
   }
-  75% {
+  65% {
+    transform: skew(5deg, -5deg) translateX(-1px) rotateZ(0deg) scale(2)
+      translateY(-40%);
+    filter: drop-shadow(0px 0px 20px rgb(119, 255, 246));
+  }
+  80% {
     transform: skew(5deg, -5deg) translateX(-1px) rotateZ(0deg) scale(2)
       translateY(-40%);
     filter: drop-shadow(0px 0px 20px rgb(119, 255, 246));

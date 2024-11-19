@@ -61,12 +61,12 @@ export default {
           isBound: true,
         },
         {
-          id: 7,
-          title: "Blocken",
+          id: 0,
+          title: "Jab",
           willpowerCost: 1,
-          description: "Erhalte 6 Verteidigung",
-          defense: 6,
-          cardArtworkSrc: cardArtworkBlock,
+          description: "Ein Gegner erleidet 2 Schaden",
+          damage: 2,
+          cardArtworkSrc: cardArtworkJab,
           isBound: true,
         },
         {
@@ -78,15 +78,7 @@ export default {
           cardArtworkSrc: cardArtworkGelberScheinImAermel,
           isBound: true,
         },
-        {
-          id: 5,
-          title: "Ausruhen",
-          willpowerCost: 1,
-          description: "Heile 5 HP",
-          heal: 10,
-          cardArtworkSrc: cardArtworkRest,
-          isBound: true,
-        },
+
         {
           id: 4,
           title: "Rechter Haken",
@@ -96,6 +88,7 @@ export default {
           cardArtworkSrc: cardArtworkRightHook,
           isBound: true,
         },
+
         {
           id: 3,
           title: "Rechter Haken",
@@ -115,6 +108,15 @@ export default {
           isBound: true,
         },
         {
+          id: 5,
+          title: "Ausruhen",
+          willpowerCost: 1,
+          description: "Heile 5 HP",
+          heal: 10,
+          cardArtworkSrc: cardArtworkRest,
+          isBound: true,
+        },
+        {
           id: 1,
           title: "Jab",
           willpowerCost: 1,
@@ -123,13 +125,14 @@ export default {
           cardArtworkSrc: cardArtworkJab,
           isBound: true,
         },
+
         {
-          id: 0,
-          title: "Jab",
+          id: 7,
+          title: "Blocken",
           willpowerCost: 1,
-          description: "Ein Gegner erleidet 2 Schaden",
-          damage: 2,
-          cardArtworkSrc: cardArtworkJab,
+          description: "Erhalte 6 Verteidigung",
+          defense: 6,
+          cardArtworkSrc: cardArtworkBlock,
           isBound: true,
         },
       ],
