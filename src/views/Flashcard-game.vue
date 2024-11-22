@@ -8,22 +8,22 @@
       />
       <HandOfCards
         ref="HandOfCards"
-        :card="drawnCard"
+        :card="selectedCard"
         class="animate-fade-in-from-bottom-to-top"
+        @unleashed-card-clicked="playCard"
       />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
       <Player class="animate-fade-in-from-left-to-right" />
       <Monster class="animate-fade-in-from-right-to-left" />
-      <Willpower class="animate-fade-in-from-left-to-right" />
+      <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
       <CardDeck
         ref="CardDeck"
         class="animate-fade-in-from-bottom-right-to-top-left"
       />
-      <!-- <QuizBox /> -->
     </div>
-    <div id="phaseBanner" class="animate-fade-in">
+    <!-- <div id="phaseBanner" class="animate-fade-in">
       <button @click="drawCard(1)" class="m-2">Ziehen</button>
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase" class="m-2">Phase ändern</button>
@@ -34,7 +34,7 @@
       <h1 v-if="this.phase === 'endTurn'" class="phaseTitle">End Turn</h1>
       <h1 v-if="this.phase === 'enemyTurn'" class="phaseTitle">Enemy Turn</h1>
       <h1 v-if="this.phase === 'gameOver'" class="phaseTitle">Game Over</h1>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -62,13 +62,14 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
-      drawnCard: null,
+      selectedCard: null,
       foo: 0,
       phase: "",
       // nextPhase: "",
       // flashcards: [],
       // question: "What is a card?",
       // response: "This is the Cards Response.",
+      animationToggle: true,
     };
   },
   beforeCreate() {
@@ -159,10 +160,25 @@ export default {
         setTimeout(() => {
           const card = this.$refs.CardDeck.drawCard();
           console.log(card);
-          this.drawnCard = card;
+          this.selectedCard = card;
           resolve(card);
         }, 200);
       });
+    },
+    playCard(card) {
+      if (this.animationToggle === true) {
+        this.animationToggle = false;
+      } else {
+        this.animationToggle = true;
+      }
+      const willpower = this.flashcardGameStore.getWillpower;
+      const cost = card.willpowerCost;
+      if (cost <= willpower) {
+        //prüfen ob WK ausreicht.
+        this.selectedCard = card; //Prop reaktiv. HandOfCards reagiert hier und passt Array an.
+        this.flashcardGameStore.decreaseWillpower(cost);
+      } else {
+      }
     },
   },
 };

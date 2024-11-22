@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      @click="handleBoundCardClick"
+      @click="handleCardClick"
       class="card"
       :class="{
         animateCardGrow: this.animationState === 'selected',
@@ -31,6 +31,9 @@
         v-if="!this.cardData.isBound"
         id="back"
         class="card-artwork absolute h-full w-full"
+        :class="{
+          'unplayable-look': isUnplayable,
+        }"
       >
         <div
           class="card-willpower-slot absolute -left-[5%] -top-[5%] z-[5] aspect-square w-[25%]"
@@ -210,6 +213,9 @@ export default {
   },
   computed: {
     // für das Berechnen der Karten Rotation
+    isUnplayable() {
+      return this.flashcardGameStore.willpower === 0;
+    },
     getCenterCardIndex() {
       const totalCards = this.handOfCardsLength;
       let cardCenter = Math.floor(totalCards / 2);
@@ -235,7 +241,13 @@ export default {
       }
     },
   },
-  watch: {},
+  watch: {
+    "flashcardGamestore.willpower"() {
+      if (this.flashcardGamestore.willpower === 0) {
+        this.isUnplayable = true;
+      }
+    },
+  },
   methods: {
     playcard() {
       this.flashcardGameStore.changeQuizBoxVisibility();
@@ -289,9 +301,11 @@ export default {
         }, 1000);
       }
     },
-    handleBoundCardClick() {
+    handleCardClick() {
       if (this.cardData.isBound == true) {
         this.animationState = "selected";
+      } else {
+        this.$emit("unleashed-card-clicked", this.cardData);
       }
 
       if (!this.isOpenCardSoundPlayed) {
@@ -309,6 +323,9 @@ export default {
   position: absolute;
   top: 50px;
 } */
+.unplayable-look {
+  filter: grayscale(80%);
+}
 
 #willpower-counter {
   text-shadow:

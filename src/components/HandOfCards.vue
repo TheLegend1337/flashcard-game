@@ -1,6 +1,6 @@
 <template>
   <div
-    class="handOfCards fixed bottom-[-5%] left-1/2 z-10 h-[300px] w-4/6 -translate-x-1/2"
+    class="handOfCards fixed bottom-[-10%] left-1/2 z-10 h-[300px] w-4/6 -translate-x-1/2"
   >
     <div tag="div" class="container flex flex-wrap items-center justify-center">
       <Card
@@ -19,6 +19,7 @@
         :handOfCardsLength="handOfCards.length"
         :cardIndex="index"
         :isBound="card.isBound"
+        @unleashed-card-clicked="unleashedCardClicked"
       />
     </div>
   </div>
@@ -48,13 +49,25 @@ export default {
     };
   },
   watch: {
-    card(card) {
-      console.log("New card willpowerCost:", card.willpowerCost);
-      this.handOfCards.push(card);
+    card(newCard) {
+      const cardExist = this.handOfCards.some(
+        (existingCard) => existingCard.id === newCard.id,
+      );
+      if (cardExist) {
+        this.handOfCards = this.handOfCards.filter(
+          (existingCard) => existingCard.id !== newCard.id,
+        );
+      } else {
+        this.handOfCards.push(newCard);
+      }
     },
   },
 
-  methods: {},
+  methods: {
+    unleashedCardClicked(cardData) {
+      this.$emit("unleashed-card-clicked", cardData);
+    },
+  },
 };
 </script>
 
