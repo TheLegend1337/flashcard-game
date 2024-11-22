@@ -1,6 +1,13 @@
 <!--Options API-->
 <template>
-  <div class="willpower">
+  <div
+    class="willpower"
+    :class="{
+      animateWillpowerEmptyShake: animationFlag,
+      'animate-fade-in-from-left-to-right': loadingAnimationFlag,
+    }"
+    @animationend="resetAnimationFlag"
+  >
     <div class="willpower-count relative">
       <span class="absolute left-[23%] top-[-5%] block h-[5px] w-[5px]">{{
         flashcardGamestore.willpower
@@ -17,11 +24,38 @@
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useWillpowerStore } from "@/stores/FlashcardGameStores/willpowerStore";
 export default {
+  props: {
+    animationToggle: {
+      type: Boolean,
+      default: false,
+      Required: true,
+    },
+  },
   data() {
     return {
       flashcardGamestore: useFlashcardGameStore(),
       willpowerStore: useWillpowerStore(),
+      animationFlag: false,
+      loadingAnimationFlag: true,
     };
+  },
+  mounted() {},
+  computed: {},
+  watch: {
+    "flashcardGamestore.willpower"() {
+      if (this.flashcardGamestore.willpower === 0) {
+        this.animationFlag = true;
+      }
+    },
+    animationToggle() {
+      this.animationFlag = true;
+    },
+  },
+  methods: {
+    resetAnimationFlag() {
+      this.animationFlag = false;
+      this.loadingAnimationFlag = false;
+    },
   },
 };
 </script>
@@ -67,5 +101,49 @@ export default {
     rgb(2, 38, 42) 1.74541px -2.43999px 0px,
     rgb(2, 38, 42) 2.44769px -1.73459px 0px,
     rgb(2, 38, 42) 2.88051px -0.838247px 0px;
+}
+
+@keyframes willpowerEmptyShake {
+  0% {
+    transform: translateX(0);
+    filter: drop-shadow(0px 0px 20px rgb(79, 217, 255));
+  }
+  10% {
+    transform: translateX(-4px) rotateZ(-2deg);
+    filter: brightness(1.4);
+  }
+  20% {
+    transform: translateX(-8px) rotateZ(2deg);
+  }
+  30% {
+    transform: translateX(-6px) rotateZ(-1.5deg);
+    filter: brightness(1);
+  }
+  40% {
+    transform: translateX(6px) rotateZ(1.5deg);
+  }
+  50% {
+    transform: translateX(-4px) rotateZ(-1deg);
+  }
+  60% {
+    transform: translateX(4px) rotateZ(1deg);
+  }
+  70% {
+    transform: translateX(-2px) rotateZ(-0.5deg);
+  }
+  80% {
+    transform: translateX(2px) rotateZ(0.5deg);
+  }
+  90% {
+    transform: translateX(-1px) rotateZ(0deg);
+  }
+  100% {
+    transform: translateX(0) rotateZ(0deg);
+    filter: drop-shadow(0px 0px 20px rgb(79, 217, 255));
+  }
+}
+
+.animateWillpowerEmptyShake {
+  animation: willpowerEmptyShake 0.6s step-end;
 }
 </style>
