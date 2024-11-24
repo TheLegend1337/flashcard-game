@@ -162,6 +162,10 @@ export default {
   background-size: cover;
   background-position: center;
   position: relative;
+  transition: all 0.3s ease-in-out;
+}
+.card-deck:hover {
+  transform: scale(1.2);
 }
 
 .card-deck-counter-border {

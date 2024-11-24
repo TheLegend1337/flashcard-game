@@ -30,7 +30,7 @@
   --bg-accent-gradient-end: #5f888a;
   --border-around-bg-accent: #a7c7c2;
   /* on accent background */
-  --drop-shadow-blue: blue;
+  --drop-shadow-blue: rgb(79, 217, 255);
 }
 
 * {

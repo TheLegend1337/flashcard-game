@@ -11,8 +11,8 @@
     <div v-if="isDamaged" class="damage-icon-animation"></div>
     <div v-if="isHealed" class="heal-icon-animation"></div>
     <!--  -->
-    <select v-model="selectedAnimation" @change="updateAnimation">
-      <!--Ich habe ein Dropdown zum debuggen hinzugefügt 
+    <!-- <select v-model="selectedAnimation" @change="updateAnimation"> -->
+    <!--Ich habe ein Dropdown zum debuggen hinzugefügt 
       und mit v-model an eine einfach Variable in data(selectedAnimation) in der Komponente gebunden sodass die Auswahl direkt auf die Variable wirkt.
       Außerdem habe ich einen Eventlistener @change hinzugefügt, der darauf reagiert, wenn eine bestimmte Änderung eintritt
       
@@ -20,18 +20,18 @@
       die Optionen werden mit v-for gerendert als Liste an Optionen für die Dropdownauswahl.
       v-for läuft dabei über fallenAngelAnimations(das ist meine Javascript Datei mit den Meta Daten zu jeder Animation.)
       -->
-      <option
+    <!-- <option
         v-for="(animation, key) in fallenAngelAnimations"
         :key="key"
         :value="key"
       >
         {{ animation.name }}
-      </option>
-    </select>
+      </option> -->
+    <!-- </select>  -->
     <Healthbar
       v-if="!healthbarOff"
       :playerHealth="playerStore.playerHealth"
-      class="healthbar"
+      :maxPlayerHealth="playerStore.maxPlayerHealth"
     />
     <!--Bracket Notation hinzugefügt damit wir dynamisch die jeweilige Animation tauschen können-->
     <div
@@ -92,17 +92,14 @@ export default {
 .player {
   width: 300px;
   height: 300px;
-
+  position: absolute;
+  top: 37%;
+  left: 25%;
   /*border: 10px solid black;*/
-  grid-row-start: 6;
+  /*grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 4;
-  grid-column-end: 5;
-}
-.healthbar {
-  position: relative;
-  top: -40px;
-  left: -45px;
+  grid-column-end: 5;*/
 }
 
 .defense-icon-animation {

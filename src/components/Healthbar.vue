@@ -1,7 +1,13 @@
 <script></script>
 <template>
-  <div v-if="playerHealth" class="healthbar">{{ playerHealth }}</div>
-  <div v-else-if="monsterHealth" class="healthbar">{{ monsterHealth }}</div>
+  <div class="healthbarPosition healthbar">
+    <div class="healthValue">
+      <p v-if="playerHealth">{{ playerHealth }}/{{ maxPlayerHealth }}</p>
+      <p v-else-if="monsterHealth">
+        {{ monsterHealth }}/{{ maxMonsterHealth }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -10,7 +16,13 @@ export default {
     playerHealth: {
       type: Number,
     },
+    maxPlayerHealth: {
+      type: Number,
+    },
     monsterHealth: {
+      type: Number,
+    },
+    maxMonsterHealth: {
       type: Number,
     },
   },
@@ -25,11 +37,52 @@ export default {
 
 <style scoped>
 /* Add your component-specific styles here */
+.healthbarPosition {
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .healthbar {
-  width: 150px;
+  width: 200px;
   height: 18px;
-  border: 5px solid black;
+  border: 3px solid #5a0000;
   border-radius: 50px;
-  background: rgb(255, 77, 77);
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(255, 77, 77, 1) 0%,
+    rgba(195, 43, 43, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(255, 77, 77, 1) 0%,
+    rgba(195, 43, 43, 1) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(255, 77, 77, 1) 0%,
+    rgba(195, 43, 43, 1) 100%
+  );
+}
+.healthValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+.healthbar p {
+  font-size: 1.8rem;
+  color: white;
+  text-shadow:
+    #5a0000 3px 0px 0px,
+    #5a0000 2px 1px 0px,
+    #5a0000 1px 2px 0px,
+    #5a0000 0px 3px 0px,
+    #5a0000 -1px 2px 0px,
+    #5a0000 -2px 1px 0px,
+    #5a0000 -3px 0px 0px,
+    #5a0000 -2px -1px 0px,
+    #5a0000 -1px -2px 0px,
+    #5a0000 0px -3px 0px;
 }
 </style>

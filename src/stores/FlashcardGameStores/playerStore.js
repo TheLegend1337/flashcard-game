@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 
 export const usePlayerStore = defineStore("player", {
   state: () => ({
-    playerHealth: 10,
+    playerHealth: 65,
+    maxPlayerHealth: 65,
+    playerArmor: 50,
   }),
   getters: {
     getPlayerHealth: (state) => state.playerHealth,

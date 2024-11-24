@@ -139,7 +139,7 @@ export default {
   }
   100% {
     transform: translateX(0) rotateZ(0deg);
-    filter: drop-shadow(0px 0px 20px rgb(79, 217, 255));
+    filter: drop-shadow(0px 0px 20px var(--drop-shadow-blue));
   }
 }
 

@@ -1,19 +1,19 @@
 <template>
   <div class="monster">
-    <select v-model="selectedAnimation" @change="updateAnimation">
-      <!-- Dropdown zur Auswahl der Animation -->
-      <option
+    <!-- <select v-model="selectedAnimation" @change="updateAnimation"> -->
+    <!-- Dropdown zur Auswahl der Animation -->
+    <!-- <option
         v-for="(animation, key) in zombieVillagerAnimations"
         :key="key"
         :value="key"
       >
         {{ animation.name }}
-      </option>
-    </select>
+      </option> -->
+    <!-- </select> -->
     <Healthbar
       v-if="!healthbarOff"
       :monsterHealth="monsterStore.monsterHealth"
-      class="healthbar"
+      :maxMonsterHealth="monsterStore.maxMonsterHealth"
     />
     <div id="single-effect-animation-wrapper" class="animate-attacking">
       <SpriteAnimation
@@ -58,16 +58,14 @@ export default {
 .monster {
   width: 300px;
   height: 300px;
+  position: absolute;
+  top: 37%;
+  right: 25%;
   /* border: 10px solid rgb(255, 0, 0);*/
-  grid-row-start: 6;
+  /* grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 6;
   grid-column-end: 7;
-  justify-self: end;
-}
-.healthbar {
-  position: relative;
-  top: -40px;
-  left: -45px;
+  justify-self: end; */
 }
 </style>

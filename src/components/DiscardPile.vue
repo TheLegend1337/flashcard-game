@@ -50,7 +50,13 @@ export default {
   grid-column-end: 2;
   justify-self: end;
   position: relative;
+  transition: all 0.3s ease-in-out;
 }
+
+.discard-pile-wrapper:hover {
+  transform: scale(1.2);
+}
+
 .discard-pile {
   width: 100%;
   height: 100%;
@@ -72,7 +78,7 @@ export default {
 }
 
 .discard-pile-counter-border {
-  /* transform: rotateZ(19deg); */
+  transform: rotateZ(19deg);
   padding: 5px;
   border-radius: 50%;
   height: 160px;
@@ -84,7 +90,8 @@ export default {
   right: 50px;
   bottom: 10px;
 
-  box-shadow: -3px -3px 7px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    -3px -3px 7px rgba(0, 0, 0, 0.5),
     0px 1px 4px rgba(255, 255, 255, 0.3);
 }
 
