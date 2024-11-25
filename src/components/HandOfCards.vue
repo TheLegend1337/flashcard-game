@@ -4,22 +4,24 @@
   >
     <div tag="div" class="container flex flex-wrap items-center justify-center">
       <Card
+        :class="{ animateDiscardCard: drawnCard.id === discardingCardId }"
         class="-m-10"
-        v-for="(card, index) in handOfCards"
-        :key="card.id"
-        :card="card"
-        :title="card.title"
-        :description="card.description"
-        :defense="card.defense"
-        :damage="card.damage"
-        :heal="card.heal"
-        :willpowerCost="card.willpowerCost"
-        :cardArtworkSrc="card.cardArtworkSrc"
-        :id="card.id"
+        v-for="(drawnCard, index) in handOfCards"
+        :key="drawnCard.id"
+        :card="drawnCard"
+        :title="drawnCard.title"
+        :description="drawnCard.description"
+        :defense="drawnCard.defense"
+        :damage="drawnCard.damage"
+        :heal="drawnCard.heal"
+        :willpowerCost="drawnCard.willpowerCost"
+        :cardArtworkSrc="drawnCard.cardArtworkSrc"
+        :id="drawnCard.id"
         :handOfCardsLength="handOfCards.length"
         :cardIndex="index"
-        :isBound="card.isBound"
+        :isBound="drawnCard.isBound"
         @unleashed-card-clicked="unleashedCardClicked"
+        @animationend="handleAnimationEnd(selectedCard)"
       />
     </div>
   </div>
@@ -32,7 +34,11 @@ import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGam
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   props: {
-    card: {
+    drawnCard: {
+      type: Object,
+      default: null,
+    },
+    selectedCard: {
       type: Object,
       default: null,
     },
@@ -46,20 +52,23 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
       handOfCards: [],
+      discardingCardId: 0,
+      isDiscardAnimationPlaying: false,
     };
   },
   watch: {
-    card(newCard) {
-      const cardExist = this.handOfCards.some(
-        (existingCard) => existingCard.id === newCard.id,
+    selectedCard(card) {
+      const existingCard = this.handOfCards.some(
+        (existingCard) => existingCard.id === card.id,
       );
-      if (cardExist) {
-        this.handOfCards = this.handOfCards.filter(
-          (existingCard) => existingCard.id !== newCard.id,
-        );
-      } else {
-        this.handOfCards.push(newCard);
+      console.log("Existing Card: " + existingCard);
+      if (existingCard) {
+        this.discardingCardId = card.id;
+        this.isDiscardAnimationPlaying = true;
       }
+    },
+    drawnCard(newCard) {
+      this.handOfCards.push(newCard);
     },
   },
 
@@ -67,25 +76,38 @@ export default {
     unleashedCardClicked(cardData) {
       this.$emit("unleashed-card-clicked", cardData);
     },
+    handleAnimationEnd(card) {
+      // Remove the card after animation ends
+      if (this.isDiscardAnimationPlaying === true) {
+        console.log("Animation ended for card:", card.id);
+        this.handOfCards = this.handOfCards.filter(
+          (existingCard) => existingCard.id !== card.id,
+        );
+        this.discardingCardId = 0;
+        this.isDiscardAnimationPlaying = false;
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 .handOfCards {
-  /* width: 100%; */
-  /* grid-row-start: 8;
-  grid-row-end: 10;
-  grid-column-start: 3;
-  grid-column-end: 8; */
 }
 
-/* Transition classes for entering and leaving */
-/* .card-transition-enter-active,
-.card-transition-leave-active {
-}
+@keyframes discardCard {
+  0% {
+    transform: translate(0%, -100%) scale(1);
+  }
+  50% {
+    transform: translate(0%, -100%) scale(1.5);
+  }
 
-.card-transition-enter-from,
-.card-transition-leave-to {
-} */
+  100% {
+    transform: translate(-300%, -20%) scale(0);
+  }
+}
+.animateDiscardCard {
+  animation: discardCard 0.5s ease-in-out forwards;
+}
 </style>

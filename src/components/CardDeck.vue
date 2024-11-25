@@ -80,16 +80,6 @@ export default {
         },
 
         {
-          id: 4,
-          title: "Rechter Haken",
-          willpowerCost: 2,
-          description: "Ein Gegner erleidet 6 Schaden",
-          damage: 6,
-          cardArtworkSrc: cardArtworkRightHook,
-          isBound: true,
-        },
-
-        {
           id: 3,
           title: "Rechter Haken",
           willpowerCost: 2,
@@ -98,6 +88,7 @@ export default {
           cardArtworkSrc: cardArtworkRightHook,
           isBound: true,
         },
+
         {
           id: 2,
           title: "Jab",
@@ -133,6 +124,15 @@ export default {
           description: "Erhalte 6 Verteidigung",
           defense: 6,
           cardArtworkSrc: cardArtworkBlock,
+          isBound: true,
+        },
+        {
+          id: 4,
+          title: "Rechter Haken",
+          willpowerCost: 2,
+          description: "Ein Gegner erleidet 6 Schaden",
+          damage: 6,
+          cardArtworkSrc: cardArtworkRightHook,
           isBound: true,
         },
       ],

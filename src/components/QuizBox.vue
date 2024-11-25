@@ -15,7 +15,7 @@
         :buttonHeight="30"
         class=""
         @button-clicked="showAnswer"
-        label="Antwort"
+        label="ansehen"
       />
     </div>
 
@@ -24,7 +24,9 @@
       class="answer flex w-full flex-col items-center justify-center text-center"
     >
       <Divider />
-      <div class="h-[90px] w-[90%] pb-[10px] pt-[10px]">
+      <div
+        class="align-center flex h-[90px] w-[90%] items-center justify-center pb-[10px] pt-[10px]"
+      >
         <p class="text-center text-[0.7rem]">
           {{ flashcard.answer }}
         </p>
@@ -129,11 +131,9 @@ export default {
   0% {
     filter: blur(0px);
   }
-
   50% {
     filter: blur(1px);
   }
-
   100% {
     filter: blur(3px);
   }

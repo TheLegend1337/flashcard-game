@@ -8,7 +8,8 @@
       />
       <HandOfCards
         ref="HandOfCards"
-        :card="selectedCard"
+        :drawnCard="drawnCard"
+        :selectedCard="selectedCard"
         class="animate-fade-in-from-bottom-to-top"
         @unleashed-card-clicked="playCard"
       />
@@ -63,6 +64,7 @@ export default {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       selectedCard: null,
+      drawnCard: null,
       foo: 0,
       phase: "",
       // nextPhase: "",
@@ -160,7 +162,7 @@ export default {
         setTimeout(() => {
           const card = this.$refs.CardDeck.drawCard();
           console.log(card);
-          this.selectedCard = card;
+          this.drawnCard = card;
           resolve(card);
         }, 200);
       });
@@ -175,9 +177,10 @@ export default {
       const cost = card.willpowerCost;
       if (cost <= willpower) {
         //prüfen ob WK ausreicht.
-        this.selectedCard = card; //Prop reaktiv. HandOfCards reagiert hier und passt Array an.
+        this.selectedCard = card; //Prop reaktiv. HandOfCards reagiert hier und passt Karten Array an.
         this.flashcardGameStore.decreaseWillpower(cost);
       } else {
+        console.log("zu Teuer");
       }
     },
   },

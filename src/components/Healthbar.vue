@@ -39,7 +39,7 @@ export default {
 /* Add your component-specific styles here */
 .healthbarPosition {
   position: absolute;
-  bottom: -5%;
+  bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
 }

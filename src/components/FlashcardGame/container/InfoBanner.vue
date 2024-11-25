@@ -102,7 +102,7 @@ export default {
           return "am Zug";
         }
         case "gameOver": {
-          return "versagt!";
+          return "dazu gelernt!";
         }
         default: {
           return "Mudda";

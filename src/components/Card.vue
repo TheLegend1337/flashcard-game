@@ -211,6 +211,7 @@ export default {
 
     console.log("Card Artwork Source URL:", this.cardArtworkSource);
   },
+  beforeUnmount() {},
   computed: {
     // für das Berechnen der Karten Rotation
     isUnplayable() {
