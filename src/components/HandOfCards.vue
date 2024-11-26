@@ -4,7 +4,9 @@
   >
     <div tag="div" class="container flex flex-wrap items-center justify-center">
       <Card
-        :class="{ animateDiscardCard: drawnCard.id === discardingCardId }"
+        :class="{
+          animateDiscardCard: selectedForDiscard,
+        }"
         class="-m-10"
         v-for="(drawnCard, index) in handOfCards"
         :key="drawnCard.id"
@@ -53,18 +55,27 @@ export default {
       cardStore: useCardStore(),
       handOfCards: [],
       discardingCardId: 0,
-      isDiscardAnimationPlaying: false,
+      // isDiscardAnimationPlaying: false,
     };
+  },
+  computed: {
+    selectedForDiscard() {
+      if (this.selectedCard.id === this.discardingCardId) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   watch: {
     selectedCard(card) {
       const existingCard = this.handOfCards.some(
         (existingCard) => existingCard.id === card.id,
       );
-      console.log("Existing Card: " + existingCard);
+
       if (existingCard) {
         this.discardingCardId = card.id;
-        this.isDiscardAnimationPlaying = true;
+        // this.isDiscardAnimationPlaying = true;
       }
     },
     drawnCard(newCard) {
@@ -78,8 +89,8 @@ export default {
     },
     handleAnimationEnd(card) {
       // Remove the card after animation ends
-      if (this.isDiscardAnimationPlaying === true) {
-        console.log("Animation ended for card:", card.id);
+      // if (this.isDiscardAnimationPlaying === true) {
+      if (this.selectedForDiscard === true) {
         this.handOfCards = this.handOfCards.filter(
           (existingCard) => existingCard.id !== card.id,
         );

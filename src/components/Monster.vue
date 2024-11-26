@@ -10,11 +10,11 @@
         {{ animation.name }}
       </option> -->
     <!-- </select> -->
-    <Healthbar
+    <!-- <Healthbar
       v-if="!healthbarOff"
       :monsterHealth="monsterStore.monsterHealth"
       :maxMonsterHealth="monsterStore.maxMonsterHealth"
-    />
+    /> -->
     <div id="single-effect-animation-wrapper" class="animate-attacking">
       <SpriteAnimation
         :key="selectedAnimation"
@@ -22,25 +22,28 @@
         flip
       />
     </div>
+    <IndicatorsContainer />
   </div>
 </template>
 
 <script>
-import Healthbar from "../components/Healthbar.vue";
+// import Healthbar from "../components/Healthbar.vue";
 // import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
+import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import zombieVillagerAnimations from "@/assets/animations/monsters/zombieVillager/animation-data/zombieVillagerAnimations.js"; // TODO: Ziel ist es irgendwann im Pfad monster-vue mit dem ausgewählten Monster zu ersetzen
 export default {
   components: {
-    Healthbar,
+    // Healthbar,
     SpriteAnimation,
+    IndicatorsContainer,
   },
   props: {
-    healthbarOff: {
-      type: Boolean,
-      default: false,
-    },
+    // healthbarOff: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   data() {
     return {

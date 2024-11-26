@@ -34,22 +34,18 @@
 
       <div id="buttons" class="difficulty flex">
         <ButtonUniversal
-          buttonWidth="60"
-          buttonHeight="19"
+          :buttonWidth="60"
+          :buttonHeight="19"
           type="wrong"
-          :clickHandler="again"
           label="falsch"
-          class=""
           @button-wrong-clicked="handleButtonWrongClicked"
         />
 
         <ButtonUniversal
-          buttonWidth="60"
-          buttonHeight="19"
+          :buttonWidth="60"
+          :buttonHeight="19"
           type="correct"
-          :clickHandler="hard"
           label="richtig"
-          class=""
           @button-correct-clicked="handleButtonCorrectClicked"
         />
       </div>

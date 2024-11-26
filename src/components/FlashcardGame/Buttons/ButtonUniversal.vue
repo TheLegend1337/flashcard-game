@@ -37,7 +37,6 @@ export default {
     },
     type: {
       type: String,
-
       default: "primary",
       //accepts primary, secondary
     },
@@ -65,12 +64,12 @@ export default {
       soundEffect_ButtonMouseEnter,
     );
 
-    console.log(
-      "Button Width is:" +
-        this.buttonWidth +
-        "And Button Height is:" +
-        this.buttonHeight,
-    );
+    // console.log(
+    //   "Button Width is:" +
+    //     this.buttonWidth +
+    //     "And Button Height is:" +
+    //     this.buttonHeight,
+    // );
     this.buttonTextSize = this.calcTextSize();
     this.$el.style.setProperty(
       "--caculated-font-size",

@@ -94,7 +94,8 @@ export default {
 </script>
 <style scoped>
 canvas {
-  height: 300px; /*canvas größe wird in Styles angepasst*/
+  height: 300px;
+  /*canvas größe wird in Styles angepasst*/
 }
 .flipped {
   transform: scaleX(-1); /* Horizontales Spiegeln */

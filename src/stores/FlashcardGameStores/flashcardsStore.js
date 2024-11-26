@@ -159,36 +159,36 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
   },
   actions: {
     shiftFirstFromStreak0() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[0].shift();
     },
     shiftFirstFromStreak1() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[1].shift();
     },
     shiftFirstFromStreak2() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[2].shift();
     },
     pushFirstFromStreak0() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[0].push();
     },
     pushFirstFromStreak1() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[1].push();
     },
     pushFirstFromStreak2() {
-      this.logRegisters();
+      // this.logRegisters();
       return Object.values(this.flashcards)[2].shift();
     },
-    logRegisters() {
-      const firstArray = Object.values(this.flashcards)[0];
-      const secondArray = Object.values(this.flashcards)[1];
-      const thirdArray = Object.values(this.flashcards)[2];
-      console.log("Register1: " + firstArray);
-      console.log("Register2: " + secondArray);
-      console.log("Register3: " + thirdArray);
-    },
+    // logRegisters() {
+    //   const firstArray = Object.values(this.flashcards)[0];
+    //   const secondArray = Object.values(this.flashcards)[1];
+    //   const thirdArray = Object.values(this.flashcards)[2];
+    //   // console.log("Register1: " + firstArray);
+    //   // console.log("Register2: " + secondArray);
+    //   // console.log("Register3: " + thirdArray);
+    // },
   },
 });

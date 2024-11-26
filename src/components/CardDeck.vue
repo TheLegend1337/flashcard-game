@@ -2,8 +2,8 @@
   <!-- Dein Template-Code kommt hier hin -->
   <div class="card-deck">
     <div class="card-deck-counter-border">
-      <div class="card-deck-counter">
-        <p class="card-deck-counter-text">3</p>
+      <div class="card-deck-counter pt-[3px]">
+        <p class="card-deck-counter-text">{{ sizeofCardDeck }}</p>
       </div>
     </div>
   </div>
@@ -38,106 +38,197 @@ export default {
           title: "Blocken",
           willpowerCost: 1,
           description: "Erhalte 6 Verteidigung",
-          defense: 6,
           cardArtworkSrc: cardArtworkBlock,
           isBound: true,
+          category: "skill", // Defensive skill
+          effects: [
+            {
+              type: "armor", // The type of effect
+              value: 6,
+              target: "player",
+              duration: 0, // Instant
+            },
+          ],
         },
         {
           id: 9,
           title: "Blocken",
           willpowerCost: 1,
           description: "Erhalte 6 Verteidigung",
-          defense: 6,
           cardArtworkSrc: cardArtworkBlock,
           isBound: true,
+          category: "skill",
+          effects: [
+            {
+              type: "armor",
+              value: 6,
+              target: "player",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 8,
           title: "Blocken",
           willpowerCost: 1,
           description: "Erhalte 6 Verteidigung",
-          defense: 6,
           cardArtworkSrc: cardArtworkBlock,
           isBound: true,
+          category: "skill",
+          effects: [
+            {
+              type: "armor",
+              value: 6,
+              target: "player",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 0,
           title: "Jab",
           willpowerCost: 1,
           description: "Ein Gegner erleidet 2 Schaden",
-          damage: 2,
           cardArtworkSrc: cardArtworkJab,
           isBound: true,
+          category: "attack", // Direct attack
+          effects: [
+            {
+              type: "damage",
+              value: 2,
+              target: "enemy",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 6,
           title: "Gelber Schein",
           willpowerCost: 2,
           description: "Heile 10 HP",
-          heal: 10,
           cardArtworkSrc: cardArtworkGelberScheinImAermel,
           isBound: true,
+          category: "skill", // Healing is a buff
+          effects: [
+            {
+              type: "heal",
+              value: 10,
+              target: "player",
+              duration: 0,
+            },
+          ],
         },
-
         {
           id: 3,
           title: "Rechter Haken",
           willpowerCost: 2,
           description: "Ein Gegner erleidet 6 Schaden",
-          damage: 6,
           cardArtworkSrc: cardArtworkRightHook,
           isBound: true,
+          category: "attack",
+          effects: [
+            {
+              type: "damage",
+              value: 6,
+              target: "enemy",
+              duration: 0,
+            },
+          ],
         },
-
         {
           id: 2,
           title: "Jab",
           willpowerCost: 1,
           description: "Ein Gegner erleidet 2 Schaden",
-          damage: 2,
           cardArtworkSrc: cardArtworkJab,
           isBound: true,
+          category: "attack",
+          effects: [
+            {
+              type: "damage",
+              value: 2,
+              target: "enemy",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 5,
           title: "Ausruhen",
           willpowerCost: 1,
           description: "Heile 5 HP",
-          heal: 10,
           cardArtworkSrc: cardArtworkRest,
           isBound: true,
+          category: "skill",
+          effects: [
+            {
+              type: "heal",
+              value: 10,
+              target: "player",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 1,
           title: "Jab",
           willpowerCost: 1,
           description: "Ein Gegner erleidet 2 Schaden",
-          damage: 2,
           cardArtworkSrc: cardArtworkJab,
           isBound: true,
+          category: "attack",
+          effects: [
+            {
+              type: "damage",
+              value: 2,
+              target: "enemy",
+              duration: 0,
+            },
+          ],
         },
-
         {
           id: 7,
           title: "Blocken",
           willpowerCost: 1,
           description: "Erhalte 6 Verteidigung",
-          defense: 6,
           cardArtworkSrc: cardArtworkBlock,
           isBound: true,
+          category: "skill",
+          effects: [
+            {
+              type: "armor",
+              value: 6,
+              target: "player",
+              duration: 0,
+            },
+          ],
         },
         {
           id: 4,
           title: "Rechter Haken",
           willpowerCost: 2,
           description: "Ein Gegner erleidet 6 Schaden",
-          damage: 6,
           cardArtworkSrc: cardArtworkRightHook,
           isBound: true,
+          category: "attack",
+          effects: [
+            {
+              type: "damage",
+              value: 6,
+              target: "enemy",
+              duration: 0,
+            },
+          ],
         },
       ],
     };
   },
+  computed: {
+    sizeofCardDeck() {
+      return this.cardDeck.length;
+    },
+  },
+  watch: {},
   methods: {
     drawCard() {
       //this.cardStore.pushCard();
@@ -157,7 +248,7 @@ export default {
   grid-row-end: 9;
   grid-column-start: 9;
   grid-column-end: 10;
-  justify-self: start;
+  justify-player: start;
   background-image: url("@/assets/icons/cardDeck.png");
   background-size: cover;
   background-position: center;

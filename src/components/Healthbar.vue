@@ -1,6 +1,6 @@
 <script></script>
 <template>
-  <div class="healthbarPosition healthbar">
+  <div class="healthbar">
     <div class="healthValue">
       <p v-if="playerHealth">{{ playerHealth }}/{{ maxPlayerHealth }}</p>
       <p v-else-if="monsterHealth">
@@ -37,13 +37,12 @@ export default {
 
 <style scoped>
 /* Add your component-specific styles here */
-.healthbarPosition {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
 .healthbar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 200px;
   height: 18px;
   border: 3px solid #5a0000;

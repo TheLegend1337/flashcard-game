@@ -8,8 +8,8 @@
       />
       <HandOfCards
         ref="HandOfCards"
-        :drawnCard="drawnCard"
         :selectedCard="selectedCard"
+        :drawnCard="drawnCard"
         class="animate-fade-in-from-bottom-to-top"
         @unleashed-card-clicked="playCard"
       />
@@ -18,13 +18,15 @@
       <Monster class="animate-fade-in-from-right-to-left" />
       <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
-      <DiscardPile /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
+      <DiscardPile
+        :discardedCard="selectedCard"
+      /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
       <CardDeck
         ref="CardDeck"
         class="animate-fade-in-from-bottom-right-to-top-left"
       />
     </div>
-    <!-- <div id="phaseBanner" class="animate-fade-in">
+    <div id="phaseBanner" class="animate-fade-in">
       <button @click="drawCard(1)" class="m-2">Ziehen</button>
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase" class="m-2">Phase ändern</button>
@@ -35,7 +37,7 @@
       <h1 v-if="this.phase === 'endTurn'" class="phaseTitle">End Turn</h1>
       <h1 v-if="this.phase === 'enemyTurn'" class="phaseTitle">Enemy Turn</h1>
       <h1 v-if="this.phase === 'gameOver'" class="phaseTitle">Game Over</h1>
-    </div> -->
+    </div>
   </main>
 </template>
 
@@ -129,7 +131,9 @@ export default {
         case "drawCards":
           console.log("Spieler zieht Karten");
           await this.drawCard(5);
-          this.phase = "playPhase";
+          setTimeout(() => {
+            this.phase = "playPhase";
+          }, 3000);
 
           break;
         case "playPhase":

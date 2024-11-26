@@ -2,8 +2,8 @@
   <div class="discard-pile-wrapper">
     <div class="discard-pile">
       <div class="discard-pile-counter-border">
-        <div class="discard-pile-counter">
-          <p class="discard-pile-counter-text">3</p>
+        <div class="discard-pile-counter pt-[3px]">
+          <p class="discard-pile-counter-text">{{ sizeofDiscardPile }}</p>
           <!-- <button @click="this.cardStore.popCard" class="card-deck-counter">
             Abwerfen
           </button> -->
@@ -23,11 +23,28 @@ export default {
   components: {
     ButtonPrimary,
   },
+  props: {
+    discardedCard: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
+      discardPile: [],
     };
+  },
+  computed: {
+    sizeofDiscardPile() {
+      return this.discardPile.length;
+    },
+  },
+  watch: {
+    discardedCard(card) {
+      this.discardPile.push(card);
+    },
   },
   methods: {
     discard() {

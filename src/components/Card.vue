@@ -367,7 +367,7 @@ export default {
     drop-shadow(0 0 12px rgba(245, 222, 179, 0.339))
     drop-shadow(0 0 18px rgba(245, 222, 179, 0.231));
   z-index: 100;
-  transform: scale(1.3) translateY(-20%);
+  transform: scale(1.3) translateY(-33%);
 }
 
 .card-artwork {

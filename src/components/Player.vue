@@ -28,11 +28,6 @@
         {{ animation.name }}
       </option> -->
     <!-- </select>  -->
-    <Healthbar
-      v-if="!healthbarOff"
-      :playerHealth="playerStore.playerHealth"
-      :maxPlayerHealth="playerStore.maxPlayerHealth"
-    />
     <!--Bracket Notation hinzugefügt damit wir dynamisch die jeweilige Animation tauschen können-->
     <div
       id="single-effect-animation-wrapper"
@@ -44,31 +39,25 @@
         :animationParameters="fallenAngelAnimations[selectedAnimation]"
       />
     </div>
+    <IndicatorsContainer />
     <!-- Außerdem habe ich den Komponenten Parameter dynamisch gemacht sodass die ausgewählte Animation hier eingetragen wird.-->
   </div>
 </template>
 
 <script>
-import Healthbar from "../components/Healthbar.vue";
-import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
+import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import fallenAngelAnimations from "@/assets/animations/characters/fallenAngel/animation-data/fallenAngelAnimations.js"; //TODO: Ziel ist es irgendwann im Pfad hero-vue mit dem ausgewählten Character zu ersetzen
 //import idleSpriteAnimation from "@/assets/animations/characters/hero-vue/sprites/idle.png";
 
 export default {
   components: {
-    Healthbar,
     SpriteAnimation,
+    IndicatorsContainer,
   },
-  props: {
-    healthbarOff: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: {},
   data() {
     return {
-      playerStore: usePlayerStore(),
       // idleSpriteAnimation,
       fallenAngelAnimations,
       selectedAnimation: "fallenAngelIdle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
