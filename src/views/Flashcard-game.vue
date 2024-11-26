@@ -8,8 +8,7 @@
       />
       <HandOfCards
         ref="HandOfCards"
-        :selectedCard="selectedCard"
-        :drawnCard="drawnCard"
+        :card="card"
         class="animate-fade-in-from-bottom-to-top"
         @unleashed-card-clicked="playCard"
       />
@@ -19,7 +18,7 @@
       <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
-        :discardedCard="selectedCard"
+        :discardedCard="discardedCard"
       /><!--Parent nimmt das Objekt und übergibt es als Prop an Abwurfstapel -->
       <CardDeck
         ref="CardDeck"
@@ -65,8 +64,8 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
-      selectedCard: null,
-      drawnCard: null,
+
+      card: null,
       foo: 0,
       phase: "",
       // nextPhase: "",
@@ -74,6 +73,7 @@ export default {
       // question: "What is a card?",
       // response: "This is the Cards Response.",
       animationToggle: true,
+      discardedCard: null,
     };
   },
   beforeCreate() {
@@ -166,22 +166,23 @@ export default {
         setTimeout(() => {
           const card = this.$refs.CardDeck.drawCard();
           console.log(card);
-          this.drawnCard = card;
+          this.card = card;
           resolve(card);
         }, 200);
       });
     },
-    playCard(card) {
+    playCard(payloadCard) {
       if (this.animationToggle === true) {
         this.animationToggle = false;
       } else {
         this.animationToggle = true;
       }
       const willpower = this.flashcardGameStore.getWillpower;
-      const cost = card.willpowerCost;
+      const cost = payloadCard.willpowerCost;
       if (cost <= willpower) {
         //prüfen ob WK ausreicht.
-        this.selectedCard = card; //Prop reaktiv. HandOfCards reagiert hier und passt Karten Array an.
+        this.card = payloadCard; //Prop reaktiv. HandOfCards reagiert hier und passt Karten Array an.
+        this.discardedCard = payloadCard;
         this.flashcardGameStore.decreaseWillpower(cost);
       } else {
         console.log("zu Teuer");

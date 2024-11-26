@@ -8,6 +8,7 @@
         animateCardShrink: this.animationState === 'shrink',
         animateAnticipationShake: this.animationState === 'anticipationShake',
         animateAnticipationSkew: this.animationState === 'anticipationSkew',
+        animateDiscardCard: this.animationState === 'discard',
       }"
       @animationend="handleAnimationEnd"
     >
@@ -250,12 +251,6 @@ export default {
     },
   },
   methods: {
-    playcard() {
-      this.flashcardGameStore.changeQuizBoxVisibility();
-      this.willpowerStore.decreaseWillpower(2);
-      this.playerStore.damageHero(3);
-      this.monsterStore.damageMonster(2);
-    },
     // für das Berechnen der Karten Rotation
     calcRotation(cardIndex) {
       const rotationFactor = 10;
@@ -300,18 +295,25 @@ export default {
         setTimeout(() => {
           this.animationState = "shrink";
         }, 1000);
+      } else if (this.animationState === "discard") {
+        this.$emit("discard-animation-ended");
       }
     },
     handleCardClick() {
       if (this.cardData.isBound == true) {
         this.animationState = "selected";
       } else {
+        const willpower = this.flashcardGameStore.getWillpower;
+        const cost = this.card.willpowerCost;
+        if (cost <= willpower) {
+          this.animationState = "discard";
+        }
         this.$emit("unleashed-card-clicked", this.cardData);
-      }
 
-      if (!this.isOpenCardSoundPlayed) {
-        this.soundHandler.playSound("openCard", 0.4);
-        this.isOpenCardSoundPlayed = true; // Update the flag
+        if (!this.isOpenCardSoundPlayed) {
+          this.soundHandler.playSound("openCard", 0.4);
+          this.isOpenCardSoundPlayed = true; // Update the flag
+        }
       }
     },
   },
@@ -537,5 +539,21 @@ export default {
 
 .animateRotateCard {
   animation: rotateCard 0.5s linear forwards;
+}
+
+@keyframes discardCard {
+  0% {
+    transform: translate(0%, -100%) scale(1);
+  }
+  50% {
+    transform: translate(0%, -100%) scale(1.5);
+  }
+
+  100% {
+    transform: translate(-300%, -20%) scale(0);
+  }
+}
+.animateDiscardCard {
+  animation: discardCard 0.5s ease-in-out forwards;
 }
 </style>
