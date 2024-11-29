@@ -163,7 +163,7 @@ export default {
           effects: [
             {
               type: "heal",
-              value: 10,
+              value: 5,
               target: "player",
               duration: 0,
             },

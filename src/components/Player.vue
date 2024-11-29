@@ -39,7 +39,7 @@
         :animationParameters="fallenAngelAnimations[selectedAnimation]"
       />
     </div>
-    <IndicatorsContainer />
+    <IndicatorsContainer role="player" />
     <!-- Außerdem habe ich den Komponenten Parameter dynamisch gemacht sodass die ausgewählte Animation hier eingetragen wird.-->
   </div>
 </template>
@@ -55,7 +55,9 @@ export default {
     SpriteAnimation,
     IndicatorsContainer,
   },
-  props: {},
+  props: {
+    playerAnimationState: {},
+  },
   data() {
     return {
       // idleSpriteAnimation,

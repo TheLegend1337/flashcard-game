@@ -22,14 +22,14 @@
         flip
       />
     </div>
-    <IndicatorsContainer />
+    <IndicatorsContainer role="monster" />
   </div>
 </template>
 
 <script>
 // import Healthbar from "../components/Healthbar.vue";
 // import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
-import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
+
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import zombieVillagerAnimations from "@/assets/animations/monsters/zombieVillager/animation-data/zombieVillagerAnimations.js"; // TODO: Ziel ist es irgendwann im Pfad monster-vue mit dem ausgewählten Monster zu ersetzen
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       // flashcardGameStore: useFlashcardGameStore(),
-      monsterStore: useMonsterStore(),
+
       zombieVillagerAnimations,
       selectedAnimation: "zombieVillagerIdle",
     };

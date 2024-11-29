@@ -4,17 +4,14 @@ export const useMonsterStore = defineStore("monsterStore", {
   state: () => ({
     monsterHealth: 400,
     maxMonsterHealth: 400,
+    monsterArmor: 0,
   }),
   getters: {
     getMonsterhealth: (state) => state.monsterHealth,
   },
   actions: {
     damageMonster(value) {
-      if (value < 0) {
-        throw new Error("Value must be negative!");
-      } else {
-        this.monsterHealth = this.monsterHealth - value;
-      }
+      this.monsterHealth = this.monsterHealth - value;
     },
   },
 });

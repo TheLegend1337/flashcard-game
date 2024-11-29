@@ -13,8 +13,8 @@
         @unleashed-card-clicked="playCard"
       />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
-      <Player class="animate-fade-in-from-left-to-right" />
-      <Monster class="animate-fade-in-from-right-to-left" />
+      <Player :playerAnimation="playerAnimation" />
+      <Monster :monsterAnimation="monsterAnimation" />
       <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
@@ -42,6 +42,8 @@
 
 <script>
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
+import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
@@ -64,7 +66,10 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
-
+      monsterStore: useMonsterStore(),
+      playerStore: usePlayerStore(),
+      playerAnimation: "fade-in-from-left-to-right",
+      monsterAnimation: "fade-in-from-right-to-left",
       card: null,
       foo: 0,
       phase: "",
@@ -184,6 +189,24 @@ export default {
         this.card = payloadCard; //Prop reaktiv. HandOfCards reagiert hier und passt Karten Array an.
         this.discardedCard = payloadCard;
         this.flashcardGameStore.decreaseWillpower(cost);
+        for (let effect of payloadCard.effects) {
+          switch (effect.type) {
+            case "damage":
+              console.log("Does Damage");
+              this.monsterStore.damageMonster(effect.value);
+              break;
+            case "armor":
+              console.log("Increase Armor");
+              this.playerStore.increaseArmor(effect.value);
+              break;
+            case "heal":
+              console.log("Increase Health");
+              this.playerStore.healHero(effect.value);
+              break;
+            default:
+            // code block
+          }
+        }
       } else {
         console.log("zu Teuer");
       }

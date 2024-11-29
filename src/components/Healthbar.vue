@@ -2,10 +2,7 @@
 <template>
   <div class="healthbar">
     <div class="healthValue">
-      <p v-if="playerHealth">{{ playerHealth }}/{{ maxPlayerHealth }}</p>
-      <p v-else-if="monsterHealth">
-        {{ monsterHealth }}/{{ maxMonsterHealth }}
-      </p>
+      <p>{{ healthValue }}/{{ maxHealthValue }}</p>
     </div>
   </div>
 </template>
@@ -13,17 +10,13 @@
 <script>
 export default {
   props: {
-    playerHealth: {
+    healthValue: {
       type: Number,
+      required: true,
     },
-    maxPlayerHealth: {
+    maxHealthValue: {
       type: Number,
-    },
-    monsterHealth: {
-      type: Number,
-    },
-    maxMonsterHealth: {
-      type: Number,
+      required: true,
     },
   },
   data() {

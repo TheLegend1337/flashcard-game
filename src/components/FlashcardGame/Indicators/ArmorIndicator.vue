@@ -1,7 +1,7 @@
 <template>
   <div class="armor-indicator">
     <div class="armor-value">
-      <p>{{ playerArmor }}</p>
+      <p>{{ armorValue }}</p>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
     //Component
   },
   props: {
-    playerArmor: {
+    armorValue: {
       type: Number,
     },
   },

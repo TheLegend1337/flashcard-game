@@ -1,16 +1,21 @@
 <template>
   <div class="indicators-container">
-    <ArmorIndicator class="z-[2]" :playerArmor="playerStore.playerArmor" />
+    <ArmorIndicator
+      v-if="playerStore.playerArmor > 0"
+      class="z-[2]"
+      :armorValue="armorValue"
+    />
     <Healthbar
       class="z-0"
-      :playerHealth="playerStore.playerHealth"
-      :maxPlayerHealth="playerStore.maxPlayerHealth"
+      :healthValue="healthValue"
+      :maxHealthValue="maxHealthValue"
     />
   </div>
 </template>
 
 <script>
 import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
+import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 import Healthbar from "@/components/Healthbar.vue";
 import ArmorIndicator from "@/components/FlashcardGame/Indicators/ArmorIndicator.vue";
 //beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
@@ -21,15 +26,50 @@ export default {
     Healthbar,
     ArmorIndicator,
   },
-  props: {},
+  props: {
+    role: {
+      type: String,
+      Required: true,
+      default: "none",
+    },
+  },
   data() {
     return {
       playerStore: usePlayerStore(),
+      monsterStore: useMonsterStore(),
       // Zustandsvariablen
     };
   },
   computed: {
     // Berechnete Eigenschaften
+    healthValue() {
+      if (this.role === "player") {
+        return this.playerStore.playerHealth;
+      } else if (this.role === "monster") {
+        return this.monsterStore.monsterHealth;
+      } else {
+        return 0;
+      }
+    },
+    maxHealthValue() {
+      if (this.role === "player") {
+        return this.playerStore.maxPlayerHealth;
+      } else if (this.role === "monster") {
+        return this.monsterStore.maxMonsterHealth;
+      } else {
+        return 0;
+      }
+    },
+    armorValue() {
+      if (this.role === "player") {
+        return this.playerStore.playerArmor;
+      } else if (this.role === "monster") {
+        9;
+        return this.monsterStore.monsterArmor;
+      } else {
+        return 0;
+      }
+    },
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
