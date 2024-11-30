@@ -2,6 +2,7 @@
   <div>
     <div
       @click="handleCardClick"
+      @mouseenter="handleMouseEnter"
       class="card"
       :class="{
         animateCardGrow: this.animationState === 'selected',
@@ -77,6 +78,7 @@ import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_DrawCard from "@/assets/sounds/soundEffects/drawCard_shorter.mp3";
 import soundEffect_OpenCard from "@/assets/sounds/soundEffects/bookFlip2.ogg";
 import soundEffect_CardReveal from "@/assets/sounds/soundEffects/triple-pop.wav";
+import soundEffect_CardEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
 
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 // import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
@@ -182,6 +184,7 @@ export default {
     this.soundHandler.registerSound("openCard", soundEffect_OpenCard);
     this.soundHandler.playSound("drawCard", 0.4);
     this.soundHandler.registerSound("revealCard", soundEffect_CardReveal);
+    this.soundHandler.registerSound("cardEnter", soundEffect_CardEnter);
 
     this.cardArtworkSource = new URL(
       this.cardArtworkSrc,
@@ -254,6 +257,9 @@ export default {
   },
   methods: {
     // für das Berechnen der Karten Rotation
+    handleMouseEnter() {
+      this.soundHandler.playSound("cardEnter", 0.01);
+    },
     calcRotation(cardIndex) {
       const rotationFactor = 10;
       const centerCardIndex = this.getCenterCardIndex;

@@ -56,7 +56,7 @@
 <script>
 //habe den Content gefunden
 import SoundHandler from "@/helpers/soundHandler";
-import soundEffect_fail from "@/assets/sounds/soundEffects/fail-swinging.wav";
+import soundEffect_fail from "@/assets/sounds/soundEffects/fail-wobble.mp3";
 import soundEffect_CardRevealBuildup from "@/assets/sounds/soundEffects/building-swoosh-short.mp3";
 
 import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
