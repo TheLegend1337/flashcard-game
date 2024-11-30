@@ -25,7 +25,7 @@ export default (options) => {
         0, //Ziel, wo wir zeichnen auf x-Achse
         0, //Ziel, wo wir zeichnen auf y-Achse (links oben weil unser Bild im Canvas von links oben gezeichnet wird)
         width, //genau so Breit und Hoch wie in der Bildquelle aus der wir den Spriteausschnitt rausnehmen.
-        height //...
+        height, //...
       );
     },
     update: function () {

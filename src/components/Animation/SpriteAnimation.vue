@@ -85,9 +85,24 @@ export default {
     },
     animate() {
       // console.log("Animate aufgerufen für:", this.$el);
-      requestAnimationFrame(this.animate); //dadurch entsteht eine Schleife, wir rufen die Methode auf in der wir uns befinden
-      this.sprite.update();
-      this.sprite.render();
+      // requestAnimationFrame(this.animate); //dadurch entsteht eine Schleife, wir rufen die Methode auf in der wir uns befinden
+      // this.sprite.update();
+      // this.sprite.render();
+      // Use an arrow function to preserve the correct 'this' context
+      const animateFrame = () => {
+        const animationCompleted = this.sprite.update();
+        this.sprite.render();
+
+        if (animationCompleted) {
+          this.$emit("sprite-animation-completed");
+          console.log("Sprite Animation completed");
+          // If you want to stop the animation loop, do not request the next frame
+          return;
+        }
+
+        requestAnimationFrame(animateFrame);
+      };
+      requestAnimationFrame(animateFrame);
     },
   },
 };

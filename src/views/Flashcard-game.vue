@@ -13,8 +13,11 @@
         @unleashed-card-clicked="playCard"
       />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
-      <Player :playerAnimation="playerAnimation" />
-      <Monster :monsterAnimation="monsterAnimation" />
+      <Player
+        :playerAction="playerAction"
+        @sprite-animation-completed="handleSpriteAnimationEnd"
+      />
+      <Monster :monsterAnimationState="monsterAnimationState" />
       <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
@@ -68,8 +71,8 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       monsterStore: useMonsterStore(),
       playerStore: usePlayerStore(),
-      playerAnimation: "fade-in-from-left-to-right",
-      monsterAnimation: "fade-in-from-right-to-left",
+      playerAction: "fade-in-from-left-to-right",
+      monsterAnimationState: "fade-in-from-right-to-left",
       card: null,
       foo: 0,
       phase: "",
@@ -176,6 +179,21 @@ export default {
         }, 200);
       });
     },
+    handleSpriteAnimationEnd(payloadWithAnimationState) {
+      switch (payloadWithAnimationState) {
+        case "attacking":
+          console.log("Payload ist auf attacking");
+          break;
+        case "buffing":
+          console.log("Payload ist auf buffing");
+          break;
+        case "dying":
+          console.log("Payload ist auf dying");
+          break;
+        default:
+          this.playerAction = "idle";
+      }
+    },
     playCard(payloadCard) {
       if (this.animationToggle === true) {
         this.animationToggle = false;
@@ -194,6 +212,7 @@ export default {
             case "damage":
               console.log("Does Damage");
               this.monsterStore.damageMonster(effect.value);
+              this.playerAction = "attacking";
               break;
             case "armor":
               console.log("Increase Armor");

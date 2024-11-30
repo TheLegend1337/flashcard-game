@@ -31,12 +31,18 @@
     <!--Bracket Notation hinzugefügt damit wir dynamisch die jeweilige Animation tauschen können-->
     <div
       id="single-effect-animation-wrapper"
-      :class="{ 'animate-attacking-from-left-to-right': isAttacking }"
+      :class="{
+        'fade-in-from-left-to-right':
+          playerAnimationState === 'fade-in-from-left-to-right',
+        'attacking-from-left-to-right': selectedAnimation === 'attacking',
+      }"
     >
+      <!-- @animationend="handleAnimationEnd" -->
       <SpriteAnimation
         class="animate-pulse-scale"
         :key="selectedAnimation"
         :animationParameters="fallenAngelAnimations[selectedAnimation]"
+        @sprite-animation-completed="handleSpriteAnimationEnd"
       />
     </div>
     <IndicatorsContainer role="player" />
@@ -48,7 +54,6 @@
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import fallenAngelAnimations from "@/assets/animations/characters/fallenAngel/animation-data/fallenAngelAnimations.js"; //TODO: Ziel ist es irgendwann im Pfad hero-vue mit dem ausgewählten Character zu ersetzen
-//import idleSpriteAnimation from "@/assets/animations/characters/hero-vue/sprites/idle.png";
 
 export default {
   components: {
@@ -56,22 +61,62 @@ export default {
     IndicatorsContainer,
   },
   props: {
-    playerAnimationState: {},
+    playerAction: {
+      type: String,
+      required: true,
+      default: "none",
+    },
   },
   data() {
     return {
       // idleSpriteAnimation,
       fallenAngelAnimations,
-      selectedAnimation: "fallenAngelIdle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
+      selectedAnimation: "idle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
       isDefenseBuff: false,
       isDamaged: false,
       isHealed: false,
-      isAttacking: false,
+      isAttacking: false, //TODO animation muss auf playerAnimationState bezogen werden
     };
   },
   methods: {
     updateAnimation() {
       console.log("Selected Animation:", this.selectedAnimation);
+    },
+    handleSpriteAnimationEnd() {
+      console.log("Handle Sprite Animation end");
+      // switch (this.playerAnimationState) {
+      //   case "attacking":
+      //     this.selectedAnimation = "idle";
+      //     break;
+      //   case "buffing":
+      //     this.selectedAnimation = "idle";
+      //     break;
+      //   case "dying":
+      //     this.selectedAnimation = "idle";
+      //     break;
+      //   default:
+      //     this.selectedAnimation = "idle";
+      // }
+      this.selectedAnimation = "idle";
+      this.$emit("sprite-animation-completed", this.selectedAnimation);
+    },
+  },
+  computed: {},
+  watch: {
+    playerAction() {
+      switch (this.playerAction) {
+        case "attacking":
+          this.selectedAnimation = "attacking";
+          break;
+        case "buffing":
+          this.selectedAnimation = "hurting";
+          break;
+        case "dying":
+          this.selectedAnimation = "dying";
+          break;
+        default:
+          this.selectedAnimation = "idle";
+      }
     },
   },
 };
@@ -216,5 +261,34 @@ export default {
     opacity: 70%;
     transform: translate(10%, 80%) scale(4);
   }
+}
+
+@keyframes fadeInFromLeftToRight {
+  0% {
+    opacity: 0;
+    transform: translate(-100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+.fade-in-from-left-to-right {
+  animation: fadeInFromLeftToRight 1s cubic-bezier(0.69, 0.16, 0.41, 1.44);
+}
+
+@keyframes attackingFromLeftToRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(100%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.attacking-from-left-to-right {
+  animation: attackingFromLeftToRight 1s cubic-bezier(0.69, 0.16, 0.41, 1.44);
 }
 </style>

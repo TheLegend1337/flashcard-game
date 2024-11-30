@@ -7,29 +7,29 @@ import fallenAngelThrowing from "@/assets/animations/characters/fallenAngel/spri
 import fallenAngelDying from "@/assets/animations/characters/fallenAngel/sprites/fallenAngelDyingSprite.png";
 
 export default {
-  fallenAngelIdle: {
-    name: "fallenAngelIdle",
+  idle: {
+    name: "idle",
     numberOfFrames: 17,
     ticksPerFrame: 3,
     loop: true,
     spriteSrc: fallenAngelIdle,
   },
-  fallenAngelHurt: {
-    name: "fallenAngelHurt",
+  hurting: {
+    name: "hurting",
     numberOfFrames: 12,
     ticksPerFrame: 4,
     loop: false,
     spriteSrc: fallenAngelHurt,
   },
-  fallenAngelThrowing: {
-    name: "fallenAngelThrowing",
+  attacking: {
+    name: "attacking",
     numberOfFrames: 12,
     ticksPerFrame: 4,
     loop: false,
     spriteSrc: fallenAngelThrowing,
   },
-  fallenAngelDying: {
-    name: "fallenAngelDying",
+  dying: {
+    name: "dying",
     numberOfFrames: 15,
     ticksPerFrame: 3,
     loop: false,
