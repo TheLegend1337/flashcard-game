@@ -6,14 +6,26 @@
     TODO
     -
     -
-    isDefenseBuff, isDamaged,isHealed  muss noch implementiert werden und durch Events auf true/false gesetzt werden. -->
-    <div v-if="isDefenseBuff" class="defense-icon-animation"></div>
-    <div v-if="isDamaged" class="damage-icon-animation"></div>
-    <div v-if="isHealed" class="heal-icon-animation"></div>
+    isDefenseIconAnimationPlaying, isDamageIconAnimationPlaying,isHealingIconAnimationPlaying  muss noch implementiert werden und durch Events auf true/false gesetzt werden. -->
+    <div
+      v-if="whatIconAnimationIsPlaying === 'defense-icon-animation'"
+      class="defense-icon-animation"
+      @animationend="handleIconAnimationEnd"
+    ></div>
+    <div
+      v-if="whatIconAnimationIsPlaying === 'damage-icon-animation'"
+      class="damage-icon-animation"
+      @animationend="handleIconAnimationEnd"
+    ></div>
+    <div
+      v-if="whatIconAnimationIsPlaying === 'heal-icon-animation'"
+      class="heal-icon-animation"
+      @animationend="handleIconAnimationEnd"
+    ></div>
     <!--  -->
-    <!-- <select v-model="selectedAnimation" @change="updateAnimation"> -->
+    <!-- <select v-model="selectedSpriteAnimation" @change="updateAnimation"> -->
     <!--Ich habe ein Dropdown zum debuggen hinzugefügt 
-      und mit v-model an eine einfach Variable in data(selectedAnimation) in der Komponente gebunden sodass die Auswahl direkt auf die Variable wirkt.
+      und mit v-model an eine einfach Variable in data(selectedSpriteAnimation) in der Komponente gebunden sodass die Auswahl direkt auf die Variable wirkt.
       Außerdem habe ich einen Eventlistener @change hinzugefügt, der darauf reagiert, wenn eine bestimmte Änderung eintritt
       
       Rendern der Liste:
@@ -34,14 +46,13 @@
       :class="{
         'fade-in-from-left-to-right':
           playerAnimationState === 'fade-in-from-left-to-right',
-        'attacking-from-left-to-right': selectedAnimation === 'attacking',
+        'attacking-from-left-to-right': selectedSpriteAnimation === 'attacking',
       }"
     >
       <!-- @animationend="handleAnimationEnd" -->
       <SpriteAnimation
-        class="animate-pulse-scale"
-        :key="selectedAnimation"
-        :animationParameters="fallenAngelAnimations[selectedAnimation]"
+        :key="selectedSpriteAnimation"
+        :animationParameters="fallenAngelAnimations[selectedSpriteAnimation]"
         @sprite-animation-completed="handleSpriteAnimationEnd"
       />
     </div>
@@ -51,6 +62,9 @@
 </template>
 
 <script>
+import SoundHandler from "@/helpers/soundHandler";
+import defenseIconAnimationSound from "@/assets/sounds/soundEffects/grinding-metal-higher.mp3";
+import attackingAnimationSound from "@/assets/sounds/soundEffects/punch1.wav";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import fallenAngelAnimations from "@/assets/animations/characters/fallenAngel/animation-data/fallenAngelAnimations.js"; //TODO: Ziel ist es irgendwann im Pfad hero-vue mit dem ausgewählten Character zu ersetzen
@@ -71,34 +85,50 @@ export default {
     return {
       // idleSpriteAnimation,
       fallenAngelAnimations,
-      selectedAnimation: "idle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
-      isDefenseBuff: false,
-      isDamaged: false,
-      isHealed: false,
+      selectedSpriteAnimation: "idle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
+      whatIconAnimationIsPlaying: "none",
+
       isAttacking: false, //TODO animation muss auf playerAnimationState bezogen werden
     };
   },
+  mounted() {
+    //ACHTUNG das hinzufügen von this.soundHandler mit dem this Keyword ist wichtig damit es beim Laden keine Probleme gibt.
+    this.soundHandler = new SoundHandler(); //zum erstellen des SoundHandlers
+    this.soundHandler.registerSound(
+      "defenseIconAnimationSound",
+      defenseIconAnimationSound,
+    ); //zum registrieren des Soundeffects
+    attackingAnimationSound;
+    this.soundHandler.registerSound(
+      "attackingAnimationSound",
+      attackingAnimationSound,
+    );
+    //zum Abspielen des Soundeffects(zweiter Parameter ist Lautstärke)
+  },
   methods: {
     updateAnimation() {
-      console.log("Selected Animation:", this.selectedAnimation);
+      console.log("Selected Animation:", this.selectedSpriteAnimation);
+    },
+    handleIconAnimationEnd() {
+      this.whatIconAnimationIsPlaying = "none";
     },
     handleSpriteAnimationEnd() {
       console.log("Handle Sprite Animation end");
       // switch (this.playerAnimationState) {
       //   case "attacking":
-      //     this.selectedAnimation = "idle";
+      //     this.selectedSpriteAnimation = "idle";
       //     break;
       //   case "buffing":
-      //     this.selectedAnimation = "idle";
+      //     this.selectedSpriteAnimation = "idle";
       //     break;
       //   case "dying":
-      //     this.selectedAnimation = "idle";
+      //     this.selectedSpriteAnimation = "idle";
       //     break;
       //   default:
-      //     this.selectedAnimation = "idle";
+      //     this.selectedSpriteAnimation = "idle";
       // }
-      this.selectedAnimation = "idle";
-      this.$emit("sprite-animation-completed", this.selectedAnimation);
+      this.selectedSpriteAnimation = "idle";
+      this.$emit("sprite-animation-completed", this.selectedSpriteAnimation);
     },
   },
   computed: {},
@@ -106,16 +136,24 @@ export default {
     playerAction() {
       switch (this.playerAction) {
         case "attacking":
-          this.selectedAnimation = "attacking";
+          this.selectedSpriteAnimation = "attacking";
+          this.soundHandler.playSound("attackingAnimationSound", 0.1);
           break;
         case "buffing":
-          this.selectedAnimation = "hurting";
+          this.whatIconAnimationIsPlaying = "defense-icon-animation";
+          this.soundHandler.playSound("defenseIconAnimationSound", 0.2);
+          break;
+        case "hurting":
+          this.selectedSpriteAnimation = "hurting";
           break;
         case "dying":
-          this.selectedAnimation = "dying";
+          this.selectedSpriteAnimation = "dying";
+          break;
+        case "healing":
+          this.selectedSpriteAnimation = "hurting";
           break;
         default:
-          this.selectedAnimation = "idle";
+          this.selectedSpriteAnimation = "idle";
       }
     },
   },
@@ -146,8 +184,8 @@ export default {
   background-size: cover;
   background-position: center;
   transform: translate(50%, 50%);
-
-  animation: defenseIconAnimation 1.5s ease-in-out infinite;
+  z-index: 10;
+  animation: defenseIconAnimation 1.5s ease-in-out;
 }
 
 @keyframes defenseIconAnimation {
@@ -186,7 +224,7 @@ export default {
   background-position: center;
   transform: translate(50%, 50%);
 
-  animation: damageIconAnimation 0.5s steps(2, end) infinite;
+  animation: damageIconAnimation 0.5s steps(2, end);
 }
 
 @keyframes damageIconAnimation {
@@ -226,7 +264,7 @@ export default {
   background-position: center;
   transform: translate(50%, 50%);
 
-  animation: healIconAnimation 1s steps(3, end) infinite;
+  animation: healIconAnimation 1s steps(3, end);
 }
 @keyframes healIconAnimation {
   0% {

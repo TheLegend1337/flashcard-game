@@ -217,10 +217,12 @@ export default {
             case "armor":
               console.log("Increase Armor");
               this.playerStore.increaseArmor(effect.value);
+              this.playerAction = "buffing";
               break;
             case "heal":
               console.log("Increase Health");
               this.playerStore.healHero(effect.value);
+              this.playerAction = "healing";
               break;
             default:
             // code block

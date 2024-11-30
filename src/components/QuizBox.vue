@@ -55,6 +55,10 @@
 
 <script>
 //habe den Content gefunden
+import SoundHandler from "@/helpers/soundHandler";
+import soundEffect_fail from "@/assets/sounds/soundEffects/fail-swinging.wav";
+import soundEffect_CardRevealBuildup from "@/assets/sounds/soundEffects/building-swoosh-short.mp3";
+
 import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
 import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
@@ -94,6 +98,13 @@ export default {
   },
   mounted() {
     this.flashcard = this.flashCardsStore.shiftFirstFromStreak0();
+    //ACHTUNG das hinzufügen von this.soundHandler mit dem this Keyword ist wichtig damit es beim Laden keine Probleme gibt.
+    this.soundHandler = new SoundHandler(); //zum erstellen des SoundHandlers
+    this.soundHandler.registerSound("fail", soundEffect_fail); //zum registrieren des Soundeffects
+    this.soundHandler.registerSound(
+      "revealCardBuildup",
+      soundEffect_CardRevealBuildup,
+    );
   },
   methods: {
     showAnswer() {
@@ -101,10 +112,12 @@ export default {
     },
     handleButtonWrongClicked() {
       this.$emit("button-wrong-clicked");
+      this.soundHandler.playSound("fail", 0.05); //zum Abspielen des Soundeffects(zweiter Parameter ist Lautstärke)
     },
     handleButtonCorrectClicked() {
       this.isAnimateAnticipationBlur = true;
       this.$emit("button-correct-clicked");
+      this.soundHandler.playSound("revealCardBuildup", 0.02);
     },
   },
 };

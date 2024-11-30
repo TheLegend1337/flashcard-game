@@ -76,6 +76,7 @@
 import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_DrawCard from "@/assets/sounds/soundEffects/drawCard_shorter.mp3";
 import soundEffect_OpenCard from "@/assets/sounds/soundEffects/bookFlip2.ogg";
+import soundEffect_CardReveal from "@/assets/sounds/soundEffects/triple-pop.wav";
 
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 // import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
@@ -180,6 +181,7 @@ export default {
     this.soundHandler.registerSound("drawCard", soundEffect_DrawCard);
     this.soundHandler.registerSound("openCard", soundEffect_OpenCard);
     this.soundHandler.playSound("drawCard", 0.4);
+    this.soundHandler.registerSound("revealCard", soundEffect_CardReveal);
 
     this.cardArtworkSource = new URL(
       this.cardArtworkSrc,
@@ -292,6 +294,7 @@ export default {
         this.animationState = "shrink";
       } else if (this.animationState === "anticipationSkew") {
         this.cardData.isBound = false;
+        this.soundHandler.playSound("revealCard", 0.05);
         setTimeout(() => {
           this.animationState = "shrink";
         }, 1000);
