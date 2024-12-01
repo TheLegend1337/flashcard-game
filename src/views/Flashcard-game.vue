@@ -15,7 +15,9 @@
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
       <Player
         :playerAction="playerAction"
+        :toggleSpeechBubble="toggleSpeechBubble"
         @sprite-animation-completed="handleSpriteAnimationEnd"
+        @resetToggleSpeechBubble="handleResetSpeechBubble"
       />
       <Monster :monsterAnimationState="monsterAnimationState" />
       <Willpower :animationToggle="animationToggle" />
@@ -82,6 +84,7 @@ export default {
       // response: "This is the Cards Response.",
       animationToggle: true,
       discardedCard: null,
+      toggleSpeechBubble: false,
     };
   },
   beforeCreate() {
@@ -194,6 +197,9 @@ export default {
           this.playerAction = "idle";
       }
     },
+    handleResetSpeechBubble() {
+      this.toggleSpeechBubble = false;
+    },
     playCard(payloadCard) {
       if (this.animationToggle === true) {
         this.animationToggle = false;
@@ -230,6 +236,7 @@ export default {
         }
       } else {
         console.log("zu Teuer");
+        this.toggleSpeechBubble = true;
       }
     },
   },

@@ -41,6 +41,10 @@
       </option> -->
     <!-- </select>  -->
     <!--Bracket Notation hinzugefügt damit wir dynamisch die jeweilige Animation tauschen können-->
+    <SpeechBubble
+      :toggleSpeechBubble="toggleSpeechBubble"
+      @resetToggleSpeechBubble="handleResetToggleSpeechBubble"
+    />
     <div
       id="single-effect-animation-wrapper"
       :class="{
@@ -68,17 +72,23 @@ import attackingAnimationSound from "@/assets/sounds/soundEffects/punch1.wav";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import fallenAngelAnimations from "@/assets/animations/characters/fallenAngel/animation-data/fallenAngelAnimations.js"; //TODO: Ziel ist es irgendwann im Pfad hero-vue mit dem ausgewählten Character zu ersetzen
+import SpeechBubble from "@/components/FlashcardGame/Indicators/SpeechBubble.vue";
 
 export default {
   components: {
     SpriteAnimation,
     IndicatorsContainer,
+    SpeechBubble,
   },
   props: {
     playerAction: {
       type: String,
       required: true,
       default: "none",
+    },
+    toggleSpeechBubble: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -87,7 +97,6 @@ export default {
       fallenAngelAnimations,
       selectedSpriteAnimation: "idle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
       whatIconAnimationIsPlaying: "none",
-
       isAttacking: false, //TODO animation muss auf playerAnimationState bezogen werden
     };
   },
@@ -111,6 +120,9 @@ export default {
     },
     handleIconAnimationEnd() {
       this.whatIconAnimationIsPlaying = "none";
+    },
+    handleResetToggleSpeechBubble() {
+      this.$emit("resetToggleSpeechBubble");
     },
     handleSpriteAnimationEnd() {
       console.log("Handle Sprite Animation end");

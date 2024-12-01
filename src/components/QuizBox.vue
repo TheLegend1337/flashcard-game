@@ -10,7 +10,7 @@
         {{ flashcard.question }}
       </p>
       <ButtonUniversal
-        v-if="!isAnswerVisible"
+        v-if="!isAnswerVisible && delayBeforeShowButtonIsOver"
         :buttonWidth="100"
         :buttonHeight="30"
         class=""
@@ -86,6 +86,7 @@ export default {
       flashCardsStore: useFlashCardsStore(),
       flashcard: {},
       isAnimateAnticipationBlur: false,
+      delayBeforeShowButtonIsOver: false,
     };
   },
   computed: {
@@ -105,6 +106,9 @@ export default {
       "revealCardBuildup",
       soundEffect_CardRevealBuildup,
     );
+    setTimeout(() => {
+      this.delayBeforeShowButtonIsOver = true;
+    }, 1200);
   },
   methods: {
     showAnswer() {
