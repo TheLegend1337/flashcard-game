@@ -7,29 +7,29 @@ import zombieVillagerRunSlashing from "@/assets/animations/monsters/zombieVillag
 import zombieVillagerDying from "@/assets/animations/monsters/zombieVillager/sprites/zombieVillagerDyingSprite.png";
 
 export default {
-  zombieVillagerIdle: {
-    name: "zombieVillagerIdle",
+  idle: {
+    name: "idle",
     numberOfFrames: 18,
     ticksPerFrame: 3,
     loop: true,
     spriteSrc: zombieVillagerIdle,
   },
-  zombieVillagerHurt: {
-    name: "zombieVillagerHurt",
+  hurting: {
+    name: "hurting",
     numberOfFrames: 12,
     ticksPerFrame: 4,
     loop: false,
     spriteSrc: zombieVillagerHurt,
   },
-  zombieVillagerRunSlashing: {
-    name: "zombieVillagerRunSlashing",
+  attacking: {
+    name: "attacking",
     numberOfFrames: 12,
     ticksPerFrame: 4,
     loop: false,
     spriteSrc: zombieVillagerRunSlashing,
   },
-  zombieVillagerDying: {
-    name: "zombieVillagerDying",
+  dying: {
+    name: "dying",
     numberOfFrames: 15,
     ticksPerFrame: 3,
     loop: false,

@@ -16,10 +16,13 @@
       <Player
         :playerAction="playerAction"
         :toggleSpeechBubble="toggleSpeechBubble"
-        @sprite-animation-completed="handleSpriteAnimationEnd"
+        @player-sprite-animation-completed="handlePlayerSpriteAnimationEnd"
         @resetToggleSpeechBubble="handleResetSpeechBubble"
       />
-      <Monster :monsterAnimationState="monsterAnimationState" />
+      <Monster
+        :monsterAction="monsterAction"
+        @monster-sprite-animation-completed="handleMonsterSpriteAnimationEnd"
+      />
       <Willpower :animationToggle="animationToggle" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
@@ -73,8 +76,9 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       monsterStore: useMonsterStore(),
       playerStore: usePlayerStore(),
-      playerAction: "fade-in-from-left-to-right",
-      monsterAnimationState: "fade-in-from-right-to-left",
+      playerAction: "idle",
+      monsterAction: "idle",
+
       card: null,
       foo: 0,
       phase: "",
@@ -182,7 +186,7 @@ export default {
         }, 200);
       });
     },
-    handleSpriteAnimationEnd(payloadWithAnimationState) {
+    handlePlayerSpriteAnimationEnd(payloadWithAnimationState) {
       switch (payloadWithAnimationState) {
         case "attacking":
           console.log("Payload ist auf attacking");
@@ -195,6 +199,25 @@ export default {
           break;
         default:
           this.playerAction = "idle";
+      }
+    },
+    handleMonsterSpriteAnimationEnd(payloadWithAnimationState) {
+      switch (payloadWithAnimationState) {
+        case "attacking":
+          this.monsterAction = "idle";
+          break;
+        case "buffing":
+          this.monsterAction = "idle";
+          break;
+        case "hurting":
+          this.monsterAction = "idle";
+          break;
+        case "dying":
+          console.log("Payload ist auf dying");
+          break;
+
+        default:
+          this.monsterAction = "idle";
       }
     },
     handleResetSpeechBubble() {
@@ -219,6 +242,7 @@ export default {
               console.log("Does Damage");
               this.monsterStore.damageMonster(effect.value);
               this.playerAction = "attacking";
+              this.monsterAction = "hurting";
               break;
             case "armor":
               console.log("Increase Armor");
@@ -257,7 +281,7 @@ export default {
   background-position: 50% 100%;
   width: 100vw;
   height: 93vh;
- 
+
   overflow: hidden;
 }
 .center-button {
