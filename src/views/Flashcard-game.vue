@@ -257,7 +257,7 @@ export default {
   background-position: 50% 100%;
   width: 100vw;
   height: 93vh;
-  border: 1px solid beige;
+ 
   overflow: hidden;
 }
 .center-button {

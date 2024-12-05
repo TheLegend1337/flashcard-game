@@ -59,7 +59,7 @@
           </p>
         </div>
         <div
-          class="card-description absolute bottom-[1%] left-1/2 z-[3] h-[40%] w-[90%] -translate-x-1/2"
+          class="card-description absolute bottom-[1%] left-1/2 z-[3] -translate-x-1/2"
         >
           <p
             id="text-card-description"
@@ -370,7 +370,11 @@ export default {
   transition: all 0.5s;
   /* background-color: white; */
   transform: var(--card-rotation-degree) var(--xy-translation);
+ 
 }
+
+
+
 
 .card:hover {
   border-radius: 10%;
@@ -396,6 +400,9 @@ export default {
 }
 
 .card-description {
+ 
+  height: 40%;
+  width: 90%;
   background-image: url("@/assets/ui-components-backgrounds/card/card_description-dark-reduced.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -415,6 +422,7 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
 .card-level-frame {
   background-image: url("@/assets/ui-components-backgrounds/card/card_level_frame.png");
   background-size: contain;
@@ -564,5 +572,24 @@ export default {
 }
 .animateDiscardCard {
   animation: discardCard 0.5s ease-in-out forwards;
+}
+
+@media screen and (max-width: 1440px) {
+  .card {
+    position: relative;
+    width: 200px; 
+    aspect-ratio: 200/280; 
+    transform: var(--card-rotation-degree) var(--xy-translation);
+    transition: all 0.3s; /* Faster transition for responsiveness */
+  }
+  
+
+  #text-card-title{
+    font-size: 1rem;
+  }
+         
+#text-card-description{
+  font-size: 1rem;
+}
 }
 </style>

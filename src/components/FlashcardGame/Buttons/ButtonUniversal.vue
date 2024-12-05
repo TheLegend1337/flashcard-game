@@ -87,8 +87,12 @@ export default {
     handleClick() {
       if (this.type === "wrong") {
         this.$emit("button-wrong-clicked");
+        this.flashcardGameStore.answeredQuestionsCounter = this.flashcardGameStore.answeredQuestionsCounter+1;
+        console.log("Answered Questions: "+ this.flashcardGameStore.answeredQuestionsCounter);
       } else if (this.type === "correct") {
         this.$emit("button-correct-clicked");
+        this.flashcardGameStore.answeredQuestionsCounter = this.flashcardGameStore.answeredQuestionsCounter+1;
+        console.log("Answered Questions: "+ this.flashcardGameStore.answeredQuestionsCounter);
       } else if (this.type === "primary") {
         //Differentiate between primary and secondary
         this.$emit("button-primary-clicked");

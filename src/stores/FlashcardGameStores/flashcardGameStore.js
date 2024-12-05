@@ -6,6 +6,7 @@ export const useFlashcardGameStore = defineStore("flashcardGame", {
     quizBox: "invisible",
     willpower: 3,
     maxWillpower: 3,
+    answeredQuestionsCounter: 0,
   }),
   getters: {
     // Willpower

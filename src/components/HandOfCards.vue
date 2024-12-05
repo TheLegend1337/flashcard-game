@@ -85,5 +85,11 @@ export default {
 
 <style scoped>
 .handOfCards {
+
+}
+@media screen and (max-width: 1440px) {
+  .handOfCards {
+    bottom: -20%;
+}
 }
 </style>
