@@ -140,7 +140,10 @@ export default {
       //     this.selectedSpriteAnimation = "idle";
       // }
       this.selectedSpriteAnimation = "idle";
-      this.$emit("sprite-animation-completed", this.selectedSpriteAnimation);
+      this.$emit(
+        "player-sprite-animation-completed",
+        this.selectedSpriteAnimation,
+      );
     },
   },
   computed: {},
@@ -162,7 +165,8 @@ export default {
           this.selectedSpriteAnimation = "dying";
           break;
         case "healing":
-          this.selectedSpriteAnimation = "hurting";
+          this.whatIconAnimationIsPlaying = "heal-icon-animation";
+
           break;
         default:
           this.selectedSpriteAnimation = "idle";
@@ -235,7 +239,7 @@ export default {
   background-size: cover;
   background-position: center;
   transform: translate(50%, 50%);
-
+  z-index: 10;
   animation: damageIconAnimation 0.5s steps(2, end);
 }
 
@@ -271,45 +275,34 @@ export default {
   width: 150px;
   height: 150px;
   position: absolute;
-  background-image: url("@/assets/icons/heal-effect-icon.png");
+  background-image: url("@/assets/icons/heal-effect-icon-plus-signs.png");
   background-size: cover;
   background-position: center;
   transform: translate(50%, 50%);
-
-  animation: healIconAnimation 1s steps(3, end);
+  z-index: 10;
+  animation: healIconAnimation 1.5s ease-in-out;
 }
 @keyframes healIconAnimation {
   0% {
-    background-image: url("@/assets/icons/heal-effect-icon.png");
     background-size: cover;
     background-position: center;
     position: absolute;
-    opacity: 20%;
-    transform: translate(50%, 20%) scale(2);
+    opacity: 0%;
+    transform: translate(50%, 50%) scale(1);
   }
-  33% {
-    background-image: url("@/assets/icons/heal-effect-icon.png");
+  30% {
     background-size: cover;
     background-position: center;
     position: absolute;
-    opacity: 80%;
-    transform: translate(80%, 60%) scale(3);
-  }
-  66% {
-    background-image: url("@/assets/icons/heal-effect-icon.png");
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    opacity: 10%;
-    transform: translate(10%, 20%) scale(2);
+    transform: translate(50%, 50%) scale(2);
+    opacity: 100%;
   }
   100% {
-    background-image: url("@/assets/icons/heal-effect-icon.png");
     background-size: cover;
     background-position: center;
     position: absolute;
-    opacity: 70%;
-    transform: translate(10%, 80%) scale(4);
+    transform: translate(50%, 50%) scale(4);
+    opacity: 0%;
   }
 }
 

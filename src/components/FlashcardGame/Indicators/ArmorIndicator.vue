@@ -1,5 +1,5 @@
 <template>
-  <div class="armor-indicator">
+  <div class="fade-in-armor-indicator-from-left-to-right armor-indicator">
     <div class="armor-value">
       <p>{{ armorValue }}</p>
     </div>
@@ -104,5 +104,20 @@ export default {
     #0b3237 -2px -1px 0px,
     #0b3237 -1px -2px 0px,
     #0b3237 0px -3px 0px;
+}
+
+@keyframes fadeInArmorIndicatorFromLeftToRight {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(17%, -45%);
+  }
+}
+
+.fade-in-armor-indicator-from-left-to-right {
+  animation: fadeInArmorIndicatorFromLeftToRight 0.3s linear;
 }
 </style>
