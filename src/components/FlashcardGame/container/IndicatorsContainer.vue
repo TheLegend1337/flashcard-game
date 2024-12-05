@@ -1,7 +1,7 @@
 <template>
   <div class="indicators-container">
     <ArmorIndicator
-      v-if="playerStore.playerArmor > 0"
+      v-if="isArmorIndicatorVisible"
       class="z-[2]"
       :armorValue="armorValue"
     />
@@ -64,10 +64,26 @@ export default {
       if (this.role === "player") {
         return this.playerStore.playerArmor;
       } else if (this.role === "monster") {
-        9;
         return this.monsterStore.monsterArmor;
       } else {
         return 0;
+      }
+    },
+    isArmorIndicatorVisible() {
+      if (this.role === "player") {
+        if (this.playerStore.playerArmor > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (this.role === "monster") {
+        if (this.monsterStore.monsterArmor > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
       }
     },
   },
