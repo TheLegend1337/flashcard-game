@@ -78,11 +78,11 @@ export default {
 
 <style scoped>
 .particle {
+  z-index: 0;
 }
 canvas {
   width: 150px;
   height: 150px;
-  border: 2px solid green;
   position: absolute;
   top: 50%;
   left: 50%;

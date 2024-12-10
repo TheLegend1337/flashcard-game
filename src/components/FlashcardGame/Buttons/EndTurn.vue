@@ -1,6 +1,7 @@
 <template>
-  <div class="end-turn">
-    <Particle />
+  <div class="end-turn" @mouseenter="playMouseEnterSound">
+    <div class="end-turn-button"></div>
+    <Particle class="particle-effect" />
   </div>
 </template>
 
@@ -8,6 +9,8 @@
 //beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
 //@ steht für den src Ordner
 import Particle from "@/components/Animation/Particle.vue";
+import SoundHandler from "@/helpers/soundHandler";
+import soundEffect_ButtonMouseEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
 export default {
   name: "ExampleComponent",
   components: {
@@ -31,6 +34,13 @@ export default {
   watch: {
     // Beobachter für reaktive Daten oder Props
   },
+  mounted() {
+    this.soundHandler = new SoundHandler();
+    this.soundHandler.registerSound(
+      "buttonHover",
+      soundEffect_ButtonMouseEnter,
+    );
+  },
   /*
       // Lifecycle Hooks
       beforeCreate() {
@@ -41,9 +51,6 @@ export default {
       },
       beforeMount() {
         // Wird ausgeführt, bevor die Komponente in den DOM eingefügt wird
-      },
-      mounted() {
-        // Wird ausgeführt, wenn die Komponente in den DOM eingefügt wurde
       },
       beforeUpdate() {
         // Wird ausgeführt, bevor sich reaktive Daten ändern und ein Re-Render bevorsteht
@@ -69,18 +76,36 @@ export default {
       },*/
   methods: {
     // Methoden der Komponente
+    playMouseEnterSound() {
+      this.soundHandler.playSound("buttonHover", 0.03);
+    },
   },
 };
 </script>
 
 <style scoped>
 .end-turn {
-  width: 80px;
-  height: 80px;
-  border: 2px solid red;
+  width: 90px;
+  height: 90px;
+
   position: absolute;
   bottom: 30%;
   right: 10%;
   justify-self: end;
+}
+.end-turn-button {
+  width: 100%;
+  height: 100%;
+  background-image: url("@/assets/icons/btn_changeturn_middle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 2;
+}
+.end-turn-button:hover {
+  filter: drop-shadow(0 0 16px rgba(245, 222, 179, 0.465));
+}
+.particle-effect {
+  z-index: 1;
 }
 </style>
