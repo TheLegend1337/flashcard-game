@@ -26,6 +26,7 @@ export default {
       speechBubbleText: 0,
       texts: [
         "Ich habe nicht genug Willenskraft!",
+        "Du musst deinen Zug beenden!",
         "Lass lieber auf die Couch und Doomscrollen!",
         "Das ist Tomorrows Problem!",
         "Die Deadline ist eh erst nächste Woche!",

@@ -24,6 +24,7 @@
         @monster-sprite-animation-completed="handleMonsterSpriteAnimationEnd"
       />
       <Willpower :animationToggle="animationToggle" />
+      <EndTurn />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
         :discardedCard="discardedCard"
@@ -56,6 +57,7 @@ import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
 import Willpower from "../components/Willpower.vue";
+import EndTurn from "@/components/FlashcardGame/Buttons/EndTurn.vue";
 import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
 // import QuizBox from "../components/QuizBox.vue";
@@ -70,6 +72,7 @@ export default {
     CardDeck,
     // QuizBox,
     InfoBanner,
+    EndTurn,
   },
   data() {
     return {

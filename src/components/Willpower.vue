@@ -66,10 +66,9 @@ export default {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  grid-row-start: 7;
-  grid-row-end: 8;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
   background-image: url("@/assets/icons/brain-icon4.png");
   background-size: 120%;
   background-position: center;
