@@ -6,6 +6,7 @@
     }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
+    @click="handleClick"
   >
     <div class="end-turn-button"></div>
     <Particle v-if="isWillpowerZero" class="particle-effect" />
@@ -42,6 +43,11 @@ export default {
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
+    "cardStore.isDiscardAll"() {
+      if (this.cardStore.isDiscardAll) {
+        this.cardStore.isDiscardAll = false;
+      }
+    },
   },
   mounted() {
     this.soundHandler = new SoundHandler();
@@ -85,6 +91,9 @@ export default {
       },*/
   methods: {
     // Methoden der Komponente
+    handleClick() {
+      this.cardStore.isDiscardAll = true;
+    },
     handleMouseEnter() {
       this.cardStore.isCardShining = true;
       console.log(this.cardStore.isCardShining);

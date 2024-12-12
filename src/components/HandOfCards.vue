@@ -19,6 +19,7 @@
         :handOfCardsLength="handOfCards.length"
         :cardIndex="index"
         :isBound="card.isBound"
+        :discard="this.cardStore.isDiscardAll"
         @unleashed-card-clicked="unleashedCardClicked"
         @discard-animation-ended="handleDiscardAnimationEnd(card)"
       />
@@ -37,6 +38,7 @@ export default {
       type: Object,
       default: null,
     },
+
     // selectedCard: {
     //   type: Object,
     //   default: null,
@@ -85,11 +87,10 @@ export default {
 
 <style scoped>
 .handOfCards {
-
 }
 @media screen and (max-width: 1440px) {
   .handOfCards {
     bottom: -20%;
-}
+  }
 }
 </style>

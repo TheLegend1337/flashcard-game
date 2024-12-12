@@ -141,6 +141,10 @@ export default {
     card: {
       type: Object,
     },
+    discard: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -255,6 +259,11 @@ export default {
     "flashcardGamestore.willpower"() {
       if (this.flashcardGamestore.willpower === 0) {
         this.isUnplayable = true;
+      }
+    },
+    discard() {
+      if (this.discard === true) {
+        this.animationState = "discard";
       }
     },
   },
