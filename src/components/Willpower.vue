@@ -45,6 +45,7 @@ export default {
     "flashcardGamestore.willpower"() {
       if (this.flashcardGamestore.willpower === 0) {
         this.animationFlag = true;
+        this.$emit("willpower-dropped-zero");
       }
     },
     animationToggle() {

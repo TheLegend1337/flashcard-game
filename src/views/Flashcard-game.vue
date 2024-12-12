@@ -23,8 +23,11 @@
         :monsterAction="monsterAction"
         @monster-sprite-animation-completed="handleMonsterSpriteAnimationEnd"
       />
-      <Willpower :animationToggle="animationToggle" />
-      <EndTurn />
+      <Willpower
+        :animationToggle="animationToggle"
+        @willpower-dropped-zero="isWillpowerZero = true"
+      />
+      <EndTurn :isWillpowerZero="isWillpowerZero" />
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
         :discardedCard="discardedCard"
@@ -81,7 +84,6 @@ export default {
       playerStore: usePlayerStore(),
       playerAction: "idle",
       monsterAction: "idle",
-
       card: null,
       foo: 0,
       phase: "",
@@ -92,6 +94,7 @@ export default {
       animationToggle: true,
       discardedCard: null,
       toggleSpeechBubble: false,
+      isWillpowerZero: false,
     };
   },
   beforeCreate() {

@@ -1,7 +1,14 @@
 <template>
-  <div class="end-turn" @mouseenter="playMouseEnterSound">
+  <div
+    class="end-turn"
+    :class="{
+      'filter-drop-shadow': isWillpowerZero,
+    }"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+  >
     <div class="end-turn-button"></div>
-    <Particle class="particle-effect" />
+    <Particle v-if="isWillpowerZero" class="particle-effect" />
   </div>
 </template>
 
@@ -11,6 +18,7 @@
 import Particle from "@/components/Animation/Particle.vue";
 import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_ButtonMouseEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 export default {
   name: "ExampleComponent",
   components: {
@@ -18,13 +26,14 @@ export default {
   },
   props: {
     // Definiere Props hier
-    // objectName:{
-    //   type: object,
-    //   default: null,
-    // }
+    isWillpowerZero: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
+      cardStore: useCardStore(),
       // Zustandsvariablen
     };
   },
@@ -76,8 +85,14 @@ export default {
       },*/
   methods: {
     // Methoden der Komponente
-    playMouseEnterSound() {
+    handleMouseEnter() {
+      this.cardStore.isCardShining = true;
+      console.log(this.cardStore.isCardShining);
       this.soundHandler.playSound("buttonHover", 0.03);
+    },
+    handleMouseLeave() {
+      this.cardStore.isCardShining = false;
+      console.log(this.cardStore.isCardShining);
     },
   },
 };
@@ -107,5 +122,8 @@ export default {
 }
 .particle-effect {
   z-index: 1;
+}
+.filter-drop-shadow {
+  filter: drop-shadow(0 0 16px rgba(245, 222, 179, 0.465));
 }
 </style>

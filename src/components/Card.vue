@@ -10,6 +10,7 @@
         animateAnticipationShake: this.animationState === 'anticipationShake',
         animateAnticipationSkew: this.animationState === 'anticipationSkew',
         animateDiscardCard: this.animationState === 'discard',
+        'filter-drop-shadow': this.cardStore.isCardShining,
       }"
       @animationend="handleAnimationEnd"
     >
@@ -79,6 +80,7 @@ import soundEffect_DrawCard from "@/assets/sounds/soundEffects/drawCard_shorter.
 import soundEffect_OpenCard from "@/assets/sounds/soundEffects/bookFlip2.ogg";
 import soundEffect_CardReveal from "@/assets/sounds/soundEffects/triple-pop.wav";
 import soundEffect_CardEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 // import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
@@ -142,6 +144,7 @@ export default {
   },
   data() {
     return {
+      cardStore: useCardStore(),
       flashcardGameStore: useFlashcardGameStore(),
       cardData: this.card,
       // playerStore: usePlayerStore(),
@@ -370,11 +373,7 @@ export default {
   transition: all 0.5s;
   /* background-color: white; */
   transform: var(--card-rotation-degree) var(--xy-translation);
- 
 }
-
-
-
 
 .card:hover {
   border-radius: 10%;
@@ -400,7 +399,6 @@ export default {
 }
 
 .card-description {
- 
   height: 40%;
   width: 90%;
   background-image: url("@/assets/ui-components-backgrounds/card/card_description-dark-reduced.png");
@@ -574,22 +572,25 @@ export default {
   animation: discardCard 0.5s ease-in-out forwards;
 }
 
+.filter-drop-shadow {
+  filter: drop-shadow(0 0 30px rgb(245, 222, 179));
+}
+
 @media screen and (max-width: 1440px) {
   .card {
     position: relative;
-    width: 200px; 
-    aspect-ratio: 200/280; 
+    width: 200px;
+    aspect-ratio: 200/280;
     transform: var(--card-rotation-degree) var(--xy-translation);
     transition: all 0.3s; /* Faster transition for responsiveness */
   }
-  
 
-  #text-card-title{
+  #text-card-title {
     font-size: 1rem;
   }
-         
-#text-card-description{
-  font-size: 1rem;
-}
+
+  #text-card-description {
+    font-size: 1rem;
+  }
 }
 </style>
