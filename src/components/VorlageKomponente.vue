@@ -24,7 +24,7 @@ export default {
   props: {
     // Definiere Props hier
     // objectName:{
-    //   type: object,
+    //   type: Object,
     //   default: null,
     // }
   },
