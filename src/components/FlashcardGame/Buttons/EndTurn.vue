@@ -20,6 +20,7 @@ import Particle from "@/components/Animation/Particle.vue";
 import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_ButtonMouseEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 export default {
   name: "ExampleComponent",
   components: {
@@ -35,6 +36,7 @@ export default {
   data() {
     return {
       cardStore: useCardStore(),
+      flashcardGameStore: useFlashcardGameStore(),
       // Zustandsvariablen
     };
   },
@@ -93,6 +95,9 @@ export default {
     // Methoden der Komponente
     handleClick() {
       this.cardStore.isDiscardAll = true;
+      setTimeout(() => {
+        this.flashcardGameStore.phase = "enemyTurn";
+      }, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
     },
     handleMouseEnter() {
       this.cardStore.isCardShining = true;

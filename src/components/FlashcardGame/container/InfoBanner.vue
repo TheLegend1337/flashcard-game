@@ -70,9 +70,6 @@ export default {
         case "playPhase": {
           return "Entfessel";
         }
-        case "endTurn": {
-          return "Zug";
-        }
         case "enemyTurn": {
           return "Gegner";
         }
@@ -94,9 +91,6 @@ export default {
         }
         case "playPhase": {
           return "Karten!";
-        }
-        case "endTurn": {
-          return "beendet";
         }
         case "enemyTurn": {
           return "am Zug";

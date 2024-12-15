@@ -1,20 +1,5 @@
 <template>
   <div class="monster">
-    <!-- <select v-model="selectedSpriteAnimation" @change="updateAnimation"> -->
-    <!-- Dropdown zur Auswahl der Animation -->
-    <!-- <option
-        v-for="(animation, key) in zombieVillagerAnimations"
-        :key="key"
-        :value="key"
-      >
-        {{ animation.name }}
-      </option> -->
-    <!-- </select> -->
-    <!-- <Healthbar
-      v-if="!healthbarOff"
-      :monsterHealth="monsterStore.monsterHealth"
-      :maxMonsterHealth="monsterStore.maxMonsterHealth"
-    /> -->
     <div
       v-if="whatIconAnimationIsPlaying === 'defense-icon-animation'"
       class="defense-icon-animation"
@@ -32,6 +17,7 @@
     ></div>
     <!-- TODO: 'fade-in-from-right-to-left':
     monsterAnimationState === 'fade-in-from-right-to-left', -->
+    <IntentIndicator :intent="intent" />
     <div
       id="single-effect-animation-wrapper"
       :class="{
@@ -51,16 +37,18 @@
 
 <script>
 // import Healthbar from "../components/Healthbar.vue";
-// import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
+import IntentIndicator from "@/components/FlashcardGame/Indicators/IntentIndicator.vue";
 import zombieVillagerAnimations from "@/assets/animations/monsters/zombieVillager/animation-data/zombieVillagerAnimations.js"; // TODO: Ziel ist es irgendwann im Pfad monster-vue mit dem ausgewählten Monster zu ersetzen
 export default {
   components: {
     // Healthbar,
     SpriteAnimation,
     IndicatorsContainer,
+    IntentIndicator,
   },
   props: {
     monsterAction: {
@@ -72,16 +60,26 @@ export default {
   data() {
     return {
       // flashcardGameStore: useFlashcardGameStore(),
-
+      flashcardGameStore: useFlashcardGameStore(),
       zombieVillagerAnimations,
       selectedSpriteAnimation: "idle",
       monsterAnimationState: "none",
       whatIconAnimationIsPlaying: "none",
+      intent: {
+        action: "",
+        attackType: "",
+        value: 0,
+      },
+      listOfIntents: [],
+      loadIntentCounter: {
+        loadHeavyAttack: 0, //reset to zero after 3
+        loadExtremeAttack: 0, //reset to zero after 2
+        extremeAttack: false,
+      },
     };
   },
   methods: {
     handleSpriteAnimationEnd() {
-      console.log("Handle Sprite Animation end");
       // switch (this.playerAnimationState) {
       //   case "attacking":
       //     this.selectedSpriteAnimation = "idle";
@@ -103,8 +101,67 @@ export default {
         this.selectedSpriteAnimation,
       );
     },
+    processListOfIntents() {
+      this.listOfIntents.forEach(() => {});
+    },
+    decideIntent() {
+      const randomNumber = Math.random();
+      switch (true) {
+        case randomNumber <= 1:
+          this.intent.action = "attack";
+          break;
+        case randomNumber < 0:
+          this.intent.action = "buffing";
+          break;
+        case randomNumber < -1:
+          this.intent.action = "healing";
+          break;
+        default:
+          throw new Error(`Unexpected value: ${randomNumber}`);
+      }
+    },
+    decideIntentSubtype() {
+      if (this.intent.action === "attack") {
+        const randomFactor = Math.random();
+        //TODO: intent sollte wieder zurückgesetzt werden um keine Probleme zu verursachen.
+        //ansonsten verändere ich z.b nur ein Attribut und die Prop wird direkt aktualisiert.
+        switch (true) {
+          case this.loadIntentCounter.loadHeavyAttack < 3:
+            this.intent.attackType = "normal";
+            this.intent.value = Math.floor(4 * randomFactor + 6);
+            this.loadIntentCounter.loadHeavyAttack++;
+            break;
+          case this.loadIntentCounter.normal == 3:
+            this.intent.attackType = "heavy";
+            this.intent.value = Math.floor(6 * randomFactor + 12);
+            this.loadIntentCounter.loadExtremeAttack++;
+            this.loadIntentCounter.normal = 0;
+            break;
+          case this.loadIntentCounter.loadExtremeAttack == 2:
+            this.intent.attackType = "extreme";
+            this.intent.value = Math.floor(4 * randomFactor + 42);
+            this.loadIntentCounter.extremeAttack = true;
+            break;
+          default:
+            throw new Error(`Unexpected value: ${this.loadIntentCounter}`);
+        }
+      }
+    },
   },
+  computed: {},
   watch: {
+    "flashcardGameStore.phase"() {
+      if (this.flashcardGameStore.phase === "enemyTurn") {
+        //
+      } else if (this.flashcardGameStore.phase === "drawCards") {
+        //this.processListOfIntents();
+
+        this.decideIntent();
+        this.decideIntentSubtype();
+
+        this.listOfIntents.push(this.intent);
+      }
+    },
     monsterAction() {
       switch (this.monsterAction) {
         case "attacking":
@@ -132,6 +189,7 @@ export default {
           this.selectedSpriteAnimation = "idle";
       }
     },
+    isEnemyTurn() {},
   },
 };
 </script>
