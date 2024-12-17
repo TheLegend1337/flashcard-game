@@ -107,7 +107,7 @@ export default {
       "defenseIconAnimationSound",
       defenseIconAnimationSound,
     ); //zum registrieren des Soundeffects
-    attackingAnimationSound;
+
     this.soundHandler.registerSound(
       "attackingAnimationSound",
       attackingAnimationSound,
@@ -325,7 +325,7 @@ export default {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(100%, 0);
+    transform: translate(180%, 0);
   }
   100% {
     transform: translate(0, 0);

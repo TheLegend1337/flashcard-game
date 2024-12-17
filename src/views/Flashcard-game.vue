@@ -187,7 +187,7 @@ export default {
           break;
         case "enemyTurn":
           console.log("Gegner ist am Zug");
-
+          this.monsterAction = "actOnIntent";
           //this.flashcardGameStore.phase = "gameOver";
           break;
         case "gameOver":

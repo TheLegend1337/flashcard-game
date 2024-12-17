@@ -17,11 +17,18 @@
     ></div>
     <!-- TODO: 'fade-in-from-right-to-left':
     monsterAnimationState === 'fade-in-from-right-to-left', -->
-    <IntentIndicator :intent="intent" />
+    <IntentIndicator
+      :intent="intent"
+      :class="{
+        intentPulseAnimation: isIntentAnimationPlaying,
+      }"
+    />
+    <!-- Animation vom Intent hier steuern? -->
     <div
       id="single-effect-animation-wrapper"
       :class="{
         'werden-wegpaniert': monsterAnimationState === 'werden-wegpaniert',
+        'attacking-from-right-to-left': selectedSpriteAnimation === 'attacking',
       }"
     >
       <SpriteAnimation
@@ -43,6 +50,10 @@ import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import IntentIndicator from "@/components/FlashcardGame/Indicators/IntentIndicator.vue";
 import zombieVillagerAnimations from "@/assets/animations/monsters/zombieVillager/animation-data/zombieVillagerAnimations.js"; // TODO: Ziel ist es irgendwann im Pfad monster-vue mit dem ausgewählten Monster zu ersetzen
+
+import SoundHandler from "@/helpers/soundHandler";
+import attackingAnimationSound from "@/assets/sounds/soundEffects/punch1.wav";
+
 export default {
   components: {
     // Healthbar,
@@ -65,6 +76,8 @@ export default {
       selectedSpriteAnimation: "idle",
       monsterAnimationState: "none",
       whatIconAnimationIsPlaying: "none",
+      isIntentAnimationPlaying: false,
+
       intent: {
         action: "",
         attackType: "",
@@ -77,6 +90,13 @@ export default {
         extremeAttack: false,
       },
     };
+  },
+  mounted() {
+    this.soundHandler = new SoundHandler();
+    this.soundHandler.registerSound(
+      "attackingAnimationSound",
+      attackingAnimationSound,
+    );
   },
   methods: {
     handleSpriteAnimationEnd() {
@@ -164,13 +184,16 @@ export default {
     },
     monsterAction() {
       switch (this.monsterAction) {
-        case "attacking":
-          // this.selectedSpriteAnimation = "attacking";
-          // this.soundHandler.playSound("attackingAnimationSound", 0.1);
-          break;
-        case "buffing":
-          // this.whatIconAnimationIsPlaying = "defense-icon-animation";
-          // this.soundHandler.playSound("defenseIconAnimationSound", 0.2);
+        case "actOnIntent":
+          setTimeout(() => {
+            this.isIntentAnimationPlaying = true;
+          }, 5000);
+          if (this.intent.action === "attack") {
+            setTimeout(() => {
+              this.selectedSpriteAnimation = "attacking";
+              this.soundHandler.playSound("attackingAnimationSound", 0.1);
+            }, 7000);
+          }
           break;
         case "hurting":
           setTimeout(() => {
@@ -181,9 +204,6 @@ export default {
           break;
         case "dying":
           // this.selectedSpriteAnimation = "dying";
-          break;
-        case "healing":
-          // this.whatIconAnimationIsPlaying = "heal-icon-animation";
           break;
         default:
           this.selectedSpriteAnimation = "idle";
@@ -376,5 +396,70 @@ export default {
 }
 .werden-wegpaniert {
   animation: werdenWegpaniert 1s cubic-bezier(0.69, 0.16, 0.41, 1.44);
+}
+
+@keyframes attackingFromRightToLeft {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-180%, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.attacking-from-right-to-left {
+  animation: attackingFromRightToLeft 1s cubic-bezier(0.69, 0.16, 0.41, 1.44);
+}
+
+@keyframes flashingPulseWithFadeOut {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(150%);
+  }
+  10% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  20% {
+    transform: translate(-50%, 0) scale(1.3);
+    opacity: 0.7;
+    filter: brightness(150%);
+  }
+  30% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  40% {
+    transform: translate(-50%, 0) scale(1.3);
+    filter: brightness(150%);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  60% {
+    transform: translate(-50%, 0) scale(1.3);
+    filter: brightness(150%);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, 0) scale(3);
+    opacity: 0;
+  }
+}
+.intentPulseAnimation {
+  animation: flashingPulseWithFadeOut 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)
+    forwards;
 }
 </style>
