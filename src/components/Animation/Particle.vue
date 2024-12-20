@@ -64,10 +64,10 @@ export default {
         this.canvasContext,
         this.canvasWidth,
         this.canvasHeight,
-        75, //originX
-        75, //originY
-        20, //originShiftX
-        20, //originShiftY
+        75, //originX (Quasi mitte)
+        75, //originY(Quasi Mitte)
+        20, //originShiftX (Verschiebung falls man in einem Bereich keine Partikel möchte)
+        20, //originShiftY(Verschiebung falls man in einem Bereich keine Partikel möchte)
         3, //maxSize
         1, //minsize
       );

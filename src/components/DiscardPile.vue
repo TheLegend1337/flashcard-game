@@ -1,5 +1,10 @@
 <template>
-  <div class="discard-pile-wrapper">
+  <div
+    class="discard-pile-wrapper"
+    :class="{
+      'grow-pulse-animation': isDiscarded,
+    }"
+  >
     <div class="discard-pile">
       <div class="discard-pile-counter-border">
         <div class="discard-pile-counter pt-[3px]">
@@ -39,6 +44,13 @@ export default {
   computed: {
     sizeofDiscardPile() {
       return this.discardPile.length;
+    },
+    isDiscarded() {
+      if (this.flashcardGameStore.phase === "enemyTurn") {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   watch: {
@@ -117,5 +129,44 @@ export default {
   line-height: 1.2rem;
   font-size: 1.5rem;
   color: #2db8a5;
+}
+
+@keyframes growPulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.3);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.3);
+  }
+  80% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100 {
+    transform: scale(1);
+  }
+}
+.grow-pulse-animation {
+  animation: growPulseAnimation 0.8s linear;
 }
 </style>

@@ -71,7 +71,7 @@ export default class SparkParticle {
     const particles = [];
 
     const animateParticles = () => {
-      const isSpawnParticle = Math.random() <= 0.05;
+      const isSpawnParticle = Math.random() <= 0.1;
       if (isSpawnParticle) {
         const particle = new SparkParticle(
           canvasContext,

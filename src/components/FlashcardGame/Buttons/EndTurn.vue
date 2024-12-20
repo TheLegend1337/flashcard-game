@@ -3,6 +3,7 @@
     class="end-turn"
     :class="{
       'filter-drop-shadow': isWillpowerZero,
+      'is-disabled': isDisabled,
     }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -37,11 +38,19 @@ export default {
     return {
       cardStore: useCardStore(),
       flashcardGameStore: useFlashcardGameStore(),
+
       // Zustandsvariablen
     };
   },
   computed: {
     // Berechnete Eigenschaften
+    isDisabled() {
+      if (this.flashcardGameStore.phase === "playPhase") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
@@ -51,6 +60,7 @@ export default {
       }
     },
   },
+
   mounted() {
     this.soundHandler = new SoundHandler();
     this.soundHandler.registerSound(
@@ -94,10 +104,12 @@ export default {
   methods: {
     // Methoden der Komponente
     handleClick() {
-      this.cardStore.isDiscardAll = true;
-      setTimeout(() => {
-        this.flashcardGameStore.phase = "enemyTurn";
-      }, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
+      if (this.flashcardGameStore.phase === "playPhase") {
+        this.cardStore.isDiscardAll = true;
+        setTimeout(() => {
+          this.flashcardGameStore.phase = "enemyTurn";
+        }, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
+      }
     },
     handleMouseEnter() {
       this.cardStore.isCardShining = true;
@@ -138,6 +150,10 @@ export default {
   z-index: 1;
 }
 .filter-drop-shadow {
-  filter: drop-shadow(0 0 16px rgba(245, 222, 179, 0.465));
+  filter: drop-shadow(0 0 16px rgb(245, 222, 179));
+}
+
+.is-disabled {
+  filter: grayscale(100%);
 }
 </style>

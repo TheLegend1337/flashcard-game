@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="this.phase"
-    class="info-banner invisible fixed left-1/2 top-1/2 z-40 h-24 w-4/6 -translate-x-1/2 transform sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40"
+    v-if="leftText !== '' && rightText !== ''"
+    class="enter-right-exit-left-with-fade-in-animation info-banner invisible fixed left-1/2 top-1/2 z-40 h-20 w-3/6 -translate-x-1/2 transform sm:h-20 md:h-24 lg:h-28 xl:h-36 2xl:h-36"
   >
     <img
       class="absolute top-0"
@@ -13,7 +13,7 @@
       class="absolute bottom-0"
     />
     <h2
-      class="absolute left-[15%] top-1/2 -translate-y-1/2 text-2xl text-white sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+      class="absolute left-[15%] top-1/2 -translate-y-1/2 text-xl text-white sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl"
     >
       {{ leftText }}
     </h2>
@@ -23,7 +23,7 @@
       alt=""
     />
     <h2
-      class="absolute right-[15%] top-1/2 -translate-y-1/2 text-2xl text-white sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+      class="absolute right-[15%] top-1/2 -translate-y-1/2 text-xl text-white sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl"
     >
       {{ rightText }}
     </h2>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+
 //beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
 //@ steht für den src Ordner
 // import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
@@ -55,56 +57,97 @@ export default {
     return {
       // Zustandsvariablen
       // flashcardGameStore: useFlashcardGameStore(),
+      flashcardGameStore: useFlashcardGameStore(),
+      leftText: "",
+      rightText: "",
     };
   },
   computed: {
     // Berechnete Eigenschaften
     leftText() {
-      switch (this.phase) {
-        case "gameStart": {
+      switch (this.flashcardGameStore.phase) {
+        case "gameStart":
           return "Kampf";
-        }
-        case "drawCards": {
-          return "Ziehe";
-        }
-        case "playPhase": {
+        case "drawCards":
           return "Entfessel";
-        }
-        case "enemyTurn": {
+        case "enemyTurn":
           return "Gegner";
-        }
-        case "gameOver": {
+        case "gameOver":
           return "Du hast";
-        }
-        default: {
-          return "Deine";
-        }
+        default:
+          return "";
       }
     },
     rightText() {
-      switch (this.phase) {
-        case "gameStart": {
+      switch (this.flashcardGameStore.phase) {
+        case "gameStart":
           return "beginnt!";
-        }
-        case "drawCards": {
-          return "Karten";
-        }
-        case "playPhase": {
+        case "drawCards":
           return "Karten!";
-        }
-        case "enemyTurn": {
+        case "enemyTurn":
           return "am Zug";
-        }
-        case "gameOver": {
+        case "gameOver":
           return "dazu gelernt!";
-        }
-        default: {
-          return "Mudda";
-        }
+        default:
+          return "";
       }
     },
   },
   watch: {
+    // "flashcardGameStore.phase"() {
+    //   switch (this.flashcardGameStore.phase) {
+    //     case "gameStart": {
+    //       this.leftText = "Kampf";
+    //       break;
+    //     }
+    //     case "drawCards": {
+    //       this.leftText = "Ziehe";
+    //       break;
+    //     }
+    //     case "playPhase": {
+    //       this.leftText = "Entfessel";
+    //       break;
+    //     }
+    //     case "enemyTurn": {
+    //       this.leftText = "Gegner";
+    //       break;
+    //     }
+    //     case "gameOver": {
+    //       this.leftText = "Du hast";
+    //       break;
+    //     }
+    //     default: {
+    //       this.leftText = "Deine";
+    //       break;
+    //     }
+    //   }
+    //   switch (this.flashcardGameStore.phase) {
+    //     case "gameStart": {
+    //       this.rightText = "beginnt!";
+    //       break;
+    //     }
+    //     case "drawCards": {
+    //       this.rightText = "Karten";
+    //       break;
+    //     }
+    //     case "playPhase": {
+    //       this.rightText = "Karten!";
+    //       break;
+    //     }
+    //     case "enemyTurn": {
+    //       this.rightText = "am Zug";
+    //       break;
+    //     }
+    //     case "gameOver": {
+    //       this.rightText = "dazu gelernt!";
+    //       break;
+    //     }
+    //     default: {
+    //       this.rightText = "Mudda";
+    //       break;
+    //     }
+    //   }
+    // },
     // Beobachter für reaktive Daten oder Props
   },
   /*
@@ -167,5 +210,31 @@ export default {
     rgba(0, 0, 0, 0.7035189075630253) 94%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+
+@keyframes enterRightExitLeftWithFadeIn {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(50%, 0);
+  }
+  30% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  70% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-100%, 0);
+  }
+}
+.enter-right-exit-left-with-fade-in-animation {
+  animation: enterRightExitLeftWithFadeIn 3s ease-in-out;
 }
 </style>
