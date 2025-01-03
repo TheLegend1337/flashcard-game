@@ -1,9 +1,8 @@
 <!--Options API-->
 <template>
-  <div class="quizbox-background flex h-full w-full justify-center">
+  <div class="quizbox-background flex justify-center">
     <div
       class="quiz-box flex h-full w-[100%] flex-col items-center justify-around"
-      :class="{ animateAnticipationBlur: isAnimateAnticipationBlur }"
     >
       <div class="question container flex flex-col items-center p-[10px]">
         <p class="text-center text-[0.7rem]">
@@ -56,9 +55,6 @@
 
 <script>
 //habe den Content gefunden
-import SoundHandler from "@/helpers/soundHandler";
-import soundEffect_fail from "@/assets/sounds/soundEffects/fail-wobble.mp3";
-import soundEffect_CardRevealBuildup from "@/assets/sounds/soundEffects/building-swoosh-short.mp3";
 
 import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
 import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
@@ -88,22 +84,13 @@ export default {
       flashcardGameStore: useFlashcardGameStore(),
       flashCardsStore: useFlashCardsStore(),
       flashcard: {},
-      isAnimateAnticipationBlur: false,
       delayBeforeShowButtonIsOver: false,
     };
   },
   computed: {},
   mounted() {
     this.flashcard = this.flashCardsStore.popSingleFlashcard();
-    //this.flashCardsStore.logAllFlashcards();
-    // console.log("On Mounted Flashcard is: ", this.flashcard);
-    //ACHTUNG das hinzufügen von this.soundHandler mit dem this Keyword ist wichtig damit es beim Laden keine Probleme gibt.
-    this.soundHandler = new SoundHandler(); //zum erstellen des SoundHandlers
-    this.soundHandler.registerSound("fail", soundEffect_fail); //zum registrieren des Soundeffects
-    this.soundHandler.registerSound(
-      "revealCardBuildup",
-      soundEffect_CardRevealBuildup,
-    );
+
     setTimeout(() => {
       this.delayBeforeShowButtonIsOver = true;
     }, 1200);
@@ -114,20 +101,23 @@ export default {
     },
     handleButtonWrongClicked() {
       this.$emit("button-wrong-clicked");
-      this.soundHandler.playSound("fail", 0.05); //zum Abspielen des Soundeffects(zweiter Parameter ist Lautstärke)
+
       this.flashcard = this.flashCardsStore.resetStreak(this.flashcard);
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
+      this.flashcard = this.flashCardsStore.popSingleFlashcard();
+      this.isAnswerVisible = false;
     },
     handleButtonCorrectClicked() {
-      this.isAnimateAnticipationBlur = true;
       this.$emit("button-correct-clicked");
-      this.soundHandler.playSound("revealCardBuildup", 0.02);
+
       this.flashcard = this.flashCardsStore.incrementStreak(this.flashcard);
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
+      this.flashcard = this.flashCardsStore.popSingleFlashcard();
+      this.isAnswerVisible = false;
     },
   },
 };

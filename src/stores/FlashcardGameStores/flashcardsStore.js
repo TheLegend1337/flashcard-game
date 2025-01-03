@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+
 export const useFlashCardsStore = defineStore("flashCardsStore", {
   state: () => ({
     allFlashcards: [

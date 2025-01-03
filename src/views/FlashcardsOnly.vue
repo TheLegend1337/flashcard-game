@@ -1,6 +1,8 @@
 <template>
   <div class="flashcards-only">
-    <QuizBoxNoGamification class="quizbox" />
+    <div class="container">
+      <QuizBoxNoGamification class="quizbox" />
+    </div>
   </div>
 </template>
 
@@ -77,16 +79,25 @@ export default {
 <style scoped>
 .flashcards-only {
   /* CSS-Stile */
+
   width: 100%;
   height: 92vh;
   border: 2px solid red;
 }
-.quizbox {
-  height: 750px;
-  width: 400px;
+.container {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  position: relative;
+  border: 1px solid green;
+  width: 248px;
+  aspect-ratio: 248/350;
+  transform: translate(-50%, -40%) scale(1.6);
+}
+
+.quizbox {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
 }
 </style>
