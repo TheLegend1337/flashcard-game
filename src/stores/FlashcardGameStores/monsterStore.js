@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 
 export const useMonsterStore = defineStore("monsterStore", {
   state: () => ({
-    monsterHealth: 400,
-    maxMonsterHealth: 400,
+    monsterHealth: 100,
+    maxMonsterHealth: 100,
     monsterArmor: 0,
   }),
   getters: {

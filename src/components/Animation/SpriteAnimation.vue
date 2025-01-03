@@ -36,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    console.log("mounted - animationParameters:", this.animationParameters);
+    // console.log("mounted - animationParameters:", this.animationParameters);
     this.initializeSprite();
     /*Ich hatte vorher den ganzen code aus initializeSprite hier und hatte das Problem, das die Komponente nicht aktuelisiert wurde
     weil ich die Animation nur beim mounten durchgeführt habe, aber wenn die Animation geändert wird muss die Animation neu initialisiert werden...*1...*/
@@ -46,7 +46,7 @@ export default {
     ...*1 deswegen musste ich noch watch hinzufügen, damit wir die Canvas komponente mit der Animation neu laden können immer wenn animationParameters sich ändert.
     */
     animationParameters() {
-      console.log("watch - animationParameters updated:", newVal);
+      //   console.log("watch - animationParameters updated:", newVal);
       this.initializeSprite();
     },
   },
@@ -58,11 +58,11 @@ export default {
       canvas.height = frameHeight;
       const spriteImage = new Image();
       spriteImage.src = this.animationParameters.spriteSrc;
-      /*Debugging: */ console.log("Bildquelle:", spriteImage.src); // Zeigt die Quelle des Bildes an
+      //  /*Debugging: */ console.log("Bildquelle:", spriteImage.src); // Zeigt die Quelle des Bildes an
       spriteImage.onload = () => {
         /* Debugging */
-        console.log("Bild erfolgreich geladen");
-        console.log("Bildquelle:", this.spriteImageSrc);
+        // console.log("Bild erfolgreich geladen");
+        // console.log("Bildquelle:", this.spriteImageSrc);
         /*HIER WERDEN DIE GANZEN DATEN FÜR DIE SPRITE ANIMATION ÜBERGEBEN*/
         this.sprite = spriteHandler({
           //heißt im tutorial " this.characterSprite = sprite({});"
@@ -95,7 +95,7 @@ export default {
 
         if (animationCompleted) {
           this.$emit("sprite-animation-completed");
-          console.log("Sprite Animation completed");
+          //   console.log("Sprite Animation completed");
           // If you want to stop the animation loop, do not request the next frame
           return;
         }

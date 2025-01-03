@@ -18,10 +18,10 @@
     <!-- TODO: 'fade-in-from-right-to-left':
     monsterAnimationState === 'fade-in-from-right-to-left', -->
     <IntentIndicator
+      v-if="isIntentVisible"
       :intent="intent"
-      :class="{
-        intentPulseAnimation: isIntentAnimationPlaying,
-      }"
+      :playIntentAnimation="playIntentAnimation"
+      @animation-ended="handleIntentIndicatorAnimationEnd"
     />
     <!-- Animation vom Intent hier steuern? -->
     <div
@@ -46,6 +46,7 @@
 // import Healthbar from "../components/Healthbar.vue";
 
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
+import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
 import IntentIndicator from "@/components/FlashcardGame/Indicators/IntentIndicator.vue";
@@ -72,12 +73,15 @@ export default {
     return {
       // flashcardGameStore: useFlashcardGameStore(),
       flashcardGameStore: useFlashcardGameStore(),
+      playerStore: usePlayerStore(),
       zombieVillagerAnimations,
       selectedSpriteAnimation: "idle",
       monsterAnimationState: "none",
       whatIconAnimationIsPlaying: "none",
-      isIntentAnimationPlaying: false,
-
+      playIntentAnimation: false,
+      intentsCounter: 0,
+      isIntentVisible: false,
+      flashingPulseWithFadeOutEnded: false,
       intent: {
         action: "",
         attackType: "",
@@ -87,7 +91,6 @@ export default {
       loadIntentCounter: {
         loadHeavyAttack: 0, //reset to zero after 3
         loadExtremeAttack: 0, //reset to zero after 2
-        extremeAttack: false,
       },
     };
   },
@@ -99,6 +102,16 @@ export default {
     );
   },
   methods: {
+    actOnIntent() {
+      if (this.flashingPulseWithFadeOutEnded == true) {
+        if (this.intent.action === "attack") {
+          this.selectedSpriteAnimation = "attacking";
+          this.$emit("monster-is-attacking-player");
+          this.playerStore.damageHero(this.intent.value);
+          this.soundHandler.playSound("attackingAnimationSound", 0.1);
+        }
+      }
+    },
     handleSpriteAnimationEnd() {
       // switch (this.playerAnimationState) {
       //   case "attacking":
@@ -116,10 +129,22 @@ export default {
       this.selectedSpriteAnimation = "idle";
       this.monsterAnimationState = "none";
       this.whatIconAnimationIsPlaying = "none";
+      if (this.flashcardGameStore.phase === "enemyTurn") {
+        //
+        this.$emit("enemy-turn-over");
+      }
       this.$emit(
         "monster-sprite-animation-completed",
         this.selectedSpriteAnimation,
       );
+    },
+    handleIntentIndicatorAnimationEnd(animationState) {
+      if (animationState === "flashingPulseWithFadeOut") {
+        this.isIntentVisible = false;
+        this.playIntentAnimation = false;
+        this.flashingPulseWithFadeOutEnded = true;
+        this.actOnIntent();
+      }
     },
     processListOfIntents() {
       this.listOfIntents.forEach(() => {});
@@ -129,16 +154,20 @@ export default {
       switch (true) {
         case randomNumber <= 1:
           this.intent.action = "attack";
+          console.log("Intent is attack");
           break;
         case randomNumber < 0:
           this.intent.action = "buffing";
+          console.log("Intent is Buffing");
           break;
         case randomNumber < -1:
           this.intent.action = "healing";
+          console.log("Intent is healing");
           break;
         default:
           throw new Error(`Unexpected value: ${randomNumber}`);
       }
+      this.decideIntentSubtype();
     },
     decideIntentSubtype() {
       if (this.intent.action === "attack") {
@@ -146,26 +175,39 @@ export default {
         //TODO: intent sollte wieder zurückgesetzt werden um keine Probleme zu verursachen.
         //ansonsten verändere ich z.b nur ein Attribut und die Prop wird direkt aktualisiert.
         switch (true) {
-          case this.loadIntentCounter.loadHeavyAttack < 3:
+          case this.loadIntentCounter.loadHeavyAttack < 3 &&
+            this.loadIntentCounter.loadExtremeAttack < 4:
             this.intent.attackType = "normal";
-            this.intent.value = Math.floor(4 * randomFactor + 6);
+            console.log("Attack is normal");
+            this.intent.value = Math.floor(4 * randomFactor + 3);
             this.loadIntentCounter.loadHeavyAttack++;
+            console.log(
+              "LoadHeavy Attack Counter: " +
+                this.loadIntentCounter.loadHeavyAttack,
+            );
             break;
-          case this.loadIntentCounter.normal == 3:
+          case this.loadIntentCounter.loadHeavyAttack == 3:
             this.intent.attackType = "heavy";
+            console.log("Attack is heavy");
             this.intent.value = Math.floor(6 * randomFactor + 12);
             this.loadIntentCounter.loadExtremeAttack++;
-            this.loadIntentCounter.normal = 0;
+            this.loadIntentCounter.loadHeavyAttack = 0;
+            console.log(
+              "load Extreme Attack Counter: " +
+                this.loadIntentCounter.loadExtremeAttack,
+            );
             break;
-          case this.loadIntentCounter.loadExtremeAttack == 2:
-            this.intent.attackType = "extreme";
-            this.intent.value = Math.floor(4 * randomFactor + 42);
-            this.loadIntentCounter.extremeAttack = true;
+          case this.loadIntentCounter.loadExtremeAttack == 4:
+            console.log("Attack is extreme");
+            this.intent.value = Math.floor(4 * randomFactor + 22);
+            this.loadIntentCounter.loadExtremeAttack = 0;
             break;
           default:
             throw new Error(`Unexpected value: ${this.loadIntentCounter}`);
         }
       }
+      this.listOfIntents.push(this.intent);
+      console.log(this.listOfIntents);
     },
   },
   computed: {},
@@ -177,23 +219,14 @@ export default {
         //this.processListOfIntents();
 
         this.decideIntent();
-        this.decideIntentSubtype();
-
+        this.isIntentVisible = true;
         this.listOfIntents.push(this.intent);
       }
     },
     monsterAction() {
       switch (this.monsterAction) {
         case "actOnIntent":
-          setTimeout(() => {
-            this.isIntentAnimationPlaying = true;
-          }, 5000);
-          if (this.intent.action === "attack") {
-            setTimeout(() => {
-              this.selectedSpriteAnimation = "attacking";
-              this.soundHandler.playSound("attackingAnimationSound", 0.1);
-            }, 7000);
-          }
+          this.playIntentAnimation = true;
           break;
         case "hurting":
           setTimeout(() => {
@@ -209,7 +242,6 @@ export default {
           this.selectedSpriteAnimation = "idle";
       }
     },
-    isEnemyTurn() {},
   },
 };
 </script>
@@ -403,7 +435,7 @@ export default {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(-180%, 0);
+    transform: translate(-100%, 0);
   }
   100% {
     transform: translate(0, 0);
@@ -411,55 +443,5 @@ export default {
 }
 .attacking-from-right-to-left {
   animation: attackingFromRightToLeft 1s cubic-bezier(0.69, 0.16, 0.41, 1.44);
-}
-
-@keyframes flashingPulseWithFadeOut {
-  0% {
-    transform: translate(-50%, 0) scale(1);
-    filter: brightness(150%);
-  }
-  10% {
-    transform: translate(-50%, 0) scale(1);
-    opacity: 1;
-    filter: brightness(100%);
-  }
-  20% {
-    transform: translate(-50%, 0) scale(1.3);
-    opacity: 0.7;
-    filter: brightness(150%);
-  }
-  30% {
-    transform: translate(-50%, 0) scale(1);
-    filter: brightness(100%);
-    opacity: 0.7;
-  }
-  40% {
-    transform: translate(-50%, 0) scale(1.3);
-    filter: brightness(150%);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, 0) scale(1);
-    filter: brightness(100%);
-    opacity: 0.7;
-  }
-  60% {
-    transform: translate(-50%, 0) scale(1.3);
-    filter: brightness(150%);
-    opacity: 0.7;
-  }
-  70% {
-    transform: translate(-50%, 0) scale(1);
-    filter: brightness(100%);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate(-50%, 0) scale(3);
-    opacity: 0;
-  }
-}
-.intentPulseAnimation {
-  animation: flashingPulseWithFadeOut 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)
-    forwards;
 }
 </style>

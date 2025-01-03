@@ -1,6 +1,13 @@
 <template>
+  <!-- Note: das Verschieben von fade-in-from-bottom-left-to-top-right in den DiscardPile
+   löst das Problem dass die Animation immer wieder in der drawCards Phase ausgeführt wurde.
+   Die Ursache liegt womöglich daran, dass die Klasse beim rerendern der Parent Component(Flashcard-game.vue) 
+   immer wieder hinzugefügt wurde. Jetzt hingegen würde die Animation nur abspielen wenn die Component 
+   DiscardPile neu gerendert wird. Oder anders gesagt sobald die Kind Component gemounted wurde, feuer die Animation  nur 
+   innerhalb des eignenen Scopes, wenn die Component neu gerendert wird.
+   -->
   <div
-    class="discard-pile-wrapper"
+    class="discard-pile-wrapper fade-in-from-bottom-left-to-top-right"
     :class="{
       'grow-pulse-animation': isDiscarded,
     }"
@@ -38,12 +45,12 @@ export default {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
-      discardPile: [],
+      // discardPile: [],
     };
   },
   computed: {
     sizeofDiscardPile() {
-      return this.discardPile.length;
+      return this.cardStore.getSizeOfDiscardPile;
     },
     isDiscarded() {
       if (this.flashcardGameStore.phase === "enemyTurn") {
@@ -55,21 +62,16 @@ export default {
   },
   watch: {
     discardedCard(card) {
-      this.discardPile.push(card);
+      //this.discardPile.push(card);
+      this.cardStore.addToDiscardPile(card);
     },
   },
-  methods: {
-    discard() {
-      this.cardStore.popCard();
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
 .discard-pile-wrapper {
-  animation: fadeInFromBottomLeftToTopRight 1s
-    cubic-bezier(0.69, 0.16, 0.41, 1.44);
   width: 150px;
   height: 150px;
   /* border: 3px solid white; */
@@ -168,5 +170,21 @@ export default {
 }
 .grow-pulse-animation {
   animation: growPulseAnimation 0.8s linear;
+}
+
+.fade-in-from-bottom-left-to-top-right {
+  animation: fadeInFromBottomLeftToTopRight 1s
+    cubic-bezier(0.69, 0.16, 0.41, 1.44);
+}
+
+@keyframes fadeInFromBottomLeftToTopRight {
+  0% {
+    opacity: 0;
+    transform: translate(-100%, 100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 </style>

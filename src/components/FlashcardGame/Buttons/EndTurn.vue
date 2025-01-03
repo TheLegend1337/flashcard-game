@@ -10,7 +10,10 @@
     @click="handleClick"
   >
     <div class="end-turn-button"></div>
-    <Particle v-if="isWillpowerZero" class="particle-effect" />
+    <Particle
+      v-if="isWillpowerZero && flashcardGameStore.phase === 'playPhase'"
+      class="particle-effect"
+    />
   </div>
 </template>
 
@@ -54,11 +57,6 @@ export default {
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
-    "cardStore.isDiscardAll"() {
-      if (this.cardStore.isDiscardAll) {
-        this.cardStore.isDiscardAll = false;
-      }
-    },
   },
 
   mounted() {
@@ -106,9 +104,10 @@ export default {
     handleClick() {
       if (this.flashcardGameStore.phase === "playPhase") {
         this.cardStore.isDiscardAll = true;
-        setTimeout(() => {
-          this.flashcardGameStore.phase = "enemyTurn";
-        }, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
+        console.log("IsDicardAll: " + this.cardStore.isDiscardAll);
+
+        this.flashcardGameStore.phase = "endTurn";
+        //setTimeout(() => {}, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
       }
     },
     handleMouseEnter() {

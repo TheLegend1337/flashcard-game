@@ -19,10 +19,10 @@
         :handOfCardsLength="handOfCards.length"
         :cardIndex="index"
         :isBound="card.isBound"
-        :discard="this.cardStore.isDiscardAll"
         @unleashed-card-clicked="unleashedCardClicked"
-        @discard-animation-ended="handleDiscardAnimationEnd(card)"
+        @discard-animation-ended="handleDiscardAnimationEnd"
       />
+      <!-- :discard="this.cardStore.isDiscardAll" -->
     </div>
   </div>
 </template>
@@ -72,14 +72,15 @@ export default {
     unleashedCardClicked(cardData) {
       this.$emit("unleashed-card-clicked", cardData);
     },
-    handleDiscardAnimationEnd(card) {
+    handleDiscardAnimationEnd(payloadCard) {
       // Remove the card after animation ends
       // if (this.isDiscardAnimationPlaying === true) {
       const filteredHandOfCards = this.handOfCards.filter(
-        (existingCard) => existingCard.id !== card.id,
+        (existingCard) => existingCard.id !== payloadCard.id,
       );
       this.handOfCards = filteredHandOfCards;
-      console.log("Length: " + this.handOfCards.length);
+      this.$emit("discard-card", payloadCard);
+      console.log("Hand Of Cards Length: " + this.handOfCards.length);
     },
   },
 };

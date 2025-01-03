@@ -9,11 +9,13 @@
       class="z-0"
       :healthValue="healthValue"
       :maxHealthValue="maxHealthValue"
+      :isArmored="isArmored"
     />
   </div>
 </template>
 
 <script>
+import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 import Healthbar from "@/components/Healthbar.vue";
@@ -32,9 +34,15 @@ export default {
       Required: true,
       default: "none",
     },
+    isArmored: {
+      type: Boolean,
+      Required: true,
+      default: false,
+    },
   },
   data() {
     return {
+      flashcardGameStore: useFlashcardGameStore(),
       playerStore: usePlayerStore(),
       monsterStore: useMonsterStore(),
       // Zustandsvariablen
@@ -89,6 +97,13 @@ export default {
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
+    "playerStore.playerArmor"() {
+      if (this.flashcardGameStore.phase === "enemyTurn") {
+        if (this.playerStore.playerArmor <= 0) {
+          this.$emit("armor-broken");
+        }
+      }
+    },
   },
   /*
     // Lifecycle Hooks

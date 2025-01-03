@@ -1,16 +1,19 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
+      <MusicPlayer />
       <InfoBanner
         :key="this.flashcardGameStore.phase"
-        :phase="this.flashcardGameStore.phase"
-        class="animate-enter-right-exit-left-with-fade-in"
+        class=""
+        @info-banner-animation-started="handleInfoBannerAnimationStart"
+        @info-banner-animation-ended="handleInfoBannerAnimationEnd"
       />
       <HandOfCards
         ref="HandOfCards"
         :card="card"
         class="animate-fade-in-from-bottom-to-top"
         @unleashed-card-clicked="playCard"
+        @discard-card="handleDiscardedCard"
       />
       <!--emitted dass Karte abgeworfen wird und übergibt Kartenobjekt an Parent -->
       <Player
@@ -22,12 +25,15 @@
       <Monster
         :monsterAction="monsterAction"
         @monster-sprite-animation-completed="handleMonsterSpriteAnimationEnd"
+        @monster-is-attacking-player="handleMonsterIsAttackingPlayer"
+        @enemy-turn-over="handleEnemyTurnOver"
       />
       <Willpower
         :animationToggle="animationToggle"
         @willpower-dropped-zero="isWillpowerZero = true"
       />
       <EndTurn :isWillpowerZero="isWillpowerZero" />
+      <!-- //Könnte man refaktorieren, zwei Komponentn sind von "isWillpowerZero" abhängig und könnten den Zugang zum Store bekommen. -->
       <!-- class="animate-fade-in-from-bottom-left-to-top-right" -->
       <DiscardPile
         :discardedCard="discardedCard"
@@ -42,35 +48,9 @@
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase()" class="m-2">Phase ändern</button>
 
-      <h1
-        v-if="this.flashcardGameStore.phase === 'gameStart'"
-        class="phaseTitle"
-      >
-        Game Start
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'drawCards'"
-        class="phaseTitle"
-      >
-        Draw Cards
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'playPhase'"
-        class="phaseTitle"
-      >
-        Play Phase
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'enemyTurn'"
-        class="phaseTitle"
-      >
-        Enemy Turn
-      </h1>
-      <h1
-        v-if="this.flashcardGameStore.phase === 'gameOver'"
-        class="phaseTitle"
-      >
-        Game Over
+      <h1 class="phaseTitle">
+        {{ this.flashcardGameStore.phase }} //
+        {{ this.flashcardGameStore.roundCounter }}
       </h1>
     </div>
   </main>
@@ -80,6 +60,8 @@
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
+import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
+
 import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
@@ -89,6 +71,7 @@ import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
 // import QuizBox from "../components/QuizBox.vue";
 import InfoBanner from "@/components/FlashcardGame/container/InfoBanner.vue";
+import MusicPlayer from "@/components/Sound/Music/MusicPlayer.vue";
 export default {
   components: {
     HandOfCards,
@@ -100,12 +83,14 @@ export default {
     // QuizBox,
     InfoBanner,
     EndTurn,
+    MusicPlayer,
   },
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       monsterStore: useMonsterStore(),
       playerStore: usePlayerStore(),
+      cardStore: useCardStore(),
       playerAction: "idle",
       monsterAction: "idle",
       card: null,
@@ -119,39 +104,40 @@ export default {
       discardedCard: null,
       toggleSpeechBubble: false,
       isWillpowerZero: false,
+      isInfoBannerAnimationPlaying: false,
     };
   },
   beforeCreate() {
-    console.log("beforeCreate");
+    //  console.log("beforeCreate");
   },
   created() {
-    console.log("created");
+    // console.log("created");
   },
   beforeMount() {
-    console.log("beforeMount");
+    // console.log("beforeMount");
   },
   mounted() {
     this.phase = this.flashcardGameStore.phase; //Brauche ich das im Mounted?
     this.changePhase();
-    console.log("mounted");
-    console.log("Phase ist: " + this.flashcardGameStore.phase);
+    //  console.log("mounted");
+    // console.log("Phase ist: " + this.flashcardGameStore.phase);
   },
   beforeUpdate() {
-    console.log("beforeUpdate");
+    // console.log("beforeUpdate");
   },
   updated() {
-    console.log("updated");
+    //console.log("updated");
   },
   beforeUnmount() {
-    console.log("beforeUnmount");
+    // console.log("beforeUnmount");
   },
   unmounted() {
-    console.log("unmounted");
+    // console.log("unmounted");
   },
 
   watch: {
     "flashcardGameStore.phase"(value) {
-      console.log(value);
+      //  console.log(value);
       this.changePhase();
     },
   },
@@ -169,33 +155,43 @@ export default {
     async changePhase() {
       switch (this.flashcardGameStore.phase) {
         case "gameStart":
-          console.log("Das Spiel hat gestartet");
+          //  console.log("Das Spiel hat gestartet");
           setTimeout(() => {
             this.flashcardGameStore.phase = "drawCards";
           }, 3000);
           break;
         case "drawCards":
-          console.log("Spieler zieht Karten");
-          await this.drawCard(5);
+          //   console.log("Spieler zieht Karten");
+          await this.flashcardGameStore.setWillpower(3);
+          //await this.flashcardGameStore.increaseWillpower(3);
+          this.isWillpowerZero = false;
+
+          if (this.cardStore.checkIfCardDeckHasNotEnoughCards) {
+            await this.cardStore.refillCardDeckWithAllCardsFromDiscardPile();
+            await this.drawCard(5);
+          } else {
+            await this.drawCard(5);
+          }
           setTimeout(() => {
             this.flashcardGameStore.phase = "playPhase";
           }, 3000);
           break;
         case "playPhase":
-          console.log("Spieler darf Entscheidungen treffen");
+          //  console.log("Spieler darf Entscheidungen treffen");
           // this.phase = "endTurn";
           break;
         case "enemyTurn":
-          console.log("Gegner ist am Zug");
+          //   console.log("Gegner ist am Zug");
           this.monsterAction = "actOnIntent";
           //this.flashcardGameStore.phase = "gameOver";
+          this.flashcardGameStore.roundCounter++;
           break;
         case "gameOver":
-          console.log("You died!");
+          //   console.log("You died!");
           this.flashcardGameStore.phase = "gameStart";
           break;
         default:
-          console.log(`Default behavior.`);
+        // console.log(`Default behavior.`);
       }
     },
     async drawCard(amount) {
@@ -206,29 +202,36 @@ export default {
     drawSinglecard() {
       return new Promise((resolve) => {
         setTimeout(() => {
-          const card = this.$refs.CardDeck.drawCard();
-          console.log(card);
+          const card = this.cardStore.drawCard();
+          // console.log(card);
           this.card = card;
           resolve(card);
         }, 200);
       });
     },
+    handleInfoBannerAnimationStart() {
+      this.isInfoBannerAnimationPlaying = true;
+    },
+    handleInfoBannerAnimationEnd() {
+      this.isInfoBannerAnimationPlaying = false;
+    },
     handlePlayerSpriteAnimationEnd(payloadWithAnimationState) {
       switch (payloadWithAnimationState) {
         case "attacking":
-          console.log("Payload ist auf attacking");
+          //console.log("Payload ist auf attacking");
           break;
         case "buffing":
-          console.log("Payload ist auf buffing");
+          //  console.log("Payload ist auf buffing");
           break;
         case "dying":
-          console.log("Payload ist auf dying");
+          // console.log("Payload ist auf dying");
           break;
         default:
           this.playerAction = "idle";
       }
     },
     handleMonsterSpriteAnimationEnd(payloadWithAnimationState) {
+      //this method has only one job: set Monster Prop "monsterAction" to idle so we get a change in data
       switch (payloadWithAnimationState) {
         case "attacking":
           this.monsterAction = "idle";
@@ -240,12 +243,22 @@ export default {
           this.monsterAction = "idle";
           break;
         case "dying":
-          console.log("Payload ist auf dying");
+          //console.log("Payload ist auf dying");
           break;
 
         default:
           this.monsterAction = "idle";
       }
+    },
+    handleMonsterIsAttackingPlayer() {
+      this.playerAction = "hurting";
+    },
+    handleEnemyTurnOver() {
+      this.flashcardGameStore.phase = "drawCards";
+      //set Timeout entfernt weil es Probleme schafft, es nimmt den Code aus dem Programmfluss raus und macht
+      //es etwas unvorhersehbar, generell habe ich gelernt, dass es
+      //besser ist auf setTimeout komplett zu verzichten und statt dessen bei Animationen
+      //die Events animationstart und animationend einzusetzen um einen vorhersehbaren Programmablauf zu schaffen
     },
     handleResetSpeechBubble() {
       this.toggleSpeechBubble = false;
@@ -266,18 +279,18 @@ export default {
         for (let effect of payloadCard.effects) {
           switch (effect.type) {
             case "damage":
-              console.log("Does Damage");
+              // console.log("Does Damage");
               this.monsterStore.damageMonster(effect.value);
               this.playerAction = "attacking";
               this.monsterAction = "hurting";
               break;
             case "armor":
-              console.log("Increase Armor");
+              //  console.log("Increase Armor");
               this.playerStore.increaseArmor(effect.value);
               this.playerAction = "buffing";
               break;
             case "heal":
-              console.log("Increase Health");
+              // console.log("Increase Health");
               this.playerStore.healHero(effect.value);
               this.playerAction = "healing";
               break;
@@ -286,9 +299,12 @@ export default {
           }
         }
       } else {
-        console.log("zu Teuer");
+        //  console.log("zu Teuer");
         this.toggleSpeechBubble = true;
       }
+    },
+    handleDiscardedCard(payloadCard) {
+      this.discardedCard = payloadCard;
     },
   },
 };

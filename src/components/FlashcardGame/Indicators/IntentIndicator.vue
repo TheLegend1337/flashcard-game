@@ -1,10 +1,15 @@
 <template>
+  <!-- :class="{
+      invisible: !isLoadingAnimationReady,
+      animateLoadIntent: isLoadingAnimationReady,
+    }" -->
   <div
     class="intent-indicator"
     :class="{
-      invisible: !isLoadingAnimationReady,
-      animateIntent: isLoadingAnimationReady,
+      animateLoadIntent: this.animationState === 'animateLoadIntent',
+      intentPulseAnimation: this.animationState === 'flashingPulseWithFadeOut',
     }"
+    @animationend="handleIntentIndicatorAnimationEnd"
   >
     <div class="intentValue">
       <p class="intent-indicator-text">{{ this.intent.value }}</p>
@@ -26,23 +31,36 @@ export default {
       type: Object,
       default: null,
     },
+
+    playIntentAnimation: {
+      type: Boolean,
+      default: false,
+      Required: true,
+    },
   },
   data() {
     return {
       // Zustandsvariablen
-      isLoadingAnimationReady: false,
+      //isLoadingAnimationReady: false,
     };
   },
+  beforeMount() {
+    this.animationState = "animateLoadIntent";
+  },
   mounted() {
-    setTimeout(() => {
-      this.isLoadingAnimationReady = true;
-    }, 5000);
+    // setTimeout(() => {
+    //   this.isLoadingAnimationReady = true;
+    // }, 5000);
   },
   computed: {
     // Berechnete Eigenschaften
   },
   watch: {
     // Beobachter für reaktive Daten oder Props
+
+    playIntentAnimation() {
+      this.animationState = "flashingPulseWithFadeOut";
+    },
   },
   /*
     // Lifecycle Hooks
@@ -79,6 +97,9 @@ export default {
     },*/
   methods: {
     // Methoden der Komponente
+    handleIntentIndicatorAnimationEnd() {
+      this.$emit("animation-ended", this.animationState);
+    },
   },
 };
 </script>
@@ -120,7 +141,7 @@ export default {
     #5a0000 0px -3px 0px;
 }
 
-@keyframes animateIntent {
+@keyframes animateLoadIntent {
   0% {
     transform: translate(-50%, -100%);
     opacity: 0;
@@ -135,11 +156,57 @@ export default {
   }
 }
 
-.animateIntent {
-  animation: animateIntent ease-in-out 2s;
+.animateLoadIntent {
+  animation: animateLoadIntent ease-in-out 2s;
 }
 
-.invisible {
-  opacity: 0;
+@keyframes flashingPulseWithFadeOut {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(150%);
+  }
+  10% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  20% {
+    transform: translate(-50%, 0) scale(1.3);
+    opacity: 0.7;
+    filter: brightness(150%);
+  }
+  30% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  40% {
+    transform: translate(-50%, 0) scale(1.3);
+    filter: brightness(150%);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  60% {
+    transform: translate(-50%, 0) scale(1.3);
+    filter: brightness(150%);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, 0) scale(1);
+    filter: brightness(100%);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, 0) scale(3);
+    opacity: 0;
+  }
+}
+.intentPulseAnimation {
+  animation: flashingPulseWithFadeOut 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)
+    forwards;
 }
 </style>

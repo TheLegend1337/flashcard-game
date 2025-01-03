@@ -13,6 +13,11 @@
       @animationend="handleIconAnimationEnd"
     ></div>
     <div
+      v-if="whatIconAnimationIsPlaying === 'broken-defense-icon-animation'"
+      class="broken-defense-icon-animation"
+      @animationend="handleIconAnimationEnd"
+    ></div>
+    <div
       v-if="whatIconAnimationIsPlaying === 'damage-icon-animation'"
       class="damage-icon-animation"
       @animationend="handleIconAnimationEnd"
@@ -22,25 +27,6 @@
       class="heal-icon-animation"
       @animationend="handleIconAnimationEnd"
     ></div>
-    <!--  -->
-    <!-- <select v-model="selectedSpriteAnimation" @change="updateAnimation"> -->
-    <!--Ich habe ein Dropdown zum debuggen hinzugefügt 
-      und mit v-model an eine einfach Variable in data(selectedSpriteAnimation) in der Komponente gebunden sodass die Auswahl direkt auf die Variable wirkt.
-      Außerdem habe ich einen Eventlistener @change hinzugefügt, der darauf reagiert, wenn eine bestimmte Änderung eintritt
-      
-      Rendern der Liste:
-      die Optionen werden mit v-for gerendert als Liste an Optionen für die Dropdownauswahl.
-      v-for läuft dabei über fallenAngelAnimations(das ist meine Javascript Datei mit den Meta Daten zu jeder Animation.)
-      -->
-    <!-- <option
-        v-for="(animation, key) in fallenAngelAnimations"
-        :key="key"
-        :value="key"
-      >
-        {{ animation.name }}
-      </option> -->
-    <!-- </select>  -->
-    <!--Bracket Notation hinzugefügt damit wir dynamisch die jeweilige Animation tauschen können-->
     <SpeechBubble
       :toggleSpeechBubble="toggleSpeechBubble"
       @resetToggleSpeechBubble="handleResetToggleSpeechBubble"
@@ -60,14 +46,20 @@
         @sprite-animation-completed="handleSpriteAnimationEnd"
       />
     </div>
-    <IndicatorsContainer role="player" />
+    <IndicatorsContainer
+      role="player"
+      :isArmored="isArmored"
+      @armor-broken="handleBrokenArmor"
+    />
     <!-- Außerdem habe ich den Komponenten Parameter dynamisch gemacht sodass die ausgewählte Animation hier eingetragen wird.-->
   </div>
 </template>
 
 <script>
+import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import SoundHandler from "@/helpers/soundHandler";
 import defenseIconAnimationSound from "@/assets/sounds/soundEffects/grinding-metal-higher.mp3";
+import brokenDefenseIconAnimationSound from "@/assets/sounds/soundEffects/broken-armor.wav";
 import attackingAnimationSound from "@/assets/sounds/soundEffects/punch1.wav";
 import SpriteAnimation from "@/components/Animation/SpriteAnimation.vue";
 import IndicatorsContainer from "@/components/FlashcardGame/container/IndicatorsContainer.vue";
@@ -94,6 +86,7 @@ export default {
   data() {
     return {
       // idleSpriteAnimation,
+      playerStore: usePlayerStore(),
       fallenAngelAnimations,
       selectedSpriteAnimation: "idle", // Standardanimation, Steuert welche Animation gerade übergeben werden soll.
       whatIconAnimationIsPlaying: "none",
@@ -108,6 +101,10 @@ export default {
       defenseIconAnimationSound,
     ); //zum registrieren des Soundeffects
 
+    this.soundHandler.registerSound(
+      "brokenDefenseIconAnimationSound",
+      brokenDefenseIconAnimationSound,
+    );
     this.soundHandler.registerSound(
       "attackingAnimationSound",
       attackingAnimationSound,
@@ -145,8 +142,24 @@ export default {
         this.selectedSpriteAnimation,
       );
     },
+    handleBrokenArmor() {
+      setTimeout(() => {
+        this.whatIconAnimationIsPlaying = "broken-defense-icon-animation";
+      }, 700);
+      setTimeout(() => {
+        this.soundHandler.playSound("brokenDefenseIconAnimationSound", 0.1);
+      }, 1100);
+    },
   },
-  computed: {},
+  computed: {
+    isArmored() {
+      if (this.playerStore.playerArmor > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
   watch: {
     playerAction() {
       switch (this.playerAction) {
@@ -160,6 +173,8 @@ export default {
           break;
         case "hurting":
           this.selectedSpriteAnimation = "hurting";
+          //this.whatIconAnimationIsPlaying = "damage-icon-animation";
+
           break;
         case "dying":
           this.selectedSpriteAnimation = "dying";
@@ -223,6 +238,45 @@ export default {
   }
   100% {
     background-image: url("@/assets/icons/shield-icon.png");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transform: translate(50%, 0%) scale(1.4);
+    opacity: 0%;
+  }
+}
+
+.broken-defense-icon-animation {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  background-image: url("@/assets/icons/broken-shield-icon.png");
+  background-size: cover;
+  background-position: center;
+  transform: translate(50%, 50%);
+  z-index: 10;
+  animation: brokenDefenseIconAnimation 1.5s ease-in-out;
+}
+
+@keyframes brokenDefenseIconAnimation {
+  0% {
+    background-image: url("@/assets/icons/broken-shield-icon.png");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    opacity: 0%;
+    transform: translate(50%, 100%) scale(1);
+  }
+  30% {
+    background-image: url("@/assets/icons/broken-shield-icon.png");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transform: translate(50%, 70%) scale(1.2);
+    opacity: 100%;
+  }
+  100% {
+    background-image: url("@/assets/icons/broken-shield-icon.png");
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -325,7 +379,7 @@ export default {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(180%, 0);
+    transform: translate(100%, 0);
   }
   100% {
     transform: translate(0, 0);

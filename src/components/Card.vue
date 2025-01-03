@@ -5,14 +5,18 @@
       @mouseenter="handleMouseEnter"
       class="card"
       :class="{
+        isNotInteractive: !this.isInteractive,
         animateCardGrow: this.animationState === 'selected',
         animateCardShrink: this.animationState === 'shrink',
+        animateCardShrinkAfterReveal:
+          this.animationState === 'shrinkAfterReveal',
         animateAnticipationShake: this.animationState === 'anticipationShake',
         animateAnticipationSkew: this.animationState === 'anticipationSkew',
         animateDiscardCard: this.animationState === 'discard',
         'filter-drop-shadow': this.cardStore.isCardShining,
       }"
       @animationend="handleAnimationEnd"
+      @animationstart="handleAnimationStart"
     >
       <div
         v-if="this.cardData.isBound"
@@ -162,9 +166,10 @@ export default {
       cardArtworkSource: "",
       previousHandOfCardsLength: this.handOfCardsLength,
       animationState: "", //TODO umschreiben in eine Computed Property(dauert ne Weile gibt einige Abhängigkeiten)
-
+      isUnplayable: false,
       //check if Soundeffect was played once, if yes, the flag will be set to true and wont be played on consequtive clicks
       isOpenCardSoundPlayed: false,
+      isInteractive: true,
     };
   },
   updated() {
@@ -202,7 +207,7 @@ export default {
     this.yTranslation = this.calcYTranslation(this.cardIndex);
     this.xTranslation = this.calcXTranslation(this.cardIndex);
 
-    console.log(this.cardRotationDegree);
+    //console.log(this.cardRotationDegree);
     this.cardRotationDegreeOnHover = this.cardRotationDegree * -1;
     this.resetYTranslationOnHover = (this.yTranslation + 25) * -1;
     //
@@ -222,14 +227,12 @@ export default {
       `translate(${this.xTranslation}%,${this.yTranslation}% )`,
     );
 
-    console.log("Card Artwork Source URL:", this.cardArtworkSource);
+    //console.log("Card Artwork Source URL:", this.cardArtworkSource);
   },
   beforeUnmount() {},
   computed: {
     // für das Berechnen der Karten Rotation
-    isUnplayable() {
-      return this.flashcardGameStore.willpower === 0;
-    },
+
     getCenterCardIndex() {
       const totalCards = this.handOfCardsLength;
       let cardCenter = Math.floor(totalCards / 2);
@@ -256,15 +259,20 @@ export default {
     },
   },
   watch: {
-    "flashcardGamestore.willpower"() {
-      if (this.flashcardGamestore.willpower === 0) {
+    "flashcardGameStore.willpower"() {
+      if (this.flashcardGameStore.willpower === 0) {
         this.isUnplayable = true;
       }
     },
-    discard() {
-      if (this.discard === true) {
+    "cardStore.isDiscardAll"() {
+      if (this.cardStore.isDiscardAll === true) {
         this.animationState = "discard";
+        // console.log("IsDicardAll: " + this.cardStore.isDiscardAll);
       }
+      // else {
+      //   this.animationState = "";
+      //   console.log("Set AnimationState to none");
+      // }
     },
   },
   methods: {
@@ -307,33 +315,45 @@ export default {
       this.animationState = "anticipationShake";
       // this.animationState = "shrink";
     },
+    handleAnimationStart() {
+      this.isInteractive = false;
+      //  console.log("this.isInteractive at AnimationStart" + this.isInteractive);
+    },
     handleAnimationEnd() {
+      this.isInteractive = true;
+      // console.log("this.isInteractive at AnimationEnd" + this.isInteractive);
       if (this.animationState === "anticipationShake") {
         this.animationState = "shrink";
       } else if (this.animationState === "anticipationSkew") {
         this.cardData.isBound = false;
         this.soundHandler.playSound("revealCard", 0.05);
-        setTimeout(() => {
-          this.animationState = "shrink";
-        }, 1000);
+        this.animationState = "shrinkAfterReveal";
+        // setTimeout(() => {
+        //   this.animationState = "shrink";
+        // }, 1000);
       } else if (this.animationState === "discard") {
-        this.$emit("discard-animation-ended");
+        this.$emit("discard-animation-ended", this.cardData);
+        this.cardStore.isDiscardAll = false;
       }
     },
     handleCardClick() {
-      if (this.cardData.isBound == true) {
-        this.animationState = "selected";
-      } else {
-        const willpower = this.flashcardGameStore.getWillpower;
-        const cost = this.card.willpowerCost;
-        if (cost <= willpower) {
-          this.animationState = "discard";
-        }
-        this.$emit("unleashed-card-clicked", this.cardData);
+      if (this.isInteractive) {
+        if (this.cardData.isBound == true) {
+          this.animationState = "selected";
+        } else {
+          const willpower = this.flashcardGameStore.getWillpower;
+          const cost = this.card.willpowerCost;
+          if (cost <= willpower) {
+            this.animationState = "discard";
+          }
+          if (this.isInteractive) {
+            this.$emit("unleashed-card-clicked", this.cardData);
+          }
 
-        if (!this.isOpenCardSoundPlayed) {
-          this.soundHandler.playSound("openCard", 0.4);
-          this.isOpenCardSoundPlayed = true; // Update the flag
+          if (!this.isOpenCardSoundPlayed) {
+            this.soundHandler.playSound("openCard", 0.4);
+            this.isOpenCardSoundPlayed = true; // Update the flag
+          }
         }
       }
     },
@@ -472,6 +492,23 @@ export default {
   animation: shrinkCard 0.5s;
 }
 
+@keyframes shrinkCardAfterReveal {
+  0% {
+    transform: skew(0deg, 0deg) translateX(0) rotateZ(0deg) scale(2.2)
+      translateY(-40%);
+  }
+  50% {
+    transform: skew(0deg, 0deg) translateX(0) rotateZ(0deg) scale(2.2)
+      translateY(-40%);
+  }
+  100% {
+    transform: scale(1) var(--card-rotation-degree) var(--xy-translation);
+  }
+}
+.animateCardShrinkAfterReveal {
+  animation: shrinkCardAfterReveal 1s;
+}
+
 @keyframes anticipationShake {
   0% {
     transform: translateX(0) scale(2.3) translateY(-40%);
@@ -579,6 +616,10 @@ export default {
 }
 .animateDiscardCard {
   animation: discardCard 0.5s ease-in-out forwards;
+}
+
+.isNotInteractive {
+  pointer-events: none;
 }
 
 .filter-drop-shadow {

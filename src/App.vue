@@ -5,6 +5,7 @@
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/matchfield">Spielfeld</RouterLink>
         <RouterLink to="/menu-overlay">Overlay</RouterLink>
+        <RouterLink to="/flashcards-only">Flashcards Only</RouterLink>
         <RouterLink to="/flashcard-game">Karteikartenspiel</RouterLink>
         <RouterLink to="/card-only">Karte</RouterLink>
         <RouterLink to="/sprite-animations">Sprite Animation Demo</RouterLink>

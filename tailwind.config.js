@@ -44,16 +44,6 @@ module.exports = {
           },
         },
 
-        fadeInFromBottomLeftToTopRight: {
-          "0%": {
-            opacity: 0,
-            transform: "translate(-100%, 100%)",
-          },
-          "100%": {
-            opacity: 1,
-            transform: "translate(0, 0)",
-          },
-        },
         fadeInFromBottomRightToTopLeft: {
           "0%": {
             opacity: 0,
@@ -132,8 +122,7 @@ module.exports = {
         //Directional animations
         //cubic-bezier(0.69, 0.16, 0.41, 1.44) sorgt für einen sauberen Rubberband Effekt
         //Cubic Bezier Generator: https://cubic-bezier.com/#.69,.16,.41,1.44
-        "fade-in-from-bottom-left-to-top-right":
-          "fadeInFromBottomLeftToTopRight 1s cubic-bezier(0.69, 0.16, 0.41, 1.44b)",
+
         "fade-in-from-bottom-right-to-top-left":
           "fadeInFromBottomRightToTopLeft 1s cubic-bezier(0.69, 0.16, 0.41, 1.44)",
         "fade-in-from-left-to-right":

@@ -2,6 +2,8 @@
   <div
     v-if="leftText !== '' && rightText !== ''"
     class="enter-right-exit-left-with-fade-in-animation info-banner invisible fixed left-1/2 top-1/2 z-40 h-20 w-3/6 -translate-x-1/2 transform sm:h-20 md:h-24 lg:h-28 xl:h-36 2xl:h-36"
+    @animationstart="handleAnimationStart"
+    @animationend="handleAnimationEnd"
   >
     <img
       class="absolute top-0"
@@ -47,30 +49,20 @@ export default {
     //   type: object,
     //   default: null,
     // }
-    phase: {
-      type: String,
-      default: "",
-      required: true,
-    },
   },
   data() {
     return {
-      // Zustandsvariablen
-      // flashcardGameStore: useFlashcardGameStore(),
       flashcardGameStore: useFlashcardGameStore(),
-      leftText: "",
-      rightText: "",
     };
   },
   computed: {
-    // Berechnete Eigenschaften
     leftText() {
       switch (this.flashcardGameStore.phase) {
         case "gameStart":
           return "Kampf";
         case "drawCards":
           return "Entfessel";
-        case "enemyTurn":
+        case "endTurn":
           return "Gegner";
         case "gameOver":
           return "Du hast";
@@ -84,7 +76,7 @@ export default {
           return "beginnt!";
         case "drawCards":
           return "Karten!";
-        case "enemyTurn":
+        case "endTurn":
           return "am Zug";
         case "gameOver":
           return "dazu gelernt!";
@@ -93,101 +85,18 @@ export default {
       }
     },
   },
-  watch: {
-    // "flashcardGameStore.phase"() {
-    //   switch (this.flashcardGameStore.phase) {
-    //     case "gameStart": {
-    //       this.leftText = "Kampf";
-    //       break;
-    //     }
-    //     case "drawCards": {
-    //       this.leftText = "Ziehe";
-    //       break;
-    //     }
-    //     case "playPhase": {
-    //       this.leftText = "Entfessel";
-    //       break;
-    //     }
-    //     case "enemyTurn": {
-    //       this.leftText = "Gegner";
-    //       break;
-    //     }
-    //     case "gameOver": {
-    //       this.leftText = "Du hast";
-    //       break;
-    //     }
-    //     default: {
-    //       this.leftText = "Deine";
-    //       break;
-    //     }
-    //   }
-    //   switch (this.flashcardGameStore.phase) {
-    //     case "gameStart": {
-    //       this.rightText = "beginnt!";
-    //       break;
-    //     }
-    //     case "drawCards": {
-    //       this.rightText = "Karten";
-    //       break;
-    //     }
-    //     case "playPhase": {
-    //       this.rightText = "Karten!";
-    //       break;
-    //     }
-    //     case "enemyTurn": {
-    //       this.rightText = "am Zug";
-    //       break;
-    //     }
-    //     case "gameOver": {
-    //       this.rightText = "dazu gelernt!";
-    //       break;
-    //     }
-    //     default: {
-    //       this.rightText = "Mudda";
-    //       break;
-    //     }
-    //   }
-    // },
-    // Beobachter für reaktive Daten oder Props
-  },
-  /*
-    // Lifecycle Hooks
-    beforeCreate() {
-      // Wird ausgeführt, bevor die Instanz erstellt wird
-    },
-    created() {
-      // Wird ausgeführt, nachdem die Instanz erstellt wurde
-    },
-    beforeMount() {
-      // Wird ausgeführt, bevor die Komponente in den DOM eingefügt wird
-    },
-    mounted() {
-      // Wird ausgeführt, wenn die Komponente in den DOM eingefügt wurde
-    },
-    beforeUpdate() {
-      // Wird ausgeführt, bevor sich reaktive Daten ändern und ein Re-Render bevorsteht
-    },
-    updated() {
-      // Wird ausgeführt, nachdem die Daten aktualisiert wurden und die Komponente neu gerendert wurde
-    },
-    activated() {
-      // Wird ausgeführt, wenn eine keep-alive-Komponente aktiviert wird
-    },
-    deactivated() {
-      // Wird ausgeführt, wenn eine keep-alive-Komponente deaktiviert wird
-    },
-    beforeDestroy() {
-      // Wird ausgeführt, bevor die Komponente zerstört wird
-    },
-    destroyed() {
-      // Wird ausgeführt, nachdem die Komponente zerstört wurde
-    },
-    errorCaptured(err, vm, info) {
-      // Wird ausgeführt, wenn ein Fehler in einem Kindkomponenten-Lebenszyklus oder -Rendering auftritt
-      // Ermöglicht Fehlerbehandlung innerhalb der Komponente
-    },*/
+  watch: {},
+
   methods: {
-    // Methoden der Komponente
+    handleAnimationStart() {
+      this.$emit("info-banner-animation-started");
+    },
+    handleAnimationEnd() {
+      if (this.flashcardGameStore.phase === "endTurn") {
+        this.flashcardGameStore.phase = "enemyTurn";
+      }
+      this.$emit("info-banner-animation-ended");
+    },
   },
 };
 </script>
@@ -197,8 +106,6 @@ export default {
 }
 
 .info-banner {
-  /* CSS-Stile */
-
   background: rgb(0, 0, 0);
   background: linear-gradient(
     90deg,

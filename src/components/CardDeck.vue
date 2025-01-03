@@ -18,11 +18,7 @@ import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue"
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 //importieren der URL, damit das Laden auch korrekt klappt...
-import cardArtworkRightHook from "@/assets/card-art/combatSport-right-hook.png";
-import cardArtworkJab from "@/assets/card-art/combatSport-Jab.png";
-import cardArtworkBlock from "@/assets/card-art/combatSport-block.png";
-import cardArtworkRest from "@/assets/card-art/combatSport-rest.png";
-import cardArtworkGelberScheinImAermel from "@/assets/card-art/buero-gelberScheinImAermel.png";
+
 export default {
   // Hier kommen alle Optionen der Options API
   components: {
@@ -32,209 +28,15 @@ export default {
     return {
       flashcardGameStore: useFlashcardGameStore(),
       cardStore: useCardStore(),
-      cardDeck: [
-        {
-          id: 10,
-          title: "Blocken",
-          willpowerCost: 1,
-          description: "Erhalte 6 Verteidigung",
-          cardArtworkSrc: cardArtworkBlock,
-          isBound: true,
-          category: "skill", // Defensive skill
-          effects: [
-            {
-              type: "armor", // The type of effect
-              value: 6,
-              target: "player",
-              duration: 0, // Instant
-            },
-          ],
-        },
-        {
-          id: 9,
-          title: "Blocken",
-          willpowerCost: 1,
-          description: "Erhalte 6 Verteidigung",
-          cardArtworkSrc: cardArtworkBlock,
-          isBound: true,
-          category: "skill",
-          effects: [
-            {
-              type: "armor",
-              value: 6,
-              target: "player",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 8,
-          title: "Blocken",
-          willpowerCost: 1,
-          description: "Erhalte 6 Verteidigung",
-          cardArtworkSrc: cardArtworkBlock,
-          isBound: true,
-          category: "skill",
-          effects: [
-            {
-              type: "armor",
-              value: 6,
-              target: "player",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 7,
-          title: "Jab",
-          willpowerCost: 1,
-          description: "Ein Gegner erleidet 2 Schaden",
-          cardArtworkSrc: cardArtworkJab,
-          isBound: true,
-          category: "attack", // Direct attack
-          effects: [
-            {
-              type: "damage",
-              value: 2,
-              target: "enemy",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 6,
-          title: "Gelber Schein",
-          willpowerCost: 2,
-          description: "Heile 10 HP",
-          cardArtworkSrc: cardArtworkGelberScheinImAermel,
-          isBound: true,
-          category: "skill", // Healing is a buff
-          effects: [
-            {
-              type: "heal",
-              value: 10,
-              target: "player",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 5,
-          title: "Rechter Haken",
-          willpowerCost: 2,
-          description: "Ein Gegner erleidet 6 Schaden",
-          cardArtworkSrc: cardArtworkRightHook,
-          isBound: true,
-          category: "attack",
-          effects: [
-            {
-              type: "damage",
-              value: 6,
-              target: "enemy",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 4,
-          title: "Jab",
-          willpowerCost: 1,
-          description: "Ein Gegner erleidet 2 Schaden",
-          cardArtworkSrc: cardArtworkJab,
-          isBound: true,
-          category: "attack",
-          effects: [
-            {
-              type: "damage",
-              value: 2,
-              target: "enemy",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 3,
-          title: "Ausruhen",
-          willpowerCost: 1,
-          description: "Heile 5 HP",
-          cardArtworkSrc: cardArtworkRest,
-          isBound: true,
-          category: "skill",
-          effects: [
-            {
-              type: "heal",
-              value: 5,
-              target: "player",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 2,
-          title: "Jab",
-          willpowerCost: 1,
-          description: "Ein Gegner erleidet 2 Schaden",
-          cardArtworkSrc: cardArtworkJab,
-          isBound: true,
-          category: "attack",
-          effects: [
-            {
-              type: "damage",
-              value: 2,
-              target: "enemy",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 1,
-          title: "Blocken",
-          willpowerCost: 1,
-          description: "Erhalte 6 Verteidigung",
-          cardArtworkSrc: cardArtworkBlock,
-          isBound: true,
-          category: "skill",
-          effects: [
-            {
-              type: "armor",
-              value: 6,
-              target: "player",
-              duration: 0,
-            },
-          ],
-        },
-        {
-          id: 0,
-          title: "Rechter Haken",
-          willpowerCost: 2,
-          description: "Ein Gegner erleidet 6 Schaden",
-          cardArtworkSrc: cardArtworkRightHook,
-          isBound: true,
-          category: "attack",
-          effects: [
-            {
-              type: "damage",
-              value: 6,
-              target: "enemy",
-              duration: 0,
-            },
-          ],
-        },
-      ],
     };
   },
   computed: {
     sizeofCardDeck() {
-      return this.cardDeck.length;
+      return this.cardStore.getCardDeckLength;
     },
   },
   watch: {},
-  methods: {
-    drawCard() {
-      //this.cardStore.pushCard();
-      return this.cardDeck.pop();
-    },
-  },
+  methods: {},
   // Methoden, Computed Properties usw. können hier hinzugefügt werden
 };
 </script>

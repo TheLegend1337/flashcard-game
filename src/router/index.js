@@ -6,6 +6,7 @@ import Matchfield from "../components/Matchfield.vue";
 import GameOverlay from "../components/GameOverlay.vue";
 import SpriteAnimations from "../views/SpriteAnimations.vue";
 import CardOnly from "@/views/CardOnly.vue";
+import FlashcardsOnly from "../views/FlashcardsOnly.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,11 @@ const router = createRouter({
       path: "/game-overlay",
       name: "game-overlay",
       component: GameOverlay,
+    },
+    {
+      path: "/flashcards-only",
+      name: "flashcards-only",
+      component: FlashcardsOnly,
     },
     {
       path: "/sprite-animations",
