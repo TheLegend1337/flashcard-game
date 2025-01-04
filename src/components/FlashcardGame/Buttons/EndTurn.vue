@@ -104,7 +104,7 @@ export default {
     handleClick() {
       if (this.flashcardGameStore.phase === "playPhase") {
         this.cardStore.isDiscardAll = true;
-        console.log("IsDicardAll: " + this.cardStore.isDiscardAll);
+        //  console.log("IsDicardAll: " + this.cardStore.isDiscardAll);
 
         this.flashcardGameStore.phase = "endTurn";
         //setTimeout(() => {}, 1); //löst das Problem, dass die Karten nicht direkt abgeworfen werden irgendwas wird blockiert.
@@ -112,12 +112,12 @@ export default {
     },
     handleMouseEnter() {
       this.cardStore.isCardShining = true;
-      console.log(this.cardStore.isCardShining);
+      //console.log(this.cardStore.isCardShining);
       this.soundHandler.playSound("buttonHover", 0.03);
     },
     handleMouseLeave() {
       this.cardStore.isCardShining = false;
-      console.log(this.cardStore.isCardShining);
+      // console.log(this.cardStore.isCardShining);
     },
   },
 };

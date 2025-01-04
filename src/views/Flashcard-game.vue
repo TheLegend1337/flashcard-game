@@ -42,7 +42,7 @@
         class="animate-fade-in-from-bottom-right-to-top-left"
       />
     </div>
-    <div id="phaseBanner" class="animate-fade-in">
+    <!-- <div id="phaseBanner" class="animate-fade-in">
       <button @click="drawCard(1)" class="m-2">Ziehen</button>
       <button @click="discard" class="m-2">Ablegen</button>
       <button @click="changePhase()" class="m-2">Phase ändern</button>
@@ -51,7 +51,7 @@
         {{ this.flashcardGameStore.phase }} //
         {{ this.flashcardGameStore.roundCounter }}
       </h1>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -154,6 +154,7 @@ export default {
       switch (this.flashcardGameStore.phase) {
         case "gameStart":
           //  console.log("Das Spiel hat gestartet");
+          this.flashcardGameStore.roundCounter = 1;
           setTimeout(() => {
             this.flashcardGameStore.phase = "drawCards";
           }, 3000);

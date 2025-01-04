@@ -1,26 +1,21 @@
 @import "./base.css";
 
 #app {
-  width: 100%;
+  /* width: 100%;
   margin: 0 auto;
-  /* padding: 2rem; */
-  font-weight: normal;
+
+  font-weight: normal; */
 }
 
 @media (min-width: 1024px) {
   body {
     /* display: flex; */
-    place-items: center;
+    /* place-items: center; */
   }
 
-  #app {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem; */
-  }
-  #teststyles {
+  /* #teststyles {
     color: red;
     font-size: 10rem;
     border: 10px solid red;
-  }
+  } */
 }

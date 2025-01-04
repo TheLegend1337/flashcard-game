@@ -83,7 +83,10 @@ import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_DrawCard from "@/assets/sounds/soundEffects/drawCard_shorter.mp3";
 import soundEffect_OpenCard from "@/assets/sounds/soundEffects/bookFlip2.ogg";
 import soundEffect_CardReveal from "@/assets/sounds/soundEffects/triple-pop.wav";
-import soundEffect_CardEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
+//import soundEffect_CardEnter from "@/assets/sounds/soundEffects/bookFlip3.ogg";
+import soundEffect_ButtonMouseEnter1 from "@/assets/sounds/soundEffects/shortScratchAKey.mp3";
+import soundEffect_ButtonMouseEnter2 from "@/assets/sounds/soundEffects/shortScratchEKey.mp3";
+import soundEffect_ButtonMouseEnter3 from "@/assets/sounds/soundEffects/shortScratchGKey.mp3";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
@@ -196,7 +199,19 @@ export default {
     this.soundHandler.registerSound("openCard", soundEffect_OpenCard);
     this.soundHandler.playSound("drawCard", 0.4);
     this.soundHandler.registerSound("revealCard", soundEffect_CardReveal);
-    this.soundHandler.registerSound("cardEnter", soundEffect_CardEnter);
+    //this.soundHandler.registerSound("cardEnter", soundEffect_CardEnter);
+    this.soundHandler.registerSound(
+      "shortScratchAKey",
+      soundEffect_ButtonMouseEnter1,
+    );
+    this.soundHandler.registerSound(
+      "shortScratchEKey",
+      soundEffect_ButtonMouseEnter2,
+    );
+    this.soundHandler.registerSound(
+      "shortScratchGKey",
+      soundEffect_ButtonMouseEnter3,
+    );
 
     this.cardArtworkSource = new URL(
       this.cardArtworkSrc,
@@ -278,7 +293,23 @@ export default {
   methods: {
     // für das Berechnen der Karten Rotation
     handleMouseEnter() {
-      this.soundHandler.playSound("cardEnter", 0.01);
+      const soundEffects = [
+        "shortScratchAKey",
+        "shortScratchEKey",
+        "shortScratchGKey",
+      ];
+      const randomIndex = Math.floor(Math.random() * soundEffects.length); // Random index between 0 and 2
+      const randomSoundKey = soundEffects[randomIndex];
+
+      // Ensure sound is loaded and ready
+      if (this.soundHandler.sounds[randomSoundKey]) {
+        const sound = this.soundHandler.sounds[randomSoundKey];
+        sound.currentTime = 0; // Reset the playback position
+        this.soundHandler.playSound(randomSoundKey, 0.03); // Play the sound
+      } else {
+        console.warn(`Sound "${randomSoundKey}" could not be played.`);
+      }
+      //this.soundHandler.playSound("cardEnter", 0.01);
     },
     calcRotation(cardIndex) {
       const rotationFactor = 10;

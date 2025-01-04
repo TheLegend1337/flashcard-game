@@ -93,18 +93,18 @@ export default {
       },*/
   beforeUnmount() {},
   methods: {
-    // toggleMusic() {
-    //   //console.log(`Toggling music. Current state: ${this.soundStore.isMusicPlaying}`);
-    //   if (this.soundStore.isMusicPlaying) {
-    //     this.soundHandler.pauseSound("mainBackgroundMusic");
-    //     // console.log("Paused music");
-    //   } else {
-    //     this.soundHandler.playSound("mainBackgroundMusic", 0.03);
-    //     //  console.log("Resumed music");
-    //   }
-    //   this.soundStore.isMusicPlaying = !this.soundStore.isMusicPlaying;
-    //   //console.log(`New state: ${this.soundStore.isMusicPlaying}`);
-    // },
+    toggleMusic() {
+      //console.log(`Toggling music. Current state: ${this.soundStore.isMusicPlaying}`);
+      if (this.soundStore.isMusicPlaying) {
+        this.soundHandler.pauseSound("mainBackgroundMusic");
+        // console.log("Paused music");
+      } else {
+        this.soundHandler.playSound("mainBackgroundMusic", 0.03);
+        //  console.log("Resumed music");
+      }
+      this.soundStore.isMusicPlaying = !this.soundStore.isMusicPlaying;
+      //console.log(`New state: ${this.soundStore.isMusicPlaying}`);
+    },
   },
 };
 </script>
@@ -113,22 +113,24 @@ export default {
 .music-player {
   width: 36px;
   height: 36px;
-  border: 2px solid red;
   border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.69, 0.16, 0.41, 1.44);
 }
-.stop-music-button {
+.music-player:hover {
+  transform: scale(1.2);
+  filter: brightness(1.5);
 }
 
 .music-is-playing {
-  width: 100%;
-  height: 100%;
+  width: 36px;
+  height: 36px;
   background-image: url("@/assets/icons/menu-icons/music-is-playing-icon.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
 .music-is-not-playing {
-  width: 100%;
-  height: 100%;
+  width: 36px;
+  height: 36px;
   background-image: url("@/assets/icons/menu-icons/music-is-not-playing-icon.png");
   background-size: contain;
   background-repeat: no-repeat;

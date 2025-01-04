@@ -18,7 +18,7 @@ export default class SoundHandler {
   registerSound(key, soundPath) {
     const audio = new Audio(soundPath);
     this.sounds[key] = audio;
-    console.log(`Sound registered: ${key}`, this.sounds[key]);
+    //console.log(`Sound registered: ${key}`, this.sounds[key]);
   }
 
   playSound(key, volume = 1.0, loop = false) {

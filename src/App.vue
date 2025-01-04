@@ -1,11 +1,16 @@
 <template>
   <header>
+    <img
+      class="h-[40px] pl-6"
+      src="@/assets/brandIdentity/Logo-1024x455.png"
+      alt="Producterra Logo"
+    />
     <div class="wrapper">
-      <MusicPlayer />
-      <Navigation />
+      <MusicPlayer class="space-between-header-icons" />
+      <Navigation class="space-between-header-icons" />
     </div>
   </header>
-  <aside></aside>
+
   <Transition name="fade" mode="out-in">
     <RouterView />
   </Transition>
@@ -134,13 +139,12 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-
 header {
-  border: 2px solid red;
   display: flex;
-  justify-content: center;
+  position: relative;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
+  /* flex-direction: row; */
   width: 100%;
   height: 7vh;
   line-height: 1.5;
@@ -150,10 +154,15 @@ header {
     rgba(250, 234, 202, 1) 0%,
     rgba(239, 207, 164, 1) 64%
   );
+  box-shadow: 0px 0px 40px rgb(63, 28, 2); /* Subtle drop shadow */
+  z-index: 1000000000; /* Ensure the header is above other elements */
+  border-bottom: 2px solid var(--border-around-bg-light);
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.space-between-header-icons {
+  margin-right: 1rem;
 }
 </style>

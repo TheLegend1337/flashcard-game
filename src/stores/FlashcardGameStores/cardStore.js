@@ -8,7 +8,7 @@ export const useCardStore = defineStore("cardStore", {
   state: () => ({
     isCardShining: false,
     isDiscardAll: false,
-    cardDeck: [
+    initialCardDeck: [
       {
         id: 10,
         title: "Blocken",
@@ -197,6 +197,7 @@ export const useCardStore = defineStore("cardStore", {
         ],
       },
     ],
+    cardDeck: [],
     discardPile: [],
   }),
   getters: {
@@ -234,7 +235,9 @@ export const useCardStore = defineStore("cardStore", {
     bindCard(card) {
       card.isBound = true;
     },
-
+    initiateCardDeck() {
+      this.cardDeck = [...this.initialCardDeck];
+    },
     refillCardDeckWithAllCardsFromDiscardPile() {
       // console.log("refillCardDeckWithAllCardsFromDiscardPile is running");
       const lengthOfDiscardPileBeforeRefill = this.discardPile.length;

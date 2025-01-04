@@ -22,6 +22,7 @@
   --bg-light-05: rgb(237, 206, 163, 0.5);
   --linktext-on-nav: #a9895d;
   --type-on-bg-light: #4a3211;
+  --border-around-bg-light: #4a3211;
   --bg-light-gradient-start: #faeaca;
   --bg-light-gradient-end: #efcfa4;
   /* on accent background */
@@ -31,6 +32,10 @@
   --border-around-bg-accent: #a7c7c2;
   /* on accent background */
   --drop-shadow-blue: rgb(79, 217, 255);
+  --drop-shadow-bright: drop-shadow(0 0 6px rgba(245, 222, 179, 0.265))
+    drop-shadow(0 0 12px rgba(245, 222, 179, 0.139))
+    drop-shadow(0 0 18px rgba(245, 222, 179, 0.131));
+  --drop-shadow-dark: #4a3211;
 }
 
 * {
