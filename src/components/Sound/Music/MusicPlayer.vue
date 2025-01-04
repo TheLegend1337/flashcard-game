@@ -1,10 +1,21 @@
 <template>
-  <div class="music-player"></div>
+  <div class="music-player">
+    <div
+      class="stop-music-button"
+      @click="toggleMusic()"
+      :class="{
+        'music-is-playing': this.soundStore.isMusicPlaying,
+        'music-is-not-playing': !this.soundStore.isMusicPlaying,
+      }"
+    ></div>
+  </div>
 </template>
 
 <script>
 import SoundHandler from "@/helpers/soundHandler";
 import music_MainBackgroundMusic from "@/assets/sounds/music/Fantasy-Vol6-Concerning-Times-Intensity-1.mp3";
+import { useSoundStore } from "@/stores/FlashcardGameStores/soundStore";
+
 export default {
   name: "MusicPlayer",
   components: {
@@ -19,24 +30,35 @@ export default {
   },
   data() {
     return {
-      // Zustandsvariablen
+      soundStore: useSoundStore(),
     };
   },
-  computed: {
-    // Berechnete Eigenschaften
-  },
+  computed: {},
   watch: {
-    // Beobachter für reaktive Daten oder Props
+    "soundStore.isMusicPlaying"() {
+      if (!this.soundStore.isMusicPlaying) {
+        this.soundHandler.pauseSound("mainBackgroundMusic");
+        console.log("isMusicPlaying: " + this.soundStore.isMusicPlaying);
+        // console.log("Paused music");
+      } else {
+        console.log("isMusicPlaying: " + this.soundStore.isMusicPlaying);
+        let loop = true;
+        this.soundHandler.playSound("mainBackgroundMusic", 0.03, loop);
+        //  console.log("Resumed music");
+      }
+    },
   },
   mounted() {
     //ACHTUNG das hinzufügen von this.soundHandler mit dem this Keyword ist wichtig damit es beim Laden keine Probleme gibt.
+
     this.soundHandler = new SoundHandler(); //zum erstellen des SoundHandlers
     this.soundHandler.registerSound(
       "mainBackgroundMusic",
       music_MainBackgroundMusic,
     ); //zum registrieren des Soundeffects
-    let loop = true;
-    this.soundHandler.playSound("mainBackgroundMusic", 0.03, loop); //zum Abspielen des Soundeffects(zweiter Parameter ist Lautstärke)
+
+    //this.soundHandler.playSound("mainBackgroundMusic", 0.03, loop); //zum Abspielen des Soundeffects(zweiter Parameter ist Lautstärke)
+    //   this.soundStore.isMusicPlaying = true;
   },
   /*
     // Lifecycle Hooks
@@ -62,24 +84,53 @@ export default {
     deactivated() {
       // Wird ausgeführt, wenn eine keep-alive-Komponente deaktiviert wird
     },
-    beforeDestroy() {
-      // Wird ausgeführt, bevor die Komponente zerstört wird
-    },
-    destroyed() {
-      // Wird ausgeführt, nachdem die Komponente zerstört wurde
-    },
     errorCaptured(err, vm, info) {
       // Wird ausgeführt, wenn ein Fehler in einem Kindkomponenten-Lebenszyklus oder -Rendering auftritt
       // Ermöglicht Fehlerbehandlung innerhalb der Komponente
-    },*/
+      destroyed() {
+        // Wird ausgeführt, nachdem die Komponente zerstört wurde
+        },
+      },*/
+  beforeUnmount() {},
   methods: {
-    // Methoden der Komponente
+    // toggleMusic() {
+    //   //console.log(`Toggling music. Current state: ${this.soundStore.isMusicPlaying}`);
+    //   if (this.soundStore.isMusicPlaying) {
+    //     this.soundHandler.pauseSound("mainBackgroundMusic");
+    //     // console.log("Paused music");
+    //   } else {
+    //     this.soundHandler.playSound("mainBackgroundMusic", 0.03);
+    //     //  console.log("Resumed music");
+    //   }
+    //   this.soundStore.isMusicPlaying = !this.soundStore.isMusicPlaying;
+    //   //console.log(`New state: ${this.soundStore.isMusicPlaying}`);
+    // },
   },
 };
 </script>
 
 <style scoped>
 .music-player {
-  /* CSS-Stile */
+  width: 36px;
+  height: 36px;
+  border: 2px solid red;
+  border-radius: 50%;
+}
+.stop-music-button {
+}
+
+.music-is-playing {
+  width: 100%;
+  height: 100%;
+  background-image: url("@/assets/icons/menu-icons/music-is-playing-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.music-is-not-playing {
+  width: 100%;
+  height: 100%;
+  background-image: url("@/assets/icons/menu-icons/music-is-not-playing-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 </style>

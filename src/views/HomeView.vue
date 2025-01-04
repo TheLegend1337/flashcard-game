@@ -12,7 +12,7 @@
         <ButtonPrimary
           label="Starten"
           route="/flashcard-game"
-          :clickHandler="startGame()"
+          :clickHandler="startGame"
         />
       </div>
     </main>
@@ -29,7 +29,7 @@
 
 <script>
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
-
+import { useSoundStore } from "@/stores/FlashcardGameStores/soundStore";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 // Achte darauf, keine Dateiendung wie '.js' beim Import zu verwenden, da dies in Vite zu einem Fehler führt.
 // '@' steht für den 'src'-Ordner.
@@ -49,11 +49,14 @@ export default {
   data() {
     return {
       flashcardGameStore: useFlashcardGameStore(),
+      soundStore: useSoundStore(),
       // Zustandsvariablen, falls nötig.
     };
   },
   methods: {
     startGame() {
+      this.soundStore.isMusicPlaying = true;
+      console.log("isMusicPlaying: " + this.soundStore.isMusicPlaying);
       this.flashcardGameStore.setPhaseGameStart;
       // tracker.createNewUserFile();
     },

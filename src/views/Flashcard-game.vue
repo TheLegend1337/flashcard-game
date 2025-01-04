@@ -1,7 +1,6 @@
 <template>
   <main class="flashcard-game">
     <div class="grid-container game-overlay">
-      <MusicPlayer />
       <InfoBanner
         :key="this.flashcardGameStore.phase"
         class=""
@@ -71,7 +70,7 @@ import DiscardPile from "../components/DiscardPile.vue";
 import CardDeck from "../components/CardDeck.vue";
 // import QuizBox from "../components/QuizBox.vue";
 import InfoBanner from "@/components/FlashcardGame/container/InfoBanner.vue";
-import MusicPlayer from "@/components/Sound/Music/MusicPlayer.vue";
+
 export default {
   components: {
     HandOfCards,
@@ -83,7 +82,6 @@ export default {
     // QuizBox,
     InfoBanner,
     EndTurn,
-    MusicPlayer,
   },
   data() {
     return {

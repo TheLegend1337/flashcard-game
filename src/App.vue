@@ -1,17 +1,8 @@
 <template>
   <header>
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/matchfield">Spielfeld</RouterLink>
-        <RouterLink to="/menu-overlay">Overlay</RouterLink>
-        <RouterLink to="/flashcards-only">Flashcards Only</RouterLink>
-        <RouterLink to="/flashcard-game">Karteikartenspiel</RouterLink>
-        <RouterLink to="/card-only">Karte</RouterLink>
-        <RouterLink to="/sprite-animations">Sprite Animation Demo</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/axiostest">Axios Test</RouterLink>
-      </nav>
+      <MusicPlayer />
+      <Navigation />
     </div>
   </header>
   <aside></aside>
@@ -24,9 +15,27 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import Navigation from "@/components/Navigation.vue";
+import MusicPlayer from "@/components/Sound/Music/MusicPlayer.vue";
 
 export default {
   name: "App",
+  components: {
+    MusicPlayer,
+    Navigation,
+  },
+  props: {
+    // Definiere Props hier
+    // objectName:{
+    //   type: Object,
+    //   default: null,
+    // }
+  },
+  data() {
+    return {
+      // Zustandsvariablen
+    };
+  },
   methods: {
     handleClickToCreateParticles(event) {
       const x = event.pageX;
@@ -127,9 +136,11 @@ export default {
 }
 
 header {
+  border: 2px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   width: 100%;
   height: 7vh;
   line-height: 1.5;
@@ -144,33 +155,5 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  height: 7vh;
-  font-size: 1rem;
-  text-align: center;
-  margin-top: 2rem;
-  border-radius: 50px;
-}
-
-nav a.router-link-exact-active {
-  color: var(--type-on-bg-light);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  color: var(--linktext-on-nav);
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
 }
 </style>

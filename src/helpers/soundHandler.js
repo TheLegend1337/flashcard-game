@@ -18,24 +18,51 @@ export default class SoundHandler {
   registerSound(key, soundPath) {
     const audio = new Audio(soundPath);
     this.sounds[key] = audio;
+    console.log(`Sound registered: ${key}`, this.sounds[key]);
   }
-  /**
-   * Plays a registered sound.
-   * @param {string} key - The key of the sound to play.
-   * @param {number} volume - The volume of the sound (between 0 and 1).
-   * @param {boolean} loop - Whether the sound should loop. Defaults to false.
-   */
+
   playSound(key, volume = 1.0, loop = false) {
     if (this.sounds[key]) {
       const sound = this.sounds[key];
       sound.volume = Math.max(0, Math.min(volume, 1)); // Ensure volume is between 0 and 1
-      sound.currentTime = 0; // Reset playback to the start
-      sound.loop = loop; // Set the loop property
+      if (sound.currentTime === 0) {
+        sound.loop = loop; // Set loop only if playing from the start
+      }
       sound.play().catch((err) => {
         console.error(`Error playing sound "${key}":`, err);
       });
     } else {
       console.warn(`Sound "${key}" not found. Make sure to register it first.`);
+    }
+  }
+
+  pauseSound(key) {
+    if (this.sounds[key]) {
+      const sound = this.sounds[key];
+      sound.pause();
+    } else {
+      console.warn(`Sound "${key}" not found.`);
+    }
+  }
+
+  stopSound(key) {
+    if (this.sounds[key]) {
+      const sound = this.sounds[key];
+      sound.pause();
+      sound.currentTime = 0;
+    } else {
+      console.warn(`Sound "${key}" not found. Make sure to register it first.`);
+    }
+  }
+
+  resumeSound(key) {
+    if (this.sounds[key]) {
+      const sound = this.sounds[key];
+      sound.play().catch((err) => {
+        console.error(`Error resuming sound "${key}":`, err);
+      });
+    } else {
+      console.warn(`Sound "${key}" not found.`);
     }
   }
 }

@@ -154,15 +154,15 @@ export default {
       switch (true) {
         case randomNumber <= 1:
           this.intent.action = "attack";
-          console.log("Intent is attack");
+          //console.log("Intent is attack");
           break;
         case randomNumber < 0:
           this.intent.action = "buffing";
-          console.log("Intent is Buffing");
+          // console.log("Intent is Buffing");
           break;
         case randomNumber < -1:
           this.intent.action = "healing";
-          console.log("Intent is healing");
+          // console.log("Intent is healing");
           break;
         default:
           throw new Error(`Unexpected value: ${randomNumber}`);
@@ -178,27 +178,24 @@ export default {
           case this.loadIntentCounter.loadHeavyAttack < 3 &&
             this.loadIntentCounter.loadExtremeAttack < 4:
             this.intent.attackType = "normal";
-            console.log("Attack is normal");
+            // console.log("Attack is normal");
             this.intent.value = Math.floor(4 * randomFactor + 3);
             this.loadIntentCounter.loadHeavyAttack++;
-            console.log(
-              "LoadHeavy Attack Counter: " +
-                this.loadIntentCounter.loadHeavyAttack,
-            );
+            //  console.log( "LoadHeavy Attack Counter: " +  this.loadIntentCounter.loadHeavyAttack,);
             break;
           case this.loadIntentCounter.loadHeavyAttack == 3:
             this.intent.attackType = "heavy";
-            console.log("Attack is heavy");
+            //console.log("Attack is heavy");
             this.intent.value = Math.floor(6 * randomFactor + 12);
             this.loadIntentCounter.loadExtremeAttack++;
             this.loadIntentCounter.loadHeavyAttack = 0;
-            console.log(
-              "load Extreme Attack Counter: " +
-                this.loadIntentCounter.loadExtremeAttack,
-            );
+            // console.log(
+            //   "load Extreme Attack Counter: " +
+            //     this.loadIntentCounter.loadExtremeAttack,
+            // );
             break;
           case this.loadIntentCounter.loadExtremeAttack == 4:
-            console.log("Attack is extreme");
+            // console.log("Attack is extreme");
             this.intent.value = Math.floor(4 * randomFactor + 22);
             this.loadIntentCounter.loadExtremeAttack = 0;
             break;
@@ -207,7 +204,7 @@ export default {
         }
       }
       this.listOfIntents.push(this.intent);
-      console.log(this.listOfIntents);
+      // console.log(this.listOfIntents);
     },
   },
   computed: {},
