@@ -131,7 +131,8 @@ button {
   color: var(--type-on-bg-dark);
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 3px;
+  margin: 5px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 1px 3px 2px -1px #fcb365;
   background-image: url("@/assets/ui-components-backgrounds/button-background-blue-icy-rectangle.png");

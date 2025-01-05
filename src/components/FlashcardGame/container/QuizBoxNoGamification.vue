@@ -59,7 +59,7 @@
 import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
 import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
-
+import UserDataHandler from "@/helpers/userDataHandler";
 import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGameStore";
 import { useFlashCardsStore } from "@/stores/FlashcardGameStores/flashcardsStore";
 
@@ -106,6 +106,11 @@ export default {
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
+      UserDataHandler.saveSingleUserInteraction(
+        "flashcardsNoGamification",
+        this.flashcard,
+      );
+      // Reihenfolge wichtig, speichern bevor wir vvvvv neue holen.
       this.flashcard = this.flashCardsStore.popSingleFlashcard();
       this.isAnswerVisible = false;
     },
@@ -116,6 +121,11 @@ export default {
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
+      UserDataHandler.saveSingleUserInteraction(
+        "flashcardsNoGamification",
+        this.flashcard,
+      );
+      // Reihenfolge wichtig, speichern bevor wir vvvvv neue holen.
       this.flashcard = this.flashCardsStore.popSingleFlashcard();
       this.isAnswerVisible = false;
     },

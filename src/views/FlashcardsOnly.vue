@@ -82,14 +82,13 @@ export default {
 
   width: 100%;
   height: 92vh;
-  border: 2px solid red;
 }
 .container {
   position: absolute;
   top: 50%;
   left: 50%;
   position: relative;
-  border: 1px solid green;
+
   width: 248px;
   aspect-ratio: 248/350;
   transform: translate(-50%, -40%) scale(1.6);

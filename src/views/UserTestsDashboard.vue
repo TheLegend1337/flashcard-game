@@ -1,88 +1,126 @@
 <template>
-  <div class="example-component">
-    <!-- Template-Inhalt -->
+  <div class="user-tests-dashboard">
+    <div class="buttons-container">
+      <ButtonUniversal
+        :buttonWidth="300"
+        :buttonHeight="100"
+        type="primary"
+        label="Daten herunterladen"
+        @button-primary-clicked="handleButtonPrimaryClicked"
+      />
+      <ButtonUniversal
+        :buttonWidth="500"
+        :buttonHeight="100"
+        type="secondary"
+        label="Alles endgültig und bis in alle Zeit löschen"
+        @button-secondary-clicked="handleButtonSecondaryClicked"
+      />
+      <ButtonUniversal
+        :buttonWidth="500"
+        :buttonHeight="100"
+        type="secondary"
+        label="Zeit tracking beenden"
+        @click="handlStopTimeButtonClick"
+      />
+    </div>
 
-    <!-- <MyComponent
-            :propName="60"
-            stringProp="secondary"
-           
-          /> -->
-    <!-- Doppelpunkt ist shorthand für v-bind und wird für Variablen verwendet
-            objects sowie Arrays brauchen den Doppelpunkt.
-            Numbers, booleans, Strings ohne Doppelpunkt. -->
+    <div v-if="userData && Object.keys(userData).length">
+      <div
+        v-for="(items, category) in userData"
+        :key="category"
+        class="category"
+      >
+        <h2>
+          {{ category }} ({{ items.length }})
+          <!-- Anzahl der Items -->
+        </h2>
+        <ul>
+          <li v-for="(item, index) in items" :key="index">
+            <pre>{{ item }}</pre>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div v-else>
+      <p>Keine Daten verfügbar.</p>
+    </div>
   </div>
 </template>
 
 <script>
-//beim import import spriteHandler from "@/helpers/spriteHandler"; darauf achten keine Dateiendung anzugeben, da es bei Vite zum Fehler führt.
-//@ steht für den src Ordner
+import UserDataHandler from "@/helpers/userDataHandler"; // Importiere die Helper-Klasse
+import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
+
 export default {
   name: "UserTestsDashboard",
   components: {
-    //Component
-  },
-  props: {
-    // Definiere Props hier
-    // objectName:{
-    //   type: Object,
-    //   default: null,
-    // }
+    ButtonUniversal,
   },
   data() {
     return {
-      // Zustandsvariablen
+      userData: null, // Gespeicherte Daten
     };
   },
-  computed: {
-    // Berechnete Eigenschaften
-  },
-  watch: {
-    // Beobachter für reaktive Daten oder Props
-  },
-  /*
-    // Lifecycle Hooks
-    beforeCreate() {
-      // Wird ausgeführt, bevor die Instanz erstellt wird
-    },
-    created() {
-      // Wird ausgeführt, nachdem die Instanz erstellt wurde
-    },
-    beforeMount() {
-      // Wird ausgeführt, bevor die Komponente in den DOM eingefügt wird
-    },
-    mounted() {
-      // Wird ausgeführt, wenn die Komponente in den DOM eingefügt wurde
-    },
-    beforeUpdate() {
-      // Wird ausgeführt, bevor sich reaktive Daten ändern und ein Re-Render bevorsteht
-    },
-    updated() {
-      // Wird ausgeführt, nachdem die Daten aktualisiert wurden und die Komponente neu gerendert wurde
-    },
-    activated() {
-      // Wird ausgeführt, wenn eine keep-alive-Komponente aktiviert wird
-    },
-    deactivated() {
-      // Wird ausgeführt, wenn eine keep-alive-Komponente deaktiviert wird
-    },
-    beforeDestroy() {
-      // Wird ausgeführt, bevor die Komponente zerstört wird
-    },
-    destroyed() {
-      // Wird ausgeführt, nachdem die Komponente zerstört wurde
-    },
-    errorCaptured(err, vm, info) {
-      // Wird ausgeführt, wenn ein Fehler in einem Kindkomponenten-Lebenszyklus oder -Rendering auftritt
-      // Ermöglicht Fehlerbehandlung innerhalb der Komponente
-    },*/
   methods: {
-    // Methoden der Komponente
+    handlStopTimeButtonClick() {},
+    handleButtonPrimaryClicked() {
+      const jsonData = JSON.stringify(this.userData, null, 2); // Convert userData to a JSON string
+      const blob = new Blob([jsonData], { type: "application/json" }); // Create a Blob with the JSON data
+      const link = document.createElement("a"); // Create a temporary link element
+      link.href = URL.createObjectURL(blob); // Set the download URL to the Blob
+      link.download = "user-data.json"; // Set the download attribute with the desired file name
+      document.body.appendChild(link); // Append the link to the document and trigger a click
+      link.click();
+
+      // Clean up by removing the link
+      document.body.removeChild(link);
+    },
+    handleButtonSecondaryClicked(event) {
+      UserDataHandler.clearAllData();
+      this.userData = UserDataHandler.getAllDataAsJSON(); //updaten vom UserDataHandler mit leeren Daten aus localStorage damit die Component die leeren Daten anzeigt
+      console.log("event ist: " + event);
+    },
+  },
+  mounted() {
+    // Daten aus dem Local Storage laden, sobald die Komponente gerendert wurde
+    UserDataHandler.endTrackingPlayTime();
+    this.userData = UserDataHandler.getAllDataAsJSON();
+    this.userData = UserDataHandler.getAllDataAsJSON();
   },
 };
 </script>
 
 <style scoped>
-.example-component {
-  /* CSS-Stile */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+.user-tests-dashboard {
+  padding: 1rem;
+}
+
+.category {
+  margin-bottom: 1.5rem;
+  color: var(--type-on-bg-dark);
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-light-gradient-start),
+    var(--bg-light-gradient-end)
+  );
+  border: 2px solid var(--border-around-bg-light);
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  color: var(--type-on-bg-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds depth */
 }
 </style>

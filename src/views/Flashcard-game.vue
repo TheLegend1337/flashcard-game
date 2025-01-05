@@ -61,6 +61,8 @@ import { useMonsterStore } from "@/stores/FlashcardGameStores/monsterStore";
 import { usePlayerStore } from "@/stores/FlashcardGameStores/playerStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 
+import UserDataHandler from "@/helpers/userDataHandler";
+
 import HandOfCards from "../components/HandOfCards.vue";
 import Player from "../components/Player.vue";
 import Monster from "../components/Monster.vue";
@@ -274,6 +276,8 @@ export default {
         //prüfen ob WK ausreicht.
         this.card = payloadCard; //Prop reaktiv. HandOfCards reagiert hier und passt Karten Array an.
         this.discardedCard = payloadCard;
+
+        UserDataHandler.saveSingleUserInteraction("playcards", payloadCard);
         this.flashcardGameStore.decreaseWillpower(cost);
         for (let effect of payloadCard.effects) {
           switch (effect.type) {
