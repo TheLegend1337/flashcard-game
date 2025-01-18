@@ -20,8 +20,16 @@ class UserDataHandler {
           playcards: [],
           flashcardsNoGamification: [],
           stats: {
-            playTime: { PlayTime: 0 }, //yo halt wie lang der User am zocken ist
+            playTime: { label: "Spielzeit: ", PlayTime: 0 },
+            flashcardsOnlyTime: {
+              label: "Flashcards Only Time: ",
+              FlashcardsOnlyTime: 0,
+            },
             flashcards: { label: "Flashcards Counter: ", count: 0 },
+            flashcardsNoGamification: {
+              label: "Flashcards Wihtout Gamification: ",
+              count: 0,
+            },
             playcards: { label: "Playcards Counter: ", count: 0 },
           },
         }),
@@ -30,26 +38,40 @@ class UserDataHandler {
   }
 
   saveSingleUserInteraction(dataType, dataObject) {
-    // Eine einzige Interaktion z.b Interaktion mit Karteikarte oder mit Spiekarte speichern
-    const storedData = JSON.parse(localStorage.getItem(this.dataKey)); //erstmal die gespeicherten Daten aus localStorage holen, parse konvertiert in javascript
+    // Load existing data from localStorage
+    const storedData = JSON.parse(localStorage.getItem(this.dataKey));
     console.log("storedData: ", storedData);
-    //wenn der Typ nicht existiert erstmal anlegen
+
+    // Initialize dataType array if it doesn't exist
     if (!storedData[dataType]) {
-      storedData[dataType] = []; //neuen dataType anlegen
-      console.log("storedData, Datatype: ", dataType);
+      storedData[dataType] = [];
     }
+    storedData[dataType].push(dataObject);
 
-    storedData[dataType].push(dataObject); //hinzufügen
-
+    // Initialize stats if missing
     if (!storedData.stats) {
       storedData.stats = {};
     }
+    // Initialize stats[dataType] if missing
     if (!storedData.stats[dataType]) {
-      storedData.stats[dataType] = 0;
+      storedData.stats[dataType] = { count: 0, label: dataType };
     }
-    storedData.stats[dataType] += 1; // Anzahl an Objekten von dem Typ inkrementieren
+    // Increment the count
+    storedData.stats[dataType].count += 1;
 
-    localStorage.setItem(this.dataKey, JSON.stringify(storedData)); //zurück ins LocalStorage rein da schnell aber
+    // Special case for flashcardsNoGamification
+    if (dataType === "flashcardsNoGamification") {
+      if (!storedData.stats.flashcardsOnly) {
+        storedData.stats.flashcardsOnly = {
+          count: 0,
+          label: "Flashcards Only Counter: ",
+        };
+      }
+      storedData.stats.flashcardsOnly.count += 1;
+    }
+
+    // Save back to localStorage
+    localStorage.setItem(this.dataKey, JSON.stringify(storedData));
   }
 
   getAllDataAsJSON() {
@@ -61,39 +83,58 @@ class UserDataHandler {
     this.initStorage(); // Neu initialisieren, um die Struktur wieder herzustellen
   }
 
-  startTrackingPlayTime() {
-    this.playTimeStart = Date.now();
-    localStorage.setItem("playTimeStart", this.playTimeStart); // Persist the start time
-    console.log("Tracking started at:", this.playTimeStart);
+  startTrackingTime(whatToTrack) {
+    this.timeTrackingStart = Date.now();
+    localStorage.setItem("timeTrackingStart", this.timeTrackingStart); // Persist the start time
+    localStorage.setItem("whatToTrack", whatToTrack); // Persist whatToTrack
+    console.log(
+      `Tracking started at: ${this.timeTrackingStart} for ${whatToTrack}`,
+    );
   }
 
-  endTrackingPlayTime() {
-    const storedPlayTimeStart = localStorage.getItem("playTimeStart");
-    //das muss persistent in localStorage zwischengespeichert werden
-    //weil wir startTrackingPlayTime nicht in der gleichen Datei aufrufen wie endTrackingPlayTime
-    const playTimeStart =
-      this.playTimeStart ||
-      (storedPlayTimeStart ? parseInt(storedPlayTimeStart, 10) : null);
+  endTrackingTime() {
+    const storedTimeTrackingStart = localStorage.getItem("timeTrackingStart");
+    const whatToTrack = localStorage.getItem("whatToTrack"); // Retrieve whatToTrack
+    const timeTrackingStart =
+      this.timeTrackingStart ||
+      (storedTimeTrackingStart ? parseInt(storedTimeTrackingStart, 10) : null);
 
-    if (playTimeStart) {
-      const elapsedTime = Math.floor((Date.now() - playTimeStart) / 1000); // Calculate elapsed time in seconds
+    if (timeTrackingStart && whatToTrack) {
+      const elapsedTime = Math.floor((Date.now() - timeTrackingStart) / 1000); // Calculate elapsed time in seconds
       const storedData = JSON.parse(localStorage.getItem(this.dataKey));
 
       if (!storedData.stats) {
         storedData.stats = {};
       }
 
-      // Update total play time
-      if (!storedData.stats.playTime) {
-        storedData.stats.playTime = { PlayTime: 0, label: "Play Time" };
+      // Update the correct tracking type dynamically
+      if (whatToTrack === "playTime") {
+        if (!storedData.stats.playTime) {
+          storedData.stats.playTime = { PlayTime: 0, label: "Play Time" };
+        }
+        storedData.stats.playTime.PlayTime += elapsedTime;
+      } else if (whatToTrack === "flashcardsOnlyTime") {
+        if (!storedData.stats.flashcardsOnlyTime) {
+          storedData.stats.flashcardsOnlyTime = {
+            FlashcardsOnlyTime: 0,
+            label: "Flashcards Only Time: ",
+          };
+        }
+        storedData.stats.flashcardsOnlyTime.FlashcardsOnlyTime += elapsedTime;
       }
-      storedData.stats.playTime.PlayTime += elapsedTime;
 
-      // Reset playTimeStart
-      this.playTimeStart = null;
-      localStorage.removeItem("playTimeStart"); // Clear the saved start time
+      // Reset timeTrackingStart
+      this.timeTrackingStart = null;
+      localStorage.removeItem("timeTrackingStart"); // Clear the saved start time
+      localStorage.removeItem("whatToTrack"); // Clear whatToTrack
 
+      // Save the updated stats back to localStorage
       localStorage.setItem(this.dataKey, JSON.stringify(storedData));
+      console.log(`${whatToTrack} updated:`, storedData.stats[whatToTrack]);
+    } else {
+      console.warn(
+        "endTrackingTime called without a valid timeTrackingStart or whatToTrack",
+      );
     }
   }
 }

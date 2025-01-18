@@ -83,7 +83,7 @@ export default {
   },
   mounted() {
     // Daten aus dem Local Storage laden, sobald die Komponente gerendert wurde
-    UserDataHandler.endTrackingPlayTime();
+    UserDataHandler.endTrackingTime();
     this.userData = UserDataHandler.getAllDataAsJSON();
     this.userData = UserDataHandler.getAllDataAsJSON();
   },

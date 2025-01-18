@@ -8,11 +8,16 @@
         src="@/assets/brandIdentity/Logo-1024x455.png"
         alt="Producterra Logo"
       />
-      <div class="button-dimension animate-pulse-scale">
+      <div class="button-dimension flex animate-pulse-scale gap-2">
         <ButtonPrimary
           label="Starten"
           route="/flashcard-game"
           :clickHandler="startGame"
+        />
+        <ButtonPrimary
+          label="Pauken"
+          route="/flashcards-only"
+          :clickHandler="startTrackingFlashcardsOnlyTime"
         />
       </div>
     </main>
@@ -60,13 +65,16 @@ export default {
   },
   methods: {
     startGame() {
-      UserDataHandler.startTrackingPlayTime();
+      UserDataHandler.startTrackingTime("playTime");
       this.cardStore.initiateCardDeck();
       this.soundStore.isMusicPlaying = true;
       console.log("isMusicPlaying: " + this.soundStore.isMusicPlaying);
       // this.flashcardGameStore.setPhaseGameStart;
       this.flashcardGameStore.phase = "gameStart";
       // tracker.createNewUserFile();
+    },
+    startTrackingFlashcardsOnlyTime() {
+      UserDataHandler.startTrackingTime("flashcardsOnlyTime");
     },
   },
 };
@@ -84,7 +92,7 @@ export default {
   background-repeat: no-repeat;
 }
 .button-dimension {
-  width: 210px;
-  height: 58px;
+  width: 350px;
+  height: 50px;
 }
 </style>
