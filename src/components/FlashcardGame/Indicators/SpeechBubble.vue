@@ -32,8 +32,6 @@ export default {
         "Die Deadline ist eh erst nächste Woche!",
         "Ich habe keine Lust!",
         "Ich fühle mich heute nicht danach :(",
-        "Wenn du es dir heute kannst besorgen dann...",
-        "...verschiebe es nicht auf morgen!",
         "Das ist schon der 8. Text!",
         "Hör Bitte auf!",
         "Denkst du das ist witzig?!",
