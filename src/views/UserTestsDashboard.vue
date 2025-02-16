@@ -12,7 +12,7 @@
         :buttonWidth="500"
         :buttonHeight="100"
         type="secondary"
-        label="Alles endgültig und bis in alle Zeit löschen"
+        label="Daten löschen"
         @button-secondary-clicked="handleButtonSecondaryClicked"
       />
       <ButtonUniversal
