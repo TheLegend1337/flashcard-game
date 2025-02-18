@@ -301,160 +301,160 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     // ],
 
     //Yannick und Lukas: Aktienanalyse
-    allFlashcards: [
-      {
-        id: 1,
-        question:
-          "Wie kann eine Aktie dir langfristigen Vermögensaufbau ermöglichen?",
-        answer: "Durch Kurssteigerung und Dividenden.",
-        streak: 0,
-      },
-      {
-        id: 2,
-        question:
-          "Kann eine Aktie auch dann fallen, wenn das Unternehmen profitabel ist?",
-        answer: "Ja.",
-        streak: 0,
-      },
-      {
-        id: 3,
-        question: "Was bedeutet 'Dividende'?",
-        answer: "Gewinnausschüttung an Aktionäre.",
-        streak: 0,
-      },
-      {
-        id: 4,
-        question: "Kann politische Unsicherheit Aktienkurse beeinflussen?",
-        answer: "Ja.",
-        streak: 0,
-      },
-      {
-        id: 5,
-        question: "Was bedeutet 'KGV'?",
-        answer: "Kurs-Gewinn-Verhältnis.",
-        streak: 0,
-      },
-      {
-        id: 6,
-        question:
-          "Bietet ein ETF automatisch eine bessere Rendite als eine Aktie?",
-        answer: "Nein.",
-        streak: 0,
-      },
-      {
-        id: 7,
-        question: "Was ist eine Börse?",
-        answer: "Marktplatz für Wertpapiere.",
-        streak: 0,
-      },
-      {
-        id: 8,
-        question:
-          "Kann eine zu hohe Konzentration auf eine einzige Aktie dein Risiko stark erhöhen?",
-        answer: "Ja.",
-        streak: 0,
-      },
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question:
+    //       "Wie kann eine Aktie dir langfristigen Vermögensaufbau ermöglichen?",
+    //     answer: "Durch Kurssteigerung und Dividenden.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 2,
+    //     question:
+    //       "Kann eine Aktie auch dann fallen, wenn das Unternehmen profitabel ist?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 3,
+    //     question: "Was bedeutet 'Dividende'?",
+    //     answer: "Gewinnausschüttung an Aktionäre.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question: "Kann politische Unsicherheit Aktienkurse beeinflussen?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Was bedeutet 'KGV'?",
+    //     answer: "Kurs-Gewinn-Verhältnis.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question:
+    //       "Bietet ein ETF automatisch eine bessere Rendite als eine Aktie?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Was ist eine Börse?",
+    //     answer: "Marktplatz für Wertpapiere.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 8,
+    //     question:
+    //       "Kann eine zu hohe Konzentration auf eine einzige Aktie dein Risiko stark erhöhen?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
 
-      {
-        id: 9,
-        question: "Was ist eine fundamentale Analyse?",
-        answer: "Bewertung einer Aktie anhand von Kennzahlen.",
-        streak: 0,
-      },
-      {
-        id: 10,
-        question: "Was zeigt die Marktkapitalisierung?",
-        answer: "Den Gesamtwert eines Unternehmens.",
-        streak: 0,
-      },
-      {
-        id: 11,
-        question: "Ist ein niedriges KGV immer gut?",
-        answer: "Nein.",
-        streak: 0,
-      },
-      {
-        id: 12,
-        question: "Was ist eine technische Analyse?",
-        answer: "Analyse anhand von Kursverläufen.",
-        streak: 0,
-      },
-      {
-        id: 13,
-        question: "Was bedeutet 'Diversifikation'?",
-        answer: "Risikostreuung durch verschiedene Anlagen.",
-        streak: 0,
-      },
-      {
-        id: 14,
-        question: "Was misst das Beta einer Aktie?",
-        answer: "Die Volatilität im Vergleich zum Markt.",
-        streak: 0,
-      },
-      {
-        id: 15,
-        question:
-          "Kann regelmäßiges Investieren helfen, Marktschwankungen auszugleichen?",
-        answer: "Ja.",
-        streak: 0,
-      },
-      {
-        id: 16,
-        question: "Was zeigt die Eigenkapitalrendite?",
-        answer: "Gewinn im Verhältnis zum Eigenkapital.",
-        streak: 0,
-      },
+    //   {
+    //     id: 9,
+    //     question: "Was ist eine fundamentale Analyse?",
+    //     answer: "Bewertung einer Aktie anhand von Kennzahlen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question: "Was zeigt die Marktkapitalisierung?",
+    //     answer: "Den Gesamtwert eines Unternehmens.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Ist ein niedriges KGV immer gut?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "Was ist eine technische Analyse?",
+    //     answer: "Analyse anhand von Kursverläufen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Was bedeutet 'Diversifikation'?",
+    //     answer: "Risikostreuung durch verschiedene Anlagen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Was misst das Beta einer Aktie?",
+    //     answer: "Die Volatilität im Vergleich zum Markt.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question:
+    //       "Kann regelmäßiges Investieren helfen, Marktschwankungen auszugleichen?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Was zeigt die Eigenkapitalrendite?",
+    //     answer: "Gewinn im Verhältnis zum Eigenkapital.",
+    //     streak: 0,
+    //   },
 
-      {
-        id: 17,
-        question: "Wie finde ich unterbewertete Aktien?",
-        answer: "Vergleich von KGV und Branchenwerten.",
-        streak: 0,
-      },
-      {
-        id: 18,
-        question: "Was bedeutet 'Dividendenrendite'?",
-        answer: "Dividende im Verhältnis zum Aktienkurs.",
-        streak: 0,
-      },
-      {
-        id: 19,
-        question: "Wie hilft ein Sparplan beim Investieren?",
-        answer: "Er verteilt Käufe über die Zeit.",
-        streak: 0,
-      },
-      {
-        id: 20,
-        question: "Erhöht ein rasanter Kursanstieg immer die Gewinnchancen?",
-        answer: "Nein.",
-        streak: 0,
-      },
-      {
-        id: 21,
-        question: "Warum ist eine Watchlist nützlich?",
-        answer: "Zum Beobachten interessanter Aktien.",
-        streak: 0,
-      },
-      {
-        id: 22,
-        question: "Wie kann ich Risiken minimieren?",
-        answer: "Durch Diversifikation.",
-        streak: 0,
-      },
-      {
-        id: 23,
-        question:
-          "Kann eine ungewöhnlich hohe Dividende auf finanzielle Probleme hindeuten?",
-        answer: "Ja.",
-        streak: 0,
-      },
-      {
-        id: 24,
-        question: "Wie sollte man auf einen Börsencrash reagieren?",
-        answer: "Ruhig bleiben, Strategie prüfen, Chancen nutzen.",
-        streak: 0,
-      },
-    ],
+    //   {
+    //     id: 17,
+    //     question: "Wie finde ich unterbewertete Aktien?",
+    //     answer: "Vergleich von KGV und Branchenwerten.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Was bedeutet 'Dividendenrendite'?",
+    //     answer: "Dividende im Verhältnis zum Aktienkurs.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question: "Wie hilft ein Sparplan beim Investieren?",
+    //     answer: "Er verteilt Käufe über die Zeit.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Erhöht ein rasanter Kursanstieg immer die Gewinnchancen?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question: "Warum ist eine Watchlist nützlich?",
+    //     answer: "Zum Beobachten interessanter Aktien.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Wie kann ich Risiken minimieren?",
+    //     answer: "Durch Diversifikation.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question:
+    //       "Kann eine ungewöhnlich hohe Dividende auf finanzielle Probleme hindeuten?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Wie sollte man auf einen Börsencrash reagieren?",
+    //     answer: "Ruhig bleiben, Strategie prüfen, Chancen nutzen.",
+    //     streak: 0,
+    //   },
+    // ],
 
     //Isländisch, Luisa
     allFlashcards: [
