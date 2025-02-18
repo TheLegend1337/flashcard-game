@@ -25,7 +25,7 @@ class UserDataHandler {
               label: "Flashcards Only Time: ",
               FlashcardsOnlyTime: 0,
             },
-            flashcards: { label: "Flashcards Counter: ", count: 0 },
+            flashcards: { label: "Game Based Flashcards Counter: ", count: 0 },
             flashcardsNoGamification: {
               label: "Flashcards Wihtout Gamification: ",
               count: 0,

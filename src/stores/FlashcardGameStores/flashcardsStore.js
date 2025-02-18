@@ -151,7 +151,7 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //   },
     // ]
 
-    //Matthias Scheer:
+    //Matthias Scheer: Imkern
     // allFlashcards: [
     //   {
     //     id: 1,
@@ -299,7 +299,8 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
-    //Yannik:
+
+    //Yannick und Lukas: Aktienanalyse
     allFlashcards: [
       {
         id: 1,
@@ -451,6 +452,148 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
         id: 24,
         question: "Wie sollte man auf einen Börsencrash reagieren?",
         answer: "Ruhig bleiben, Strategie prüfen, Chancen nutzen.",
+        streak: 0,
+      },
+    ],
+
+    //Isländisch, Luisa
+    allFlashcards: [
+      {
+        id: 1,
+        question: "Wie sagt man ‚Hallo‘ auf Isländisch?",
+        answer: "Halló",
+        streak: 0,
+      },
+      { id: 2, question: "Was bedeutet ‚Takk‘?", answer: "Danke", streak: 0 },
+      {
+        id: 3,
+        question: "Bedeutet ‚Já‘ auf Isländisch ‚Ja‘?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 4,
+        question: "Wie sagt man ‚Nein‘ auf Isländisch?",
+        answer: "Nei",
+        streak: 0,
+      },
+      {
+        id: 5,
+        question: "Ist Isländisch eine germanische Sprache?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 6,
+        question: "Was bedeutet ‚Bless‘?",
+        answer: "Tschüss",
+        streak: 0,
+      },
+      {
+        id: 7,
+        question: "Wie sagt man ‚Bitte‘ auf Isländisch?",
+        answer: "Gjörðu svo vel",
+        streak: 0,
+      },
+      { id: 8, question: "Heißt ‚Vinur‘ Freund?", answer: "Ja", streak: 0 },
+
+      {
+        id: 9,
+        question: "Wie fragt man ‚Wie geht es dir?‘ auf Isländisch?",
+        answer: "Hvernig hefurðu það?",
+        streak: 0,
+      },
+      {
+        id: 10,
+        question: "Was bedeutet ‚Ég skil ekki‘?",
+        answer: "Ich verstehe nicht",
+        streak: 0,
+      },
+      {
+        id: 11,
+        question: "Kann man ‚Ég heiti…‘ für die Vorstellung nutzen?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 12,
+        question: "Wie antwortet man auf ‚Hvað segirðu gott?‘?",
+        answer: "Allt gott",
+        streak: 0,
+      },
+      {
+        id: 13,
+        question: "Was bedeutet ‚Afsakið‘?",
+        answer: "Entschuldigung",
+        streak: 0,
+      },
+      {
+        id: 14,
+        question: "Ist die Aussprache von ‚j‘ im Isländischen wie ‚j‘ in ‚ja‘?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 15,
+        question: "Wie fragt man nach dem Preis?",
+        answer: "Hvað kostar þetta?",
+        streak: 0,
+      },
+      {
+        id: 16,
+        question: "Was bedeutet ‚Ég tala ekki íslensku‘?",
+        answer: "Ich spreche kein Isländisch",
+        streak: 0,
+      },
+
+      {
+        id: 17,
+        question: "Wie bestellt man einen Kaffee?",
+        answer: "Ég vil kaffi",
+        streak: 0,
+      },
+      {
+        id: 18,
+        question: "Was bedeutet ‚Hvar er klósettið?‘?",
+        answer: "Wo ist die Toilette?",
+        streak: 0,
+      },
+      {
+        id: 19,
+        question:
+          "Wie sagt man ‚Die Wohlgestelltheit nichtlinearer PDEs hängt von der Hyperbolizität und der Sobolev-Einbettung in geeignete Banachräume ab.‘?",
+        answer:
+          "Velskilgreining ólínulegra afleiðujafna fer eftir ofurbolsku og Sobolev-ísetningu í viðeigandi Banach-rúm.",
+        streak: 0,
+      },
+      {
+        id: 20,
+        question: "Was heißt ‚Hvað er klukkan?‘?",
+        answer: "Wie spät ist es?",
+        streak: 0,
+      },
+      {
+        id: 21,
+        question: "Wie sagt man ‚Guten Morgen‘?",
+        answer: "Góðan daginn",
+        streak: 0,
+      },
+      {
+        id: 22,
+        question: "Ist Isländisch mit Norwegisch verwandt?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 23,
+        question: "Wie kann man ein Taxi rufen?",
+        answer: "Hringdu í leigubíl",
+        streak: 0,
+      },
+      {
+        id: 24,
+        question: "Was bedeutet ‚Ég á ekki pening‘?",
+        answer: "Ich habe kein Geld",
         streak: 0,
       },
     ],
