@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 export const useFlashCardsStore = defineStore("flashCardsStore", {
   state: () => ({
     //Spanisch:
-
     /*allFlashcards: [
       {
         id: 1,
@@ -151,7 +150,6 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
         streak: 0,
       },
     ] */
-
     //Matthias Scheer: Imkern
     // allFlashcards: [
     //   {
@@ -300,7 +298,6 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
-
     //Yannick und Lukas: Aktienanalyse
     // allFlashcards: [
     //   {
@@ -355,7 +352,6 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     answer: "Ja.",
     //     streak: 0,
     //   },
-
     //   {
     //     id: 9,
     //     question: "Was ist eine fundamentale Analyse?",
@@ -405,7 +401,6 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     answer: "Gewinn im Verhältnis zum Eigenkapital.",
     //     streak: 0,
     //   },
-
     //   {
     //     id: 17,
     //     question: "Wie finde ich unterbewertete Aktien?",
@@ -456,9 +451,8 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
-
     //Isländisch, Luisa
-    allFlashcards: [
+    /* allFlashcards: [
       {
         id: 1,
         question: "Wie sagt man ‚Hallo‘ auf Isländisch?",
@@ -597,7 +591,183 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
         answer: "Ich habe kein Geld",
         streak: 0,
       },
-    ],
+    ],*/
+    //Grundlagen der Programmierlogik, eugen
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question: "Was ist eine Variable?",
+    //     answer: "Ein Speicherplatz für Daten.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 2,
+    //     question: "Ist eine Schleife eine Kontrollstruktur? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 3,
+    //     question: "Was ist eine Bedingung?",
+    //     answer: "Eine Abfrage, die wahr oder falsch ist.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question:
+    //       "Kann eine IF-Anweisung mehrere Bedingungen prüfen? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Was bedeutet 'Iteration'?",
+    //     answer: "Wiederholung eines Befehlsblocks.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question:
+    //       "Braucht eine WHILE-Schleife eine Abbruchbedingung? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Was ist eine Konstante?",
+    //     answer: "Ein fester Wert, der sich nicht ändert.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 8,
+    //     question: "Ist 'x = x + 1' eine Zuweisung? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 9,
+    //     question: "Wie wird eine WHILE-Schleife beendet?",
+    //     answer: "Wenn die Bedingung falsch wird.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question: "Was ist der Zweck einer IF-Anweisung?",
+    //     answer: "Bedingte Ausführung von Code.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Kann eine FOR-Schleife rückwärts zählen? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "Was macht ein ELSE-Block?",
+    //     answer: "Führt Code bei falscher Bedingung aus.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Was bedeutet 'Schleifenkontrolle'?",
+    //     answer: "Steuerung der Schleifen-Ausführung.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Kann man Schleifen ineinander verschachteln? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question: "Was ist eine Endlosschleife?",
+    //     answer: "Eine Schleife ohne Abbruchbedingung.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Erhöht 'i = i + 1' den Zähler? (Ja/Nein)",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 17,
+    //     question: "Wie vermeidest du eine Endlosschleife?",
+    //     answer: "Durch eine gültige Abbruchbedingung.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Was macht ein 'break'-Befehl?",
+    //     answer: "Beendet die aktuelle Schleife.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question: "Wann nutzt man eine FOR-Schleife?",
+    //     answer: "Bei bekannter Anzahl an Durchläufen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Was passiert bei 'IF x > 5 THEN y = 1'?",
+    //     answer: "y wird 1, wenn x größer als 5 ist.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question: "Wie überspringt man eine Iteration?",
+    //     answer: "Mit dem 'continue'-Befehl.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Warum Bedingungen kombinieren?",
+    //     answer: "Für komplexere Entscheidungslogik.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question: "Wie kann man mehrere IFs effizienter schreiben?",
+    //     answer: "Mit ELSE IF-Ketten.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Was prüft 'WHILE x != 0'?",
+    //     answer: "Ob x ungleich 0 ist.",
+    //     streak: 0,
+    //   },
+    // ],
+    //IPv4, Eugen
+    // allFlashcards: [
+    //   {id: 1, question: "Was ist Subnetting?", answer: "Aufteilung eines Netzwerks in kleinere Netze.", streak: 0},
+    //   {id: 2, question: "Besteht eine IPv4-Adresse aus 32 Bit? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 3, question: "Was ist eine Subnetzmaske?", answer: "Sie trennt Netz- und Hostanteil.", streak: 0},
+    //   {id: 4, question: "Ist 255.255.255.0 eine Subnetzmaske? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 5, question: "Was bedeutet CIDR?", answer: "Classless Inter-Domain Routing.", streak: 0},
+    //   {id: 6, question: "Gibt es private IPv4-Bereiche? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 7, question: "Was ist eine Broadcast-Adresse?", answer: "Adresse für alle Hosts im Subnetz.", streak: 0},
+    //   {id: 8, question: "Ist 192.168.1.1 eine private IP? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 9, question: "Was macht Subnetting effizienter?", answer: "Bessere IP-Adressausnutzung.", streak: 0},
+    //   {id: 10, question: "Was bedeutet /24 im CIDR-Format?", answer: "24 Bit für das Netzwerk.", streak: 0},
+    //   {id: 11, question: "Kann ein Subnetz mehr als 254 Hosts haben? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 12, question: "Was ist die Netzwerkadresse?", answer: "Erste Adresse eines Subnetzes.", streak: 0},
+    //   {id: 13, question: "Wie viele Hosts in /30?", answer: "2 nutzbare Hosts.", streak: 0},
+    //   {id: 14, question: "Darf eine Host-Adresse nur aus Nullen bestehen? (Ja/Nein)", answer: "Nein", streak: 0},
+    //   {id: 15, question: "Was ist eine Standard-Subnetzmaske für Klasse C?", answer: "255.255.255.0", streak: 0},
+    //   {id: 16, question: "Ist 10.0.0.0/8 ein privater Bereich? (Ja/Nein)", answer: "Ja", streak: 0},
+    //   {id: 17, question: "Wie viele Subnetze entstehen aus /24 in /26?", answer: "4 Subnetze.", streak: 0},
+    //   {id: 18, question: "Wie viele Hosts hat ein /29-Netz?", answer: "6 nutzbare Hosts.", streak: 0},
+    //   {id: 19, question: "Wie erkennt man die Broadcast-Adresse?", answer: "Alle Hostbits sind 1.", streak: 0},
+    //   {id: 20, question: "Was ist der Zweck von VLSM?", answer: "Variable Subnetzgrößen.", streak: 0},
+    //   {id: 21, question: "Wie viele Hosts hat ein /16-Netz?", answer: "65.534 Hosts.", streak: 0},
+    //   {id: 22, question: "Wie wird Subnetting berechnet?", answer: "Mit Binärumrechnung der IPs.", streak: 0},
+    //   {id: 23, question: "Warum Subnetting verwenden?", answer: "Für Sicherheit und Netzwerkeffizienz.", streak: 0},
+    //   {id: 24, question: "Wie viele Adressen in /27?", answer: "32 Adressen, 30 nutzbar.", streak: 0}
+    // ]
   }),
   getters: {
     //Platz für Getters
