@@ -1,3 +1,4 @@
+import { all } from "axios";
 import { defineStore } from "pinia";
 
 export const useFlashCardsStore = defineStore("flashCardsStore", {
@@ -452,146 +453,144 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //   },
     // ],
     //Isländisch, Luisa
-    /* allFlashcards: [
-      {
-        id: 1,
-        question: "Wie sagt man ‚Hallo‘ auf Isländisch?",
-        answer: "Halló",
-        streak: 0,
-      },
-      { id: 2, question: "Was bedeutet ‚Takk‘?", answer: "Danke", streak: 0 },
-      {
-        id: 3,
-        question: "Bedeutet ‚Já‘ auf Isländisch ‚Ja‘?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 4,
-        question: "Wie sagt man ‚Nein‘ auf Isländisch?",
-        answer: "Nei",
-        streak: 0,
-      },
-      {
-        id: 5,
-        question: "Ist Isländisch eine germanische Sprache?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 6,
-        question: "Was bedeutet ‚Bless‘?",
-        answer: "Tschüss",
-        streak: 0,
-      },
-      {
-        id: 7,
-        question: "Wie sagt man ‚Bitte‘ auf Isländisch?",
-        answer: "Gjörðu svo vel",
-        streak: 0,
-      },
-      { id: 8, question: "Heißt ‚Vinur‘ Freund?", answer: "Ja", streak: 0 },
-
-      {
-        id: 9,
-        question: "Wie fragt man ‚Wie geht es dir?‘ auf Isländisch?",
-        answer: "Hvernig hefurðu það?",
-        streak: 0,
-      },
-      {
-        id: 10,
-        question: "Was bedeutet ‚Ég skil ekki‘?",
-        answer: "Ich verstehe nicht",
-        streak: 0,
-      },
-      {
-        id: 11,
-        question: "Kann man ‚Ég heiti…‘ für die Vorstellung nutzen?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 12,
-        question: "Wie antwortet man auf ‚Hvað segirðu gott?‘?",
-        answer: "Allt gott",
-        streak: 0,
-      },
-      {
-        id: 13,
-        question: "Was bedeutet ‚Afsakið‘?",
-        answer: "Entschuldigung",
-        streak: 0,
-      },
-      {
-        id: 14,
-        question: "Ist die Aussprache von ‚j‘ im Isländischen wie ‚j‘ in ‚ja‘?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 15,
-        question: "Wie fragt man nach dem Preis?",
-        answer: "Hvað kostar þetta?",
-        streak: 0,
-      },
-      {
-        id: 16,
-        question: "Was bedeutet ‚Ég tala ekki íslensku‘?",
-        answer: "Ich spreche kein Isländisch",
-        streak: 0,
-      },
-
-      {
-        id: 17,
-        question: "Wie bestellt man einen Kaffee?",
-        answer: "Ég vil kaffi",
-        streak: 0,
-      },
-      {
-        id: 18,
-        question: "Was bedeutet ‚Hvar er klósettið?‘?",
-        answer: "Wo ist die Toilette?",
-        streak: 0,
-      },
-      {
-        id: 19,
-        question:
-          "Wie sagt man ‚Die Wohlgestelltheit nichtlinearer PDEs hängt von der Hyperbolizität und der Sobolev-Einbettung in geeignete Banachräume ab.‘?",
-        answer:
-          "Velskilgreining ólínulegra afleiðujafna fer eftir ofurbolsku og Sobolev-ísetningu í viðeigandi Banach-rúm.",
-        streak: 0,
-      },
-      {
-        id: 20,
-        question: "Was heißt ‚Hvað er klukkan?‘?",
-        answer: "Wie spät ist es?",
-        streak: 0,
-      },
-      {
-        id: 21,
-        question: "Wie sagt man ‚Guten Morgen‘?",
-        answer: "Góðan daginn",
-        streak: 0,
-      },
-      {
-        id: 22,
-        question: "Ist Isländisch mit Norwegisch verwandt?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 23,
-        question: "Wie kann man ein Taxi rufen?",
-        answer: "Hringdu í leigubíl",
-        streak: 0,
-      },
-      {
-        id: 24,
-        question: "Was bedeutet ‚Ég á ekki pening‘?",
-        answer: "Ich habe kein Geld",
-        streak: 0,
-      },
-    ],*/
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question: "Wie sagt man ‚Hallo‘ auf Isländisch?",
+    //     answer: "Halló",
+    //     streak: 0,
+    //   },
+    //   { id: 2, question: "Was bedeutet ‚Takk‘?", answer: "Danke", streak: 0 },
+    //   {
+    //     id: 3,
+    //     question: "Bedeutet ‚Já‘ auf Isländisch ‚Ja‘?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question: "Wie sagt man ‚Nein‘ auf Isländisch?",
+    //     answer: "Nei",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Ist Isländisch eine germanische Sprache?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question: "Was bedeutet ‚Bless‘?",
+    //     answer: "Tschüss",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Wie sagt man ‚Bitte‘ auf Isländisch?",
+    //     answer: "Gjörðu svo vel",
+    //     streak: 0,
+    //   },
+    //   { id: 8, question: "Heißt ‚Vinur‘ Freund?", answer: "Ja", streak: 0 },
+    //   {
+    //     id: 9,
+    //     question: "Wie fragt man ‚Wie geht es dir?‘ auf Isländisch?",
+    //     answer: "Hvernig hefurðu það?",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question: "Was bedeutet ‚Ég skil ekki‘?",
+    //     answer: "Ich verstehe nicht",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Kann man ‚Ég heiti…‘ für die Vorstellung nutzen?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "Wie antwortet man auf ‚Hvað segirðu gott?‘?",
+    //     answer: "Allt gott",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Was bedeutet ‚Afsakið‘?",
+    //     answer: "Entschuldigung",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Ist die Aussprache von ‚j‘ im Isländischen wie ‚j‘ in ‚ja‘?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question: "Wie fragt man nach dem Preis?",
+    //     answer: "Hvað kostar þetta?",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Was bedeutet ‚Ég tala ekki íslensku‘?",
+    //     answer: "Ich spreche kein Isländisch",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 17,
+    //     question: "Wie bestellt man einen Kaffee?",
+    //     answer: "Ég vil kaffi",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Was bedeutet ‚Hvar er klósettið?‘?",
+    //     answer: "Wo ist die Toilette?",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question:
+    //       "Wie sagt man ‚Die Wohlgestelltheit nichtlinearer PDEs hängt von der Hyperbolizität und der Sobolev-Einbettung in geeignete Banachräume ab.‘?",
+    //     answer:
+    //       "Velskilgreining ólínulegra afleiðujafna fer eftir ofurbolsku og Sobolev-ísetningu í viðeigandi Banach-rúm.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Was heißt ‚Hvað er klukkan?‘?",
+    //     answer: "Wie spät ist es?",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question: "Wie sagt man ‚Guten Morgen‘?",
+    //     answer: "Góðan daginn",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Ist Isländisch mit Norwegisch verwandt?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question: "Wie kann man ein Taxi rufen?",
+    //     answer: "Hringdu í leigubíl",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Was bedeutet ‚Ég á ekki pening‘?",
+    //     answer: "Ich habe kein Geld",
+    //     streak: 0,
+    //   },
+    // ],
     //Grundlagen der Programmierlogik, eugen
     // allFlashcards: [
     //   {
@@ -768,6 +767,480 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //   {id: 23, question: "Warum Subnetting verwenden?", answer: "Für Sicherheit und Netzwerkeffizienz.", streak: 0},
     //   {id: 24, question: "Wie viele Adressen in /27?", answer: "32 Adressen, 30 nutzbar.", streak: 0}
     // ]
+    //Game Design, Aaron
+    allFlashcards: [
+      {
+        id: 1,
+        question: "Was bedeutet 'Game Feel'?",
+        answer: "Der emotionale Eindruck beim Spielen.",
+        streak: 0,
+      },
+      {
+        id: 2,
+        question:
+          "Beeinflusst eine hohe Eingabeverzögerung das wahrgenommene Game Feel negativ?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 3,
+        question: "Was beschreibt der Begriff 'Juiciness'?",
+        answer: "Übertriebenes Feedback, das Aktionen belohnt.",
+        streak: 0,
+      },
+      {
+        id: 4,
+        question: "Können schlechte Animationen das Spielgefühl ruinieren?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 5,
+        question: "Was versteht man unter 'Input Buffering'?",
+        answer: "Speichern von Eingaben für flüssige Steuerung.",
+        streak: 0,
+      },
+      {
+        id: 6,
+        question: "Verbessert Screen Shake die Wirkung starker Effekte?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 7,
+        question: "Was bedeutet 'Coyote Time'?",
+        answer: "Kurze Nachfrist für Sprünge nach Kantenabgang.",
+        streak: 0,
+      },
+      {
+        id: 8,
+        question: "Kann Sounddesign direkt das Spielgefühl beeinflussen?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 9,
+        question: "Wie nutzt man Partikeleffekte effektiv?",
+        answer: "Verstärken Aktionen und geben visuelles Feedback.",
+        streak: 0,
+      },
+      {
+        id: 10,
+        question: "Was sind Easing Curves?",
+        answer: "Kurven für natürliche Bewegungsübergänge.",
+        streak: 0,
+      },
+      {
+        id: 11,
+        question: "Ist ein kurzer Hit-Stop wichtig für Trefferfeedback?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 12,
+        question: "Wie verbessert man die Responsiveness von Steuerungen?",
+        answer: "Minimale Eingabeverzögerung sicherstellen.",
+        streak: 0,
+      },
+      {
+        id: 13,
+        question: "Was ist 'Anticipation' in Animationen?",
+        answer: "Vorbereitende Bewegung vor der Hauptaktion.",
+        streak: 0,
+      },
+      {
+        id: 14,
+        question: "Sollten UI-Elemente animiertes Feedback geben?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 15,
+        question: "Wie verbessert man das Gefühl von Geschwindigkeit?",
+        answer: "Durch Motion Blur und Kamerabewegungen.",
+        streak: 0,
+      },
+      {
+        id: 16,
+        question: "Was bedeutet 'Hit Stop'?",
+        answer: "Kurzes Einfrieren bei Treffern für Wirkung.",
+        streak: 0,
+      },
+      {
+        id: 17,
+        question: "Wie steigert dynamisches Licht Immersion?",
+        answer: "Hervorheben wichtiger Momente und Atmosphäre.",
+        streak: 0,
+      },
+      {
+        id: 18,
+        question: "Was beschreibt 'Inverse Kinematik'?",
+        answer: "Technik für realistische Gelenkbewegungen.",
+        streak: 0,
+      },
+      {
+        id: 19,
+        question: "Erhöht ein Kamera-Zoom bei Treffern die Wirkung?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 20,
+        question: "Wie kann Polishing das Spielgefühl verbessern?",
+        answer: "Feinschliff für kohärentes Gesamtbild.",
+        streak: 0,
+      },
+      {
+        id: 21,
+        question: "Was ist ein 'Feedback Loop' im Game Design?",
+        answer: "System zur Verstärkung von Spieleraktionen.",
+        streak: 0,
+      },
+      {
+        id: 22,
+        question: "Hilft Vibration als haptisches Feedback bei Immersion?",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 23,
+        question: "Wie nutzt man Farben zur Verstärkung von Feedback?",
+        answer: "Klare Kontraste zur Signalisierung wichtiger Events.",
+        streak: 0,
+      },
+      {
+        id: 24,
+        question: "Was bedeutet 'Game Juice'?",
+        answer: "Übertriebene visuelle und akustische Effekte.",
+        streak: 0,
+      },
+    ],
+    // Verteilte Systeme
+    //   allFlashcards: [
+    //     { id: 1, question: "Was ist die Bitübertragungsschicht?", answer: "Physikalische Übertragung der Bits", streak: 0 },
+    //     { id: 2, question: "Wird bei der Bitübertragungsschicht ein Protokoll verwendet?", answer: "Ja", streak: 0 },
+    //     { id: 3, question: "Was macht die Sicherungsschicht?", answer: "Erkennt und korrigiert Übertragungsfehler", streak: 0 },
+    //     { id: 4, question: "Ist Ethernet ein Beispiel für die Sicherungsschicht?", answer: "Ja", streak: 0 },
+    //     { id: 5, question: "Was ist Paketvermittlung?", answer: "Daten werden in Paketen gesendet", streak: 0 },
+    //     { id: 6, question: "Ist Leitungsvermittlung verbindungsorientiert?", answer: "Ja", streak: 0 },
+    //     { id: 7, question: "Was bedeutet Modulation?", answer: "Übertragung von Signalen auf Trägerwellen", streak: 0 },
+    //     { id: 8, question: "Verwendet WLAN Funkmodulation?", answer: "Ja", streak: 0 },
+    //     { id: 9, question: "Was ist das OSI-Modell?", answer: "Schichtenmodell zur Netzwerkkommunikation", streak: 0 },
+    //     { id: 10, question: "Gehört die Transportschicht zum OSI-Modell?", answer: "Ja", streak: 0 },
+    //     { id: 11, question: "Was macht die Vermittlungsschicht?", answer: "Routet Datenpakete im Netzwerk", streak: 0 },
+    //     { id: 12, question: "Was ist ein IP-Protokoll?", answer: "Regelt Adressierung und Routing", streak: 0 },
+    //     { id: 13, question: "Erkennt CSMA/CD Kollisionen?", answer: "Ja", streak: 0 },
+    //     { id: 14, question: "Was ist ein Datagrammnetz?", answer: "Verbindungsloser Paketdienst", streak: 0 },
+    //     { id: 15, question: "Was macht die Transportschicht?", answer: "Stellt Ende-zu-Ende-Verbindungen her", streak: 0 },
+    //     { id: 16, question: "Gibt es verbindungslose Transportschicht-Protokolle?", answer: "Ja, z.B. UDP", streak: 0 },
+    //     { id: 17, question: "Wie erkennt CSMA/CD Kollisionen?", answer: "Durch Signalanalyse während der Übertragung", streak: 0 },
+    //     { id: 18, question: "Nutzen Token-Ring-Netzwerke Token für den Zugriff?", answer: "Ja", streak: 0 },
+    //     { id: 19, question: "Was ist der Vorteil von Slotted ALOHA?", answer: "Reduzierte Kollisionen durch Zeitslots", streak: 0 },
+    //     { id: 20, question: "Was macht der Dijkstra-Algorithmus?", answer: "Berechnet kürzeste Netzwerkpfade", streak: 0 },
+    //     { id: 21, question: "Was bedeutet NAT?", answer: "Übersetzt private in öffentliche IP-Adressen", streak: 0 },
+    //     { id: 22, question: "Was ist der Zweck von DHCP?", answer: "Automatische IP-Adressvergabe", streak: 0 },
+    //     { id: 23, question: "Wie funktioniert ARQ?", answer: "Sendet fehlerhafte Pakete erneut", streak: 0 },
+    //     { id: 24, question: "Kann ein Paket im Datagrammnetz verloren gehen?", answer: "Ja", streak: 0 }
+    // ]
+    //Webprog 1
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question: "Was ist der Zweck von CSS?",
+    //     answer: "Trennung von Inhalt und Design.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 2,
+    //     question: "Wie bindet man ein externes CSS-Stylesheet ein?",
+    //     answer: "<link rel='stylesheet' href='style.css'>",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 3,
+    //     question: "Was macht der Universalselektor (*)?",
+    //     answer: "Er wählt alle Elemente aus.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question: "Was ist ein Typselektor in CSS?",
+    //     answer: "Er wählt Elemente nach Tag-Namen aus.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Wofür wird das Box-Modell in CSS verwendet?",
+    //     answer: "Zur Definition von Layout-Rahmen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question: "Beeinflusst 'visibility: hidden' das Layout?",
+    //     answer: "Ja, nimmt weiterhin Platz ein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Verhindert 'display: none' die Anzeige im DOM?",
+    //     answer: "Nein, es bleibt im DOM.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 8,
+    //     question: "Vererben sich alle CSS-Eigenschaften?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 9,
+    //     question: "Wie priorisiert der Browser konkurrierende CSS-Regeln?",
+    //     answer: "Durch Spezifität und Kaskade.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question:
+    //       "Was ist der Unterschied zwischen 'relative' und 'absolute' Positionierung?",
+    //     answer: "'Relative' bleibt im Fluss, 'absolute' nicht.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Was bewirkt 'float: left'?",
+    //     answer: "Element schwebt links.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "Was passiert bei 'display: none'?",
+    //     answer: "Element wird nicht angezeigt.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Was ist ein ID-Selektor?",
+    //     answer: "Ein Selektor der nur für ein Element gültig sein kann.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Kann 'position: fixed' scrollen?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question: "Hat der Selektor '.class' höhere Spezifität als '#id'?",
+    //     answer: "Nein.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Was ist der Zweck von Media Queries?",
+    //     answer: "Layouts für verschiedene Geräte.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 17,
+    //     question:
+    //       "Wie wird das CSS-Boxmodell bei verschachtelten Elementen berechnet?",
+    //     answer: "Außenabstände addieren sich nicht.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Wie funktioniert das Stacking-Context mit z-index?",
+    //     answer: "Bestimmt die Stapelreihenfolge.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question: "Was macht 'overflow: hidden'?",
+    //     answer: "Verborgener Inhalt wird abgeschnitten.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Wie verhindert man Margin-Collapsing?",
+    //     answer: "Durch Verwendung von Padding oder Borders.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question: "Was ist der Unterschied zwischen em und rem?",
+    //     answer: "'em' relativ zum Eltern, 'rem' zum Root.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Kann man mit CSS Animationen erstellen?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question: "Beeinflusst 'visibility: hidden' das Layout?",
+    //     answer: "Ja, aber das Element bleibt sichtbar.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Kann man CSS-Variablen verwenden?",
+    //     answer: "Ja.",
+    //     streak: 0,
+    //   },
+    // ],
+    //Vue
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question: "Was ist der beforeCreate-Hook?",
+    //     answer: "Wird aufgerufen, bevor die Instanz initialisiert wird.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 2,
+    //     question: "Wann wird der created-Hook ausgeführt?",
+    //     answer: "Nach der Initialisierung der reaktiven Daten.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 3,
+    //     question: "Wann wird der beforeMount-Hook aufgerufen?",
+    //     answer: "Vor dem Einfügen der Komponente in den DOM.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question: "Wann tritt der mounted-Hook ein?",
+    //     answer: "Nach dem Einfügen der Instanz in den DOM.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Was ermöglicht der beforeUpdate-Hook?",
+    //     answer: "Eingriff kurz vor der Aktualisierung des DOM.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question: "Wann wird der updated-Hook aufgerufen?",
+    //     answer: "Nach der DOM-Aktualisierung durch Datenänderungen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Was ist der Zweck des beforeUnmount-Hooks?",
+    //     answer: "Wird aufgerufen, bevor die Instanz zerstört wird.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 8,
+    //     question: "Wann wird der unmounted-Hook ausgeführt?",
+    //     answer: "Nach der Entfernung der Instanz aus dem DOM.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 9,
+    //     question: "Kann man im created-Hook auf Props zugreifen?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question:
+    //       "Welche Hooks werden vor der ersten DOM-Renderung ausgeführt?",
+    //     answer: "beforeCreate, created, beforeMount",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Sollte man API-Aufrufe im mounted-Hook durchführen?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "In welchem Hook ist der DOM garantiert verfügbar?",
+    //     answer: "mounted",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Kann man im updated-Hook DOM-Manipulationen durchführen?",
+    //     answer: "Ja, aber mit Vorsicht, um Loops zu vermeiden.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Wann sollte man Event-Listener entfernen?",
+    //     answer: "Im beforeUnmount- oder unmounted-Hook.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question: "Welcher Hook eignet sich für Animationen beim Einfügen?",
+    //     answer: "mounted",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Welche Hooks gibt es speziell für <KeepAlive>?",
+    //     answer: "activated und deactivated",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 17,
+    //     question: "Was passiert, wenn errorCaptured true zurückgibt?",
+    //     answer: "Der Fehler wird nicht weitergegeben.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Welcher Hook wird bei jeder Datenänderung ausgelöst?",
+    //     answer: "beforeUpdate und updated",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question: "Wann werden Watcher entfernt?",
+    //     answer: "Im unmounted-Hook.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Wie kann man Speicherlecks vermeiden?",
+    //     answer: "Ressourcen im unmounted-Hook freigeben.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question:
+    //       "Ist der beforeCreate-Hook für Server-Side Rendering verfügbar?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Kann man im beforeMount-Hook auf den DOM zugreifen?",
+    //     answer: "Nein",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question:
+    //       "Wird der mounted-Hook während des Server-Side Renderings aufgerufen?",
+    //     answer: "Nein",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Was ist der Zweck des serverPrefetch-Hooks?",
+    //     answer: "Datenvorabruf vor dem Server-Side Rendering.",
+    //     streak: 0,
+    //   },
+    // ],
   }),
   getters: {
     //Platz für Getters
