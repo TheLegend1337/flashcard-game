@@ -740,6 +740,8 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
+
+    //
     //IPv4, Eugen
     // allFlashcards: [
     //   {id: 1, question: "Was ist Subnetting?", answer: "Aufteilung eines Netzwerks in kleinere Netze.", streak: 0},
@@ -767,181 +769,221 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //   {id: 23, question: "Warum Subnetting verwenden?", answer: "Für Sicherheit und Netzwerkeffizienz.", streak: 0},
     //   {id: 24, question: "Wie viele Adressen in /27?", answer: "32 Adressen, 30 nutzbar.", streak: 0}
     // ]
+
+
     //Game Design, Aaron
-    allFlashcards: [
-      {
-        id: 1,
-        question: "Was bedeutet 'Game Feel'?",
-        answer: "Der emotionale Eindruck beim Spielen.",
-        streak: 0,
-      },
-      {
-        id: 2,
-        question:
-          "Beeinflusst eine hohe Eingabeverzögerung das wahrgenommene Game Feel negativ?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 3,
-        question: "Was beschreibt der Begriff 'Juiciness'?",
-        answer: "Übertriebenes Feedback, das Aktionen belohnt.",
-        streak: 0,
-      },
-      {
-        id: 4,
-        question: "Können schlechte Animationen das Spielgefühl ruinieren?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 5,
-        question: "Was versteht man unter 'Input Buffering'?",
-        answer: "Speichern von Eingaben für flüssige Steuerung.",
-        streak: 0,
-      },
-      {
-        id: 6,
-        question: "Verbessert Screen Shake die Wirkung starker Effekte?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 7,
-        question: "Was bedeutet 'Coyote Time'?",
-        answer: "Kurze Nachfrist für Sprünge nach Kantenabgang.",
-        streak: 0,
-      },
-      {
-        id: 8,
-        question: "Kann Sounddesign direkt das Spielgefühl beeinflussen?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 9,
-        question: "Wie nutzt man Partikeleffekte effektiv?",
-        answer: "Verstärken Aktionen und geben visuelles Feedback.",
-        streak: 0,
-      },
-      {
-        id: 10,
-        question: "Was sind Easing Curves?",
-        answer: "Kurven für natürliche Bewegungsübergänge.",
-        streak: 0,
-      },
-      {
-        id: 11,
-        question: "Ist ein kurzer Hit-Stop wichtig für Trefferfeedback?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 12,
-        question: "Wie verbessert man die Responsiveness von Steuerungen?",
-        answer: "Minimale Eingabeverzögerung sicherstellen.",
-        streak: 0,
-      },
-      {
-        id: 13,
-        question: "Was ist 'Anticipation' in Animationen?",
-        answer: "Vorbereitende Bewegung vor der Hauptaktion.",
-        streak: 0,
-      },
-      {
-        id: 14,
-        question: "Sollten UI-Elemente animiertes Feedback geben?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 15,
-        question: "Wie verbessert man das Gefühl von Geschwindigkeit?",
-        answer: "Durch Motion Blur und Kamerabewegungen.",
-        streak: 0,
-      },
-      {
-        id: 16,
-        question: "Was bedeutet 'Hit Stop'?",
-        answer: "Kurzes Einfrieren bei Treffern für Wirkung.",
-        streak: 0,
-      },
-      {
-        id: 17,
-        question: "Wie steigert dynamisches Licht Immersion?",
-        answer: "Hervorheben wichtiger Momente und Atmosphäre.",
-        streak: 0,
-      },
-      {
-        id: 18,
-        question: "Was beschreibt 'Inverse Kinematik'?",
-        answer: "Technik für realistische Gelenkbewegungen.",
-        streak: 0,
-      },
-      {
-        id: 19,
-        question: "Erhöht ein Kamera-Zoom bei Treffern die Wirkung?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 20,
-        question: "Wie kann Polishing das Spielgefühl verbessern?",
-        answer: "Feinschliff für kohärentes Gesamtbild.",
-        streak: 0,
-      },
-      {
-        id: 21,
-        question: "Was ist ein 'Feedback Loop' im Game Design?",
-        answer: "System zur Verstärkung von Spieleraktionen.",
-        streak: 0,
-      },
-      {
-        id: 22,
-        question: "Hilft Vibration als haptisches Feedback bei Immersion?",
-        answer: "Ja",
-        streak: 0,
-      },
-      {
-        id: 23,
-        question: "Wie nutzt man Farben zur Verstärkung von Feedback?",
-        answer: "Klare Kontraste zur Signalisierung wichtiger Events.",
-        streak: 0,
-      },
-      {
-        id: 24,
-        question: "Was bedeutet 'Game Juice'?",
-        answer: "Übertriebene visuelle und akustische Effekte.",
-        streak: 0,
-      },
-    ],
-    // Verteilte Systeme
-    //   allFlashcards: [
-    //     { id: 1, question: "Was ist die Bitübertragungsschicht?", answer: "Physikalische Übertragung der Bits", streak: 0 },
-    //     { id: 2, question: "Wird bei der Bitübertragungsschicht ein Protokoll verwendet?", answer: "Ja", streak: 0 },
-    //     { id: 3, question: "Was macht die Sicherungsschicht?", answer: "Erkennt und korrigiert Übertragungsfehler", streak: 0 },
-    //     { id: 4, question: "Ist Ethernet ein Beispiel für die Sicherungsschicht?", answer: "Ja", streak: 0 },
-    //     { id: 5, question: "Was ist Paketvermittlung?", answer: "Daten werden in Paketen gesendet", streak: 0 },
-    //     { id: 6, question: "Ist Leitungsvermittlung verbindungsorientiert?", answer: "Ja", streak: 0 },
-    //     { id: 7, question: "Was bedeutet Modulation?", answer: "Übertragung von Signalen auf Trägerwellen", streak: 0 },
-    //     { id: 8, question: "Verwendet WLAN Funkmodulation?", answer: "Ja", streak: 0 },
-    //     { id: 9, question: "Was ist das OSI-Modell?", answer: "Schichtenmodell zur Netzwerkkommunikation", streak: 0 },
-    //     { id: 10, question: "Gehört die Transportschicht zum OSI-Modell?", answer: "Ja", streak: 0 },
-    //     { id: 11, question: "Was macht die Vermittlungsschicht?", answer: "Routet Datenpakete im Netzwerk", streak: 0 },
-    //     { id: 12, question: "Was ist ein IP-Protokoll?", answer: "Regelt Adressierung und Routing", streak: 0 },
-    //     { id: 13, question: "Erkennt CSMA/CD Kollisionen?", answer: "Ja", streak: 0 },
-    //     { id: 14, question: "Was ist ein Datagrammnetz?", answer: "Verbindungsloser Paketdienst", streak: 0 },
-    //     { id: 15, question: "Was macht die Transportschicht?", answer: "Stellt Ende-zu-Ende-Verbindungen her", streak: 0 },
-    //     { id: 16, question: "Gibt es verbindungslose Transportschicht-Protokolle?", answer: "Ja, z.B. UDP", streak: 0 },
-    //     { id: 17, question: "Wie erkennt CSMA/CD Kollisionen?", answer: "Durch Signalanalyse während der Übertragung", streak: 0 },
-    //     { id: 18, question: "Nutzen Token-Ring-Netzwerke Token für den Zugriff?", answer: "Ja", streak: 0 },
-    //     { id: 19, question: "Was ist der Vorteil von Slotted ALOHA?", answer: "Reduzierte Kollisionen durch Zeitslots", streak: 0 },
-    //     { id: 20, question: "Was macht der Dijkstra-Algorithmus?", answer: "Berechnet kürzeste Netzwerkpfade", streak: 0 },
-    //     { id: 21, question: "Was bedeutet NAT?", answer: "Übersetzt private in öffentliche IP-Adressen", streak: 0 },
-    //     { id: 22, question: "Was ist der Zweck von DHCP?", answer: "Automatische IP-Adressvergabe", streak: 0 },
-    //     { id: 23, question: "Wie funktioniert ARQ?", answer: "Sendet fehlerhafte Pakete erneut", streak: 0 },
-    //     { id: 24, question: "Kann ein Paket im Datagrammnetz verloren gehen?", answer: "Ja", streak: 0 }
+    // allFlashcards: [
+    //   {
+    //     id: 1,
+    //     question: "Was bedeutet 'Game Feel'?",
+    //     answer: "Der emotionale Eindruck beim Spielen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 2,
+    //     question:
+    //       "Beeinflusst eine hohe Eingabeverzögerung das wahrgenommene Game Feel negativ?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 3,
+    //     question: "Was beschreibt der Begriff 'Juiciness'?",
+    //     answer: "Übertriebenes Feedback, das Aktionen belohnt.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 4,
+    //     question: "Können schlechte Animationen das Spielgefühl ruinieren?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 5,
+    //     question: "Was versteht man unter 'Input Buffering'?",
+    //     answer: "Speichern von Eingaben für flüssige Steuerung.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 6,
+    //     question: "Verbessert Screen Shake die Wirkung starker Effekte?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 7,
+    //     question: "Was bedeutet 'Coyote Time'?",
+    //     answer: "Kurze Nachfrist für Sprünge nach Kantenabgang.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 8,
+    //     question: "Kann Sounddesign direkt das Spielgefühl beeinflussen?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 9,
+    //     question: "Wie nutzt man Partikeleffekte effektiv?",
+    //     answer: "Verstärken Aktionen und geben visuelles Feedback.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 10,
+    //     question: "Was sind Easing Curves?",
+    //     answer: "Kurven für natürliche Bewegungsübergänge.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 11,
+    //     question: "Ist ein kurzer Hit-Stop wichtig für Trefferfeedback?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 12,
+    //     question: "Wie verbessert man die Responsiveness von Steuerungen?",
+    //     answer: "Minimale Eingabeverzögerung sicherstellen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 13,
+    //     question: "Was ist 'Anticipation' in Animationen?",
+    //     answer: "Vorbereitende Bewegung vor der Hauptaktion.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 14,
+    //     question: "Sollten UI-Elemente animiertes Feedback geben?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 15,
+    //     question: "Wie verbessert man das Gefühl von Geschwindigkeit?",
+    //     answer: "Durch Motion Blur und Kamerabewegungen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 16,
+    //     question: "Was bedeutet 'Hit Stop'?",
+    //     answer: "Kurzes Einfrieren bei Treffern für Wirkung.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 17,
+    //     question: "Wie steigert dynamisches Licht Immersion?",
+    //     answer: "Hervorheben wichtiger Momente und Atmosphäre.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 18,
+    //     question: "Was beschreibt 'Inverse Kinematik'?",
+    //     answer: "Technik für realistische Gelenkbewegungen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 19,
+    //     question: "Erhöht ein Kamera-Zoom bei Treffern die Wirkung?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 20,
+    //     question: "Wie kann Polishing das Spielgefühl verbessern?",
+    //     answer: "Feinschliff für kohärentes Gesamtbild.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 21,
+    //     question: "Was ist ein 'Feedback Loop' im Game Design?",
+    //     answer: "System zur Verstärkung von Spieleraktionen.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 22,
+    //     question: "Hilft Vibration als haptisches Feedback bei Immersion?",
+    //     answer: "Ja",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 23,
+    //     question: "Wie nutzt man Farben zur Verstärkung von Feedback?",
+    //     answer: "Klare Kontraste zur Signalisierung wichtiger Events.",
+    //     streak: 0,
+    //   },
+    //   {
+    //     id: 24,
+    //     question: "Was bedeutet 'Game Juice'?",
+    //     answer: "Übertriebene visuelle und akustische Effekte.",
+    //     streak: 0,
+    //   },
+    // ],
+
+    //
+    //Machine Learning, Anton
+
+    // allFlashcards: [
+    //   {id: 1, question: "Was ist On-Device Machine Learning?", answer: "ML direkt auf dem Gerät ohne Serverabhängigkeit.", streak: 0},
+    //   {id: 2, question: "Wofür wird TensorFlow Lite verwendet?", answer: "Für ML-Modelle auf mobilen und eingebetteten Geräten.", streak: 0},
+    //   {id: 3, question: "Ist Core ML nur für iOS-Geräte verfügbar?", answer: "Ja.", streak: 0},
+    //   {id: 4, question: "Was bedeutet Modell-Quantisierung?", answer: "Reduktion der Modellgröße für bessere Effizienz.", streak: 0},
+    //   {id: 5, question: "Kann On-Device ML offline arbeiten?", answer: "Ja.", streak: 0},
+    //   {id: 6, question: "Was ist der Hauptvorteil von On-Device ML?", answer: "Geringe Latenz und bessere Datensicherheit.", streak: 0},
+    //   {id: 7, question: "Unterstützt TensorFlow Lite Bilderkennung?", answer: "Ja.", streak: 0},
+    //   {id: 8, question: "Was ist ein Interpreter in TensorFlow Lite?", answer: "Komponente, die Modelle auf dem Gerät ausführt.", streak: 0},
+    
+    //   {id: 9, question: "Warum ist Modell-Optimierung wichtig?", answer: "Für schnellere Inferenz und geringeren Ressourcenverbrauch.", streak: 0},
+    //   {id: 10, question: "Kann Core ML personalisierte Modelle nutzen?", answer: "Ja.", streak: 0},
+    //   {id: 11, question: "Was ist Transfer Learning?", answer: "Wiederverwendung vortrainierter Modelle für neue Aufgaben.", streak: 0},
+    //   {id: 12, question: "Was macht die Edge-Computing-Architektur aus?", answer: "Datenverarbeitung direkt am Netzwerkrand.", streak: 0},
+    //   {id: 13, question: "Unterstützt TensorFlow Lite Audioerkennung?", answer: "Ja.", streak: 0},
+    //   {id: 14, question: "Was ist ein Tensor?", answer: "Mehrdimensionales Datenarray für ML-Berechnungen.", streak: 0},
+    //   {id: 15, question: "Warum ist On-Device ML datensicherer?", answer: "Daten bleiben lokal und werden nicht gesendet.", streak: 0},
+    //   {id: 16, question: "Was bedeutet Pruning eines Modells?", answer: "Entfernen unwichtiger Verbindungen im Modell.", streak: 0},
+    
+    //   {id: 17, question: "Wie verbessert Quantisierung die Performance?", answer: "Verringert Speicherbedarf und erhöht Ausführungsgeschwindigkeit.", streak: 0},
+    //   {id: 18, question: "Welche Plattformen unterstützt TensorFlow Lite?", answer: "Android, iOS, Embedded Systeme.", streak: 0},
+    //   {id: 19, question: "Erfordert On-Device ML immer GPU-Unterstützung?", answer: "Nein.", streak: 0},
+    //   {id: 20, question: "Wie reduziert man die Latenz bei On-Device ML?", answer: "Durch Modelloptimierung und Hardwarebeschleunigung.", streak: 0},
+    //   {id: 21, question: "Was ist ein praktischer Nutzen von Core ML?", answer: "Echtzeit-Bilderkennung in iOS-Apps.", streak: 0},
+    //   {id: 22, question: "Kann man On-Device ML für Personalisierung nutzen?", answer: "Ja, für individuelle Nutzererfahrungen.", streak: 0},
+    //   {id: 23, question: "Welches Dateiformat nutzt TensorFlow Lite?", answer: ".tflite", streak: 0},
+    //   {id: 24, question: "Was ist ein praktisches Beispiel für On-Device ML?", answer: "Offline-Spracherkennung auf Smartphones.", streak: 0}
     // ]
+    
+
+
+
+    
+    // Verteilte Systeme
+      allFlashcards: [
+        { id: 1, question: "Was ist die Bitübertragungsschicht?", answer: "Physikalische Übertragung der Bits", streak: 0 },
+        { id: 2, question: "Wird bei der Bitübertragungsschicht ein Protokoll verwendet?", answer: "Ja", streak: 0 },
+        { id: 3, question: "Was macht die Sicherungsschicht?", answer: "Erkennt und korrigiert Übertragungsfehler", streak: 0 },
+        { id: 4, question: "Ist Ethernet ein Beispiel für die Sicherungsschicht?", answer: "Ja", streak: 0 },
+        { id: 5, question: "Was ist Paketvermittlung?", answer: "Daten werden in Paketen gesendet", streak: 0 },
+        { id: 6, question: "Ist Leitungsvermittlung verbindungsorientiert?", answer: "Ja", streak: 0 },
+        { id: 7, question: "Was bedeutet Modulation?", answer: "Übertragung von Signalen auf Trägerwellen", streak: 0 },
+        { id: 8, question: "Verwendet WLAN Funkmodulation?", answer: "Ja", streak: 0 },
+        { id: 9, question: "Was ist das OSI-Modell?", answer: "Schichtenmodell zur Netzwerkkommunikation", streak: 0 },
+        { id: 10, question: "Gehört die Transportschicht zum OSI-Modell?", answer: "Ja", streak: 0 },
+        { id: 11, question: "Was macht die Vermittlungsschicht?", answer: "Routet Datenpakete im Netzwerk", streak: 0 },
+        { id: 12, question: "Was ist ein IP-Protokoll?", answer: "Regelt Adressierung und Routing", streak: 0 },
+        { id: 13, question: "Erkennt CSMA/CD Kollisionen?", answer: "Ja", streak: 0 },
+        { id: 14, question: "Was ist ein Datagrammnetz?", answer: "Verbindungsloser Paketdienst", streak: 0 },
+        { id: 15, question: "Was macht die Transportschicht?", answer: "Stellt Ende-zu-Ende-Verbindungen her", streak: 0 },
+        { id: 16, question: "Gibt es verbindungslose Transportschicht-Protokolle?", answer: "Ja, z.B. UDP", streak: 0 },
+        { id: 17, question: "Wie erkennt CSMA/CD Kollisionen?", answer: "Durch Signalanalyse während der Übertragung", streak: 0 },
+        { id: 18, question: "Nutzen Token-Ring-Netzwerke Token für den Zugriff?", answer: "Ja", streak: 0 },
+        { id: 19, question: "Was ist der Vorteil von Slotted ALOHA?", answer: "Reduzierte Kollisionen durch Zeitslots", streak: 0 },
+        { id: 20, question: "Was macht der Dijkstra-Algorithmus?", answer: "Berechnet kürzeste Netzwerkpfade", streak: 0 },
+        { id: 21, question: "Was bedeutet NAT?", answer: "Übersetzt private in öffentliche IP-Adressen", streak: 0 },
+        { id: 22, question: "Was ist der Zweck von DHCP?", answer: "Automatische IP-Adressvergabe", streak: 0 },
+        { id: 23, question: "Wie funktioniert ARQ?", answer: "Sendet fehlerhafte Pakete erneut", streak: 0 },
+        { id: 24, question: "Kann ein Paket im Datagrammnetz verloren gehen?", answer: "Ja", streak: 0 }
+    ]
+    //
     //Webprog 1
     // allFlashcards: [
     //   {
@@ -1091,7 +1133,9 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
+    //
     //Vue
+
     // allFlashcards: [
     //   {
     //     id: 1,
