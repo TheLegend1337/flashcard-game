@@ -591,155 +591,189 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
     //     streak: 0,
     //   },
     // ],
-    //Grundlagen der Programmierlogik, eugen
+    /**/
+    //Französisch, Willi und Nastja
     // allFlashcards: [
-    //   {
-    //     id: 1,
-    //     question: "Was ist eine Variable?",
-    //     answer: "Ein Speicherplatz für Daten.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 2,
-    //     question: "Ist eine Schleife eine Kontrollstruktur? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 3,
-    //     question: "Was ist eine Bedingung?",
-    //     answer: "Eine Abfrage, die wahr oder falsch ist.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 4,
-    //     question:
-    //       "Kann eine IF-Anweisung mehrere Bedingungen prüfen? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 5,
-    //     question: "Was bedeutet 'Iteration'?",
-    //     answer: "Wiederholung eines Befehlsblocks.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 6,
-    //     question:
-    //       "Braucht eine WHILE-Schleife eine Abbruchbedingung? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 7,
-    //     question: "Was ist eine Konstante?",
-    //     answer: "Ein fester Wert, der sich nicht ändert.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 8,
-    //     question: "Ist 'x = x + 1' eine Zuweisung? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 9,
-    //     question: "Wie wird eine WHILE-Schleife beendet?",
-    //     answer: "Wenn die Bedingung falsch wird.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 10,
-    //     question: "Was ist der Zweck einer IF-Anweisung?",
-    //     answer: "Bedingte Ausführung von Code.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 11,
-    //     question: "Kann eine FOR-Schleife rückwärts zählen? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 12,
-    //     question: "Was macht ein ELSE-Block?",
-    //     answer: "Führt Code bei falscher Bedingung aus.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 13,
-    //     question: "Was bedeutet 'Schleifenkontrolle'?",
-    //     answer: "Steuerung der Schleifen-Ausführung.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 14,
-    //     question: "Kann man Schleifen ineinander verschachteln? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 15,
-    //     question: "Was ist eine Endlosschleife?",
-    //     answer: "Eine Schleife ohne Abbruchbedingung.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 16,
-    //     question: "Erhöht 'i = i + 1' den Zähler? (Ja/Nein)",
-    //     answer: "Ja",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 17,
-    //     question: "Wie vermeidest du eine Endlosschleife?",
-    //     answer: "Durch eine gültige Abbruchbedingung.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 18,
-    //     question: "Was macht ein 'break'-Befehl?",
-    //     answer: "Beendet die aktuelle Schleife.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 19,
-    //     question: "Wann nutzt man eine FOR-Schleife?",
-    //     answer: "Bei bekannter Anzahl an Durchläufen.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 20,
-    //     question: "Was passiert bei 'IF x > 5 THEN y = 1'?",
-    //     answer: "y wird 1, wenn x größer als 5 ist.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 21,
-    //     question: "Wie überspringt man eine Iteration?",
-    //     answer: "Mit dem 'continue'-Befehl.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 22,
-    //     question: "Warum Bedingungen kombinieren?",
-    //     answer: "Für komplexere Entscheidungslogik.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 23,
-    //     question: "Wie kann man mehrere IFs effizienter schreiben?",
-    //     answer: "Mit ELSE IF-Ketten.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 24,
-    //     question: "Was prüft 'WHILE x != 0'?",
-    //     answer: "Ob x ungleich 0 ist.",
-    //     streak: 0,
-    //   },
-    // ],
+    //   {id: 1, question: "Wie wird der Buchstabe 'é' ausgesprochen?", answer: "[e] – wie in 'See'", streak: 0},
+    //   {id: 2, question: "Wie nennt man den Akzent in 'è'?", answer: "Accent grave [ɛ] – wie in 'Bett'", streak: 0},
+    //   {id: 3, question: "Wie wird das 'r' im Französischen ausgesprochen?", answer: "[ʁ] – Kehllaute-R", streak: 0},
+    //   {id: 4, question: "Wie spricht man 'ch' in 'chien' aus?", answer: "[ʃ] – wie 'sch' in 'Schule'", streak: 0},
+    //   {id: 5, question: "Wie liest man das Nasal 'on'?", answer: "[ɔ̃] – nasales 'on'", streak: 0},
+    //   {id: 6, question: "Welche Laute werden durch 'eu' erzeugt?", answer: "[ø] oder [œ] – wie 'ö' in 'schön' oder 'Götter'", streak: 0},
+    //   {id: 7, question: "Wie liest man 'oi' in 'moi'?", answer: "[wa] – wie 'ua' in 'Mauer'", streak: 0},
+    //   {id: 8, question: "Wie wird 'eau' ausgesprochen?", answer: "[o] – wie 'o' in 'Ofen'", streak: 0},
+    
+    //   {id: 9, question: "Wird 'h' im Französischen ausgesprochen?", answer: "Nein – stumm", streak: 0},
+    //   {id: 10, question: "Wie wird das 's' zwischen zwei Vokalen ausgesprochen?", answer: "[z] – wie 's' in 'Rose'", streak: 0},
+    //   {id: 11, question: "Wie spricht man das 'g' in 'gare' aus?", answer: "[g] – wie 'g' in 'gut'", streak: 0},
+    //   {id: 12, question: "Wie spricht man das 'g' in 'gentil' aus?", answer: "[ʒ] – wie 'g' in 'Genie'", streak: 0},
+    //   {id: 13, question: "Wie liest man 'gn' in 'champagne'?", answer: "[ɲ] – wie 'ñ' in 'Spanien'", streak: 0},
+    //   {id: 14, question: "Wie wird das 'e' am Wortende meistens ausgesprochen?", answer: "Stumm – wird oft nicht gesprochen", streak: 0},
+    //   {id: 15, question: "Wie spricht man 'au' in 'aujourd'hui' aus?", answer: "[o] – wie 'o' in 'Ofen'", streak: 0},
+    //   {id: 16, question: "Wie wird das 'an' in 'manger' ausgesprochen?", answer: "[ɑ̃] – nasales 'a'", streak: 0},
+    
+    //   {id: 17, question: "Wie spricht man das 'y' in 'lycée' aus?", answer: "[i] – wie 'i' in 'Igel'", streak: 0},
+    //   {id: 18, question: "Wie wird 'ou' in 'bonjour' ausgesprochen?", answer: "[u] – wie 'u' in 'Uhr'", streak: 0},
+    //   {id: 19, question: "Wie liest man das 'll' in 'ville'?", answer: "[l] – wie 'l' in 'Lampe'", streak: 0},
+    //   {id: 20, question: "Wie liest man 'ille' in 'fille'?", answer: "[j] – wie 'j' in 'Jahr'", streak: 0},
+    //   {id: 21, question: "Wie spricht man 'ain' in 'pain' aus?", answer: "[ɛ̃] – nasales 'ä'", streak: 0},
+    //   {id: 22, question: "Wie spricht man 'eil' in 'soleil' aus?", answer: "[ɛj] – wie 'ei' in 'Reis'", streak: 0},
+    //   {id: 23, question: "Wie spricht man 'oin' in 'loin' aus?", answer: "[wɛ̃] – wie 'wä'", streak: 0},
+    //   {id: 24, question: "Wie spricht man 'ç' in 'français' aus?", answer: "[s] – wie 's' in 'Sonne'", streak: 0}
+    // ]
+    
+    
+
+
+    //Grundlagen der Programmierlogik, eugen, jürgen
+   /* allFlashcards: [
+      {
+        id: 1,
+        question: "Was ist eine Variable?",
+        answer: "Ein Speicherplatz für Daten.",
+        streak: 0,
+      },
+      {
+        id: 2,
+        question: "Ist eine Schleife eine Kontrollstruktur? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 3,
+        question: "Was ist eine Bedingung?",
+        answer: "Eine Abfrage, die wahr oder falsch ist.",
+        streak: 0,
+      },
+      {
+        id: 4,
+        question:
+          "Kann eine IF-Anweisung mehrere Bedingungen prüfen? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 5,
+        question: "Was bedeutet 'Iteration'?",
+        answer: "Wiederholung eines Befehlsblocks.",
+        streak: 0,
+      },
+      {
+        id: 6,
+        question:
+          "Braucht eine WHILE-Schleife eine Abbruchbedingung? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 7,
+        question: "Was ist eine Konstante?",
+        answer: "Ein fester Wert, der sich nicht ändert.",
+        streak: 0,
+      },
+      {
+        id: 8,
+        question: "Ist 'x = x + 1' eine Zuweisung? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 9,
+        question: "Wie wird eine WHILE-Schleife beendet?",
+        answer: "Wenn die Bedingung falsch wird.",
+        streak: 0,
+      },
+      {
+        id: 10,
+        question: "Was ist der Zweck einer IF-Anweisung?",
+        answer: "Bedingte Ausführung von Code.",
+        streak: 0,
+      },
+      {
+        id: 11,
+        question: "Kann eine FOR-Schleife rückwärts zählen? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 12,
+        question: "Was macht ein ELSE-Block?",
+        answer: "Führt Code bei falscher Bedingung aus.",
+        streak: 0,
+      },
+      {
+        id: 13,
+        question: "Was bedeutet 'Schleifenkontrolle'?",
+        answer: "Steuerung der Schleifen-Ausführung.",
+        streak: 0,
+      },
+      {
+        id: 14,
+        question: "Kann man Schleifen ineinander verschachteln? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 15,
+        question: "Was ist eine Endlosschleife?",
+        answer: "Eine Schleife ohne Abbruchbedingung.",
+        streak: 0,
+      },
+      {
+        id: 16,
+        question: "Erhöht 'i = i + 1' den Zähler? (Ja/Nein)",
+        answer: "Ja",
+        streak: 0,
+      },
+      {
+        id: 17,
+        question: "Wie vermeidest du eine Endlosschleife?",
+        answer: "Durch eine gültige Abbruchbedingung.",
+        streak: 0,
+      },
+      {
+        id: 18,
+        question: "Was macht ein 'break'-Befehl?",
+        answer: "Beendet die aktuelle Schleife.",
+        streak: 0,
+      },
+      {
+        id: 19,
+        question: "Wann nutzt man eine FOR-Schleife?",
+        answer: "Bei bekannter Anzahl an Durchläufen.",
+        streak: 0,
+      },
+      {
+        id: 20,
+        question: "Was passiert bei 'IF x > 5 THEN y = 1'?",
+        answer: "y wird 1, wenn x größer als 5 ist.",
+        streak: 0,
+      },
+      {
+        id: 21,
+        question: "Wie überspringt man eine Iteration?",
+        answer: "Mit dem 'continue'-Befehl.",
+        streak: 0,
+      },
+      {
+        id: 22,
+        question: "Warum Bedingungen kombinieren?",
+        answer: "Für komplexere Entscheidungslogik.",
+        streak: 0,
+      },
+      {
+        id: 23,
+        question: "Wie kann man mehrere IFs effizienter schreiben?",
+        answer: "Mit ELSE IF-Ketten.",
+        streak: 0,
+      },
+      {
+        id: 24,
+        question: "Was prüft 'WHILE x != 0'?",
+        answer: "Ob x ungleich 0 ist.",
+        streak: 0,
+      },
+    ],*/
 
     //
     //IPv4, Eugen
@@ -957,182 +991,182 @@ export const useFlashCardsStore = defineStore("flashCardsStore", {
 
     
     // Verteilte Systeme
-      allFlashcards: [
-        { id: 1, question: "Was ist die Bitübertragungsschicht?", answer: "Physikalische Übertragung der Bits", streak: 0 },
-        { id: 2, question: "Wird bei der Bitübertragungsschicht ein Protokoll verwendet?", answer: "Ja", streak: 0 },
-        { id: 3, question: "Was macht die Sicherungsschicht?", answer: "Erkennt und korrigiert Übertragungsfehler", streak: 0 },
-        { id: 4, question: "Ist Ethernet ein Beispiel für die Sicherungsschicht?", answer: "Ja", streak: 0 },
-        { id: 5, question: "Was ist Paketvermittlung?", answer: "Daten werden in Paketen gesendet", streak: 0 },
-        { id: 6, question: "Ist Leitungsvermittlung verbindungsorientiert?", answer: "Ja", streak: 0 },
-        { id: 7, question: "Was bedeutet Modulation?", answer: "Übertragung von Signalen auf Trägerwellen", streak: 0 },
-        { id: 8, question: "Verwendet WLAN Funkmodulation?", answer: "Ja", streak: 0 },
-        { id: 9, question: "Was ist das OSI-Modell?", answer: "Schichtenmodell zur Netzwerkkommunikation", streak: 0 },
-        { id: 10, question: "Gehört die Transportschicht zum OSI-Modell?", answer: "Ja", streak: 0 },
-        { id: 11, question: "Was macht die Vermittlungsschicht?", answer: "Routet Datenpakete im Netzwerk", streak: 0 },
-        { id: 12, question: "Was ist ein IP-Protokoll?", answer: "Regelt Adressierung und Routing", streak: 0 },
-        { id: 13, question: "Erkennt CSMA/CD Kollisionen?", answer: "Ja", streak: 0 },
-        { id: 14, question: "Was ist ein Datagrammnetz?", answer: "Verbindungsloser Paketdienst", streak: 0 },
-        { id: 15, question: "Was macht die Transportschicht?", answer: "Stellt Ende-zu-Ende-Verbindungen her", streak: 0 },
-        { id: 16, question: "Gibt es verbindungslose Transportschicht-Protokolle?", answer: "Ja, z.B. UDP", streak: 0 },
-        { id: 17, question: "Wie erkennt CSMA/CD Kollisionen?", answer: "Durch Signalanalyse während der Übertragung", streak: 0 },
-        { id: 18, question: "Nutzen Token-Ring-Netzwerke Token für den Zugriff?", answer: "Ja", streak: 0 },
-        { id: 19, question: "Was ist der Vorteil von Slotted ALOHA?", answer: "Reduzierte Kollisionen durch Zeitslots", streak: 0 },
-        { id: 20, question: "Was macht der Dijkstra-Algorithmus?", answer: "Berechnet kürzeste Netzwerkpfade", streak: 0 },
-        { id: 21, question: "Was bedeutet NAT?", answer: "Übersetzt private in öffentliche IP-Adressen", streak: 0 },
-        { id: 22, question: "Was ist der Zweck von DHCP?", answer: "Automatische IP-Adressvergabe", streak: 0 },
-        { id: 23, question: "Wie funktioniert ARQ?", answer: "Sendet fehlerhafte Pakete erneut", streak: 0 },
-        { id: 24, question: "Kann ein Paket im Datagrammnetz verloren gehen?", answer: "Ja", streak: 0 }
-    ]
+    //   allFlashcards: [
+    //     { id: 1, question: "Was ist die Bitübertragungsschicht?", answer: "Physikalische Übertragung der Bits", streak: 0 },
+    //     { id: 2, question: "Wird bei der Bitübertragungsschicht ein Protokoll verwendet?", answer: "Ja", streak: 0 },
+    //     { id: 3, question: "Was macht die Sicherungsschicht?", answer: "Erkennt und korrigiert Übertragungsfehler", streak: 0 },
+    //     { id: 4, question: "Ist Ethernet ein Beispiel für die Sicherungsschicht?", answer: "Ja", streak: 0 },
+    //     { id: 5, question: "Was ist Paketvermittlung?", answer: "Daten werden in Paketen gesendet", streak: 0 },
+    //     { id: 6, question: "Ist Leitungsvermittlung verbindungsorientiert?", answer: "Ja", streak: 0 },
+    //     { id: 7, question: "Was bedeutet Modulation?", answer: "Übertragung von Signalen auf Trägerwellen", streak: 0 },
+    //     { id: 8, question: "Verwendet WLAN Funkmodulation?", answer: "Ja", streak: 0 },
+    //     { id: 9, question: "Was ist das OSI-Modell?", answer: "Schichtenmodell zur Netzwerkkommunikation", streak: 0 },
+    //     { id: 10, question: "Gehört die Transportschicht zum OSI-Modell?", answer: "Ja", streak: 0 },
+    //     { id: 11, question: "Was macht die Vermittlungsschicht?", answer: "Routet Datenpakete im Netzwerk", streak: 0 },
+    //     { id: 12, question: "Was ist ein IP-Protokoll?", answer: "Regelt Adressierung und Routing", streak: 0 },
+    //     { id: 13, question: "Erkennt CSMA/CD Kollisionen?", answer: "Ja", streak: 0 },
+    //     { id: 14, question: "Was ist ein Datagrammnetz?", answer: "Verbindungsloser Paketdienst", streak: 0 },
+    //     { id: 15, question: "Was macht die Transportschicht?", answer: "Stellt Ende-zu-Ende-Verbindungen her", streak: 0 },
+    //     { id: 16, question: "Gibt es verbindungslose Transportschicht-Protokolle?", answer: "Ja, z.B. UDP", streak: 0 },
+    //     { id: 17, question: "Wie erkennt CSMA/CD Kollisionen?", answer: "Durch Signalanalyse während der Übertragung", streak: 0 },
+    //     { id: 18, question: "Nutzen Token-Ring-Netzwerke Token für den Zugriff?", answer: "Ja", streak: 0 },
+    //     { id: 19, question: "Was ist der Vorteil von Slotted ALOHA?", answer: "Reduzierte Kollisionen durch Zeitslots", streak: 0 },
+    //     { id: 20, question: "Was macht der Dijkstra-Algorithmus?", answer: "Berechnet kürzeste Netzwerkpfade", streak: 0 },
+    //     { id: 21, question: "Was bedeutet NAT?", answer: "Übersetzt private in öffentliche IP-Adressen", streak: 0 },
+    //     { id: 22, question: "Was ist der Zweck von DHCP?", answer: "Automatische IP-Adressvergabe", streak: 0 },
+    //     { id: 23, question: "Wie funktioniert ARQ?", answer: "Sendet fehlerhafte Pakete erneut", streak: 0 },
+    //     { id: 24, question: "Kann ein Paket im Datagrammnetz verloren gehen?", answer: "Ja", streak: 0 }
+    // ]
     //
     //Webprog 1
-    // allFlashcards: [
-    //   {
-    //     id: 1,
-    //     question: "Was ist der Zweck von CSS?",
-    //     answer: "Trennung von Inhalt und Design.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 2,
-    //     question: "Wie bindet man ein externes CSS-Stylesheet ein?",
-    //     answer: "<link rel='stylesheet' href='style.css'>",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 3,
-    //     question: "Was macht der Universalselektor (*)?",
-    //     answer: "Er wählt alle Elemente aus.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 4,
-    //     question: "Was ist ein Typselektor in CSS?",
-    //     answer: "Er wählt Elemente nach Tag-Namen aus.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 5,
-    //     question: "Wofür wird das Box-Modell in CSS verwendet?",
-    //     answer: "Zur Definition von Layout-Rahmen.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 6,
-    //     question: "Beeinflusst 'visibility: hidden' das Layout?",
-    //     answer: "Ja, nimmt weiterhin Platz ein.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 7,
-    //     question: "Verhindert 'display: none' die Anzeige im DOM?",
-    //     answer: "Nein, es bleibt im DOM.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 8,
-    //     question: "Vererben sich alle CSS-Eigenschaften?",
-    //     answer: "Nein.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 9,
-    //     question: "Wie priorisiert der Browser konkurrierende CSS-Regeln?",
-    //     answer: "Durch Spezifität und Kaskade.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 10,
-    //     question:
-    //       "Was ist der Unterschied zwischen 'relative' und 'absolute' Positionierung?",
-    //     answer: "'Relative' bleibt im Fluss, 'absolute' nicht.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 11,
-    //     question: "Was bewirkt 'float: left'?",
-    //     answer: "Element schwebt links.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 12,
-    //     question: "Was passiert bei 'display: none'?",
-    //     answer: "Element wird nicht angezeigt.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 13,
-    //     question: "Was ist ein ID-Selektor?",
-    //     answer: "Ein Selektor der nur für ein Element gültig sein kann.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 14,
-    //     question: "Kann 'position: fixed' scrollen?",
-    //     answer: "Nein.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 15,
-    //     question: "Hat der Selektor '.class' höhere Spezifität als '#id'?",
-    //     answer: "Nein.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 16,
-    //     question: "Was ist der Zweck von Media Queries?",
-    //     answer: "Layouts für verschiedene Geräte.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 17,
-    //     question:
-    //       "Wie wird das CSS-Boxmodell bei verschachtelten Elementen berechnet?",
-    //     answer: "Außenabstände addieren sich nicht.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 18,
-    //     question: "Wie funktioniert das Stacking-Context mit z-index?",
-    //     answer: "Bestimmt die Stapelreihenfolge.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 19,
-    //     question: "Was macht 'overflow: hidden'?",
-    //     answer: "Verborgener Inhalt wird abgeschnitten.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 20,
-    //     question: "Wie verhindert man Margin-Collapsing?",
-    //     answer: "Durch Verwendung von Padding oder Borders.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 21,
-    //     question: "Was ist der Unterschied zwischen em und rem?",
-    //     answer: "'em' relativ zum Eltern, 'rem' zum Root.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 22,
-    //     question: "Kann man mit CSS Animationen erstellen?",
-    //     answer: "Ja.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 23,
-    //     question: "Beeinflusst 'visibility: hidden' das Layout?",
-    //     answer: "Ja, aber das Element bleibt sichtbar.",
-    //     streak: 0,
-    //   },
-    //   {
-    //     id: 24,
-    //     question: "Kann man CSS-Variablen verwenden?",
-    //     answer: "Ja.",
-    //     streak: 0,
-    //   },
-    // ],
+    allFlashcards: [
+      {
+        id: 1,
+        question: "Was ist der Zweck von CSS?",
+        answer: "Trennung von Inhalt und Design.",
+        streak: 0,
+      },
+      {
+        id: 2,
+        question: "Wie bindet man ein externes CSS-Stylesheet ein?",
+        answer: "<link rel='stylesheet' href='style.css'>",
+        streak: 0,
+      },
+      {
+        id: 3,
+        question: "Was macht der Universalselektor (*)?",
+        answer: "Er wählt alle Elemente aus.",
+        streak: 0,
+      },
+      {
+        id: 4,
+        question: "Was ist ein Typselektor in CSS?",
+        answer: "Er wählt Elemente nach Tag-Namen aus.",
+        streak: 0,
+      },
+      {
+        id: 5,
+        question: "Wofür wird das Box-Modell in CSS verwendet?",
+        answer: "Zur Definition von Layout-Rahmen.",
+        streak: 0,
+      },
+      {
+        id: 6,
+        question: "Beeinflusst 'visibility: hidden' das Layout?",
+        answer: "Ja, nimmt weiterhin Platz ein.",
+        streak: 0,
+      },
+      {
+        id: 7,
+        question: "Verhindert 'display: none' die Anzeige im DOM?",
+        answer: "Nein, es bleibt im DOM.",
+        streak: 0,
+      },
+      {
+        id: 8,
+        question: "Vererben sich alle CSS-Eigenschaften?",
+        answer: "Nein.",
+        streak: 0,
+      },
+      {
+        id: 9,
+        question: "Wie priorisiert der Browser konkurrierende CSS-Regeln?",
+        answer: "Durch Spezifität und Kaskade.",
+        streak: 0,
+      },
+      {
+        id: 10,
+        question:
+          "Was ist der Unterschied zwischen 'relative' und 'absolute' Positionierung?",
+        answer: "'Relative' bleibt im Fluss, 'absolute' nicht.",
+        streak: 0,
+      },
+      {
+        id: 11,
+        question: "Was bewirkt 'float: left'?",
+        answer: "Element schwebt links.",
+        streak: 0,
+      },
+      {
+        id: 12,
+        question: "Was passiert bei 'display: none'?",
+        answer: "Element wird nicht angezeigt.",
+        streak: 0,
+      },
+      {
+        id: 13,
+        question: "Was ist ein ID-Selektor?",
+        answer: "Ein Selektor der nur für ein Element gültig sein kann.",
+        streak: 0,
+      },
+      {
+        id: 14,
+        question: "Kann 'position: fixed' scrollen?",
+        answer: "Nein.",
+        streak: 0,
+      },
+      {
+        id: 15,
+        question: "Hat der Selektor '.class' höhere Spezifität als '#id'?",
+        answer: "Nein.",
+        streak: 0,
+      },
+      {
+        id: 16,
+        question: "Was ist der Zweck von Media Queries?",
+        answer: "Layouts für verschiedene Geräte.",
+        streak: 0,
+      },
+      {
+        id: 17,
+        question:
+          "Wie wird das CSS-Boxmodell bei verschachtelten Elementen berechnet?",
+        answer: "Außenabstände addieren sich nicht.",
+        streak: 0,
+      },
+      {
+        id: 18,
+        question: "Wie funktioniert das Stacking-Context mit z-index?",
+        answer: "Bestimmt die Stapelreihenfolge.",
+        streak: 0,
+      },
+      {
+        id: 19,
+        question: "Was macht 'overflow: hidden'?",
+        answer: "Verborgener Inhalt wird abgeschnitten.",
+        streak: 0,
+      },
+      {
+        id: 20,
+        question: "Wie verhindert man Margin-Collapsing?",
+        answer: "Durch Verwendung von Padding oder Borders.",
+        streak: 0,
+      },
+      {
+        id: 21,
+        question: "Was ist der Unterschied zwischen em und rem?",
+        answer: "'em' relativ zum Eltern, 'rem' zum Root.",
+        streak: 0,
+      },
+      {
+        id: 22,
+        question: "Kann man mit CSS Animationen erstellen?",
+        answer: "Ja.",
+        streak: 0,
+      },
+      {
+        id: 23,
+        question: "Beeinflusst 'visibility: hidden' das Layout?",
+        answer: "Ja, aber das Element bleibt sichtbar.",
+        streak: 0,
+      },
+      {
+        id: 24,
+        question: "Kann man CSS-Variablen verwenden?",
+        answer: "Ja.",
+        streak: 0,
+      },
+    ],
     //
     //Vue
 
