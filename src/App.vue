@@ -1,21 +1,25 @@
 <template>
-  <header>
-    <img
-      class="h-[40px] pl-6"
-      src="@/assets/brandIdentity/Logo-1024x455.png"
-      alt="Producterra Logo"
-    />
-    <div class="wrapper">
-      <MusicPlayer class="space-between-header-icons" />
-      <Navigation class="space-between-header-icons" />
-    </div>
-  </header>
-
-  <Transition name="fade" mode="out-in">
-    <RouterView />
-  </Transition>
-  <!-- Particle effect container -->
-  <div ref="particleContainer" class="particle-container"></div>
+  <div v-if="isDesktop">
+    <header>
+      <img
+        class="h-[40px] pl-6"
+        src="@/assets/brandIdentity/Logo-1024x455.png"
+        alt="Producterra Logo"
+      />
+      <div class="wrapper">
+        <MusicPlayer class="space-between-header-icons" />
+        <Navigation class="space-between-header-icons" />
+      </div>
+    </header>
+    <Transition name="fade" mode="out-in">
+      <RouterView />
+    </Transition>
+    <!-- Particle effect container -->
+    <div ref="particleContainer" class="particle-container"></div>
+  </div>
+  <div v-else class="desktop-only">
+    <h1>Bitte wechseln Sie auf einen größeren Bildschirm.</h1>
+  </div>
 </template>
 
 <script>
@@ -38,10 +42,13 @@ export default {
   },
   data() {
     return {
-      // Zustandsvariablen
+      isDesktop: true,
     };
   },
   methods: {
+    checkDesktop() {
+      this.isDesktop = window.matchMedia("(min-width: 1440px)").matches;
+    },
     handleClickToCreateParticles(event) {
       const x = event.pageX;
       const y = event.pageY;
@@ -106,11 +113,14 @@ export default {
     },
   },
   mounted() {
+    this.checkDesktop();
+    window.addEventListener("resize", this.checkDesktop);
     // Attach the click event listener to the document body
     document.body.addEventListener("click", this.handleClickToCreateParticles);
   },
   beforeUnmount() {
     // Clean up the event listener when the component is destroyed
+    window.removeEventListener("resize", this.checkDesktop);
     document.body.removeEventListener(
       "click",
       this.handleClickToCreateParticles,
@@ -120,6 +130,15 @@ export default {
 </script>
 
 <style scoped>
+.desktop-only {
+  color: var(--type-on-bg-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
 .particle-container {
   position: absolute;
   top: 0;
