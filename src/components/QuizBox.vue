@@ -58,7 +58,7 @@ import SoundHandler from "@/helpers/soundHandler";
 import soundEffect_fail from "@/assets/sounds/soundEffects/fail-wobble.mp3";
 import soundEffect_CardRevealBuildup from "@/assets/sounds/soundEffects/building-swoosh-short.mp3";
 
-import UserDataHandler from "@/helpers/userDataHandler";
+// import UserDataHandler from "@/helpers/userDataHandler";
 
 import ButtonUniversal from "@/components/FlashcardGame/Buttons/ButtonUniversal.vue";
 import Divider from "@/components/FlashcardGame/Structural/Divider.vue";
@@ -117,7 +117,7 @@ export default {
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
-      UserDataHandler.saveSingleUserInteraction("flashcards", this.flashcard);
+      // UserDataHandler.saveSingleUserInteraction("flashcards", this.flashcard);
     },
     handleButtonCorrectClicked() {
       this.isAnimateAnticipationBlur = true;
@@ -127,7 +127,7 @@ export default {
       this.flashCardsStore.putSingleFlashcardBackToAllFlashcards(
         this.flashcard,
       );
-      UserDataHandler.saveSingleUserInteraction("flashcards", this.flashcard);
+      // UserDataHandler.saveSingleUserInteraction("flashcards", this.flashcard);
     },
   },
 };

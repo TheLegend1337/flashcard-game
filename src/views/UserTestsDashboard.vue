@@ -76,16 +76,16 @@ export default {
       document.body.removeChild(link);
     },
     handleButtonSecondaryClicked(event) {
-      UserDataHandler.clearAllData();
-      this.userData = UserDataHandler.getAllDataAsJSON(); //updaten vom UserDataHandler mit leeren Daten aus localStorage damit die Component die leeren Daten anzeigt
+      // UserDataHandler.clearAllData();
+      // this.userData = UserDataHandler.getAllDataAsJSON(); //updaten vom UserDataHandler mit leeren Daten aus localStorage damit die Component die leeren Daten anzeigt
       console.log("event ist: " + event);
     },
   },
   mounted() {
     // Daten aus dem Local Storage laden, sobald die Komponente gerendert wurde
-    UserDataHandler.endTrackingTime();
-    this.userData = UserDataHandler.getAllDataAsJSON();
-    this.userData = UserDataHandler.getAllDataAsJSON();
+    // UserDataHandler.endTrackingTime();
+    // this.userData = UserDataHandler.getAllDataAsJSON();
+    // this.userData = UserDataHandler.getAllDataAsJSON();
   },
 };
 </script>

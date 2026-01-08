@@ -37,7 +37,7 @@ import { useFlashcardGameStore } from "@/stores/FlashcardGameStores/flashcardGam
 import { useSoundStore } from "@/stores/FlashcardGameStores/soundStore";
 import { useCardStore } from "@/stores/FlashcardGameStores/cardStore";
 
-import UserDataHandler from "@/helpers/userDataHandler";
+// import UserDataHandler from "@/helpers/userDataHandler";
 
 import ButtonPrimary from "@/components/FlashcardGame/Buttons/ButtonPrimary.vue";
 // Achte darauf, keine Dateiendung wie '.js' beim Import zu verwenden, da dies in Vite zu einem Fehler führt.
@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     startGame() {
-      UserDataHandler.startTrackingTime("playTime");
+      // UserDataHandler.startTrackingTime("playTime");
       this.cardStore.initiateCardDeck();
       this.soundStore.isMusicPlaying = true;
       console.log("isMusicPlaying: " + this.soundStore.isMusicPlaying);
@@ -73,9 +73,9 @@ export default {
       this.flashcardGameStore.phase = "gameStart";
       // tracker.createNewUserFile();
     },
-    startTrackingFlashcardsOnlyTime() {
-      UserDataHandler.startTrackingTime("flashcardsOnlyTime");
-    },
+    // startTrackingFlashcardsOnlyTime() {
+    //   UserDataHandler.startTrackingTime("flashcardsOnlyTime");
+    // },
   },
 };
 </script>

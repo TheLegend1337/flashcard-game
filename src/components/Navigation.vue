@@ -13,15 +13,11 @@
       <div class="menu-popup">
         <nav>
           <RouterLink @mouseenter="handleMouseEnter" to="/">Home</RouterLink>
-          <RouterLink @mouseenter="handleMouseEnter" to="/flashcards-only"
-            >Flashcards Only</RouterLink
-          >
-          <RouterLink @mouseenter="handleMouseEnter" to="/flashcard-game"
-            >Karteikartenspiel</RouterLink
-          >
-          <RouterLink @mouseenter="handleMouseEnter" to="/user-tests-dashboard"
-            >User Tests Dashboard</RouterLink
-          >
+          <!-- <RouterLink @mouseenter="handleMouseEnter" to="/flashcards-only">Flashcards Only</RouterLink> -->
+          <RouterLink @mouseenter="handleMouseEnter" to="/flashcard-game">Karteikartenspiel</RouterLink>
+          <!-- <RouterLink @mouseenter="handleMouseEnter" to="/user-tests-dashboard">User Tests Dashboard</RouterLink> -->
+          <RouterLink @mouseenter="handleMouseEnter" to="/impressum">Impressum</RouterLink>
+          <RouterLink @mouseenter="handleMouseEnter" to="/datenschutz">Datenschutz</RouterLink>
         </nav>
       </div>
     </div>
